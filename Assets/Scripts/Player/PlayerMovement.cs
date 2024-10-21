@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float speedX = Input.GetAxis("Horizontal");
         float speedY = Input.GetAxis("Vertical");
+
         player.velocity = new Vector2(speedX * speed, speedY * speed);
     }
 

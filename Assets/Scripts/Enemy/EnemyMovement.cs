@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// The EnemyMovement class is responsible for handling the player's movement.
+/// </summary>
 public class EnemyMovement : MonoBehaviour
 {
     /// <summary>
@@ -19,12 +22,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float speed;
 
     /// <summary>
-    /// The isEnemyRight variable is responsible for storing the enemy's spawn direction.
-    /// </summary>
-    private bool isEnemyRight;
-
-
-    /// <summary>
     /// The Awake method is called when the script instance is being loaded(Unity Method).
     /// In this method, we are getting the player's and the enemy Rigidbody2D components and checking the enemy's spawn direction.
     /// </summary>
@@ -32,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         enemy = GetComponent<Rigidbody2D>();
-        isEnemyRight = enemy.position.x > player.position.x;
+
     }
 
     /// <summary>
@@ -41,15 +38,19 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        ChasePlayerHorizontaly();
+        bool isEnemyRight = enemy.position.x > player.position.x;
+        var defaultMove = isEnemyRight ? new Vector2(-speed, enemy.velocity.y) : new Vector2(speed, enemy.velocity.y);
 
-        ChasePlayerVertically();
+        ChasePlayerHorizontaly(isEnemyRight,defaultMove);
+
+        ChasePlayerVertically(defaultMove);
     }
 
     /// <summary>
     /// The ChasePlayerHorizontaly method is responsible for moving the enemy to chase the player horizontaly.
+    /// It also checks if the enemy is on the right or left side of the player,and sets the enemy's default movement.
     /// </summary>
-    private void ChasePlayerHorizontaly()
+    private void ChasePlayerHorizontaly(bool isEnemyRight,Vector2 defaultMove)
     {
         // If the player is moving left and the enemy is on the right side of the player, the enemy will move left.
         // If the player is moving right the enemy wont chase the player.
@@ -64,17 +65,18 @@ public class EnemyMovement : MonoBehaviour
             enemy.velocity = new Vector2(speed, enemy.velocity.y);
         }
 
-        // If the player is not moving horizontally, the enemy will stop moving horizontally.
+        // If the player is not moving horizontally, the enemy will move in its default direction.
+       
         if (player.velocity.x == 0)
         {
-            enemy.velocity = new Vector2(0, enemy.velocity.y);
+            enemy.velocity = defaultMove;
         }
     }
 
     /// <summary>
     /// The ChasePlayerVertically method is responsible for moving the enemy to chase the player vertically.
     /// </summary>
-    private void ChasePlayerVertically()
+    private void ChasePlayerVertically(Vector2 defaultMove)
     {
         // If the player is moving up, the enemy will move up.
         if (player.velocity.y < 0)
@@ -86,11 +88,10 @@ public class EnemyMovement : MonoBehaviour
         {
             enemy.velocity = new Vector2(enemy.velocity.x, speed);
         }
-        // If the player is not moving vertically, the enemy will stop moving vertically.
+        // If the player is not moving vertically, the enemy will move in its default direction.
         else
         {
-            enemy.velocity = new Vector2(enemy.velocity.x, 0);
+            enemy.velocity = defaultMove;
         }
-
     }
 }
