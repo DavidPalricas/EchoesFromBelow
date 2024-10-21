@@ -29,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         enemy = GetComponent<Rigidbody2D>();
+
+
     }
 
     /// <summary>
@@ -96,4 +98,20 @@ public class EnemyMovement : MonoBehaviour
             enemy.velocity = defaultMove;
         }
     }
+
+    /// <summary>
+    /// The OnCollisionEnter2D method is called when a collider  has begun touching the collider of the enemy (Unity Method).
+    /// In this method, we are ignoring the collision between the enemy and the player. 
+    /// </summary>
+    /// <param name="collision">The collision variable stores the collider of the game object that collided with the enemy.</param>
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        }
+
+    }   
 }
+

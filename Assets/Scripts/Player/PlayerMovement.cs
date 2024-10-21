@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The PlayerMovement class is responsible for handling the player's movement.
@@ -35,18 +36,23 @@ public class PlayerMovement : MonoBehaviour
         float speedY = Input.GetAxis("Vertical");
 
         player.velocity = new Vector2(speedX * speed, speedY * speed);
+        
     }
 
     /// <summary>
-    /// The OnTriggerEnter2D method is called when a collider marked as is Trigger has begun touching the collider of the player (Unity Method).
+    /// The OnCollisionEnter2D method is called when a collider has begun touching the collider of the player (Unity Method).
     /// In this method, we are checking if the player collided with an enemy.
     /// </summary>
     /// <param name="collision">The collision variable stores the collider of the game object that collided with the player.</param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {   
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Player collided with enemy");
+        {       
+            // Restart the current scene (Simulation of game over).
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
         }
-    }
+    } 
 }
+
+

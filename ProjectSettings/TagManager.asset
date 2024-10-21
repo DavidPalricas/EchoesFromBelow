@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Object
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - Entity
   - Water
   - UI
   - 
@@ -41,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 2078319897
     locked: 0
