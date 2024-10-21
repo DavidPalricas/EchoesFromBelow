@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     /// <summary>
-    /// The plyers variable is responsible for storing the player's Rigidbody2D component.
+    /// The player variable is responsible for storing the player's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D player;
 
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     /// The OnCollisionEnter2D method is called when this collider/rigidbody has begun touching another rigidbody/collider (Unity Method).
     /// In this method, we are checking if the player collided with an enemy.
     /// </summary>
-    /// <param name="collision">The rigidbody/collider thar collided with the player.</param>
+    /// <param name="collision">The collision variable stores the rigidbody/collider that collided with the player.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {   
         if (collision.gameObject.CompareTag("Enemy"))

@@ -29,12 +29,12 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         enemy = GetComponent<Rigidbody2D>();
-
     }
 
     /// <summary>
     /// The Update method is called every frame(Unity Method).
     /// In this method, we are moving the enemy to chase the player.
+    /// It also checks if the enemy is on the right or left side of the player,and sets the enemy's default movement.
     /// </summary>
     private void Update()
     {
@@ -48,8 +48,9 @@ public class EnemyMovement : MonoBehaviour
 
     /// <summary>
     /// The ChasePlayerHorizontaly method is responsible for moving the enemy to chase the player horizontaly.
-    /// It also checks if the enemy is on the right or left side of the player,and sets the enemy's default movement.
     /// </summary>
+    /// <param name="isEnemyRight">The isEnemyRight variable indicates if the enemy is on the right side of the player .</param>
+    /// <param name="defaultMove">The defaultMove variable stores the default move of the enemy.</param>
     private void ChasePlayerHorizontaly(bool isEnemyRight,Vector2 defaultMove)
     {
         // If the player is moving left and the enemy is on the right side of the player, the enemy will move left.
@@ -76,6 +77,7 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// The ChasePlayerVertically method is responsible for moving the enemy to chase the player vertically.
     /// </summary>
+    /// <param name="defaultMove">The defaultMove variable stores the default move of the enemy.</param>
     private void ChasePlayerVertically(Vector2 defaultMove)
     {
         // If the player is moving up, the enemy will move up.
