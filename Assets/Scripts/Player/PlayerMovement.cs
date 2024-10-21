@@ -35,4 +35,17 @@ public class PlayerMovement : MonoBehaviour
         float speedY = Input.GetAxis("Vertical");
         player.velocity = new Vector2(speedX * speed, speedY * speed);
     }
+
+    /// <summary>
+    /// The OnCollisionEnter2D method is called when this collider/rigidbody has begun touching another rigidbody/collider (Unity Method).
+    /// In this method, we are checking if the player collided with an enemy.
+    /// </summary>
+    /// <param name="collision">The rigidbody/collider thar collided with the player.</param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {   
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Player collided with enemy");
+        }
+    }
 }

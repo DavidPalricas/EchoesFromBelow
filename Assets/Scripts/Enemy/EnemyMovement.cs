@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
     /// The Update method is called every frame(Unity Method).
     /// In this method, we are moving the enemy to chase the player.
     /// </summary>
-    void Update()
+    private void Update()
     {
         ChasePlayerHorizontaly();
 
