@@ -5,26 +5,22 @@ using UnityEngine;
 
 public class AStar
 {   
-    private static List <GameGridCell> openList;
-    private static List<GameGridCell> closedList;
-
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
 
 
     private static List<GameGridCell> GetNeighbours(GameGridCell currentCell, GameGrid gameGrid)
     {
-        // Lista dos deslocamentos para os 8 vizinhos (horizontal, vertical e diagonais)
         int[,] directions = new int[,]
         {
-        { -1,  0 }, // Esquerda
-        {  1,  0 }, // Direita
-        {  0, -1 }, // Baixo
-        {  0,  1 }, // Cima
-        { -1, -1 }, // Diagonal inferior esquerda
-        { -1,  1 }, // Diagonal superior esquerda
-        {  1, -1 }, // Diagonal inferior direita
-        {  1,  1 }  // Diagonal superior direita
+        { -1,  0 }, // Left
+        {  1,  0 }, // Right
+        {  0, -1 }, // Down
+        {  0,  1 }, // Up
+        { -1, -1 }, // Down left Diagonal
+        { -1,  1 }, // Up left Diagonal
+        {  1, -1 }, // Right Down Diagonal
+        {  1,  1 }  // Up Right Diagonal
         };
 
         var neighbours = new List<GameGridCell>(8);  
@@ -81,8 +77,8 @@ public class AStar
 
     public static List<GameGridCell> FindPath(GameGridCell startCell, GameGridCell targetCell, GameGrid gameGrid)
     {
-        var  openList = new MinHeap<GameGridCell>();
-        closedList = new List<GameGridCell>();
+        var openList = new AStarMinHeap<GameGridCell>();
+        var closedList = new List<GameGridCell>();
 
         startCell.Heruistic = 0;
         startCell.EvaluationFunction = 0;
@@ -131,117 +127,6 @@ public class AStar
         }
 
         return new List<GameGridCell>();  // Retorna lista vazia se não houver caminho
-    }
-   
-}
-
-public class MinHeap<T> where T : IComparable<T>
-{
-    private List<T> heap;
-
-    public MinHeap()
-    {
-        heap = new List<T>();
-    }
-
-    // Retorna o número de elementos na heap
-    public int Count => heap.Count;
-
-    // Retorna o menor elemento (raiz) da heap
-    public T Peek()
-    {
-        if (heap.Count == 0)
-        {
-            throw new InvalidOperationException("A heap está vazia.");
-        }
-        return heap[0];
-    }
-
-    // Remove e retorna o menor elemento da heap (a raiz)
-    public T Pop()
-    {
-        if (heap.Count == 0)
-        {
-            throw new InvalidOperationException("A heap está vazia.");
-        }
-
-        T root = heap[0];
-        heap[0] = heap[heap.Count - 1];
-        heap.RemoveAt(heap.Count - 1);
-        HeapifyDown(0);
-        return root;
-    }
-
-    // Adiciona um novo elemento à heap
-    public void Add(T item)
-    {
-        heap.Add(item);
-        HeapifyUp(heap.Count - 1);
-    }
-
-    // Remove um item específico da heap
-    public bool Remove(T item)
-    {
-        int index = heap.IndexOf(item);
-        if (index == -1) return false;
-
-        heap[index] = heap[heap.Count - 1];
-        heap.RemoveAt(heap.Count - 1);
-        HeapifyDown(index);
-        return true;
-    }
-
-    // Função para manter a propriedade da Min-Heap ao adicionar um elemento
-    private void HeapifyUp(int index)
-    {
-        while (index > 0)
-        {
-            int parentIndex = (index - 1) / 2;
-            if (heap[index].CompareTo(heap[parentIndex]) >= 0)
-            {
-                break;
-            }
-
-            Swap(index, parentIndex);
-            index = parentIndex;
-        }
-    }
-
-    // Função para manter a propriedade da Min-Heap ao remover a raiz
-    private void HeapifyDown(int index)
-    {
-        int lastIndex = heap.Count - 1;
-        while (index < lastIndex)
-        {
-            int leftChildIndex = 2 * index + 1;
-            int rightChildIndex = 2 * index + 2;
-            int smallest = index;
-
-            if (leftChildIndex <= lastIndex && heap[leftChildIndex].CompareTo(heap[smallest]) < 0)
-            {
-                smallest = leftChildIndex;
-            }
-
-            if (rightChildIndex <= lastIndex && heap[rightChildIndex].CompareTo(heap[smallest]) < 0)
-            {
-                smallest = rightChildIndex;
-            }
-
-            if (smallest == index)
-            {
-                break;
-            }
-
-            Swap(index, smallest);
-            index = smallest;
-        }
-    }
-
-    private void Swap(int i, int j)
-    {
-        T temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
-    }
+    }   
 }
 
