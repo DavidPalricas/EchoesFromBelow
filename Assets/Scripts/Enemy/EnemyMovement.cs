@@ -116,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
     /// <returns>It returns a boolean value, true if the path is clear and false if there is an obstacle</returns>
     private bool IsPathClear(Vector2 direction)
     {
-        float raycastDistance = 0.9f;
+        float raycastDistance = 5f;
 
         LayerMask obstacleLayer = LayerMask.GetMask("Default");
 
