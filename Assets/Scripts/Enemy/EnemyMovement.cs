@@ -161,7 +161,7 @@ public class EnemyMovement : MonoBehaviour
     /// The OnCollisionEnter2D method is called when the enemy collides with another object (Unity Method).
     /// In this method, the enemy ignores the collision with the player and other enemies.
     /// </summary>
-    /// <param name="collision">The collision parameter stores a RigidBody2D or a collider of a game object which collide with the enemy</param>
+    /// <param name="collision">The collision parameter stores a RigidBody2D or a collider of a game object which collide with the enemy.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
