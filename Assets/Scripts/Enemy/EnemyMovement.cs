@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<Rigidbody2D>();
-        speed = 4f;
+        speed = 3f;
 
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         willCollide = false;

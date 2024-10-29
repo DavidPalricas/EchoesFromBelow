@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     /// In this method, we are checking if the player collided with an enemy.
     /// </summary>
     /// <param name="collision">The collision variable stores the collider of the game object that collided with the player.</param>
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {       
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
-    } 
+    } */
 }
 
 
