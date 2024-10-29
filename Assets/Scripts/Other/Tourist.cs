@@ -1,5 +1,3 @@
-using UnityEditor.SearchService;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class Tourist : MonoBehaviour
@@ -28,7 +26,6 @@ public class Tourist : MonoBehaviour
         tourist.velocity = new Vector2(speed, tourist.velocity.y);
     }
 
-
     /// <summary>
     /// The OnCollisionEnter2D method is called when this collider/rigidbody has begun touching another rigidbody/collider (Unity Method).
     /// In this method, if the tourist collides with a checkpoint, the tourist is destroyed and ignores the collisions with another tourists.
@@ -37,16 +34,9 @@ public class Tourist : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("CheckPoint"))
-        {  
-            Debug.Log("Checkpoint");
-            
-        }
-        else if (collision.gameObject.CompareTag("Tourist"))
         {
-            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            Destroy(gameObject);
+
         }
-}
-
-
-
+    }
 }
