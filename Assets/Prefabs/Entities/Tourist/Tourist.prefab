@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3434492447618268769}
   - component: {fileID: 6887818726600303224}
   - component: {fileID: 2100469504857261905}
+  - component: {fileID: 469235289716711849}
   m_Layer: 3
   m_Name: Tourist
   m_TagString: Untagged
@@ -126,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e931696d4ef804190117bd905c2732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!58 &2100469504857261905
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +162,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &469235289716711849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288420554201831135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83280f9c26d051c4c83cd8ea7809fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 1
+  Speed: 4
+  AttackDamage: 0

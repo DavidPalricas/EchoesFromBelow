@@ -1,12 +1,19 @@
 using UnityEngine;
 
-public class Tourist : MonoBehaviour
+/// <summary>
+/// The TouristMovement class is responsible for handling the tourist's movement.
+/// </summary>
+public class TouristMovement : MonoBehaviour
 {
+    /// <summary>
+    /// The speed variable is responsible for storing the tourist's speed.
+    /// </summary>
+    private float speed;
 
-    [SerializeField] float speed;
-
-    private  Rigidbody2D tourist;
-
+    /// <summary>
+    /// The tourist variable is responsible for storing the tourist's Rigidbody2D component.
+    /// </summary>
+    private Rigidbody2D tourist;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -15,6 +22,7 @@ public class Tourist : MonoBehaviour
     private void Awake()
     {
         tourist = GetComponent<Rigidbody2D>();
+        speed = GetComponent<Entity>().Speed;
     }
 
     /// <summary>

@@ -33,10 +33,24 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 movetoNotCollide;
 
     /// <summary>
+    /// The playerDirections variable is responsible for storing the possible movement directions of the player.
+    /// </summary>
+    private static readonly Vector2[] playerDirections = new Vector2[]
+    {
+        Vector2.left,
+        Vector2.right,
+        Vector2.down,
+        Vector2.up,
+        new (-1, -1), //Left Down Diagonal
+        new (-1, 1), // Left Up Diagonal
+        new (1, -1), // Right Down Diagonal
+        new (1, 1), // Right Up Diagonal
+    };
+
+    /// <summary>
     /// The attemptedDirections variable is responsible for storing the directions that have already been attempted.
     /// </summary>
     private readonly HashSet<Vector2> attemptedDirections = new();
-
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -45,9 +59,9 @@ public class EnemyMovement : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponent<Rigidbody2D>();
-        speed = 3f;
-
+        speed = GetComponent<Entity>().Speed;
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+
         willCollide = false;
     }
 
@@ -69,7 +83,6 @@ public class EnemyMovement : MonoBehaviour
           ChasePlayer(directionToPlayer);
         }
     }
-
 
     /// <summary>
     /// The HandleCollision method is responsible for handling the enemy's movement when it will collide with an obstacle.
@@ -128,7 +141,6 @@ public class EnemyMovement : MonoBehaviour
         return hit.collider == null || !hit.collider.CompareTag("Object");
     }
 
-
     /// <summary>
     /// The FindAlternativeDirection method is responsible for finding an alternative direction for the enemy to move.
     /// This method tries to find the closest direction to the player that is not blocked by an obstacle.
@@ -138,7 +150,7 @@ public class EnemyMovement : MonoBehaviour
     /// <returns>It returns a Vector2 which represents the direction in which the enemy should move</returns>
     private Vector2 FindAlternativeDirection(Vector2 blockedDirection)
     {
-        List<Vector2> alternativeDirections = Entity.Directions
+        List<Vector2> alternativeDirections = playerDirections
             .Where(direction => direction != blockedDirection && !attemptedDirections.Contains(direction))
             .OrderBy(direction => Vector2.Distance((Vector2)enemy.position + direction, player.position))
             .ToList();
@@ -155,7 +167,6 @@ public class EnemyMovement : MonoBehaviour
         attemptedDirections.Clear(); 
         return blockedDirection;
     }
-
 
     /// <summary>
     /// The OnCollisionEnter2D method is called when the enemy collides with another object (Unity Method).

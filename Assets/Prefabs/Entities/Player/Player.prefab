@@ -631,10 +631,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackArea: {fileID: 0}
-  melee_left: {fileID: 3683219949669321261}
-  melee_right: {fileID: 7597942102496744807}
-  melee_up: {fileID: 966352755093986192}
-  melee_down: {fileID: 33022776123688665}
+  meleeLeft: {fileID: 3683219949669321261}
+  meleeRight: {fileID: 7597942102496744807}
+  meleeUp: {fileID: 966352755093986192}
+  meleeDown: {fileID: 33022776123688665}
 --- !u!1 &7597942102496744807
 GameObject:
   m_ObjectHideFlags: 0
