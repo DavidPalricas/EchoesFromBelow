@@ -6,12 +6,12 @@ using UnityEngine;
 public class TouristMovement : MonoBehaviour
 {
     /// <summary>
-    /// The speed variable is responsible for storing the tourist's speed.
+    /// The speed property  is responsible for storing the tourist's speed.
     /// </summary>
     private float speed;
 
     /// <summary>
-    /// The tourist variable is responsible for storing the tourist's Rigidbody2D component.
+    /// The tourist property  is responsible for storing the tourist's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D tourist;
 

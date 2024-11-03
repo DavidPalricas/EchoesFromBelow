@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The PlayerMovement class is responsible for handling the player's movement.
@@ -7,15 +6,14 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     /// <summary>
-    /// The player variable is responsible for storing the player's Rigidbody2D component.
+    /// The player property is responsible for storing the player's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D player;
 
     /// <summary>
-    /// The speed variable is responsible for storing the player's speed.
-    /// The SerializeField attribute is used to show the variable in the Unity Inspector.
+    /// The speed property is responsible for storing the player's speed.
     /// </summary>
-    [SerializeField] float speed;
+    private float speed;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded(Unity Method).
@@ -24,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Rigidbody2D>();
+
+        speed = GetComponent<Entity>().Speed;
     }
 
     /// <summary>
@@ -35,24 +35,29 @@ public class PlayerMovement : MonoBehaviour
         float speedX = Input.GetAxis("Horizontal");
         float speedY = Input.GetAxis("Vertical");
 
-        player.velocity = new Vector2(speedX * speed, speedY * speed);
-        
+        player.velocity = new Vector2(speedX * speed, speedY * speed);  
     }
 
     /// <summary>
     /// The OnCollisionEnter2D method is called when a collider has begun touching the collider of the player (Unity Method).
-    /// In this method, we are checking if the player collided with an enemy.
+    /// In this method, we are checking if the player collided with an enemy or an item.
+    /// If the player collided with an enemy, the player's health is decreased by 1.
+    /// If the player collided with an item, the player's HasKey property is set to true amd the item diseapers from the map.
     /// </summary>
     /// <param name="collision">The collision variable stores the collider of the game object that collided with the player.</param>
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {       
-            // Restart the current scene (Simulation of game over).
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
+            GetComponent<Entity>().Health -= 1;
         }
-    } */
+
+        else if (collision.gameObject.CompareTag("Item"))
+        {
+            // Destroy the key game object.
+            Destroy(collision.gameObject);
+
+            GetComponent<PlayerActions>().HasKey = true;
+        }
+    } 
 }
-
-

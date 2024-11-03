@@ -6,17 +6,17 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     /// <summary>
-    /// The Health variable is responsible for storing the entity's health.
+    /// The Health property  is responsible for storing the entity's health.
     /// </summary>
     public int Health;
 
     /// <summary>
-    /// The Speed variable is responsible for storing the entity's speed.
+    /// The Speed property  is responsible for storing the entity's speed.
     /// </summary>
     public float Speed;
 
     /// <summary>
-    /// The AttackDamage variable is responsible for storing the entity's attack damage.
+    /// The AttackDamage property  is responsible for storing the entity's attack damage.
     /// </summary>
     public float AttackDamage;
 

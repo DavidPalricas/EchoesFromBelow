@@ -8,32 +8,32 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     /// <summary>
-    /// The player variable is responsible for storing the player's Rigidbody2D component.
+    /// The player property is responsible for storing the player's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D player;
 
     /// <summary>
-    /// The enemy variable is responsible for storing the enemy's Rigidbody2D component.
+    /// The enemy property is responsible for storing the enemy's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D enemy;
 
     /// <summary>
-    /// The speed variable is responsible for storing the enemy's speed.
+    /// The speed property is responsible for storing the enemy's speed.
     /// </summary>
     private float speed;
 
     /// <summary>
-    /// The willCollide variable is responsible for storing whether the enemy will collide with an obstacle.
+    /// The willCollide property is responsible for storing whether the enemy will collide with an obstacle.
     /// </summary>
     private bool willCollide;
 
     /// <summary>
-    /// The movetoNotCollide variable is responsible for storing the direction the enemy will move to avoid colliding with an obstacle.
+    /// The movetoNotCollide property is responsible for storing the direction the enemy will move to avoid colliding with an obstacle.
     /// </summary>
     private Vector2 movetoNotCollide;
 
     /// <summary>
-    /// The playerDirections variable is responsible for storing the possible movement directions of the player.
+    /// The playerDirections property is responsible for storing the possible movement directions of the player.
     /// </summary>
     private static readonly Vector2[] playerDirections = new Vector2[]
     {
@@ -126,7 +126,7 @@ public class EnemyMovement : MonoBehaviour
     /// It uses a raycast to check if there is an obstacle in the enemy's path.
     /// </summary>
     /// <param name="direction">The direction parameter stores an vector which represents the direction the enemy should move</param>
-    /// <returns>It returns a boolean value, true if the path is clear and false if there is an obstacle</returns>
+    /// <c>true</c> if the path is clear,otherwise <c>false</c>.
     private bool IsPathClear(Vector2 direction)
     {
         float raycastDistance = 5f;
@@ -178,6 +178,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+
         }
     }   
 }
