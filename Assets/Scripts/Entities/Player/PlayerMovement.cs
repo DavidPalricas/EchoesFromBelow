@@ -39,20 +39,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// The OnCollisionEnter2D method is called when a collider has begun touching the collider of the player (Unity Method).
-    /// In this method, we are checking if the player collided with an enemy or an item.
-    /// If the player collided with an enemy, the player's health is decreased by 1.
+    /// The OnCollisionEnter2D method is called when a collider or a RigidBody2D has begun touching the collider of the player (Unity Method).
+    /// In this method, we are checking if the player collided with an item.
     /// If the player collided with an item, the player's HasKey property is set to true amd the item diseapers from the map.
     /// </summary>
     /// <param name="collision">The collision variable stores the collider of the game object that collided with the player.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {       
-            GetComponent<Entity>().Health -= 1;
-        }
-
-        else if (collision.gameObject.CompareTag("Item"))
+        if (collision.gameObject.CompareTag("Item"))
         {
             // Destroy the key game object.
             Destroy(collision.gameObject);

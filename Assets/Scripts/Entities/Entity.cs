@@ -37,7 +37,7 @@ public class Entity : MonoBehaviour
     {
         if (Health <= 0)
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(false);          
         }
     }
 }

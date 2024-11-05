@@ -47,6 +47,9 @@ public class EnemyMovement : MonoBehaviour
         new (1, 1), // Right Up Diagonal
     };
 
+    /// <summary>
+    /// The attackDirections property is responsible for storing the possible attack directions of the enemy.
+    /// </summary>
     private readonly Vector2[] attackDirections = { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
 
     /// <summary>
@@ -69,31 +72,22 @@ public class EnemyMovement : MonoBehaviour
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, the direction to the player is calculated and the enemy's movement is handled.
+    /// In this method, the direction to the player is calculated ,the enemy's movement is handled and check if the enemy is ready to attack.
+    /// If the enemy is attacking or the conditions to attack are met, the enemy stops moving, to perform the attack.
     /// If the enemy will collide, the HandleCollision method is called, otherwise the ChasePlayer method is called.
     /// </summary>
     private void Update()
     {
+        // Check if the enemy is attacking
         if (GetComponent<EnemyAttack>().Attacking)
         {
             return;
         }
 
-        // Normalize the direction to the player to obtain vectors of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
-        Vector2 directionToPlayer = (player.position - enemy.position).normalized;
+        Vector2 directionToPlayer = GetDirectionToPlayer();
 
-        // Round the direction to the player if the normalized direction is not a vector of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
-        directionToPlayer = new Vector2(Mathf.Round(directionToPlayer.x), Mathf.Round(directionToPlayer.y));
-
-
-        // Check if the enemy is attacking or the conditions to attack are met
-        if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
+        if (EnemyIsReadyToAttack(directionToPlayer))
         {
-            // Stop the enemy's movement to attack
-            enemy.velocity = Vector2.zero;
-            
-            GetComponent<EnemyAttack>().AttackDirection = directionToPlayer;
-
             return;
         }
 
@@ -107,6 +101,50 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The GetDirectionToPlayer method is responsible for calculating the normalized direction to the player .
+    /// </summary>
+    /// <returns>The normalized direction to the player </returns>
+    private Vector2 GetDirectionToPlayer()
+    {
+        // Normalize the direction to the player to obtain vectors of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
+        Vector2 directionToPlayer = (player.position - enemy.position).normalized;
+
+        // Round the direction to the player if the normalized direction is not a vector of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
+        return new Vector2(Mathf.Round(directionToPlayer.x), Mathf.Round(directionToPlayer.y));
+    }
+
+    /// <summary>
+    /// The EnemyIsReadyToAttack method is responsible for checking if the enemy is ready to attack.
+    /// If it is, the enemy stops moving to attack, and its attack direction is set has is current direction.
+    /// </summary>
+    /// <param name="directionToPlayer">The direction to player.</param>
+    /// <returns>
+    ///   <c>true</c> if the enemy is ready to attack; otherwise, <c>false</c>.
+    /// </returns>
+    private bool EnemyIsReadyToAttack(Vector2 directionToPlayer)
+    {
+        // Check if the enemy is attacking or the conditions to attack are met
+        if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
+        {
+            // Stop the enemy's movement to attack
+            enemy.velocity = Vector2.zero;
+
+            GetComponent<EnemyAttack>().AttackDirection = directionToPlayer;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// The PlayerNear method is responsible for checking if the player is near the enemy.
+    /// </summary>
+    /// <param name="directionToPlayer">The direction to the player.</param>
+    /// <returns>
+    ///   <c>true</c> if the enemy is near to the player; otherwise, <c>false</c>.
+    /// </returns>
     private bool PlayerNear(Vector2 directionToPlayer)
     {
         float rayCastDistance = 1f;
@@ -121,8 +159,13 @@ public class EnemyMovement : MonoBehaviour
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
-
-
+    /// <summary>
+    /// Determines if the current direction is an attack direction.
+    /// </summary>
+    /// <param name="enemyDirection">The enemy direction.</param>
+    /// <returns>
+    ///   <c>true</c> if the current enemy direction is an attak direction; otherwise, <c>false</c>.
+    /// </returns>
     private bool IsAttackDirection(Vector2 enemyDirection)
     {
         foreach (var attackDirection in attackDirections)
@@ -134,7 +177,6 @@ public class EnemyMovement : MonoBehaviour
         }
         return false;
     }
-
 
     /// <summary>
     /// The HandleCollision method is responsible for handling the enemy's movement when it will collide with an obstacle.
