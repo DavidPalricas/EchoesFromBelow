@@ -5,16 +5,24 @@ using UnityEngine;
 /// </summary>  
 public class AttackArea : MonoBehaviour
 {
-
     //VAR que define a força do ataque
-    public float meleeDamage = 3f;
+    private float meleeDamage;
+
+    private bool isPlayer;
+
+    private void Awake()
+    {
+        meleeDamage = GetComponentInParent<Entity>().AttackDamage;
+
+        isPlayer =  transform.parent.CompareTag("Player");
+
+    }
 
     //Verifica a colisão
-    public void OnTriggerEnter2D (Collider2D collider){
-
-        //Se a colisão é feita com um inimigo, definido pelas TAGS
-        if(collider.gameObject.CompareTag("Enemy")){
-
+    private void OnTriggerEnter2D (Collider2D collider){
+        if (collider.gameObject.CompareTag("Enemy") && isPlayer || collider.gameObject.CompareTag("Player") && !isPlayer)
+        {
+            Debug.Log("Colidiu com " + collider.gameObject.name);
             //Acessa o script do objeto com que colidiu e retira vida ao objeto
             collider.GetComponent<Entity>().Health -= (int) meleeDamage;
 

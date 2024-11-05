@@ -47,6 +47,8 @@ public class EnemyMovement : MonoBehaviour
         new (1, 1), // Right Up Diagonal
     };
 
+    private readonly Vector2[] attackDirections = { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
+
     /// <summary>
     /// The attemptedDirections variable is responsible for storing the directions that have already been attempted.
     /// </summary>
@@ -72,7 +74,28 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (GetComponent<EnemyAttack>().Attacking)
+        {
+            return;
+        }
+
+        // Normalize the direction to the player to obtain vectors of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
         Vector2 directionToPlayer = (player.position - enemy.position).normalized;
+
+        // Round the direction to the player if the normalized direction is not a vector of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
+        directionToPlayer = new Vector2(Mathf.Round(directionToPlayer.x), Mathf.Round(directionToPlayer.y));
+
+
+        // Check if the enemy is attacking or the conditions to attack are met
+        if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
+        {
+            // Stop the enemy's movement to attack
+            enemy.velocity = Vector2.zero;
+            
+            GetComponent<EnemyAttack>().AttackDirection = directionToPlayer;
+
+            return;
+        }
 
         if (willCollide)
         {   
@@ -83,6 +106,35 @@ public class EnemyMovement : MonoBehaviour
           ChasePlayer(directionToPlayer);
         }
     }
+
+    private bool PlayerNear(Vector2 directionToPlayer)
+    {
+        float rayCastDistance = 1f;
+
+        LayerMask playerLayer = LayerMask.GetMask("Default");
+
+        RaycastHit2D hit = Physics2D.Raycast(enemy.position, directionToPlayer, rayCastDistance, playerLayer);
+
+        // This line is used to draw a ray in the scene view for debugging purposes
+        //Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
+
+        return hit.collider != null && hit.collider.CompareTag("Player");
+    }
+
+
+
+    private bool IsAttackDirection(Vector2 enemyDirection)
+    {
+        foreach (var attackDirection in attackDirections)
+        {
+            if (attackDirection == enemyDirection)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /// <summary>
     /// The HandleCollision method is responsible for handling the enemy's movement when it will collide with an obstacle.
@@ -136,7 +188,7 @@ public class EnemyMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(enemy.position, direction, raycastDistance, obstacleLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-        Debug.DrawRay(enemy.position, direction * raycastDistance, Color.yellow);
+       // Debug.DrawRay(enemy.position, direction * raycastDistance, Color.yellow);
 
         return hit.collider == null || !hit.collider.CompareTag("Object");
     }
@@ -175,7 +227,7 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="collision">The collision parameter stores a RigidBody2D or a collider of a game object which collide with the enemy.</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
 

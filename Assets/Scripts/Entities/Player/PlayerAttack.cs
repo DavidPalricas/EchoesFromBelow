@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     /// <summary>
     /// The attackArea variable is responsible for storing the attack area to use.
     /// </summary>
-    public GameObject attackArea;
+    private GameObject attackArea;
 
     /// <summary>
     /// The meleeLeft variable is responsible for storing the left attack area.
@@ -51,6 +51,12 @@ public class PlayerAttack : MonoBehaviour
     /// In this method, the player's attack logic is handled.
     /// By calling methods to get the attack direction, handle the attack cooldown and attack if the player pressed the key to attack.
     /// </summary>
+    /// 
+
+    private void Awake()
+    {
+        DeactivateAttack();
+    }
     private void Update()
     {
         GetAttackDirection();
