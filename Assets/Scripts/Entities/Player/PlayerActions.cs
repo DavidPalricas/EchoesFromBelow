@@ -32,7 +32,9 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private GameObject itemNear;
 
-
+    /// <summary>
+    /// The playerMaxHealth property is responsible for storing the player's maximum health.
+    /// </summary>
     private int playerMaxHealth;
 
     /// <summary>
@@ -184,7 +186,6 @@ public class PlayerActions : MonoBehaviour
             GameObject itemToDestroy = itemNear;
             itemNear = null;
             Destroy(itemToDestroy);
-
         }
     }
 
