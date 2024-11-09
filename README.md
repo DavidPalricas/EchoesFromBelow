@@ -20,4 +20,4 @@ We are Arcadia Labs, a team of Master’s students specializing in Digital Game 
 * David Palricas: Programmer and Sound Designer 
 * Eva Aguiar: 2D Artist and Animator
 * Hugo Tavares: Story Teller and Programmer
-* Pedro Soares 2D Artist and Sound Designer 
+* Pedro Soares 2D: Artist and Sound Designer 
