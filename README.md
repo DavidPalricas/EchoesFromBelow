@@ -7,11 +7,11 @@ In this exploration and 2D top down adventure game, you play as an explorer who,
 As you navigate oppressive, ancient corridors, you'll face fantastical creatures, gather resources, and struggle to stay alive. 
 
 ## Controls
- |Keys         | Move Right| Move Left| Move Up| Move Down| Pick Items | Heal |
- |:-----------:| :--------:| :-------:|:------:|:--------:|:----------:|:----:|
- |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |            |      |
- | Arrow Keys  |  `Right`  |    `Left`|  `Up`  |  `Down`  |            |      |
- | Other Keys  |           |          |        |          |    `E`     | `H`  |
+ |Keys         | Move Right| Move Left| Move Up| Move Down|    Attack    | Pick Items | Heal |
+ |:-----------:| :--------:| :-------:|:------:|:--------:|:------------:|:----------:|:----:|
+ |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |              |            |      |
+ | Arrow Keys  |  `Right`  |    `Left`|  `Up`  |  `Down`  |              |            |      |
+ | Other Keys  |           |          |        |          |  `Space Bar` |    `E`     | `H`  |
  
 ## Team
 We are Arcadia Labs, a team of Master’s students specializing in Digital Game Development at the University of Aveiro. 
