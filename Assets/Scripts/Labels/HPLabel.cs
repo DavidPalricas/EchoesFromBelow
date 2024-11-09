@@ -10,7 +10,7 @@ public class HPLabel : MonoBehaviour
     /// <summary>
     /// The labelText property is responsible for storing the text which will display the player's health on the screen.
     /// </summary>
-    public TMP_Text labelText;
+    private TMP_Text labelText;
 
     /// <summary>
     /// The player property is responsible for storing the player's game object.
@@ -19,10 +19,11 @@ public class HPLabel : MonoBehaviour
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method)
-    /// In this method, the player variable is initialized.
+    /// In this method, the player property and labelText property are initialized.
     /// </summary>
     private void Awake()
-    {
+    {    
+        labelText = GetComponent<TMP_Text>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

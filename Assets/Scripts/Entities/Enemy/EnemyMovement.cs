@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// The movetoNotCollide property is responsible for storing the direction the enemy will move to avoid colliding with an obstacle.
     /// </summary>
-    private Vector2 movetoNotCollide;
+    private Vector2 moveToNotCollide;
 
     /// <summary>
     /// The playerDirections property is responsible for storing the possible movement directions of the player.
@@ -51,11 +51,6 @@ public class EnemyMovement : MonoBehaviour
     /// The attackDirections property is responsible for storing the possible attack directions of the enemy.
     /// </summary>
     private readonly Vector2[] attackDirections = { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
-
-    /// <summary>
-    /// The attemptedDirections variable is responsible for storing the directions that have already been attempted.
-    /// </summary>
-    private readonly HashSet<Vector2> attemptedDirections = new();
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -99,6 +94,8 @@ public class EnemyMovement : MonoBehaviour
         {
           ChasePlayer(directionToPlayer);
         }
+
+        enemy.velocity = moveToNotCollide * speed;
     }
 
     /// <summary>
@@ -185,12 +182,16 @@ public class EnemyMovement : MonoBehaviour
     /// <param name="directionToPlayer">The directionToPlayer parameter stores an vector which represents te distance of the enemy to the player</param>
     private void HandleCollision(Vector2 directionToPlayer)
     {
-        enemy.velocity = movetoNotCollide * speed;
-
         if (IsPathClear(directionToPlayer))
         {
             willCollide = false;
-            attemptedDirections.Clear(); 
+
+            moveToNotCollide = directionToPlayer;
+        }
+
+        if (!IsPathClear(moveToNotCollide))
+        {
+            moveToNotCollide = FindAlternativeDirection(moveToNotCollide);
         }
     }
 
@@ -204,14 +205,15 @@ public class EnemyMovement : MonoBehaviour
     {
         if (IsPathClear(directionToPlayer))
         {
-            enemy.velocity = directionToPlayer * speed;
+            moveToNotCollide = directionToPlayer;
         }
         else
         {
             Vector2 alternativeDirection = FindAlternativeDirection(directionToPlayer);
-            enemy.velocity = alternativeDirection * speed;
+
             willCollide = true;
-            movetoNotCollide = alternativeDirection;
+
+            moveToNotCollide = alternativeDirection;
         }
     }
 
@@ -220,7 +222,9 @@ public class EnemyMovement : MonoBehaviour
     /// It uses a raycast to check if there is an obstacle in the enemy's path.
     /// </summary>
     /// <param name="direction">The direction parameter stores an vector which represents the direction the enemy should move</param>
+    /// <returns>
     /// <c>true</c> if the path is clear,otherwise <c>false</c>.
+    /// </returns>
     private bool IsPathClear(Vector2 direction)
     {
         float raycastDistance = 5f;
@@ -229,10 +233,49 @@ public class EnemyMovement : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(enemy.position, direction, raycastDistance, obstacleLayer);
 
-        // This line is used to draw a ray in the scene view for debugging purposes
-       // Debug.DrawRay(enemy.position, direction * raycastDistance, Color.yellow);
+        // In case the raycast does not hit anything, but the enemy could still collide with an obstacle
+        if (hit.collider == null && !CheckPossibleCollision(direction))
+        {
+            return false;
+        }
 
         return hit.collider == null || !hit.collider.CompareTag("Object");
+    }
+
+    /// <summary>
+    /// The CheckPossibleCollision method is responsible for checking if the enemy will collide with an obstacle, in a future movement.
+    /// </summary>
+    /// <param name="direction">A possible direction of the enemy's future movement</param>
+    /// <returns>
+    /// <c>true</c> if the gate is near otherwise, <c>false</c>.
+    /// </returns>
+    private bool CheckPossibleCollision(Vector2 direction)
+    {
+        // Check if the enemy has a Collider2D component
+        if (!TryGetComponent<BoxCollider2D>(out var enemyCollider))
+        {
+            Debug.LogWarning("Enemy does not have a Collider2D component.");
+            return true;
+        }
+
+        Vector2 boxSize = enemyCollider.bounds.size;
+        LayerMask obstacleLayer = LayerMask.GetMask("Default");
+
+        // Create a box in the direction the enemy will moves, with the same size as the enemy's collider
+        Vector2 offsetPosition = (Vector2)enemyCollider.bounds.center + direction.normalized * boxSize.x / 2;
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0f, obstacleLayer);
+
+        // Check if there is an obstacle in the enemy's path
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Object"))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -245,20 +288,18 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 FindAlternativeDirection(Vector2 blockedDirection)
     {
         List<Vector2> alternativeDirections = playerDirections
-            .Where(direction => direction != blockedDirection && !attemptedDirections.Contains(direction))
+            .Where(direction => direction != blockedDirection)
             .OrderBy(direction => Vector2.Distance((Vector2)enemy.position + direction, player.position))
             .ToList();
 
         foreach (var direction in alternativeDirections)
         {
             if (IsPathClear(direction))
-            {
-                attemptedDirections.Add(direction); 
+            {; 
                 return direction;
             }
         }
 
-        attemptedDirections.Clear(); 
         return blockedDirection;
     }
 

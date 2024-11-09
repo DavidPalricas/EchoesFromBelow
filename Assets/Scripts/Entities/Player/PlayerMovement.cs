@@ -39,19 +39,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// The OnCollisionEnter2D method is called when a collider or a RigidBody2D has begun touching the collider of the player (Unity Method).
-    /// In this method, we are checking if the player collided with an item.
-    /// If the player collided with an item, the player's HasKey property is set to true amd the item diseapers from the map.
+    /// The GetPlayerDirection method is responsible for getting the player's direction normalized.
     /// </summary>
-    /// <param name="collision">The collision variable stores the collider of the game object that collided with the player.</param>
-    private void OnCollisionEnter2D(Collision2D collision)
+    /// <returns> The player's direction normalized</returns>
+    public Vector2 GetPlayerDirection()
     {
-        if (collision.gameObject.CompareTag("Item"))
-        {
-            // Destroy the key game object.
-            Destroy(collision.gameObject);
+        Vector2 playerDirection = player.velocity.normalized;
 
-            GetComponent<PlayerActions>().HasKey = true;
-        }
-    } 
+        return new Vector2(Mathf.Round(playerDirection.x), Mathf.Round(playerDirection.y));
+    }
 }
