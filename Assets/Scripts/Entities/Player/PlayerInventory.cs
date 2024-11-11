@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// The HasKey property is responsible for indicating if the player has the key.
     /// </summary>
-    public bool HasKey { get; set; }
+    public GameObject Key { get; set; }
 
     /// <summary>
     /// The HealItems property is responsible for storing the number of heal items that the player has.
@@ -27,7 +27,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         HealItems = 0;
-        HasKey = false;
+        Key = null;
     }
 
     /// <summary>
@@ -37,6 +37,6 @@ public class PlayerInventory : MonoBehaviour
     public void ResetItems()
     {
         HealItems = 0;
-        HasKey = false;
+        Key = null;
     } 
 }

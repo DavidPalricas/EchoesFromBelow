@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -14,12 +15,6 @@ public class PlayerActions : MonoBehaviour
     /// The gate property is responsible for storing the gate GameObject.
     /// </summary>
     private GameObject gate;
-
-    /// <summary>
-    /// The rayCastDistance property is responsible for storing the distance of the ray cast.
-    /// This ray cast will be used to check items or objects near the player.
-    /// </summary>
-    private readonly float rayCastDistance = 1.5f;
 
     /// <summary>
     /// The layer property is responsible for storing the layer mask.
@@ -59,8 +54,8 @@ public class PlayerActions : MonoBehaviour
     {
         if (gate != null)
         {
-            if (IsGateNear())
-            {
+            if (IsGateNear() && Input.GetKeyDown(KeyCode.E))
+            {   
                 OpenGate();
             }
         }
@@ -72,22 +67,30 @@ public class PlayerActions : MonoBehaviour
 
         if (GetComponent<PlayerInventory>().HealItems > 0 && Input.GetKeyDown(KeyCode.H))
         {
-
             HealPlayer();
         }
     }
 
     /// <summary>
     /// The isGateNear method is responsible for checking if the player is near the gate.
+    /// A raycast is create to check if the player is near the gate and its facing down the gate.
     /// </summary>
     /// <returns>
     /// <c>true</c> if the gate is near otherwise, <c>false</c>.
     /// </returns>
     private bool IsGateNear()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(player.position, Vector2.down, rayCastDistance, layer);
+    {        
+        float rayCastDistance = 1.5f;
 
-        return hit.collider != null || hit.collider.gameObject.name != "Gate";
+        Vector2 raycastOrigin = player.position + new Vector2(0, -1f); 
+
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, rayCastDistance, layer);
+
+        // This line is used to visualize the raycast in the scene view, for debugging purposes.
+        // Debug.DrawRay(raycastOrigin, Vector2.down * rayCastDistance, Color.red);
+
+
+        return hit.collider != null && hit.collider.gameObject.name == "Gate";
     }
 
     /// <summary>
@@ -122,14 +125,28 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The OpenGate method is responsible for opening the gate, if the player has the key and presses the E key.
+    /// The OpenGate method is responsible for opening the gate, if the player has the key.
+    /// If the player has the corect key, the gate is opened, otherwise the key is removed from the player's inventory.
     /// </summary>
     private void OpenGate()
     {
-        if (Input.GetKeyDown(KeyCode.E) && GetComponent<PlayerInventory>().HasKey)
+        if (GetComponent<PlayerInventory>().Key != null)
         {
-            gate.SetActive(false);
-        }
+            // Gets the key and its value
+            Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
+
+            // If the ket value is true, its the correct key to open the gate
+            if (keys[GetComponent<PlayerInventory>().Key])
+            {    
+                // Opens the gate
+                 gate.SetActive(false);
+            }
+            else
+            {
+                // Removes the key from the player's inventory
+                GetComponent<PlayerInventory>().Key = null;
+            }
+        }  
     }
 
     /// <summary>
@@ -148,8 +165,9 @@ public class PlayerActions : MonoBehaviour
     private void GrabItem()
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (itemNear.name == "Key")
+        {   
+          
+            if (itemNear.name.Contains("Key"))
             {
                 GrabKey();
             }
@@ -165,12 +183,19 @@ public class PlayerActions : MonoBehaviour
     /// The player's iventory is updated, and the key is destroyed.
     /// </summary>
     private void GrabKey()
-    {
-        GetComponent<PlayerInventory>().HasKey = true;
+    {   
 
-        GameObject itemToDestroy = itemNear;
-        itemNear = null;
-        Destroy(itemToDestroy);
+
+        if (GetComponent<PlayerInventory>().Key == null)
+        {  
+            GetComponent<PlayerInventory>().Key = itemNear;
+
+            Debug.Log(GetComponent<PlayerInventory>().Key);
+
+            GameObject itemToDestroy = itemNear;
+            itemNear = null;
+            itemToDestroy.SetActive(false);
+        }   
     }
 
     /// <summary>
