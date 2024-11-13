@@ -23,6 +23,11 @@ public class EnemyMovement : MonoBehaviour
     private float speed;
 
     /// <summary>
+    /// The isInHorde property is responsible for storing whether the enemy is in a horde.
+    /// </summary>
+    public bool IsIdle { get; set;}
+
+    /// <summary>
     /// The willCollide property is responsible for storing whether the enemy will collide with an obstacle.
     /// </summary>
     private bool willCollide;
@@ -54,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// In this method, the enemy,speed,player and willCollide variables are initialized.
+    /// In this method, the enemy,speed,player, willCollide and IsInHorde variables are initialized.
     /// </summary>
     private void Awake()
     {
@@ -62,6 +67,7 @@ public class EnemyMovement : MonoBehaviour
         speed = GetComponent<Entity>().Speed;
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
 
+        IsIdle = true;
         willCollide = false;
     }
 
@@ -72,7 +78,16 @@ public class EnemyMovement : MonoBehaviour
     /// If the enemy will collide, the HandleCollision method is called, otherwise the ChasePlayer method is called.
     /// </summary>
     private void Update()
-    {
+    {   
+        if (IsIdle)
+        {
+            if (!PlayerInRange())
+            {
+                return;
+            }
+            IsIdle = false;
+        }
+
         // Check if the enemy is attacking
         if (GetComponent<EnemyAttack>().Attacking)
         {
@@ -96,6 +111,19 @@ public class EnemyMovement : MonoBehaviour
         }
 
         enemy.velocity = moveToNotCollide * speed;
+    }
+
+    /// <summary>
+    /// The PlayerInRange method is responsible for checking if the player is in range of the enemy.
+    /// </summary>
+    /// <returns>
+    ///  <c>true</c> if the player is in range; otherwise, <c>false</c>.
+    /// </returns>
+    private bool PlayerInRange()
+    {
+        float range = 5f;
+
+        return Vector2.Distance(player.position, enemy.position) <= range;
     }
 
     /// <summary>
@@ -219,49 +247,14 @@ public class EnemyMovement : MonoBehaviour
 
     /// <summary>
     /// The IsPathClear method is responsible for checking if the path is clear for the enemy to move.
-    /// It uses a raycast to check if there is an obstacle in the enemy's path.
+    /// The method creates a box in the direction the enemy will move, with the same size as the enemy's collider.
+    /// If there is an obstacle in the enemy's path, the method returns false, otherwise it returns true.
     /// </summary>
     /// <param name="direction">The direction parameter stores an vector which represents the direction the enemy should move</param>
     /// <returns>
     /// <c>true</c> if the path is clear,otherwise <c>false</c>.
     /// </returns>
     private bool IsPathClear(Vector2 direction)
-    {
-        // Check if the enemy has a Collider2D component
-        if (!TryGetComponent<BoxCollider2D>(out var enemyCollider))
-        {
-            Debug.LogWarning("Enemy does not have a Collider2D component.");
-            return true;
-        }
-
-        Vector2 boxSize = enemyCollider.bounds.size;
-        LayerMask obstacleLayer = LayerMask.GetMask("Default");
-
-        // Create a box in the direction the enemy will moves, with the same size as the enemy's collider
-        Vector2 offsetPosition = (Vector2)enemyCollider.bounds.center + direction.normalized * boxSize.x / 2;
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0f, obstacleLayer);
-
-        // Check if there is an obstacle in the enemy's path
-        foreach (var collider in colliders)
-        {
-            if (collider.CompareTag("Object"))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /// <summary>
-    /// The CheckPossibleCollision method is responsible for checking if the enemy will collide with an obstacle, in a future movement.
-    /// </summary>
-    /// <param name="direction">A possible direction of the enemy's future movement</param>
-    /// <returns>
-    /// <c>true</c> if the gate is near otherwise, <c>false</c>.
-    /// </returns>
-    private bool CheckPossibleCollision(Vector2 direction)
     {
         // Check if the enemy has a Collider2D component
         if (!TryGetComponent<BoxCollider2D>(out var enemyCollider))
