@@ -227,19 +227,31 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool IsPathClear(Vector2 direction)
     {
-        float raycastDistance = 5f;
-
-        LayerMask obstacleLayer = LayerMask.GetMask("Default");
-
-        RaycastHit2D hit = Physics2D.Raycast(enemy.position, direction, raycastDistance, obstacleLayer);
-
-        // In case the raycast does not hit anything, but the enemy could still collide with an obstacle
-        if (hit.collider == null && !CheckPossibleCollision(direction))
+        // Check if the enemy has a Collider2D component
+        if (!TryGetComponent<BoxCollider2D>(out var enemyCollider))
         {
-            return false;
+            Debug.LogWarning("Enemy does not have a Collider2D component.");
+            return true;
         }
 
-        return hit.collider == null || !hit.collider.CompareTag("Object");
+        Vector2 boxSize = enemyCollider.bounds.size;
+        LayerMask obstacleLayer = LayerMask.GetMask("Default");
+
+        // Create a box in the direction the enemy will moves, with the same size as the enemy's collider
+        Vector2 offsetPosition = (Vector2)enemyCollider.bounds.center + direction.normalized * boxSize.x / 2;
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0f, obstacleLayer);
+
+        // Check if there is an obstacle in the enemy's path
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Object"))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
