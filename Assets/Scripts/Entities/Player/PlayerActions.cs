@@ -24,9 +24,9 @@ public class PlayerActions : MonoBehaviour
     private LayerMask layer;
 
     /// <summary>
-    /// The gate and itemNear properties are responsible for storing the gate and item near the player.
+    /// The gate and objectNear properties are responsible for storing the gate and object near the player.
     /// </summary>
-    private GameObject gate, itemNear;
+    private GameObject gate, objectNear;
 
     /// <summary>
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
@@ -47,9 +47,10 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, we are checking if the are gates and items in the level.
+    /// In this method, we are checking if the are gates, if the player pressed the E key, and if the heal conditions are met.
     /// If there are gates, the IsGateNear() and OpenGate() methods are called.
-    /// If there are items, the ItemsLeft() and IsItemNear() methods are called.
+    /// If the player pressed the E key, the CheckGrabObjectsConditions() method is called.
+    /// And if the player pressed the H key, the HealPlayer() method is called.
     /// </summary>
     private void Update()
     {
@@ -61,14 +62,29 @@ public class PlayerActions : MonoBehaviour
             }
         }
 
-        if (ItemsLeft() && IsItemNear())
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            GrabItem();
+            CheckGrabObjectsConditions();
         }
 
+        // Heal Conditions
         if (Input.GetKeyDown(KeyCode.H) && GetComponent<PlayerInventory>().Items["HealItems"] > 0)
         {
             HealPlayer();
+        }
+    }
+
+    /// <summary>
+    /// The CheckGrabObjectsConditions method is responsible for checking the conditions to grab an object (item or weapon).
+    /// The first if stament condition is to check the conditions to grab an item, the second condition is to check the conditions to grab a weapon.
+    /// </summary>
+    private void CheckGrabObjectsConditions()
+    {   
+        bool grabItemsConditions = ItemsLeft() && IsObjectNear("Item");
+
+        if (grabItemsConditions|| IsObjectNear("Weapon"))
+        {
+            GrabObject();
         }
     }
 
@@ -94,14 +110,15 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The IsItemNear method is responsible for checking if the player is near an item.
-    /// To check if the player is near an item, a box collider is created around the player.
-    /// If the player is near an item, the itemNear variable is set to the item game object.
+    /// The IsObjectNear method is responsible for checking if the player is near an object, the object can be an item or a weapon.
+    /// To check if the player is near an object, a box collider is created around the player.
+    /// If the player is near an  object, the objectNear property is updated with the object.
     /// </summary>
+    /// <param name="objectTag">The object tag.</param>
     /// <returns>
-    ///   <c>true</c> if the item is  near; otherwise, <c>false</c>.
+    ///   <c>true</c> if the object is  near; otherwise, <c>false</c>.
     /// </returns>
-    private bool IsItemNear()
+    private bool IsObjectNear(string objectTag)
     {   
         BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
 
@@ -114,9 +131,10 @@ public class PlayerActions : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.gameObject.CompareTag("Item"))
-            {
-                itemNear = collider.gameObject;
+            if (collider.gameObject.CompareTag(objectTag))
+            {          
+                objectNear = collider.gameObject;
+                
                 return true;
             }
         }
@@ -160,23 +178,49 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The GrabItem method is responsible for grabbing the item near the player.
-    /// It grabs the item if the player presses the E key, and calls specific methods for each type of item.
+    /// The GrabObject method is responsible for grabbing the object near the player.
+    /// It calls the correct method to grab the object, depending on the object's name.
     /// </summary>
-    private void GrabItem()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {   
-          
-            if (itemNear.name.Contains("Key"))
-            {
+    private void GrabObject()
+    {   
+        switch (objectNear.name)
+        {
+            case "Stick":
+            case "Sword":
+                 GrabMeleeWeapon();
+
+                return;
+
+            case "Key":
+                Debug.Log("Grab Key");
                 GrabKey();
-            }
-            else
-            {
+
+                return;
+
+            case "HealItem":
                 GrabHealItem();
-            }
+
+                return;
+
+            default:
+                return;
+        }      
+    }
+
+    /// <summary>
+    /// The GrabMeleeWeapon method is responsible for grabbing the melee weapon, updating the player's inventory, and removing the weapon from the level.
+    /// If the player grabs the stick, PlayerAttack component is enable, because the stick is the player's first weapon.
+    /// </summary>
+    private void GrabMeleeWeapon()
+    {   
+        if (objectNear.name == "Stick")
+        {
+            GetComponent<PlayerAttack>().enabled = true;
         }
+
+        GetComponent<PlayerInventory>().Weapons["Melee"] = objectNear.name;
+
+        DestroyObject();
     }
 
     /// <summary>
@@ -189,7 +233,7 @@ public class PlayerActions : MonoBehaviour
         {  
             GetComponent<PlayerInventory>().Items["Key"] = 1;
 
-            GameObject itemToDestroy = DestroyItem();
+            GameObject itemToDestroy = DestroyObject();
 
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy); ;
@@ -206,21 +250,21 @@ public class PlayerActions : MonoBehaviour
         {
             GetComponent<PlayerInventory>().Items["HealItems"]++;
 
-            DestroyItem();
+            DestroyObject();
         }
     }
 
     /// <summary>
-    /// The DestroyItem method is responsible for destroying the item near the player.
+    /// The DestroyObject method is responsible for destroying the object near the player.
     /// </summary>
-    /// <returns>The item to destroy</returns>
-    private GameObject DestroyItem()
+    /// <returns>The object to destroy</returns>
+    private GameObject DestroyObject()
     {
-        GameObject itemToDestroy = itemNear;
-        itemNear = null;
-        Destroy(itemToDestroy);
+        GameObject objectToDestroy = objectNear;
+        objectNear = null;
+        Destroy(objectToDestroy);
 
-        return itemToDestroy;
+        return objectToDestroy;
     }
 
     /// <summary>

@@ -54,15 +54,14 @@ public class PlayerAttack : MonoBehaviour
     /// 
 
     private void Awake()
-    {
+    {   
         DeactivateAttack();
     }
     private void Update()
     {
         GetAttackDirection();
-       
-        //Verifica se a tecla de ataque foi pressionada
-        if(Input.GetKeyDown(KeyCode.Space)){
+
+        if (Input.GetKeyDown(KeyCode.Space)){
             Attack();
         }
 
