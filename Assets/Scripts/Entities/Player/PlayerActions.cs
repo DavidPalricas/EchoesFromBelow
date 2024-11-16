@@ -179,10 +179,16 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The GrabObject method is responsible for grabbing the object near the player.
+    /// It removes the (Clone) string from the object's name, if it exists, to get the original object name.
     /// It calls the correct method to grab the object, depending on the object's name.
     /// </summary>
     private void GrabObject()
     {   
+        if (objectNear.name.Contains("(Clone"))
+        {
+          objectNear.name = objectNear.name.Replace("(Clone)", "");
+        }
+
         switch (objectNear.name)
         {
             case "Stick":

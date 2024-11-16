@@ -22,22 +22,21 @@ public class Entity : MonoBehaviour
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, the EntityDeath method is called.
+    /// In this method, the EntityDeath method is called, when the entity is dead.
     /// </summary>
     private void Update()
     {
-        EntityDeath();          
+        if (Health <= 0)
+        {
+           EntityDeath();
+        }   
     }
 
     /// <summary>
     /// The EntityDeath method is responsible for handling the entity's death.
-    /// If the entity's health is less than or equal to 0(the entity is dead), the entity is disabled.
     /// </summary>
-    private void EntityDeath()
+    protected virtual void EntityDeath()
     {
-        if (Health <= 0)
-        {
-            gameObject.SetActive(false);          
-        }
+        gameObject.SetActive(false);          
     }
 }

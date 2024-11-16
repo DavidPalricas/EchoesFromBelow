@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1617022257010111131}
   - component: {fileID: 8882805716847569812}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,10 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fced9b163b763e347813b19eea04b657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 7
-  Speed: 2.5
-  AttackDamage: 3
-  IsBoss: 0
+  Health: 10
+  Speed: 2
+  AttackDamage: 4
+  isBoss: 1
+  bossDropItem: {fileID: 4279726040407628192, guid: e9af9346b962c61488190ea4fb1ddd43, type: 3}
   IsLongRanged: 0
 --- !u!1001 &5019335564265845972
 PrefabInstance:
