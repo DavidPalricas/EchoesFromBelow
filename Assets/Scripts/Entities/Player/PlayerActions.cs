@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -54,7 +55,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (gate != null)
         {
-            if (IsGateNear() && Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && IsGateNear())
             {   
                 OpenGate();
             }
@@ -65,7 +66,7 @@ public class PlayerActions : MonoBehaviour
             GrabItem();
         }
 
-        if (GetComponent<PlayerInventory>().HealItems > 0 && Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) && GetComponent<PlayerInventory>().Items["HealItems"] > 0)
         {
             HealPlayer();
         }
@@ -88,7 +89,6 @@ public class PlayerActions : MonoBehaviour
 
         // This line is used to visualize the raycast in the scene view, for debugging purposes.
         // Debug.DrawRay(raycastOrigin, Vector2.down * rayCastDistance, Color.red);
-
 
         return hit.collider != null && hit.collider.gameObject.name == "Gate";
     }
@@ -127,16 +127,18 @@ public class PlayerActions : MonoBehaviour
     /// <summary>
     /// The OpenGate method is responsible for opening the gate, if the player has the key.
     /// If the player has the corect key, the gate is opened, otherwise the key is removed from the player's inventory.
+    /// To check if the player has the correct key, it checks the keys dictionary of the first level.
+    /// If the keys dictionary has no key with a true value, it means that the player has grabbed the correct key.
     /// </summary>
     private void OpenGate()
     {
-        if (GetComponent<PlayerInventory>().Key != null)
+        if (GetComponent<PlayerInventory>().Items["Key"] == 1)
         {
             // Gets the key and its value
             Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
 
             // If the ket value is true, its the correct key to open the gate
-            if (keys[GetComponent<PlayerInventory>().Key])
+            if (!keys.Values.Any(value => value == true))
             {    
                 // Opens the gate
                  gate.SetActive(false);
@@ -144,7 +146,7 @@ public class PlayerActions : MonoBehaviour
             else
             {
                 // Removes the key from the player's inventory
-                GetComponent<PlayerInventory>().Key = null;
+                GetComponent<PlayerInventory>().Items["Key"] = 0;
             }
         }  
     }
@@ -180,21 +182,21 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The GrabKey method is responsible for grabbing the key.
-    /// The player's iventory is updated, and the key is destroyed.
+    /// It adds a key to the player's inventory, and removes the key from the level.
     /// </summary>
     private void GrabKey()
     {   
 
-
-        if (GetComponent<PlayerInventory>().Key == null)
+        if (GetComponent<PlayerInventory>().Items["Key"] == 0)
         {  
-            GetComponent<PlayerInventory>().Key = itemNear;
-
-            Debug.Log(GetComponent<PlayerInventory>().Key);
+            GetComponent<PlayerInventory>().Items["Key"] = 1;
 
             GameObject itemToDestroy = itemNear;
             itemNear = null;
             itemToDestroy.SetActive(false);
+
+            // Removes the key from the dictionary which stores the keys and their values
+            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy); ;
         }   
     }
 
@@ -204,9 +206,9 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void GrabHealItem()
     {
-        if (GetComponent<PlayerInventory>().HealItems < PlayerInventory.MaxHealItems)
+        if (GetComponent<PlayerInventory>().Items["HealItems"] < PlayerInventory.MaxHealItems)
         {
-            GetComponent<PlayerInventory>().HealItems++;
+            GetComponent<PlayerInventory>().Items["HealItems"]++;
 
             GameObject itemToDestroy = itemNear;
             itemNear = null;
@@ -222,7 +224,7 @@ public class PlayerActions : MonoBehaviour
         if (GetComponent<Entity>().Health < playerMaxHealth)
         {
             GetComponent<Entity>().Health++;
-            GetComponent<PlayerInventory>().HealItems--;
+            GetComponent<PlayerInventory>().Items["HealItems"]--;
         }
     }
 }

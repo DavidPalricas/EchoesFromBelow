@@ -21,6 +21,12 @@ public class Level1Logic : MonoBehaviour
         GameObject[] gameKeys = FindKeys();
 
         AddKeysValues(gameKeys);
+
+
+        foreach (var key in Keys)
+        {
+            Debug.Log(key.Key.name + " : " + key.Value);
+        }
     }
 
     /// <summary>

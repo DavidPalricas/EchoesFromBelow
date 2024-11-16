@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,23 +12,33 @@ public class PlayerInventory : MonoBehaviour
     public const int MaxHealItems = 3;
 
     /// <summary>
-    /// The HasKey property is responsible for indicating if the player has the key.
+    /// The Items property is responsible for storing the items that the player has.
     /// </summary>
-    public GameObject Key { get; set; }
+    public Dictionary<string, int> Items { get; private set; }
 
     /// <summary>
-    /// The HealItems property is responsible for storing the number of heal items that the player has.
+    /// The Weapons property is responsible for storing the weapons that the player has.
     /// </summary>
-    public int HealItems { get; set; }
+    public Dictionary <string,string> Weapons { get; private set; }
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// In this method, we are initializing the player's inventory.
+    /// In this method, we are initializing the player's inventory (Items and Weapons).
     /// </summary>
     private void Awake()
     {
-        HealItems = 0;
-        Key = null;
+        Items = new Dictionary<string, int>
+        {
+            { "HealItems", 0 },
+            { "Key", 0 }
+        };
+
+        Weapons = new Dictionary<string, string>
+        {
+            { "Melee", null },
+            { "Long", null }
+        };
+
     }
 
     /// <summary>
@@ -36,7 +47,9 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     public void ResetItems()
     {
-        HealItems = 0;
-        Key = null;
+        foreach (var item in Items)
+        {
+            Items[item.Key] = 0;
+        }
     } 
 }

@@ -35,7 +35,7 @@ public class InventoryLabel : MonoBehaviour
     /// </summary>
     private void UpdateIventoryLabel()
     {
-        int playerHealItems = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().HealItems;
+        int playerHealItems = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().Items["HealItems"];
 
         if (playerHealItems == PlayerInventory.MaxHealItems)
         {
