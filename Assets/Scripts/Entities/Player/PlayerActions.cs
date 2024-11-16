@@ -15,7 +15,7 @@ public class PlayerActions : MonoBehaviour
     /// <summary>
     /// The gate property is responsible for storing the gate GameObject.
     /// </summary>
-    private GameObject gate;
+
 
     /// <summary>
     /// The layer property is responsible for storing the layer mask.
@@ -24,9 +24,9 @@ public class PlayerActions : MonoBehaviour
     private LayerMask layer;
 
     /// <summary>
-    /// The itemNear property is responsible for storing the item near the player.
+    /// The gate and itemNear properties are responsible for storing the gate and item near the player.
     /// </summary>
-    private GameObject itemNear;
+    private GameObject gate, itemNear;
 
     /// <summary>
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
@@ -137,8 +137,7 @@ public class PlayerActions : MonoBehaviour
             // Gets the key and its value
             Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
 
-            // If the ket value is true, its the correct key to open the gate
-            if (!keys.Values.Any(value => value == true))
+            if (!keys.Values.Any(value => value))
             {    
                 // Opens the gate
                  gate.SetActive(false);
@@ -186,14 +185,11 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void GrabKey()
     {   
-
         if (GetComponent<PlayerInventory>().Items["Key"] == 0)
         {  
             GetComponent<PlayerInventory>().Items["Key"] = 1;
 
-            GameObject itemToDestroy = itemNear;
-            itemNear = null;
-            itemToDestroy.SetActive(false);
+            GameObject itemToDestroy = DestroyItem();
 
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy); ;
@@ -210,10 +206,21 @@ public class PlayerActions : MonoBehaviour
         {
             GetComponent<PlayerInventory>().Items["HealItems"]++;
 
-            GameObject itemToDestroy = itemNear;
-            itemNear = null;
-            Destroy(itemToDestroy);
+            DestroyItem();
         }
+    }
+
+    /// <summary>
+    /// The DestroyItem method is responsible for destroying the item near the player.
+    /// </summary>
+    /// <returns>The item to destroy</returns>
+    private GameObject DestroyItem()
+    {
+        GameObject itemToDestroy = itemNear;
+        itemNear = null;
+        Destroy(itemToDestroy);
+
+        return itemToDestroy;
     }
 
     /// <summary>

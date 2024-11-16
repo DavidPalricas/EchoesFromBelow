@@ -18,15 +18,7 @@ public class Level1Logic : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        GameObject[] gameKeys = FindKeys();
-
-        AddKeysValues(gameKeys);
-
-
-        foreach (var key in Keys)
-        {
-            Debug.Log(key.Key.name + " : " + key.Value);
-        }
+        AddKeysValues(FindKeys());
     }
 
     /// <summary>
