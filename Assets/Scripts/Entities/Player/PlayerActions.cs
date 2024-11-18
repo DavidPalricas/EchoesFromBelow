@@ -99,7 +99,7 @@ public class PlayerActions : MonoBehaviour
     {        
         float rayCastDistance = 1.5f;
 
-        Vector2 raycastOrigin = player.position + new Vector2(0, -1f); 
+        Vector2 raycastOrigin = player.position * player.transform.localScale + new Vector2(0, -1f); 
 
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, rayCastDistance, layer);
 
