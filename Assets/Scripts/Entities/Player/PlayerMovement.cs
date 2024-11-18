@@ -48,4 +48,14 @@ public class PlayerMovement : MonoBehaviour
 
         return new Vector2(Mathf.Round(playerDirection.x), Mathf.Round(playerDirection.y));
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.name == "BoneTrigger")
+        {
+            GameObject spawnHord = GameObject.Find("SpawnHorde");
+
+            spawnHord.GetComponent<SpawnHorde>().enabled = true;
+        }
+    }
 }
