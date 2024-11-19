@@ -161,7 +161,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.mdjd-proj2d
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -785,8 +786,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: mdjd_proj2d
-  metroPackageVersion: 
+  metroPackageName: mdjdproj2d
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -794,7 +795,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: mdjd_proj2d
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: mdjd_proj2d
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

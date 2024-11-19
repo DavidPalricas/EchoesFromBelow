@@ -75,6 +75,8 @@ crashlytics-build.properties
 /Assets/Scenes/SampleScene.unity.meta
 /Assets/Scenes/TestingScenes/
 /Assets/Scenes/TestingScenes.meta
+
+test/
 .vsconfig
 
 .vscode

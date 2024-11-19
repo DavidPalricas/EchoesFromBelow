@@ -68,6 +68,10 @@ public class SpawnHorde : MonoBehaviour
                 SpawEnemies();
                 spawnTime = GetSpawnTime();
             }
+        } else{
+
+            this.enabled = false;
+
         }
     }
 

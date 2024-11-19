@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -99,14 +100,15 @@ public class PlayerActions : MonoBehaviour
     {        
         float rayCastDistance = 1.5f;
 
-        Vector2 raycastOrigin = player.position * player.transform.localScale + new Vector2(0, -1f); 
+        Vector2 raycastOrigin = (Vector2)player.position + new Vector2(0, -player.GetComponent<Collider2D>().bounds.extents.y);
 
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, rayCastDistance, layer);
 
         // This line is used to visualize the raycast in the scene view, for debugging purposes.
-        // Debug.DrawRay(raycastOrigin, Vector2.down * rayCastDistance, Color.red);
+        Debug.DrawRay(raycastOrigin, Vector2.down * rayCastDistance, Color.red);
 
         return hit.collider != null && hit.collider.gameObject.name == "Gate";
+
     }
 
     /// <summary>
@@ -242,7 +244,9 @@ public class PlayerActions : MonoBehaviour
             GameObject itemToDestroy = DestroyObject();
 
             // Removes the key from the dictionary which stores the keys and their values
-            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy); ;
+            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy);
+
+            SpawnHordes();
         }   
     }
 
@@ -284,4 +288,15 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerInventory>().Items["HealItems"]--;
         }
     }
+
+
+    //abc
+    private void SpawnHordes(){
+
+        GameObject spawnHord = GameObject.Find("SpawnHorde");
+
+        spawnHord.GetComponent<SpawnHorde>().enabled = true;
+
+    }
+
 }

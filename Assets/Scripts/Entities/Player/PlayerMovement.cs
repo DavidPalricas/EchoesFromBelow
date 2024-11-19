@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
             GameObject spawnHord = GameObject.Find("SpawnHorde");
 
             spawnHord.GetComponent<SpawnHorde>().enabled = true;
+            collider.gameObject.SetActive(false);
+
         }
     }
 }
