@@ -36,6 +36,13 @@ public class AttackArea : MonoBehaviour
         if (collider.gameObject.CompareTag("Enemy") && isPlayer || collider.gameObject.CompareTag("Player") && !isPlayer)
         {
             collider.GetComponent<Entity>().Health -= (int) meleeDamage;
+
+            if (!isPlayer){
+
+                GameObject.Find("healthBar").GetComponent<healthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
+
+            }
+
         }
     }
 }
