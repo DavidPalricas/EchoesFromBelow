@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 /// <summary>
@@ -27,6 +29,17 @@ public class PlayerActions : MonoBehaviour
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
     /// </summary>
     private int playerMaxHealth;
+
+    /// <summary>
+    /// The playerArmed property is responsible for verifying if the player has a weapon equiped.
+    /// The equipedWeapon property is responsible for verifying which weapon is equiped.
+    /// The ...Iconm properties are responsible for identifying the proper UI images for the equiped weapons.
+    /// </summary>
+    public bool playerArmed = false;
+    public string equipedWeapon;
+    public GameObject stickIcon;
+    public GameObject swordIcon;
+    public GameObject slingshotIcon;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -66,6 +79,39 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H) && GetComponent<PlayerInventory>().Items["HealItems"] > 0)
         {
             HealPlayer();
+        }
+
+        if (playerArmed == true){
+
+            // FALTA FAZER CÓDIGO PARA VERIIFCAR SE O JOGADOR JÁ TEM AS OUTRAS ARMAS NO INVENTÁRIO.
+            // SE NÃO, CONSEGUE TROCAR PARA QUALQUER IMAGEM DE ARMA SEM AS TER EQUIPADAS
+
+            if (Input.GetKeyDown(KeyCode.Alpha1)){
+
+                equipedWeapon = "stick";
+                
+                stickIcon.SetActive(true);
+                swordIcon.SetActive(false);
+                slingshotIcon.SetActive(false);
+
+            } else if (Input.GetKeyDown(KeyCode.Alpha2)){
+
+                equipedWeapon = "sword";
+
+                swordIcon.SetActive(true);
+                stickIcon.SetActive(false);
+                slingshotIcon.SetActive(false);
+
+            } else if (Input.GetKeyDown(KeyCode.Alpha3)){
+
+                equipedWeapon = "slingshot";
+
+                slingshotIcon.SetActive(true);
+                stickIcon.SetActive(false);
+                swordIcon.SetActive(false);
+
+            }
+
         }
     }
 
@@ -210,6 +256,11 @@ public class PlayerActions : MonoBehaviour
         if (objectNear.name == "Stick")
         {
             GetComponent<PlayerAttack>().enabled = true;
+
+            playerArmed = true;
+            equipedWeapon = "stick";
+            stickIcon.SetActive(true);
+
         }
 
         GetComponent<PlayerInventory>().Weapons["Melee"] = objectNear.name;
