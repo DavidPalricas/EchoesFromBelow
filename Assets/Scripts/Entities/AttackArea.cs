@@ -39,7 +39,7 @@ public class AttackArea : MonoBehaviour
 
             if (!isPlayer){
 
-                GameObject.Find("healthBar").GetComponent<healthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
+                GameObject.Find("healthBar").GetComponent<HealthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
 
             }
 

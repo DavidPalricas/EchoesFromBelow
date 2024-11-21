@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -12,11 +11,6 @@ public class PlayerActions : MonoBehaviour
     /// The player property is responsible for storing the player's Rigidbody2D component.
     /// </summary>
     private Rigidbody2D player;
-
-    /// <summary>
-    /// The gate property is responsible for storing the gate GameObject.
-    /// </summary>
-
 
     /// <summary>
     /// The layer property is responsible for storing the layer mask.
@@ -91,24 +85,19 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The isGateNear method is responsible for checking if the player is near the gate.
-    /// A raycast is create to check if the player is near the gate and its facing down the gate.
+    /// First , it checks if the player is facing down, or if the player is idle and the last direction was down.
+    /// After that, it checks if the player is near the gate, calling the IsObjectNear method.
     /// </summary>
     /// <returns>
     /// <c>true</c> if the gate is near otherwise, <c>false</c>.
     /// </returns>
     private bool IsGateNear()
-    {        
-        float rayCastDistance = 1.5f;
+    {   
+        Vector2 LastMovingDirection = GameObject.Find("Player").GetComponent < PlayerMovement>().LastMovingDirection;
 
-        Vector2 raycastOrigin = (Vector2)player.position + new Vector2(0, -player.GetComponent<Collider2D>().bounds.extents.y);
+        Vector2 playerDirection = Utils.NormalizeDirectionVector(player.velocity);
 
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, rayCastDistance, layer);
-
-        // This line is used to visualize the raycast in the scene view, for debugging purposes.
-        Debug.DrawRay(raycastOrigin, Vector2.down * rayCastDistance, Color.red);
-
-        return hit.collider != null && hit.collider.gameObject.name == "Gate";
-
+        return (playerDirection == Vector2.down || LastMovingDirection == Vector2.down) && IsObjectNear("Object","Gate");
     }
 
     /// <summary>
@@ -116,11 +105,12 @@ public class PlayerActions : MonoBehaviour
     /// To check if the player is near an object, a box collider is created around the player.
     /// If the player is near an  object, the objectNear property is updated with the object.
     /// </summary>
-    /// <param name="objectTag">The object tag.</param>
+    /// <param name="objectTag">The object's tag.</param>
+    /// <param name="objectName">The object's name.</param>
     /// <returns>
     ///   <c>true</c> if the object is  near; otherwise, <c>false</c>.
     /// </returns>
-    private bool IsObjectNear(string objectTag)
+    private bool IsObjectNear(string objectTag, string objectName = null)
     {   
         BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
 
@@ -147,17 +137,13 @@ public class PlayerActions : MonoBehaviour
     /// <summary>
     /// The OpenGate method is responsible for opening the gate, if the player has the key.
     /// If the player has the corect key, the gate is opened, otherwise the key is removed from the player's inventory.
-    /// To check if the player has the correct key, it checks the keys dictionary of the first level.
-    /// If the keys dictionary has no key with a true value, it means that the player has grabbed the correct key.
     /// </summary>
     private void OpenGate()
     {
-        if (GetComponent<PlayerInventory>().Items["Key"] == 1)
+        if (GetComponent<PlayerInventory>().Items["Key"] > 0)
         {
-            // Gets the key and its value
-            Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
-
-            if (!keys.Values.Any(value => value))
+            // Player has the right key
+            if (GetComponent<PlayerInventory>().Items["Key"] == 2)
             {    
                 // Opens the gate
                  gate.SetActive(false);
@@ -232,21 +218,37 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
+    /// The RightKeyGrabbed method is responsible for checking if the player has grabbed the right key, to open the gate.
+    /// If the are no keys with a true value in the level, it means that the player has grabbed the right key.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the right key was grabbed; otherwise, <c>false</c>.
+    /// </returns>
+    private bool RightKeyGrabbed()
+    {
+        // Gets the key and its values (true or false)
+        Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
+
+        return !(!keys.Values.Any(value => value));
+    }
+
+    /// <summary>
     /// The GrabKey method is responsible for grabbing the key.
-    /// It adds a key to the player's inventory, and removes the key from the level.
+    /// It adds a key to the player's inventory, removes the key from the level and spawns an horde of enemies.
+    /// If the player has the right key, it will have the value 2 in the inventory, otherwise it will have the value 1.
     /// </summary>
     private void GrabKey()
     {   
         if (GetComponent<PlayerInventory>().Items["Key"] == 0)
-        {  
-            GetComponent<PlayerInventory>().Items["Key"] = 1;
+        {   
+            GetComponent<PlayerInventory>().Items["Key"] = RightKeyGrabbed() ? 2 : 1;
 
             GameObject itemToDestroy = DestroyObject();
 
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy);
 
-            SpawnHordes();
+            SpawnHordes(GetComponent<PlayerInventory>().Items["Key"] == 2);
         }   
     }
 
@@ -289,14 +291,22 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The SpawnHordes method is responsible for spawning hordes of enemies.
+    /// It gets the SpawnHorde component and resets the number of enemies spawned and increases the horde size.
+    /// By reseting the number of enemies spawned in a horde, we ensure that a new horde will be spawned.
+    /// Because the horde stops spawning when the number of enemies reaches a certain value.
+    /// </summary>
+    private void SpawnHordes(bool hasRightKey){
 
-    //abc
-    private void SpawnHordes(){
+        SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
 
-        GameObject spawnHord = GameObject.Find("SpawnHorde");
+        spawnHord.EnemiesSpawned = 0;
 
-        spawnHord.GetComponent<SpawnHorde>().enabled = true;
+        spawnHord.HordeSize += Mathf.RoundToInt(spawnHord.HordeSize /= 2);
 
+        if (hasRightKey){
+            spawnHord.SpawnBoss();
+        }
     }
-
 }

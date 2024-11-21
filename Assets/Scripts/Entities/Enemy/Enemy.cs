@@ -23,6 +23,11 @@ public class Enemy : Entity
     public bool IsLongRanged;
 
     /// <summary>
+    /// The IsIndependent property is responsible for storing if the enemy is independent (is not in a horde).
+    /// </summary>
+    public bool IsIndependent;
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are checking if the enemy is no boss and has a drop item.
     /// If these conditions are met, an error message is displayed.

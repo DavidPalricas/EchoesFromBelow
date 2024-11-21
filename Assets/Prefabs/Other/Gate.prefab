@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904613644006922313}
   - component: {fileID: 6147476740246200587}
-  - component: {fileID: 3006516999469902182}
+  - component: {fileID: 7770375633054881543}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Object
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3006516999469902182
+--- !u!61 &7770375633054881543
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

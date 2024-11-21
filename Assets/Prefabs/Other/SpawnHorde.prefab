@@ -93,13 +93,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7720119661784529961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 430ee4ee9bee1244d9c5748198d69437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hordeSize: 20
+  HordeSize: 3
   enemyPrefab: {fileID: 8008701558926860469, guid: 1eb0de2a4a9c56b46a1ab29d5e7db092, type: 3}
+  bossPrefab: {fileID: 8008701558926860469, guid: 61c9c1e16670e064c8a6ef13cae256e6, type: 3}
   maxSpawnTime: 2
   minSpawnTime: 1
 --- !u!58 &2031448498831029051

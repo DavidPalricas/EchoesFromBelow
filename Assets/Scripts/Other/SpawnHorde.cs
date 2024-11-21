@@ -9,8 +9,7 @@ public class SpawnHorde : MonoBehaviour
     /// The hordeSize property represents the number of enemies that will be spawned.
     /// It is serialized so that it can be set in the Unity Editor.
     /// </summary>
-    [SerializeField]
-    private int hordeSize;
+    public int HordeSize;
 
     /// <summary>
     /// The enemyPrefab property stores the prefab of the enemy that will be spawned.
@@ -18,6 +17,13 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject enemyPrefab;
+
+    /// <summary>
+    /// The bossPrefab property stores the prefab of the boss enemy that will be spawned.
+    /// It is serialized so that it can be set in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private GameObject bossPrefab;
 
     /// <summary>
     /// The maxSpawnTime property represents the maximum time between enemy spawns.
@@ -36,7 +42,7 @@ public class SpawnHorde : MonoBehaviour
     /// <summary>
     /// The enemiesSpawned property represents the number of enemies that have been spawned.
     /// </summary>
-    private int enemiesSpawned = 0;
+    public int EnemiesSpawned { get; set; }
 
     /// <summary>
     /// The spawnTime property represents the time between enemy spawns.
@@ -50,6 +56,7 @@ public class SpawnHorde : MonoBehaviour
     private void Awake()
     {
         spawnTime = GetSpawnTime();
+        EnemiesSpawned = 0;
     }
 
     /// <summary>
@@ -59,7 +66,7 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (enemiesSpawned < hordeSize)
+        if (EnemiesSpawned < HordeSize)
         {
             spawnTime -= Time.deltaTime;
 
@@ -68,11 +75,7 @@ public class SpawnHorde : MonoBehaviour
                 SpawEnemies();
                 spawnTime = GetSpawnTime();
             }
-        } else{
-
-            this.enabled = false;
-
-        }
+        } 
     }
 
     /// <summary>
@@ -90,13 +93,9 @@ public class SpawnHorde : MonoBehaviour
     private void SpawEnemies()
     {   
         Vector2 enemyPosition = GetEnemySpawnPosition();
-        GameObject enemy =  Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+        Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
 
-        Debug.Log("Enemy spawned at: " + enemyPosition);
-
-        enemy.GetComponent<EnemyMovement>().IsIdle = false;
-
-        enemiesSpawned++;
+        EnemiesSpawned++;
     }
 
     /// <summary>
@@ -138,5 +137,15 @@ public class SpawnHorde : MonoBehaviour
     private bool InSpawnArea(Vector2 enemyPosition, float radius, Vector2 spawnAreaCenter)
     {
         return Mathf.Pow(enemyPosition.x - spawnAreaCenter.x, 2) + Mathf.Pow(enemyPosition.y - spawnAreaCenter.y, 2) <= Mathf.Pow(radius, 2);
+    }
+
+    /// <summary>
+    /// The SpawnBoss method is responsible for spawning the boss enemy.
+    /// </summary>
+    public void SpawnBoss()
+    {
+        Vector2 bossPosition = GetEnemySpawnPosition();
+
+        Instantiate(bossPrefab, bossPosition, Quaternion.identity);
     }
 }

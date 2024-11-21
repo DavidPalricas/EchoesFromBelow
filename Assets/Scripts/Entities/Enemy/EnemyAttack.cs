@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 /// <summary>
 /// The EnemyAttack class is responsible for handling the enemy's attack.
 /// </summary>

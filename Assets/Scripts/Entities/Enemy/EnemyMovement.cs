@@ -23,11 +23,6 @@ public class EnemyMovement : MonoBehaviour
     private float speed;
 
     /// <summary>
-    /// The isInHorde property is responsible for storing whether the enemy is in a horde.
-    /// </summary>
-    public bool IsIdle { get; set;}
-
-    /// <summary>
     /// The willCollide property is responsible for storing whether the enemy will collide with an obstacle.
     /// </summary>
     private bool willCollide;
@@ -66,8 +61,6 @@ public class EnemyMovement : MonoBehaviour
         enemy = GetComponent<Rigidbody2D>();
         speed = GetComponent<Entity>().Speed;
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-
-        IsIdle = true;
         willCollide = false;
     }
 
@@ -79,13 +72,9 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     private void Update()
     {   
-        if (IsIdle)
+        if (GetComponent<Enemy>().IsIndependent && !PlayerInRange())
         {
-            if (!PlayerInRange())
-            {
-                return;
-            }
-            IsIdle = false;
+           return;
         }
 
         // Check if the enemy is attacking
@@ -94,10 +83,10 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        Vector2 directionToPlayer = GetDirectionToPlayer();
+        Vector2 directionToPlayer = Utils.NormalizeDirectionVector(player.position - enemy.position);
 
         if (EnemyIsReadyToAttack(directionToPlayer))
-        {
+        {  
             return;
         }
 
@@ -127,19 +116,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// The GetDirectionToPlayer method is responsible for calculating the normalized direction to the player .
-    /// </summary>
-    /// <returns>The normalized direction to the player </returns>
-    private Vector2 GetDirectionToPlayer()
-    {
-        // Normalize the direction to the player to obtain vectors of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
-        Vector2 directionToPlayer = (player.position - enemy.position).normalized;
-
-        // Round the direction to the player if the normalized direction is not a vector of this form: (-1, 0), (0, 1), (1, 0), (0, -1)
-        return new Vector2(Mathf.Round(directionToPlayer.x), Mathf.Round(directionToPlayer.y));
-    }
-
-    /// <summary>
     /// The EnemyIsReadyToAttack method is responsible for checking if the enemy is ready to attack.
     /// If it is, the enemy stops moving to attack, and its attack direction is set has is current direction.
     /// </summary>
@@ -151,7 +127,7 @@ public class EnemyMovement : MonoBehaviour
     {
         // Check if the enemy is attacking or the conditions to attack are met
         if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
-        {
+        {   
             // Stop the enemy's movement to attack
             enemy.velocity = Vector2.zero;
 
@@ -165,6 +141,7 @@ public class EnemyMovement : MonoBehaviour
 
     /// <summary>
     /// The PlayerNear method is responsible for checking if the player is near the enemy.
+    /// It crates a raycast in the direction of the player, and if the player is hit, the method returns true.
     /// </summary>
     /// <param name="directionToPlayer">The direction to the player.</param>
     /// <returns>
@@ -172,14 +149,18 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool PlayerNear(Vector2 directionToPlayer)
     {
-        float rayCastDistance = 1f;
+        float rayCastDistance = 0.5f;
+
+        BoxCollider2D enemyCollider = enemy.GetComponent<BoxCollider2D>();
+
+        Vector2 raycastOrigin = (Vector2) enemyCollider.bounds.center + directionToPlayer;
 
         LayerMask playerLayer = LayerMask.GetMask("Default");
 
-        RaycastHit2D hit = Physics2D.Raycast(enemy.position, directionToPlayer, rayCastDistance, playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-        //Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
+        // Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
 
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
@@ -274,7 +255,7 @@ public class EnemyMovement : MonoBehaviour
         // Check if there is an obstacle in the enemy's path
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Object"))
+            if (collider.CompareTag("Object") || collider.CompareTag("Enemy") && collider.gameObject != enemy.gameObject)
             {
                 return false;
             }
@@ -316,8 +297,20 @@ public class EnemyMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
-        {
-           // Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        {   
+            /*
+            Debug.Log("Enemy collided with another enemy");
+
+            Rigidbody2D otherEnemy = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            Vector2 enemyDirection = NormalizeDirectionVector(otherEnemy.position - enemy.position);
+
+            float impactForce = 10f;
+
+            enemy.AddForce(-enemyDirection * impactForce, ForceMode2D.Impulse);
+
+            otherEnemy.AddForce(enemyDirection * impactForce , ForceMode2D.Impulse);
+            */
 
         }
     }   
