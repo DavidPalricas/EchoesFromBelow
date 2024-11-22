@@ -207,6 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d138aa7feb92f464ab5360bec9536425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stickIcon: {fileID: 2423271921205860284, guid: 4ea7d187a5da6fe46a66786a1ba7ac39, type: 3}
+  swordIcon: {fileID: 4279726040407628192, guid: e9af9346b962c61488190ea4fb1ddd43, type: 3}
+  slingshotIcon: {fileID: 0}
 --- !u!114 &5400349198844175059
 MonoBehaviour:
   m_ObjectHideFlags: 0
