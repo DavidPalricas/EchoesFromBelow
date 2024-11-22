@@ -57,6 +57,9 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject slingshotIcon;
 
+    [SerializeField]
+    private GameObject noWeaponIcon;
+
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are initializing the player and gate variables and setting the HasKey property to false.
@@ -271,6 +274,7 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerAttack>().enabled = true;
 
             playerArmed = true;
+            noWeaponIcon.SetActive(false);
             equipedWeapon = "stick";
             stickIcon.SetActive(true);
         }
