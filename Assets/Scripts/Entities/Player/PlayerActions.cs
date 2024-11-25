@@ -296,7 +296,7 @@ public class PlayerActions : MonoBehaviour
         // Gets the key and its values (true or false)
         Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
 
-        return !(!keys.Values.Any(value => value));
+        return (!keys.Values.Any(value => value));
     }
 
     /// <summary>
