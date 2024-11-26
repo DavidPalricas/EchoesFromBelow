@@ -40,9 +40,10 @@ public class TimeLabel : MonoBehaviour
     private void UpdateTimeLabel()
     {
         int hours = Mathf.FloorToInt(time / 3600F);
-        int minutes = Mathf.FloorToInt((time / 3600) % 60F);
-        int seconds = Mathf.FloorToInt((time % 3600) % 60F);
+        int minutes = Mathf.FloorToInt((time % 3600) / 60F); 
+        int seconds = Mathf.FloorToInt(time % 60F);
 
         labelText.text = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
+
 }
