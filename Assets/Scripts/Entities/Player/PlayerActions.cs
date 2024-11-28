@@ -40,6 +40,12 @@ public class PlayerActions : MonoBehaviour
     private string equipedWeapon;
 
     /// <summary>
+    /// The equipedWeapon property is responsible for verifying which weapon is equiped.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+
+    /// <summary>
     /// The stickIcon property is responsible for storing the stick icon.
     /// </summary>
     [SerializeField]
@@ -277,6 +283,9 @@ public class PlayerActions : MonoBehaviour
             noWeaponIcon.SetActive(false);
             equipedWeapon = "stick";
             stickIcon.SetActive(true);
+
+            animator.SetBool("HasWeapon", true);
+
         }
 
         GetComponent<PlayerInventory>().Weapons["Melee"] = objectNear.name;

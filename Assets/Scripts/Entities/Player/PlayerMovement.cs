@@ -11,9 +11,21 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D player;
 
     /// <summary>
+    /// The player property is responsible for storing the player's Rigidbody2D component.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+
+    /// <summary>
     /// The speed property is responsible for storing the player's speed.
     /// </summary>
+    [SerializeField]
     private float speed;
+
+    /// <summary>
+    /// The speed property is responsible for storing the player's speed.
+    /// </summary>
+    private Vector2 speedVector;
 
     /// <summary>
     /// The previousDirection property is responsible for storing the player's previous direction.
@@ -41,7 +53,22 @@ public class PlayerMovement : MonoBehaviour
         float speedX = Input.GetAxis("Horizontal");
         float speedY = Input.GetAxis("Vertical");
 
-        player.velocity = new Vector2(speedX * speed, speedY * speed);  
+        speedVector.x = Input.GetAxis("Horizontal");
+        speedVector.y = Input.GetAxis("Vertical");
+
+        if (speedVector != Vector2.zero){
+
+            speedVector = speedVector.normalized;
+        
+        }
+
+        animator.SetFloat("Horizontal", speedX);
+        animator.SetFloat("Vertical", speedY);
+        animator.SetFloat("Speed", speedVector.sqrMagnitude);
+        
+
+        player.velocity = speedVector * speed;
+        //player.velocity = new Vector2(speedX * speed, speedY * speed);  
 
         if (player.velocity != Vector2.zero)
         {
