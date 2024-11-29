@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd32bb11de8f4e145ace6bad9fb0818d
+guid: c829b1bd7de60514a813815c00b96440
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,11 +149,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_Walking_stick_0
+      name: character_Death_Attack_stick_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 325
+        y: 470
         width: 64
         height: 64
       alignment: 0
@@ -163,18 +163,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4447b1f7e4f0756409328bc8b55b1820
-      internalID: -992456031
+      spriteID: e9c801c92fb71db41ab9479406efaf9b
+      internalID: 1556460257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_1
+      name: character_Death_Attack_stick_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 325
+        y: 470
         width: 64
         height: 64
       alignment: 0
@@ -184,18 +184,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc113b10817ac6a49b8f4abdf676f54a
-      internalID: -426987642
+      spriteID: 5822e4c6412bf914d8e3cc9543a077ce
+      internalID: -502671464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_2
+      name: character_Death_Attack_stick_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 325
+        y: 470
         width: 64
         height: 64
       alignment: 0
@@ -205,18 +205,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4253a050d03fdd4394af53d524b6592
-      internalID: 613082097
+      spriteID: bcfd975f572af7a419cc34362459c0b4
+      internalID: -2085128635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_3
+      name: character_Death_Attack_stick_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 325
+        y: 470
         width: 64
         height: 64
       alignment: 0
@@ -226,18 +226,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9027f207cd3b0b540ab6f8c3d061d13b
-      internalID: 1014840380
+      spriteID: dc2e5c7ecfb1dea4a9cb644263ece58f
+      internalID: 576405305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_4
+      name: character_Death_Attack_stick_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 261
+        y: 406
         width: 64
         height: 64
       alignment: 0
@@ -247,18 +247,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d1d23e18ef7cea4ab7547f4b3451059
-      internalID: -919763340
+      spriteID: a1d8b6f3483cf1c4b8823ecff7262b93
+      internalID: -53010770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_5
+      name: character_Death_Attack_stick_5
       rect:
         serializedVersion: 2
         x: 64
-        y: 261
+        y: 406
         width: 64
         height: 64
       alignment: 0
@@ -268,18 +268,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37ac55ae308f7d34eb09ea3b63821bed
-      internalID: 57053572
+      spriteID: f587d9fd6302a60468e1aa594759bb2b
+      internalID: -630786033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_6
+      name: character_Death_Attack_stick_6
       rect:
         serializedVersion: 2
         x: 128
-        y: 261
+        y: 406
         width: 64
         height: 64
       alignment: 0
@@ -289,18 +289,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3966a0f60778375479199b9afe80a1f3
-      internalID: 1261906611
+      spriteID: 6914ba543d46e52479a28838c6ca2521
+      internalID: -1853062262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_7
+      name: character_Death_Attack_stick_7
       rect:
         serializedVersion: 2
         x: 192
-        y: 261
+        y: 406
         width: 64
         height: 64
       alignment: 0
@@ -310,18 +310,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e90592a033893c409ed5daf32209976
-      internalID: 1727663831
+      spriteID: 88812156c09df6348a35369e8111b16c
+      internalID: 1286094100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_8
+      name: character_Death_Attack_stick_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 197
+        y: 342
         width: 64
         height: 64
       alignment: 0
@@ -331,18 +331,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2492cd6125aa8a448e8f273d1ebb527
-      internalID: -338957605
+      spriteID: 9d0f57790ec38934b97f68d4ca57e076
+      internalID: -839362210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_9
+      name: character_Death_Attack_stick_9
       rect:
         serializedVersion: 2
         x: 64
-        y: 197
+        y: 342
         width: 64
         height: 64
       alignment: 0
@@ -352,18 +352,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 959838566557b36449eacd28f3353f49
-      internalID: 2113216888
+      spriteID: aaaa274fc4eee0544b5560cfd6f5a594
+      internalID: 1888542551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_10
+      name: character_Death_Attack_stick_10
       rect:
         serializedVersion: 2
         x: 128
-        y: 197
+        y: 342
         width: 64
         height: 64
       alignment: 0
@@ -373,18 +373,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdf7b5e597ce7694abea612e286e1989
-      internalID: 1730429318
+      spriteID: 128961c17ea40f945a18d47acb25fd32
+      internalID: 504656775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_11
+      name: character_Death_Attack_stick_11
       rect:
         serializedVersion: 2
         x: 192
-        y: 197
+        y: 342
         width: 64
         height: 64
       alignment: 0
@@ -394,18 +394,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3d35730c9c36594498ea154805dc087
-      internalID: -1849295342
+      spriteID: ab3b900e8960c9545b666c13f4630d4d
+      internalID: 1504748964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_12
+      name: character_Death_Attack_stick_12
       rect:
         serializedVersion: 2
         x: 0
-        y: 133
+        y: 214
         width: 64
         height: 64
       alignment: 0
@@ -415,18 +415,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afb1386034bd98e4bb5603b8217c3476
-      internalID: 1701280604
+      spriteID: 3a091d079c3c7a543939ccf87a2408f9
+      internalID: 1421593286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_13
+      name: character_Death_Attack_stick_13
       rect:
         serializedVersion: 2
         x: 64
-        y: 133
+        y: 214
         width: 64
         height: 64
       alignment: 0
@@ -436,18 +436,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2b034d3ee7343d4c9715abe78fca110
-      internalID: 2101897075
+      spriteID: 7120fd8383174ee478febe2a7ca61f22
+      internalID: 1360713591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_14
+      name: character_Death_Attack_stick_14
       rect:
         serializedVersion: 2
         x: 128
-        y: 133
+        y: 214
         width: 64
         height: 64
       alignment: 0
@@ -457,18 +457,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e8fa908d73d0ad42b02f08fb6cf91fe
-      internalID: -477860847
+      spriteID: 368cf2c6876f07f4683482b3da9a2c65
+      internalID: 441263452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_15
+      name: character_Death_Attack_stick_15
       rect:
         serializedVersion: 2
         x: 192
-        y: 133
+        y: 214
         width: 64
         height: 64
       alignment: 0
@@ -478,18 +478,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b1f106a60ed9f942a60a9ee05442c5d
-      internalID: -353218200
+      spriteID: bccc13f5df228f14aa6d99fc46b1f73d
+      internalID: 540293060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_16
+      name: character_Death_Attack_stick_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 69
+        y: 150
         width: 64
         height: 64
       alignment: 0
@@ -499,18 +499,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1a7ecb7eb43bd241bad1748fed26a38
-      internalID: 1236783494
+      spriteID: c0eec7e4e4285094d80081355a5c42ab
+      internalID: 475706078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_17
+      name: character_Death_Attack_stick_17
       rect:
         serializedVersion: 2
         x: 64
-        y: 69
+        y: 150
         width: 64
         height: 64
       alignment: 0
@@ -520,18 +520,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2c6dde0ab1a18644a1cdfb31cc6477f
-      internalID: 1889792240
+      spriteID: 09f30eb3428b58f48b40ae874c3d5626
+      internalID: -1796769688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_18
+      name: character_Death_Attack_stick_18
       rect:
         serializedVersion: 2
         x: 128
-        y: 69
+        y: 150
         width: 64
         height: 64
       alignment: 0
@@ -541,18 +541,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ebfc09642f0c9e4690a3abf7ca033cf
-      internalID: 873435607
+      spriteID: be8f70bd050e11343b3b7ddc445b4616
+      internalID: -735429820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_19
+      name: character_Death_Attack_stick_19
       rect:
         serializedVersion: 2
         x: 192
-        y: 69
+        y: 150
         width: 64
         height: 64
       alignment: 0
@@ -562,18 +562,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17c966c18c6444245bdfbb531e2e7c70
-      internalID: -446366571
+      spriteID: e2100be71c46e93448d65c23d5b3b4d7
+      internalID: 261284158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_20
+      name: character_Death_Attack_stick_20
       rect:
         serializedVersion: 2
         x: 0
-        y: 5
+        y: 86
         width: 64
         height: 64
       alignment: 0
@@ -583,18 +583,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17133d7d3e24ff244a75318f16249c62
-      internalID: 661356827
+      spriteID: 004be89c456c962478edbe83352a94fc
+      internalID: -1024243148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_21
+      name: character_Death_Attack_stick_21
       rect:
         serializedVersion: 2
         x: 64
-        y: 5
+        y: 86
         width: 64
         height: 64
       alignment: 0
@@ -604,18 +604,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18dec5360a957a8489737eb3d7396607
-      internalID: 314488928
+      spriteID: b7c69ca1d5b147247885a84121a145b2
+      internalID: -344218293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_22
+      name: character_Death_Attack_stick_22
       rect:
         serializedVersion: 2
         x: 128
-        y: 5
+        y: 86
         width: 64
         height: 64
       alignment: 0
@@ -625,18 +625,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3735b89a7b671544960542ce422175c
-      internalID: 1120064867
+      spriteID: d52bf36608eb14f41ad49d8523bc45c7
+      internalID: -441493690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_stick_23
+      name: character_Death_Attack_stick_23
       rect:
         serializedVersion: 2
         x: 192
-        y: 5
+        y: 86
         width: 64
         height: 64
       alignment: 0
@@ -646,8 +646,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cad5c8a6323de7c40b9f04fd784348b5
-      internalID: 2140626368
+      spriteID: 4e2d0485f3b513a4a892ca0ee32bf7e3
+      internalID: -1517691425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character_Death_Attack_stick_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 22
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6670e9b5fcacbf4f97e1fbb900e0d17
+      internalID: 456862404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character_Death_Attack_stick_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 22
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5734602cd1d30154b8f819f416b94a7a
+      internalID: -1847687830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character_Death_Attack_stick_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 22
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f9aba31ed25df043865ef8d03a284ea
+      internalID: -1308280585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character_Death_Attack_stick_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 22
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d720bcc857a2cf841a1d523f90e7ce69
+      internalID: -1801767696
       vertices: []
       indices: 
       edges: []
@@ -663,30 +747,34 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      character_Walking_stick_0: -992456031
-      character_Walking_stick_1: -426987642
-      character_Walking_stick_10: 1730429318
-      character_Walking_stick_11: -1849295342
-      character_Walking_stick_12: 1701280604
-      character_Walking_stick_13: 2101897075
-      character_Walking_stick_14: -477860847
-      character_Walking_stick_15: -353218200
-      character_Walking_stick_16: 1236783494
-      character_Walking_stick_17: 1889792240
-      character_Walking_stick_18: 873435607
-      character_Walking_stick_19: -446366571
-      character_Walking_stick_2: 613082097
-      character_Walking_stick_20: 661356827
-      character_Walking_stick_21: 314488928
-      character_Walking_stick_22: 1120064867
-      character_Walking_stick_23: 2140626368
-      character_Walking_stick_3: 1014840380
-      character_Walking_stick_4: -919763340
-      character_Walking_stick_5: 57053572
-      character_Walking_stick_6: 1261906611
-      character_Walking_stick_7: 1727663831
-      character_Walking_stick_8: -338957605
-      character_Walking_stick_9: 2113216888
+      character_Death_Attack_stick_0: 1556460257
+      character_Death_Attack_stick_1: -502671464
+      character_Death_Attack_stick_10: 504656775
+      character_Death_Attack_stick_11: 1504748964
+      character_Death_Attack_stick_12: 1421593286
+      character_Death_Attack_stick_13: 1360713591
+      character_Death_Attack_stick_14: 441263452
+      character_Death_Attack_stick_15: 540293060
+      character_Death_Attack_stick_16: 475706078
+      character_Death_Attack_stick_17: -1796769688
+      character_Death_Attack_stick_18: -735429820
+      character_Death_Attack_stick_19: 261284158
+      character_Death_Attack_stick_2: -2085128635
+      character_Death_Attack_stick_20: -1024243148
+      character_Death_Attack_stick_21: -344218293
+      character_Death_Attack_stick_22: -441493690
+      character_Death_Attack_stick_23: -1517691425
+      character_Death_Attack_stick_24: 456862404
+      character_Death_Attack_stick_25: -1847687830
+      character_Death_Attack_stick_26: -1308280585
+      character_Death_Attack_stick_27: -1801767696
+      character_Death_Attack_stick_3: 576405305
+      character_Death_Attack_stick_4: -53010770
+      character_Death_Attack_stick_5: -630786033
+      character_Death_Attack_stick_6: -1853062262
+      character_Death_Attack_stick_7: 1286094100
+      character_Death_Attack_stick_8: -839362210
+      character_Death_Attack_stick_9: 1888542551
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

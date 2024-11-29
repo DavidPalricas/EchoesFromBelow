@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerWalk_Left_stick
+  m_Name: PlayerAttack_Stick_Down
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -338957605, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+      value: {fileID: 1360713591, guid: c829b1bd7de60514a813815c00b96440, type: 3}
     - time: 0.14285715
-      value: {fileID: 1701280604, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+      value: {fileID: -1796769688, guid: c829b1bd7de60514a813815c00b96440, type: 3}
     - time: 0.2857143
-      value: {fileID: 1236783494, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+      value: {fileID: -344218293, guid: c829b1bd7de60514a813815c00b96440, type: 3}
     - time: 0.42857143
-      value: {fileID: 661356827, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+      value: {fileID: -1847687830, guid: c829b1bd7de60514a813815c00b96440, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -338957605, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
-    - {fileID: 1701280604, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
-    - {fileID: 1236783494, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
-    - {fileID: 661356827, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+    - {fileID: 1360713591, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -1796769688, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -344218293, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -1847687830, guid: c829b1bd7de60514a813815c00b96440, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

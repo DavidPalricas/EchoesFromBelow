@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerIdle_stick
+  m_Name: PlayerAttack_Stick_Right
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,19 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 895617244, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+      value: {fileID: 441263452, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - time: 0.14285715
+      value: {fileID: -735429820, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - time: 0.2857143
+      value: {fileID: -441493690, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - time: 0.42857143
+      value: {fileID: -1308280585, guid: c829b1bd7de60514a813815c00b96440, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 60
+  m_SampleRate: 7
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -44,13 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 895617244, guid: bd32bb11de8f4e145ace6bad9fb0818d, type: 3}
+    - {fileID: 441263452, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -735429820, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -441493690, guid: c829b1bd7de60514a813815c00b96440, type: 3}
+    - {fileID: -1308280585, guid: c829b1bd7de60514a813815c00b96440, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.5714286
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
