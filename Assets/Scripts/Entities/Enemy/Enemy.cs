@@ -53,7 +53,8 @@ public class Enemy : Entity
     protected override void EntityDeath()
     {
         // Call the base EntityDeath method to retain the original behavior
-        base.EntityDeath();
+        //base.EntityDeath();
+        gameObject.SetActive(false);
 
         if (isBoss)
         {

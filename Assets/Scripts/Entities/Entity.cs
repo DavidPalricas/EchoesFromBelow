@@ -21,6 +21,13 @@ public class Entity : MonoBehaviour
     public float AttackDamage;
 
     /// <summary>
+    /// Stores the animator.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+    private bool isDead = false;
+    
+    /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, the EntityDeath method is called, when the entity is dead.
     /// </summary>
@@ -37,6 +44,28 @@ public class Entity : MonoBehaviour
     /// </summary>
     protected virtual void EntityDeath()
     {
-        gameObject.SetActive(false);          
+        if (isDead) return;
+
+        isDead = true;
+        animator.SetBool("IsDead", true);
+
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement != null)
+        {
+
+            movement.enabled = false;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        }
+
+        PlayerAttack attack = GetComponent<PlayerAttack>();
+        if (attack != null)
+        {
+
+            attack.enabled = false;
+
+        }
+
+        Debug.Log("Player has died.");
     }
 }
