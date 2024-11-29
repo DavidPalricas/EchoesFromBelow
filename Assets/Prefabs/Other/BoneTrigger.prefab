@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5327924237567741371}
   - component: {fileID: 1530019829112899037}
   - component: {fileID: 5773384703584352225}
+  - component: {fileID: 5928785895116453887}
   m_Layer: 0
   m_Name: BoneTrigger
   m_TagString: Untagged
@@ -120,3 +121,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &5928785895116453887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158243875712921759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a18d0a217123c49966ed038e384b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

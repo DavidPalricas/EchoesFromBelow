@@ -76,24 +76,6 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
 
-    /// <summary>
-    /// The OnTriggerEnter2D method is called when the Collider2D enters the trigger.
-    /// In this method, we are checking if the player has collided with the BoneTrigger.
-    /// In this case, we are enabling the SpawnHorde script.
-    /// </summary>
-    /// <param name="collider">The collider.</param>
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.name == "BoneTrigger")
-        {
-            GameObject spawnHord = GameObject.Find("SpawnHorde");
-
-            spawnHord.GetComponent<SpawnHorde>().enabled = true;
-            collider.gameObject.SetActive(false);
-
-        }
-    }
-
     /* METHOD NOT WORKING
     private void OnCollisionEnter2D(Collision2D collision)
     {
