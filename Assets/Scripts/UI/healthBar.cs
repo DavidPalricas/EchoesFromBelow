@@ -33,11 +33,12 @@ public class HealthBar : MonoBehaviour
     /// The UpdateLabel method is responsible for updating the player's health bar.
     /// If the player's health is less than or equal to 30, the health bar will be red, otherwise it will be green.
     /// </summary>
-    /// <param name="health">The player's health value.</param>
+    /// <param name="health">The player's health value.</param>-
     public void UpdateLabel(int health){
 
         slider.value = health;
 
-        fill.color = slider.value <= 30 ? Color.red : Color.green;   
+        fill.color = slider.value <= 30 ? new Color32(207, 0, 4, (byte)(0.9f * 255)) : new Color32(77, 207, 0, (byte)(0.9f * 255));
+
     }
 }

@@ -52,25 +52,12 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject stickIcon;
 
-    /// <summary>
-    /// The swordIcon property is responsible for storing the sword icon.
-    /// </summary>
-    [SerializeField]
-    private GameObject swordIcon;
 
     /// <summary>
-    /// The slingshotIcon property is responsible for storing the slingshot icon.
+    /// Icone e texto do icone dos frascos de vida no HUD.
     /// </summary>
-    [SerializeField]
-    private GameObject slingshotIcon;
-
-    [SerializeField]
-    private GameObject noWeaponIcon;
-
-
     [SerializeField]
     private GameObject flaskIcon;
-
     [SerializeField]
     private TextMeshProUGUI flaskQuantity;
 
@@ -121,29 +108,10 @@ public class PlayerActions : MonoBehaviour
             // FALTA FAZER CÓDIGO PARA VERIIFCAR SE O JOGADOR JÁ TEM AS OUTRAS ARMAS NO INVENTÁRIO.
             // SE NÃO, CONSEGUE TROCAR PARA QUALQUER IMAGEM DE ARMA SEM AS TER EQUIPADAS
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)){
+            if (Input.GetKeyDown(KeyCode.Q)){
 
-                equipedWeapon = "stick";
-                
-                stickIcon.SetActive(true);
-                swordIcon.SetActive(false);
-                slingshotIcon.SetActive(false);
+                //INSERIR CÓDIGO PARA TROCAR PARA AS FUTURAS ARMAS
 
-            } else if (Input.GetKeyDown(KeyCode.Alpha2)){
-
-                equipedWeapon = "sword";
-
-                swordIcon.SetActive(true);
-                stickIcon.SetActive(false);
-                slingshotIcon.SetActive(false);
-
-            } else if (Input.GetKeyDown(KeyCode.Alpha3)){
-
-                equipedWeapon = "slingshot";
-
-                slingshotIcon.SetActive(true);
-                stickIcon.SetActive(false);
-                swordIcon.SetActive(false);
             }
         }
     }
@@ -233,7 +201,6 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerAttack>().enabled = true;
 
             playerArmed = true;
-            noWeaponIcon.SetActive(false);
             equipedWeapon = "stick";
             stickIcon.SetActive(true);
 
