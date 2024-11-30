@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Stores the players animator.
     /// </summary>
-    [SerializeField]
     private Animator animator;
 
     /// <summary>
@@ -41,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
 
         speed = GetComponent<Entity>().Speed;
+
+        animator = GetComponent<Animator>();
 
         //Define a posição inicial para onde o player está a olhar como para baixo
         LastMovingDirection = Vector2.down;

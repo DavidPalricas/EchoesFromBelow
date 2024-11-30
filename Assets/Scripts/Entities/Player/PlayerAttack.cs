@@ -56,12 +56,12 @@ public class PlayerAttack : MonoBehaviour
     /// <summary>
     /// Guarda a informação do animator do jogador
     /// </summary>
-    [SerializeField]
     private Animator animator;
 
     private void Awake()
     {   
         DeactivateAttack();
+        animator = GetComponent<Animator>();
     }
     private void Update()
     {

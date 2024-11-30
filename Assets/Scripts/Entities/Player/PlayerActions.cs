@@ -40,10 +40,7 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private string equipedWeapon;
 
-    /// <summary>
-    /// The equipedWeapon property is responsible for verifying which weapon is equiped.
-    /// </summary>
-    [SerializeField]
+
     private Animator animator;
 
     /// <summary>
@@ -79,6 +76,7 @@ public class PlayerActions : MonoBehaviour
         gate = GameObject.Find("Gate");
         layer = LayerMask.GetMask("Default");
         playerMaxHealth = GetComponent<Entity>().Health;
+        animator = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -88,6 +86,8 @@ public class PlayerActions : MonoBehaviour
     /// If the player pressed the E key, the CheckGrabObjectsConditions() method is called.
     /// And if the player pressed the H key, the HealPlayer() method is called.
     /// </summary>
+    /// 
+
     private void Update()
     {
         if (gate != null)

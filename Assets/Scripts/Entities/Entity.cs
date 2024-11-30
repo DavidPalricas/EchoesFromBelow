@@ -23,10 +23,14 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Stores the animator.
     /// </summary>
-    [SerializeField]
     private Animator animator;
     private bool isDead = false;
-    
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, the EntityDeath method is called, when the entity is dead.
@@ -49,8 +53,7 @@ public class Entity : MonoBehaviour
         isDead = true;
         animator.SetBool("IsDead", true);
 
-        PlayerMovement movement = GetComponent<PlayerMovement>();
-        if (movement != null)
+        if (TryGetComponent<PlayerMovement>(out var movement))
         {
 
             movement.enabled = false;
@@ -58,22 +61,20 @@ public class Entity : MonoBehaviour
 
         }
 
-        PlayerAttack attack = GetComponent<PlayerAttack>();
-        if (attack != null)
+        if (TryGetComponent<PlayerAttack>(out var attack))
         {
 
             attack.enabled = false;
 
         }
 
-        if (this.gameObject.tag == "Enemy"){
+        if (gameObject.CompareTag("Enemy")){
 
             animator.SetBool("isDead", true);
 
         }
 
-        EnemyMovement enemyMovement = GetComponent<EnemyMovement>();
-        if (enemyMovement != null)
+        if (TryGetComponent<EnemyMovement>(out var enemyMovement))
         {
 
             enemyMovement.enabled = false;
@@ -81,8 +82,7 @@ public class Entity : MonoBehaviour
 
         }
 
-        EnemyAttack enemyAttack = GetComponent<EnemyAttack>();
-        if (enemyAttack != null)
+        if (TryGetComponent<EnemyAttack>(out var enemyAttack))
         {
 
             enemyAttack.DeactivateAttackAreas();
