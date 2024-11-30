@@ -53,6 +53,12 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     /// 
 
+    /// <summary>
+    /// Guarda a informação do animator do jogador
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+
     private void Awake()
     {   
         DeactivateAttack();
@@ -120,6 +126,9 @@ public class PlayerAttack : MonoBehaviour
 
                 // Desactivate the attack area
                 attackArea.SetActive(false);
+
+                //Diz ao animator que já não está a atacar
+                animator.SetBool("IsAttacking", false);
             }
         }
     }
@@ -136,6 +145,10 @@ public class PlayerAttack : MonoBehaviour
         attackArea.SetActive(true);
 
         attacking = true;
+
+        //Diz ao animator que está a atacar
+        animator.SetBool("IsAttacking", true);
+
     }
 
     /// <summary>
@@ -149,4 +162,5 @@ public class PlayerAttack : MonoBehaviour
         meleeUp.SetActive(false);
         meleeDown.SetActive(false);
     }
+
 }

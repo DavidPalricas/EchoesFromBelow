@@ -149,11 +149,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_Walking_Stick_0
+      name: character_Walking_stick_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 322
+        y: 325
         width: 64
         height: 64
       alignment: 0
@@ -163,18 +163,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d3ac5037dfa5d4d8ef4ad2e12713b5
-      internalID: 550922146
+      spriteID: 4447b1f7e4f0756409328bc8b55b1820
+      internalID: -992456031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_1
+      name: character_Walking_stick_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 322
+        y: 325
         width: 64
         height: 64
       alignment: 0
@@ -184,18 +184,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f27f743b805d4f844b7344073447e366
-      internalID: 895617244
+      spriteID: cc113b10817ac6a49b8f4abdf676f54a
+      internalID: -426987642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_2
+      name: character_Walking_stick_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 322
+        y: 325
         width: 64
         height: 64
       alignment: 0
@@ -205,18 +205,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f658d0947891ee4d96eb6975fca6547
-      internalID: 586592668
+      spriteID: f4253a050d03fdd4394af53d524b6592
+      internalID: 613082097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_3
+      name: character_Walking_stick_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 322
+        y: 325
         width: 64
         height: 64
       alignment: 0
@@ -226,18 +226,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc60a80c3dd8b2f42b02a6daf2f1af00
-      internalID: -316825233
+      spriteID: 9027f207cd3b0b540ab6f8c3d061d13b
+      internalID: 1014840380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_4
+      name: character_Walking_stick_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 258
+        y: 261
         width: 64
         height: 64
       alignment: 0
@@ -247,18 +247,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc63c270e5bfe0f4cb0843619afc5aa1
-      internalID: -1038369084
+      spriteID: 1d1d23e18ef7cea4ab7547f4b3451059
+      internalID: -919763340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_5
+      name: character_Walking_stick_5
       rect:
         serializedVersion: 2
         x: 64
-        y: 258
+        y: 261
         width: 64
         height: 64
       alignment: 0
@@ -268,18 +268,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 454f86ae7261d804c88188e8c3a9d729
-      internalID: 558543923
+      spriteID: 37ac55ae308f7d34eb09ea3b63821bed
+      internalID: 57053572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_6
+      name: character_Walking_stick_6
       rect:
         serializedVersion: 2
         x: 128
-        y: 258
+        y: 261
         width: 64
         height: 64
       alignment: 0
@@ -289,18 +289,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 575d3388695d18c428742c20ca26d9b5
-      internalID: -1386130871
+      spriteID: 3966a0f60778375479199b9afe80a1f3
+      internalID: 1261906611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_7
+      name: character_Walking_stick_7
       rect:
         serializedVersion: 2
         x: 192
-        y: 258
+        y: 261
         width: 64
         height: 64
       alignment: 0
@@ -310,18 +310,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90117c041155e9f4585032f0f7a5c7a1
-      internalID: 795553058
+      spriteID: 4e90592a033893c409ed5daf32209976
+      internalID: 1727663831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_8
+      name: character_Walking_stick_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 194
+        y: 197
         width: 64
         height: 64
       alignment: 0
@@ -331,18 +331,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56805469d103be346a60ddfe7c39341e
-      internalID: -1278403099
+      spriteID: f2492cd6125aa8a448e8f273d1ebb527
+      internalID: -338957605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_9
+      name: character_Walking_stick_9
       rect:
         serializedVersion: 2
         x: 64
-        y: 194
+        y: 197
         width: 64
         height: 64
       alignment: 0
@@ -352,18 +352,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50308599b469ef3468dec33fcbc9c87e
-      internalID: 1037905672
+      spriteID: 959838566557b36449eacd28f3353f49
+      internalID: 2113216888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_10
+      name: character_Walking_stick_10
       rect:
         serializedVersion: 2
         x: 128
-        y: 194
+        y: 197
         width: 64
         height: 64
       alignment: 0
@@ -373,18 +373,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a712eaadc18efc4db9bde8c4bd8c1d2
-      internalID: 227312774
+      spriteID: bdf7b5e597ce7694abea612e286e1989
+      internalID: 1730429318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_11
+      name: character_Walking_stick_11
       rect:
         serializedVersion: 2
         x: 192
-        y: 194
+        y: 197
         width: 64
         height: 64
       alignment: 0
@@ -394,18 +394,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d73aaf9fbbeee8459febde114644020
-      internalID: 1219280319
+      spriteID: a3d35730c9c36594498ea154805dc087
+      internalID: -1849295342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_12
+      name: character_Walking_stick_12
       rect:
         serializedVersion: 2
         x: 0
-        y: 130
+        y: 133
         width: 64
         height: 64
       alignment: 0
@@ -415,18 +415,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2066375652938146b5696fc21f513b1
-      internalID: 1954364728
+      spriteID: afb1386034bd98e4bb5603b8217c3476
+      internalID: 1701280604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_13
+      name: character_Walking_stick_13
       rect:
         serializedVersion: 2
         x: 64
-        y: 130
+        y: 133
         width: 64
         height: 64
       alignment: 0
@@ -436,18 +436,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25c8b3bc09f30ba47b5f3237b0d25eb8
-      internalID: 1538790282
+      spriteID: e2b034d3ee7343d4c9715abe78fca110
+      internalID: 2101897075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_14
+      name: character_Walking_stick_14
       rect:
         serializedVersion: 2
         x: 128
-        y: 130
+        y: 133
         width: 64
         height: 64
       alignment: 0
@@ -457,18 +457,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb484e358b1fe2e4bba4f6cf393c4b43
-      internalID: -1184521293
+      spriteID: 1e8fa908d73d0ad42b02f08fb6cf91fe
+      internalID: -477860847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_15
+      name: character_Walking_stick_15
       rect:
         serializedVersion: 2
         x: 192
-        y: 130
+        y: 133
         width: 64
         height: 64
       alignment: 0
@@ -478,18 +478,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b2688e95361df1469ba52ab1508daa1
-      internalID: -1982755615
+      spriteID: 4b1f106a60ed9f942a60a9ee05442c5d
+      internalID: -353218200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_16
+      name: character_Walking_stick_16
       rect:
         serializedVersion: 2
         x: 0
-        y: 66
+        y: 69
         width: 64
         height: 64
       alignment: 0
@@ -499,18 +499,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6415074d372a98049944f70001cfcddc
-      internalID: 963706064
+      spriteID: a1a7ecb7eb43bd241bad1748fed26a38
+      internalID: 1236783494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_17
+      name: character_Walking_stick_17
       rect:
         serializedVersion: 2
         x: 64
-        y: 66
+        y: 69
         width: 64
         height: 64
       alignment: 0
@@ -520,18 +520,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3af1034fb9798544bd5d80b60709e78
-      internalID: 1228260578
+      spriteID: b2c6dde0ab1a18644a1cdfb31cc6477f
+      internalID: 1889792240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_18
+      name: character_Walking_stick_18
       rect:
         serializedVersion: 2
         x: 128
-        y: 66
+        y: 69
         width: 64
         height: 64
       alignment: 0
@@ -541,18 +541,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90a09ba2089864a4baeb0b6030c2286b
-      internalID: -101169391
+      spriteID: 2ebfc09642f0c9e4690a3abf7ca033cf
+      internalID: 873435607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_19
+      name: character_Walking_stick_19
       rect:
         serializedVersion: 2
         x: 192
-        y: 66
+        y: 69
         width: 64
         height: 64
       alignment: 0
@@ -562,18 +562,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4bff16b8b0a3a545a78a645f748ec34
-      internalID: 1279577602
+      spriteID: 17c966c18c6444245bdfbb531e2e7c70
+      internalID: -446366571
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_20
+      name: character_Walking_stick_20
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
+        y: 5
         width: 64
         height: 64
       alignment: 0
@@ -583,18 +583,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8401fc7ce421c7e48b0ba3a0280dc8b2
-      internalID: 895503260
+      spriteID: 17133d7d3e24ff244a75318f16249c62
+      internalID: 661356827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_21
+      name: character_Walking_stick_21
       rect:
         serializedVersion: 2
         x: 64
-        y: 2
+        y: 5
         width: 64
         height: 64
       alignment: 0
@@ -604,18 +604,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c9fbcc8d094d274fbc76d9cbccab21b
-      internalID: 1998271893
+      spriteID: 18dec5360a957a8489737eb3d7396607
+      internalID: 314488928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_22
+      name: character_Walking_stick_22
       rect:
         serializedVersion: 2
         x: 128
-        y: 2
+        y: 5
         width: 64
         height: 64
       alignment: 0
@@ -625,18 +625,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16b543bcfb08dd8408263d9efa7f39c3
-      internalID: 2040050317
+      spriteID: f3735b89a7b671544960542ce422175c
+      internalID: 1120064867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_Walking_Stick_23
+      name: character_Walking_stick_23
       rect:
         serializedVersion: 2
         x: 192
-        y: 2
+        y: 5
         width: 64
         height: 64
       alignment: 0
@@ -646,8 +646,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51730210ee6f5624db1292aa0fa82d1a
-      internalID: 1457942022
+      spriteID: cad5c8a6323de7c40b9f04fd784348b5
+      internalID: 2140626368
       vertices: []
       indices: 
       edges: []
@@ -663,30 +663,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      character_Walking_Stick_0: 550922146
-      character_Walking_Stick_1: 895617244
-      character_Walking_Stick_10: 227312774
-      character_Walking_Stick_11: 1219280319
-      character_Walking_Stick_12: 1954364728
-      character_Walking_Stick_13: 1538790282
-      character_Walking_Stick_14: -1184521293
-      character_Walking_Stick_15: -1982755615
-      character_Walking_Stick_16: 963706064
-      character_Walking_Stick_17: 1228260578
-      character_Walking_Stick_18: -101169391
-      character_Walking_Stick_19: 1279577602
-      character_Walking_Stick_2: 586592668
-      character_Walking_Stick_20: 895503260
-      character_Walking_Stick_21: 1998271893
-      character_Walking_Stick_22: 2040050317
-      character_Walking_Stick_23: 1457942022
-      character_Walking_Stick_3: -316825233
-      character_Walking_Stick_4: -1038369084
-      character_Walking_Stick_5: 558543923
-      character_Walking_Stick_6: -1386130871
-      character_Walking_Stick_7: 795553058
-      character_Walking_Stick_8: -1278403099
-      character_Walking_Stick_9: 1037905672
+      character_Walking_stick_0: -992456031
+      character_Walking_stick_1: -426987642
+      character_Walking_stick_10: 1730429318
+      character_Walking_stick_11: -1849295342
+      character_Walking_stick_12: 1701280604
+      character_Walking_stick_13: 2101897075
+      character_Walking_stick_14: -477860847
+      character_Walking_stick_15: -353218200
+      character_Walking_stick_16: 1236783494
+      character_Walking_stick_17: 1889792240
+      character_Walking_stick_18: 873435607
+      character_Walking_stick_19: -446366571
+      character_Walking_stick_2: 613082097
+      character_Walking_stick_20: 661356827
+      character_Walking_stick_21: 314488928
+      character_Walking_stick_22: 1120064867
+      character_Walking_stick_23: 2140626368
+      character_Walking_stick_3: 1014840380
+      character_Walking_stick_4: -919763340
+      character_Walking_stick_5: 57053572
+      character_Walking_stick_6: 1261906611
+      character_Walking_stick_7: 1727663831
+      character_Walking_stick_8: -338957605
+      character_Walking_stick_9: 2113216888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -23,6 +23,13 @@ public class EnemyMovement : MonoBehaviour
     private float speed;
 
     /// <summary>
+    /// Stores the animator component.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+    private Vector2 lastMovingDirection { get; set; }
+
+    /// <summary>
     /// The willCollide property is responsible for storing whether the enemy will collide with an obstacle.
     /// </summary>
     private bool willCollide;
@@ -62,6 +69,7 @@ public class EnemyMovement : MonoBehaviour
         speed = GetComponent<Entity>().Speed;
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         willCollide = false;
+        lastMovingDirection = Vector2.down;
     }
 
     /// <summary>
@@ -71,10 +79,10 @@ public class EnemyMovement : MonoBehaviour
     /// If the enemy will collide, the HandleCollision method is called, otherwise the ChasePlayer method is called.
     /// </summary>
     private void Update()
-    {   
+    {
         if (GetComponent<Enemy>().IsIndependent && !PlayerInRange())
         {
-           return;
+            return;
         }
 
         // Check if the enemy is attacking
@@ -86,20 +94,37 @@ public class EnemyMovement : MonoBehaviour
         Vector2 directionToPlayer = Utils.NormalizeDirectionVector(player.position - enemy.position);
 
         if (EnemyIsReadyToAttack(directionToPlayer))
-        {  
+        {
             return;
         }
 
         if (willCollide)
-        {   
-            HandleCollision(directionToPlayer);   
+        {
+            HandleCollision(directionToPlayer);
         }
         else
         {
-          ChasePlayer(directionToPlayer);
+            ChasePlayer(directionToPlayer);
         }
 
         enemy.velocity = moveToNotCollide * speed;
+
+        Vector2 velocity = enemy.velocity;
+        Vector2 direction = velocity.sqrMagnitude > 0.01f ? velocity.normalized : Vector2.zero;
+
+        animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.y);
+        animator.SetFloat("Speed", velocity.sqrMagnitude);
+
+        if (velocity.sqrMagnitude > 0.01f)
+        {
+
+            lastMovingDirection = direction;
+
+        }
+
+        animator.SetFloat("LastHorizontal", lastMovingDirection.x);
+        animator.SetFloat("LastVertical", lastMovingDirection.y);
     }
 
     /// <summary>

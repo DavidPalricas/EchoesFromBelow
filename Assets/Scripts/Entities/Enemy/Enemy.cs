@@ -28,6 +28,12 @@ public class Enemy : Entity
     public bool IsIndependent;
 
     /// <summary>
+    /// Stores the animator component.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are checking if the enemy is no boss and has a drop item.
     /// If these conditions are met, an error message is displayed.
@@ -53,7 +59,10 @@ public class Enemy : Entity
     protected override void EntityDeath()
     {
         // Call the base EntityDeath method to retain the original behavior
+
         base.EntityDeath();
+
+        //gameObject.SetActive(false);
 
         if (isBoss)
         {
