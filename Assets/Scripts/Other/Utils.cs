@@ -18,4 +18,15 @@ public static class Utils
         // To avoid these issues, we round the values to get the closest integer value.
         return new Vector2(Mathf.Round(vectorToBeNormalized.x), Mathf.Round(vectorToBeNormalized.y));
     }
+
+    /// <summary>
+    /// The CollectableItemType enum is responsible for storing the types of the collectable items of the game.
+    /// </summary>
+    public enum CollectableType
+    {
+        HealItem,
+        Key,
+        Sword,
+        Stick,
+    }
 }

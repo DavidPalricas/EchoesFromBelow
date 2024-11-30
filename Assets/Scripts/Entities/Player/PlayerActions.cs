@@ -21,7 +21,7 @@ public class PlayerActions : MonoBehaviour
     /// <summary>
     /// The gate and objectNear properties are responsible for storing the gate and object near the player.
     /// </summary>
-    private GameObject gate, objectNear;
+    private GameObject gate,collectableItemGrabed;
 
     /// <summary>
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
@@ -89,15 +89,10 @@ public class PlayerActions : MonoBehaviour
     {
         if (gate != null)
         {
-            if (Input.GetKeyDown(KeyCode.E) && IsGateNear())
+            if (Input.GetKeyDown(KeyCode.E) && CheckConditionsToOpenGate())
             {   
                 OpenGate();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            CheckGrabObjectsConditions();
         }
 
         // Heal Conditions
@@ -138,47 +133,31 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The CheckGrabObjectsConditions method is responsible for checking the conditions to grab an object (item or weapon).
-    /// The first if stament condition is to check the conditions to grab an item, the second condition is to check the conditions to grab a weapon.
-    /// </summary>
-    private void CheckGrabObjectsConditions()
-    {   
-        bool grabItemsConditions = ItemsLeft() && IsObjectNear("Item");
-
-        if (grabItemsConditions|| IsObjectNear("Weapon"))
-        {
-            GrabObject();
-        }
-    }
-
-    /// <summary>
-    /// The isGateNear method is responsible for checking if the player is near the gate.
+    /// The CheckGateConditionsToOpen method is responsible for checking if the gate conditions are met to open the gate.
     /// First , it checks if the player is facing down, or if the player is idle and the last direction was down.
-    /// After that, it checks if the player is near the gate, calling the IsObjectNear method.
+    /// After that, it checks if the player is near the gate, calling the IsGateNear method.
     /// </summary>
     /// <returns>
     /// <c>true</c> if the gate is near otherwise, <c>false</c>.
     /// </returns>
-    private bool IsGateNear()
+    private bool CheckConditionsToOpenGate()
     {   
-        Vector2 LastMovingDirection = GameObject.Find("Player").GetComponent < PlayerMovement>().LastMovingDirection;
+        Vector2 LastMovingDirection = GameObject.Find("Player").GetComponent<PlayerMovement>().LastMovingDirection;
 
         Vector2 playerDirection = Utils.NormalizeDirectionVector(player.velocity);
 
-        return (playerDirection == Vector2.down || LastMovingDirection == Vector2.down) && IsObjectNear("Object","Gate");
+        return (playerDirection == Vector2.down || LastMovingDirection == Vector2.down) && IsGateNear();
     }
 
     /// <summary>
-    /// The IsObjectNear method is responsible for checking if the player is near an object, the object can be an item or a weapon.
+    /// The IsGateNear method is responsible for checking if the player is near a gate, the object can be an item or a weapon.
     /// To check if the player is near an object, a box collider is created around the player.
     /// If the player is near an  object, the objectNear property is updated with the object.
     /// </summary>
-    /// <param name="objectTag">The object's tag.</param>
-    /// <param name="objectName">The object's name.</param>
     /// <returns>
     ///   <c>true</c> if the object is  near; otherwise, <c>false</c>.
     /// </returns>
-    private bool IsObjectNear(string objectTag, string objectName = null)
+    private bool IsGateNear()
     {   
         BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
 
@@ -190,12 +169,12 @@ public class PlayerActions : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0, layer);
 
         foreach (Collider2D collider in colliders)
-        {
-            if (collider.gameObject.CompareTag(objectTag))
-            {          
-                objectNear = collider.gameObject;
-                
-                return true;
+        {   
+            if (collider.gameObject.CompareTag("Object") && collider.gameObject.name == "Gate")
+            {            
+               Debug.Log("Gate Near");
+               Debug.Log(GetComponent<PlayerInventory>().Items["Key"]);
+               return true;
             }
         }
 
@@ -209,12 +188,15 @@ public class PlayerActions : MonoBehaviour
     private void OpenGate()
     {
         if (GetComponent<PlayerInventory>().Items["Key"] > 0)
-        {
+        {   
+            Debug.Log("Open Gate");
             // Player has the right key
             if (GetComponent<PlayerInventory>().Items["Key"] == 2)
-            {    
-                // Opens the gate
-                 gate.SetActive(false);
+            {
+                // Opens the gate and not removes the key from the player's inventory, to not grab any more keys
+                gate.SetActive(false);
+
+
             }
             else
             {
@@ -225,57 +207,12 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The ItemsLeft method is responsible for checking if there are items left in the level.
-    /// </summary>
-    /// <returns></returns>
-    private bool ItemsLeft()
-    {
-        return GameObject.FindGameObjectsWithTag("Item").Length > 0;
-    }
-
-    /// <summary>
-    /// The GrabObject method is responsible for grabbing the object near the player.
-    /// It removes the (Clone) string from the object's name, if it exists, to get the original object name.
-    /// It calls the correct method to grab the object, depending on the object's name.
-    /// </summary>
-    private void GrabObject()
-    {   
-        if (objectNear.name.Contains("(Clone"))
-        {
-          objectNear.name = objectNear.name.Replace("(Clone)", "");
-        }
-
-        switch (objectNear.name)
-        {
-            case "Stick":
-            case "Sword":
-                 GrabMeleeWeapon();
-
-                return;
-
-            case "Key":
-                Debug.Log("Grab Key");
-                GrabKey();
-
-                return;
-
-            case "HealItem":
-                GrabHealItem();
-
-                return;
-
-            default:
-                return;
-        }      
-    }
-
-    /// <summary>
     /// The GrabMeleeWeapon method is responsible for grabbing the melee weapon, updating the player's inventory, and removing the weapon from the level.
     /// If the player grabs the stick, PlayerAttack component is enable, because the stick is the player's first weapon.
     /// </summary>
-    private void GrabMeleeWeapon()
+    private void GrabMeleeWeapon(Utils.CollectableType meleeWeapon)
     {   
-        if (objectNear.name == "Stick")
+        if (meleeWeapon ==  Utils.CollectableType.Stick)
         {
             GetComponent<PlayerAttack>().enabled = true;
 
@@ -286,11 +223,15 @@ public class PlayerActions : MonoBehaviour
 
             animator.SetBool("HasWeapon", true);
 
+            GetComponent<PlayerInventory>().Weapons["Melee"] = "Stick";
+
+        }
+        else
+        {
+            GetComponent<PlayerInventory>().Weapons["Melee"] = "Sword";
         }
 
-        GetComponent<PlayerInventory>().Weapons["Melee"] = objectNear.name;
-
-        DestroyObject();
+        DestroyCollectable();
     }
 
     /// <summary>
@@ -319,7 +260,7 @@ public class PlayerActions : MonoBehaviour
         {   
             GetComponent<PlayerInventory>().Items["Key"] = RightKeyGrabbed() ? 2 : 1;
 
-            GameObject itemToDestroy = DestroyObject();
+            GameObject itemToDestroy = DestroyCollectable();
 
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy);
@@ -338,21 +279,21 @@ public class PlayerActions : MonoBehaviour
         {
             GetComponent<PlayerInventory>().Items["HealItems"]++;
 
-            DestroyObject();
+            DestroyCollectable();
         }
     }
 
     /// <summary>
-    /// The DestroyObject method is responsible for destroying the object near the player.
+    /// The DestroyCollectable method is responsible for destroying the collectable item grabbed by the player.
     /// </summary>
     /// <returns>The object to destroy</returns>
-    private GameObject DestroyObject()
+    private GameObject DestroyCollectable()
     {
-        GameObject objectToDestroy = objectNear;
-        objectNear = null;
-        Destroy(objectToDestroy);
+        GameObject collectableToDestroy = collectableItemGrabed;
+        collectableItemGrabed = null;
+        Destroy(collectableToDestroy);
 
-        return objectToDestroy;
+        return collectableToDestroy;
     }
 
     /// <summary>
@@ -383,6 +324,42 @@ public class PlayerActions : MonoBehaviour
 
         if (hasRightKey){
             spawnHord.SpawnBoss();
+        }
+    }
+
+    /// <summary>
+    /// The GrabObject method is responsible for grabbing the object near the player.
+    /// It removes the (Clone) string from the object's name, if it exists, to get the original object name.
+    /// It calls the correct method to grab the object, depending on the object's name.
+    /// </summary>
+    public void GrabCollectable(GameObject collectableItem)
+    {   
+        collectableItemGrabed = collectableItem;
+
+        Utils.CollectableType ColleccollectableType = collectableItem.GetComponent<Collectable>().type;
+
+        switch (ColleccollectableType)
+        {
+            case Utils.CollectableType.Stick:
+            case Utils.CollectableType.Sword:
+                GrabMeleeWeapon(ColleccollectableType);
+
+                return;
+
+            case Utils.CollectableType.Key:
+                Debug.Log("Grab Key");
+                GrabKey();
+
+                return;
+
+            case Utils.CollectableType.HealItem:
+                GrabHealItem();
+
+                return;
+
+            default:
+                Debug.LogError("Invalid collectable type");
+                return;
         }
     }
 }

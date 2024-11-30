@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6175077933414457194}
   - component: {fileID: 8181732498737391969}
   - component: {fileID: 2680207581451495323}
+  - component: {fileID: -7209295915992876876}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Weapon
@@ -120,3 +121,16 @@ CapsuleCollider2D:
   m_Offset: {x: -0.000061035156, y: -0.00024414062}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &-7209295915992876876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423271921205860284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5146b62aa67adf847bdf15bbab351893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3

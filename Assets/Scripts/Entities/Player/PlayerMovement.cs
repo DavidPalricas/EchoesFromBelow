@@ -76,9 +76,9 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
 
-    /* METHOD NOT WORKING
     private void OnCollisionEnter2D(Collision2D collision)
-    {
+    {   
+        /* NOT WORKING
         if (collision.gameObject.CompareTag("Enemy"))
         {   
             Rigidbody2D enemy = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -93,7 +93,13 @@ public class PlayerMovement : MonoBehaviour
 
             enemy.AddForce(collisionDirection * impactForce, ForceMode2D.Impulse);
         }
+        */
+
+        if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
+        {
+            GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
+        }
     }
 
-    */
+    
 }
