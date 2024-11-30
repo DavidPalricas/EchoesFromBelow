@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
         player.velocity = speedVector * speed;
         //player.velocity = new Vector2(speedX * speed, speedY * speed);  
-
+        
         if (player.velocity != Vector2.zero)
         {
             LastMovingDirection = Utils.NormalizeDirectionVector(player.velocity);

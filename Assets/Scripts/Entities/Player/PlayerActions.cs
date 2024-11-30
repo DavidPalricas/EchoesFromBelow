@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -65,6 +66,16 @@ public class PlayerActions : MonoBehaviour
 
     [SerializeField]
     private GameObject noWeaponIcon;
+
+    [SerializeField]
+    private GameObject flaskIcon;
+    [SerializeField]
+    private TextMeshProUGUI flaskQuantity;
+    [SerializeField]
+    private HealthBar healthBar;
+
+    [SerializeField]
+    private GameObject keyIcon;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -215,11 +226,15 @@ public class PlayerActions : MonoBehaviour
             {    
                 // Opens the gate
                  gate.SetActive(false);
+                //Removes the key icon from the HUD
+                keyIcon.SetActive(false);
             }
             else
             {
                 // Removes the key from the player's inventory
                 GetComponent<PlayerInventory>().Items["Key"] = 0;
+                //Removes the key icon from the HUD
+                keyIcon.SetActive(false);
             }
         }  
     }
@@ -319,6 +334,8 @@ public class PlayerActions : MonoBehaviour
         {   
             GetComponent<PlayerInventory>().Items["Key"] = RightKeyGrabbed() ? 2 : 1;
 
+            keyIcon.SetActive(true);
+
             GameObject itemToDestroy = DestroyObject();
 
             // Removes the key from the dictionary which stores the keys and their values
@@ -339,6 +356,10 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerInventory>().Items["HealItems"]++;
 
             DestroyObject();
+
+            //Ativa o icone de poções no HUD e corrige a quantidade de poçoes indicada
+            flaskIcon.SetActive(true);
+            flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
         }
     }
 
@@ -362,8 +383,19 @@ public class PlayerActions : MonoBehaviour
     {   
         if (GetComponent<Entity>().Health < playerMaxHealth)
         {
-            GetComponent<Entity>().Health++;
+            GetComponent<Entity>().Health += (playerMaxHealth / 2);
+
             GetComponent<PlayerInventory>().Items["HealItems"]--;
+            if (GetComponent<PlayerInventory>().Items["HealItems"] == 0)
+            {
+
+                flaskIcon.SetActive(false);
+
+            }
+
+            flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
+
+            healthBar.UpdateLabel(this.GetComponent<Entity>().Health);
         }
     }
 

@@ -66,6 +66,30 @@ public class Entity : MonoBehaviour
 
         }
 
+        if (this.gameObject.tag == "Enemy"){
+
+            animator.SetBool("isDead", true);
+
+        }
+
+        EnemyMovement enemyMovement = GetComponent<EnemyMovement>();
+        if (enemyMovement != null)
+        {
+
+            enemyMovement.enabled = false;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        }
+
+        EnemyAttack enemyAttack = GetComponent<EnemyAttack>();
+        if (enemyAttack != null)
+        {
+
+            enemyAttack.DeactivateAttackAreas();
+            enemyAttack.enabled = false;
+
+        }
+
         Debug.Log("Player has died.");
     }
 }

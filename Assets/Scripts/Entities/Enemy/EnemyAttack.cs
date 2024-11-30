@@ -42,6 +42,12 @@ public class EnemyAttack : MonoBehaviour
     /// </summary>
     private readonly float timeToAttack = 0.5f;
 
+    /// <summary>
+    /// Stores the animator component.
+    /// </summary>
+    [SerializeField]
+    private Animator animator;
+
     private void Awake()
     {
         Attacking = false;
@@ -109,6 +115,8 @@ public class EnemyAttack : MonoBehaviour
 
                 // Desactivate the attack area
                 attackArea.SetActive(false);
+
+                animator.SetBool("isAttacking", false);
             }
         }
     }
@@ -125,12 +133,14 @@ public class EnemyAttack : MonoBehaviour
         attackArea.SetActive(true);
 
         Attacking = true;
+
+        animator.SetBool("isAttacking", true);
     }
 
     /// <summary>
     /// The DeactivateAttack method is responsible for deactivating the enemy's attack areas.
     /// </summary>
-    private void DeactivateAttackAreas()
+    public void DeactivateAttackAreas()
     {
         meleeLeft.SetActive(false);
         meleeRight.SetActive(false);

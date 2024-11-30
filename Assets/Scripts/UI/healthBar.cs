@@ -10,8 +10,7 @@ public class HealthBar : MonoBehaviour
     /// The slider property is responsible for showing the player's health bar on the screen.
     /// It is serialized so that it can be set in the Unity Editor.
     /// </summary>
-    [SerializeField]
-    private Slider slider;
+    public Slider slider;
 
     /// <summary>
     /// The fill property is responsible for filling the player's health bar.
