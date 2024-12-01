@@ -351,8 +351,8 @@ public class PlayerActions : MonoBehaviour
                 return;
 
             case Utils.CollectableType.HealItem:
-                Debug.Log(GetComponent<PlayerInventory>().Items["HealItems"]);
                 GrabHealItem();
+                Debug.Log(GetComponent<PlayerInventory>().Items["HealItems"]);
 
                 return;
 

@@ -23,10 +23,17 @@ public class EnemyMovement : MonoBehaviour
     private float speed;
 
     /// <summary>
-    /// Stores the animator component.
+    /// The animator property is responsible for storing the enemy's animator.
     /// </summary>
     private Animator animator;
-    private Vector2 lastMovingDirection { get; set; }
+
+    /// <summary>
+    /// The LastMovingDirection property is responsible for storing the last moving direction of the enemy.
+    /// </summary>
+    /// <value>
+    /// The last moving direction of the enemy.
+    /// </value>
+    private Vector2 LastMovingDirection { get; set; }
 
     /// <summary>
     /// The willCollide property is responsible for storing whether the enemy will collide with an obstacle.
@@ -68,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
         speed = GetComponent<Entity>().Speed;
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         willCollide = false;
-        lastMovingDirection = Vector2.down;
+        LastMovingDirection = Vector2.down;
         animator = GetComponent<Entity>().animator;
     }
 
@@ -119,12 +126,12 @@ public class EnemyMovement : MonoBehaviour
         if (velocity.sqrMagnitude > 0.01f)
         {
 
-            lastMovingDirection = direction;
+            LastMovingDirection = direction;
 
         }
 
-        animator.SetFloat("LastHorizontal", lastMovingDirection.x);
-        animator.SetFloat("LastVertical", lastMovingDirection.y);
+        animator.SetFloat("LastHorizontal", LastMovingDirection.x);
+        animator.SetFloat("LastVertical", LastMovingDirection.y);
     }
 
     /// <summary>
