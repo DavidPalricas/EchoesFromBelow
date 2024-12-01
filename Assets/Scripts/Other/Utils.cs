@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 /// <summary>
@@ -51,5 +52,17 @@ public static class Utils
         yield return new WaitForSeconds(animationState.length);
 
         callback?.Invoke();
+    }
+
+    /// <summary>
+    /// The Wait method is responsible for waiting for a specific time.
+    /// </summary>
+    /// <param name="time">The time to wait (seconds).</param>
+    /// <param name="action">Action to execute after waiting.</param>
+    /// <returns></returns>
+    public static IEnumerator Wait(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action?.Invoke();
     }
 }

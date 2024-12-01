@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     /// If the player stops moving, we are storing the last direction the player was moving.
     /// </summary>
     private void Update()
-    {
+    {   
         float speedX = Input.GetAxis("Horizontal");
         float speedY = Input.GetAxis("Vertical");
 

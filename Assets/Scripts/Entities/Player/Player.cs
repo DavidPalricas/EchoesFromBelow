@@ -1,5 +1,7 @@
 
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -15,11 +17,29 @@ public class Player : Entity
     public Vector2 spawnPoint;
 
     /// <summary>
+    /// The movement property is responsible for storing the player's PlayerMovement component.
+    /// </summary>
+    private PlayerMovement movement;
+
+    /// <summary>
+    /// The attack property is responsible for storing the player's PlayerAttack component.
+    /// </summary>
+    private PlayerAttack attack;
+
+    /// <summary>
+    /// The player actions property is responsible for storing the player's PlayerActions component.
+    /// </summary>
+    private PlayerActions playerActions;
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// </summary>
     private void Awake()
     {
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
+        movement = GetComponent<PlayerMovement>();
+        attack = GetComponent<PlayerAttack>();
+        playerActions = GetComponent<PlayerActions>();
     }
 
     /// <summary>
@@ -30,17 +50,47 @@ public class Player : Entity
     protected override void EntityDeath()
     {
         base.EntityDeath();
-        StartCoroutine(Utils.WaitForAnimationEnd(animator, "Death", Respawn));  
+
+        StartCoroutine(Utils.WaitForAnimationEnd(animator, "Death", Respawn));
     }
 
     /// <summary>
     /// The Respawn method is responsible for respawning the player at the spawn point and resetting its health.
+    /// It waits for 2 seconds before respawning the player.
     /// </summary>
     private void Respawn()
+    { 
+        DesactivateScripts();
+
+        StartCoroutine(Utils.Wait(1.5f, () =>
+        {
+            Health = 100;
+            transform.position = spawnPoint;
+            animator.SetBool("IsDead", false);
+            GetComponent<Entity>().isDead = false;
+
+            movement.enabled = true;
+            playerActions.enabled = true;
+
+            Dictionary<string, string> playerWeapons = GetComponent<PlayerInventory>().Weapons;
+
+            if (playerWeapons.Values.Any(weapon => weapon != null))
+            {
+                attack.enabled = true;
+
+            }
+        }));
+    }
+
+    /// <summary>
+    /// The DesactivateScripts method is responsible for deactivating the player's scripts when it dies.
+    /// The scripts that are deactivated are the PlayerAttack, PlayerMovement, and PlayerActions.
+    /// </summary>
+    private void DesactivateScripts()
     {
-        Health = 100;
-        transform.position = spawnPoint;
-        animator.SetBool("IsDead", false);
-        GetComponent<Entity>().isDead = false;
+        attack.enabled = false;
+        movement.enabled = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerActions.enabled = false;
     }
 }
