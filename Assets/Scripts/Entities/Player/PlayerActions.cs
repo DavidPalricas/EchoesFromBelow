@@ -90,6 +90,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
+
         if (gate != null)
         {
             if (Input.GetKeyDown(KeyCode.E) && CheckConditionsToOpenGate())
@@ -268,6 +269,7 @@ public class PlayerActions : MonoBehaviour
             flaskIcon.SetActive(true);
 
             flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
+
         }
     }
 

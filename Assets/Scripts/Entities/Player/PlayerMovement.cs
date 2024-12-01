@@ -85,30 +85,43 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {   
-        /* NOT WORKING
-        if (collision.gameObject.CompareTag("Enemy"))
-        {   
-            Rigidbody2D enemy = collision.gameObject.GetComponent<Rigidbody2D>();
-
-            Vector2 collisionDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
-
-            float relativeVelocity = Vector2.Dot(player.velocity - enemy.velocity, collisionDirection);
-
-            float impactForce = Mathf.Abs(relativeVelocity) * player.mass;
-
-            player.AddForce(-collisionDirection * impactForce, ForceMode2D.Impulse);
-
-            enemy.AddForce(collisionDirection * impactForce, ForceMode2D.Impulse);
-        }
-        */
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
         if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
         {
             GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
+
         }
+
     }
 
-    
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{   
+    //    /* NOT WORKING
+    //    if (collision.gameObject.CompareTag("Enemy"))
+    //    {   
+    //        Rigidbody2D enemy = collision.gameObject.GetComponent<Rigidbody2D>();
+
+    //        Vector2 collisionDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
+
+    //        float relativeVelocity = Vector2.Dot(player.velocity - enemy.velocity, collisionDirection);
+
+    //        float impactForce = Mathf.Abs(relativeVelocity) * player.mass;
+
+    //        player.AddForce(-collisionDirection * impactForce, ForceMode2D.Impulse);
+
+    //        enemy.AddForce(collisionDirection * impactForce, ForceMode2D.Impulse);
+    //    }
+    //    */
+
+
+
+    //    if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
+    //    {
+    //        GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
+    //    }
+    //}
+
+
 }
