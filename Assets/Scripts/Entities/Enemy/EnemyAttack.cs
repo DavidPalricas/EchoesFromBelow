@@ -45,13 +45,13 @@ public class EnemyAttack : MonoBehaviour
     /// <summary>
     /// Stores the animator component.
     /// </summary>
-    [SerializeField]
     private Animator animator;
 
     private void Awake()
     {
         Attacking = false;
         AttackDirection = Vector2.zero;
+        animator = GetComponent<Entity>().animator;
     }
 
     /// <summary>

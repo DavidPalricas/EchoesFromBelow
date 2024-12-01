@@ -59,15 +59,15 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
 
     private void Awake()
-    {   
+    {
+        animator = GetComponent<Entity>().animator;
         DeactivateAttack();
-        animator = GetComponent<Animator>();
     }
+
     private void Update()
     {
-        GetAttackDirection();
-
         if (Input.GetKeyDown(KeyCode.Space)){
+            GetAttackDirection();
             Attack();
         }
 
@@ -81,25 +81,31 @@ public class PlayerAttack : MonoBehaviour
     private void GetAttackDirection()
     {
         //Verifica para que lado está virado o jogador de modo a que ataque virado para esse lado
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+
+        float playerDirectionX = animator.GetFloat("Horizontal");
+        float playerDirectionY = animator.GetFloat("Vertical");
+
+        if (playerDirectionY > 0)
         {
 
             attackArea = meleeUp;
 
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (playerDirectionY < 0)
         {
 
             attackArea = meleeDown;
 
         }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+
+
+        if (playerDirectionX < 0)
         {
 
             attackArea = meleeLeft;
 
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (playerDirectionX > 0)
         {
 
             attackArea = meleeRight;
@@ -138,7 +144,7 @@ public class PlayerAttack : MonoBehaviour
     /// It calls the DeactivateAttack method to deactivate the previous attack areas,activates the new attack area  ands updates the player's attacking status.
     /// </summary>
     private void Attack()
-    {
+    {  
         //GOTTA FIX THIS!!!!
         DeactivateAttack();
 

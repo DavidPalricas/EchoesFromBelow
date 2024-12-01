@@ -25,7 +25,6 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// Stores the animator component.
     /// </summary>
-    [SerializeField]
     private Animator animator;
     private Vector2 lastMovingDirection { get; set; }
 
@@ -70,6 +69,7 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         willCollide = false;
         lastMovingDirection = Vector2.down;
+        animator = GetComponent<Entity>().animator;
     }
 
     /// <summary>

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// The Enemy class is responsible for representing the game's enemies.
+/// The Enemy class is responsible for handling the game's enemies attributes.
 /// </summary>
 public class Enemy : Entity
 {
@@ -26,12 +26,6 @@ public class Enemy : Entity
     /// The IsIndependent property is responsible for storing if the enemy is independent (is not in a horde).
     /// </summary>
     public bool IsIndependent;
-
-    /// <summary>
-    /// Stores the animator component.
-    /// </summary>
-    [SerializeField]
-    private Animator animator;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -62,11 +56,31 @@ public class Enemy : Entity
 
         base.EntityDeath();
 
-        //gameObject.SetActive(false);
+        GetComponent<EnemyMovement>().enabled = false;
 
         if (isBoss)
         {
             Instantiate(bossDropItem, transform.position, Quaternion.identity);
         }
+
+        StartCoroutine(Utils.WaitForAnimationEnd(animator, "Skeleton_Death", CreateEnemyDeadBody));
+    }
+
+    /// <summary>
+    /// The CreateEnemyDeadBody method is responsible for creating the enemy's dead body.
+    /// This method creates a new GameObject with the enemy's sprite and position, and destroys the enemy GameObject.
+    /// This new game object it has only a sprite renderer as a component.
+    /// </summary>
+    private void CreateEnemyDeadBody()
+    {   
+        Debug.Log("Creating dead body");
+        var deadBody = new GameObject("DeadBody");
+        deadBody.transform.position = transform.position;
+        deadBody.transform.localScale = transform.localScale;
+
+        SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
+        deadBodySprite.sprite = GetComponent<SpriteRenderer>().sprite;
+
+        Destroy(gameObject);
     }
 }

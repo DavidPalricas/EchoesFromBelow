@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
         speed = GetComponent<Entity>().Speed;
 
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Entity>().animator;
 
         //Define a posição inicial para onde o player está a olhar como para baixo
         LastMovingDirection = Vector2.down;

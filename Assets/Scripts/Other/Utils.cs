@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /// <summary>
 /// The Utils class is responsible for storing utility methods that can be used in different parts of the game.
@@ -28,5 +29,27 @@ public static class Utils
         Key,
         Sword,
         Stick,
+    }
+
+    /// <summary>
+    /// The WaitForAnimationEnd method is responsible for waiting for a specific animation to end.
+    /// After the animation ends, a function or method is called.
+    /// </summary>
+    /// <param name="animator">The animator of the game object.</param>
+    /// <param name="animationName">Name of the animation.</param>
+    /// <param name="callback">The method or function called after the animation ends.</param>
+    /// <returns>An IEnumerator used to control the coroutine. Returns null if the animation is not found.</returns>
+    public static IEnumerator WaitForAnimationEnd(Animator animator, string animationName, System.Action callback)
+    {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(animationName))
+        {   
+            yield return null;
+        }
+
+        AnimatorStateInfo animationState = animator.GetCurrentAnimatorStateInfo(0);
+
+        yield return new WaitForSeconds(animationState.length);
+
+        callback?.Invoke();
     }
 }

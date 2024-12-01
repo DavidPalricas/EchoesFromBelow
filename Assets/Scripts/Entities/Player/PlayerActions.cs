@@ -76,7 +76,7 @@ public class PlayerActions : MonoBehaviour
         gate = GameObject.Find("Gate");
         layer = LayerMask.GetMask("Default");
         playerMaxHealth = GetComponent<Entity>().Health;
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Entity>().animator;
     }
 
     /// <summary>
@@ -207,7 +207,6 @@ public class PlayerActions : MonoBehaviour
             animator.SetBool("HasWeapon", true);
 
             GetComponent<PlayerInventory>().Weapons["Melee"] = "Stick";
-
         }
         else
         {
@@ -352,6 +351,7 @@ public class PlayerActions : MonoBehaviour
                 return;
 
             case Utils.CollectableType.HealItem:
+                Debug.Log(GetComponent<PlayerInventory>().Items["HealItems"]);
                 GrabHealItem();
 
                 return;

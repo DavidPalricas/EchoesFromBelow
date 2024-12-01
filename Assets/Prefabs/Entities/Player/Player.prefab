@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4012519553707733667}
   - component: {fileID: 4890617891295396606}
   - component: {fileID: 7641519816493334048}
-  - component: {fileID: 5400349198844175059}
   - component: {fileID: 469163243183865698}
   - component: {fileID: 5020927037021046664}
   m_Layer: 0
@@ -180,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89872ce6d238c714090a01755d63341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5020927037021046664}
   speed: 0
 --- !u!114 &4890617891295396606
 MonoBehaviour:
@@ -198,7 +196,6 @@ MonoBehaviour:
   meleeRight: {fileID: 7597942102496744807}
   meleeUp: {fileID: 966352755093986192}
   meleeDown: {fileID: 33022776123688665}
-  animator: {fileID: 5020927037021046664}
 --- !u!114 &7641519816493334048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,31 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d138aa7feb92f464ab5360bec9536425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5020927037021046664}
   stickIcon: {fileID: 2423271921205860284, guid: 4ea7d187a5da6fe46a66786a1ba7ac39, type: 3}
-  swordIcon: {fileID: 4279726040407628192, guid: e9af9346b962c61488190ea4fb1ddd43, type: 3}
-  slingshotIcon: {fileID: 0}
-  noWeaponIcon: {fileID: 0}
   flaskIcon: {fileID: 0}
   flaskQuantity: {fileID: 0}
   healthBar: {fileID: 0}
   keyIcon: {fileID: 0}
---- !u!114 &5400349198844175059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827529518274912995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83280f9c26d051c4c83cd8ea7809fe81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 10
-  Speed: 5
-  AttackDamage: 5
-  animator: {fileID: 0}
 --- !u!114 &469163243183865698
 MonoBehaviour:
   m_ObjectHideFlags: 0

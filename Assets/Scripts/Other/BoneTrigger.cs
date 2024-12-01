@@ -17,6 +17,8 @@ public class BoneTrigger : MonoBehaviour
 
             spawnHord.GetComponent<SpawnHorde>().enabled = true;
             gameObject.SetActive(false);
+
+            collider.gameObject.GetComponent<Player>().spawnPoint = new Vector2(transform.position.x, transform.position.y);
         }
     }
 }

@@ -23,13 +23,13 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Stores the animator.
     /// </summary>
-    private Animator animator;
-    private bool isDead = false;
+    public Animator animator;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    /// <summary>
+    /// The isDead property is responsible for storing whether the entity is dead or not.
+    /// </summary>
+    [HideInInspector]
+    public bool isDead = false;
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
@@ -37,10 +37,10 @@ public class Entity : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Health <= 0)
+        if (!isDead && Health <= 0)
         {
            EntityDeath();
-        }   
+        }
     }
 
     /// <summary>
@@ -48,48 +48,16 @@ public class Entity : MonoBehaviour
     /// </summary>
     protected virtual void EntityDeath()
     {
-        if (isDead) return;
-
         isDead = true;
-        animator.SetBool("IsDead", true);
-
-        if (TryGetComponent<PlayerMovement>(out var movement))
+        // THIS IF STATEMENT IS USESSELESS the bool "isDead" in the enemy animator must be called "IsDead" with a capital "I"
+        if (gameObject.CompareTag("Player"))
         {
-
-            movement.enabled = false;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
+            animator.SetBool("IsDead", true);
+            Debug.Log("Player has died.");
         }
-
-        if (TryGetComponent<PlayerAttack>(out var attack))
+        else
         {
-
-            attack.enabled = false;
-
-        }
-
-        if (gameObject.CompareTag("Enemy")){
-
             animator.SetBool("isDead", true);
-
-        }
-
-        if (TryGetComponent<EnemyMovement>(out var enemyMovement))
-        {
-
-            enemyMovement.enabled = false;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-        }
-
-        if (TryGetComponent<EnemyAttack>(out var enemyAttack))
-        {
-
-            enemyAttack.DeactivateAttackAreas();
-            enemyAttack.enabled = false;
-
-        }
-
-        Debug.Log("Player has died.");
+        }   
     }
 }
