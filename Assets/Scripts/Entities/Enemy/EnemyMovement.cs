@@ -157,6 +157,8 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool EnemyIsReadyToAttack(Vector2 directionToPlayer)
     {
+
+        Debug.Log("Cona: " + PlayerNear(directionToPlayer));
         // Check if the enemy is attacking or the conditions to attack are met
         if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
         {   
@@ -185,14 +187,14 @@ public class EnemyMovement : MonoBehaviour
 
         BoxCollider2D enemyCollider = enemy.GetComponent<BoxCollider2D>();
 
-        Vector2 raycastOrigin = (Vector2) enemyCollider.bounds.center + directionToPlayer;
+        Vector2 raycastOrigin = (Vector2) enemyCollider.bounds.center + directionToPlayer * (enemyCollider.bounds.extents + new Vector3(rayCastDistance, rayCastDistance)).magnitude;
 
         LayerMask playerLayer = LayerMask.GetMask("Default");
 
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-        // Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
+         Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
 
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
@@ -277,10 +279,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector2 boxSize = enemyCollider.bounds.size;
+
         LayerMask obstacleLayer = LayerMask.GetMask("Default");
 
         // Create a box in the direction the enemy will moves, with the same size as the enemy's collider
-        Vector2 offsetPosition = (Vector2)enemyCollider.bounds.center + direction.normalized * boxSize.x / 2;
+        Vector2 offsetPosition = (Vector2)enemyCollider.bounds.center + direction.normalized * (boxSize.x / 2);
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0f, obstacleLayer);
 
@@ -292,6 +295,12 @@ public class EnemyMovement : MonoBehaviour
                 return false;
             }
         }
+
+        // These lines are only used for debugging purposes
+        /*
+        Debug.DrawLine(offsetPosition - new Vector2(boxSize.x / 2, boxSize.y / 2),
+                  offsetPosition + new Vector2(boxSize.x / 2, boxSize.y / 2), Color.red);
+        */
 
         return true;
     }

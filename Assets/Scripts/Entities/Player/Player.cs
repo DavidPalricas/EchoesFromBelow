@@ -77,7 +77,6 @@ public class Player : Entity
             if (playerWeapons.Values.Any(weapon => weapon != null))
             {
                 attack.enabled = true;
-
             }
         }));
     }
