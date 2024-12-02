@@ -31,6 +31,10 @@ public class Player : Entity
     /// </summary>
     private PlayerActions playerActions;
 
+
+    [SerializeField]
+    private HealthBar healthBar;
+
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// </summary>
@@ -67,6 +71,7 @@ public class Player : Entity
         StartCoroutine(Utils.Wait(1.5f, () =>
         {
             Health = 100;
+            healthBar.GetComponent<HealthBar>().UpdateLabel(Health);
             transform.position = spawnPoint;
             animator.SetBool("IsDead", false);
             GetComponent<Entity>().isDead = false;

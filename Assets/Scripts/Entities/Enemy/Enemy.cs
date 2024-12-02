@@ -78,9 +78,12 @@ public class Enemy : Entity
         deadBody.transform.position = transform.position;
         deadBody.transform.localScale = transform.localScale;
         deadBody.layer = transform.gameObject.layer;
+      
+
 
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = GetComponent<SpriteRenderer>().sprite;
+        deadBodySprite.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
 
         Destroy(gameObject);
     }

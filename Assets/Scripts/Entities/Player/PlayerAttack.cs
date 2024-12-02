@@ -91,7 +91,7 @@ public class PlayerAttack : MonoBehaviour
             attackArea = meleeUp;
 
         }
-        else if (playerDirectionY < 0)
+        else if (playerDirectionY <= 0)
         {
 
             attackArea = meleeDown;
@@ -99,7 +99,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
 
-        if (playerDirectionX < 0)
+        if (playerDirectionX <= 0)
         {
 
             attackArea = meleeLeft;

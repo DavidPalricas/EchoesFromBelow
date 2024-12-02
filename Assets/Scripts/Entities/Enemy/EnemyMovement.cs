@@ -142,7 +142,7 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool PlayerInRange()
     {
-        float range = 5f;
+        float range = 15f;
 
         return Vector2.Distance(player.position, enemy.position) <= range;
     }
