@@ -16,5 +16,4 @@ public class Collectable : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public bool isCollected = false;
-
 }
