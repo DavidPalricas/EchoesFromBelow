@@ -51,6 +51,8 @@ public class Player : Entity
     {
         base.EntityDeath();
 
+        GameObject.Find("Level1").GetComponent<Rank>().DeathsNumber++;
+
         StartCoroutine(Utils.WaitForAnimationEnd(animator, "Death", Respawn));
     }
 

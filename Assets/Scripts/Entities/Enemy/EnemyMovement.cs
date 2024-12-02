@@ -157,8 +157,6 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool EnemyIsReadyToAttack(Vector2 directionToPlayer)
     {
-
-        Debug.Log("Cona: " + PlayerNear(directionToPlayer));
         // Check if the enemy is attacking or the conditions to attack are met
         if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
         {   
@@ -194,7 +192,7 @@ public class EnemyMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-         Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
+        //Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
 
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
@@ -329,31 +327,5 @@ public class EnemyMovement : MonoBehaviour
 
         return blockedDirection;
     }
-
-    /// <summary>
-    /// The OnCollisionEnter2D method is called when the enemy collides with another object (Unity Method).
-    /// In this method, the enemy ignores the collision with the player and other enemies.
-    /// </summary>
-    /// <param name="collision">The collision parameter stores a RigidBody2D or a collider of a game object which collide with the enemy.</param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {   
-            /*
-            Debug.Log("Enemy collided with another enemy");
-
-            Rigidbody2D otherEnemy = collision.gameObject.GetComponent<Rigidbody2D>();
-
-            Vector2 enemyDirection = NormalizeDirectionVector(otherEnemy.position - enemy.position);
-
-            float impactForce = 10f;
-
-            enemy.AddForce(-enemyDirection * impactForce, ForceMode2D.Impulse);
-
-            otherEnemy.AddForce(enemyDirection * impactForce , ForceMode2D.Impulse);
-            */
-
-        }
-    }   
 }
 

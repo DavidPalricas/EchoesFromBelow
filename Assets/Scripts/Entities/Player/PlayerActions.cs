@@ -36,35 +36,44 @@ public class PlayerActions : MonoBehaviour
     private bool playerArmed = false;
 
     /// <summary>
-    /// The equipedWeapon property is responsible for verifying which weapon is equiped.
+    /// The animator property is responsible for storing the player's animator.
     /// </summary>
-    private string equipedWeapon;
-
-
     private Animator animator;
 
     /// <summary>
     /// The stickIcon property is responsible for storing the stick icon.
+    /// Its Serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
     private GameObject stickIcon;
 
-
     /// <summary>
     /// Icone e texto do icone dos frascos de vida no HUD.
+    /// Its Serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
     private GameObject flaskIcon;
+
+    /// <summary>
+    /// The flaskQuantity property is responsible for storing the quantity of heal items in the player's inventory.
+    /// Its Serialized so that it can be set in the Unity Editor.
+    /// </summary>
     [SerializeField]
     private TextMeshProUGUI flaskQuantity;
 
-
+    /// <summary>
+    /// The healthBar property is responsible for storing the player's health bar.
+    /// Its Serialized so that it can be set in the Unity Editor.
+    /// </summary>
     [SerializeField]
     private HealthBar healthBar;
 
+    /// <summary>
+    /// The keyIcon property is responsible for storing the key icon.
+    /// Its Serialized so that it can be set in the Unity Editor.
+    /// </summary>
     [SerializeField]
     private GameObject keyIcon;
-
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -87,7 +96,6 @@ public class PlayerActions : MonoBehaviour
     /// And if the player pressed the H key, the HealPlayer() method is called.
     /// </summary>
     /// 
-
     private void Update()
     {
 
@@ -202,7 +210,7 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerAttack>().enabled = true;
 
             playerArmed = true;
-            equipedWeapon = "stick";
+
             stickIcon.SetActive(true);
 
             animator.SetBool("HasWeapon", true);
@@ -298,6 +306,8 @@ public class PlayerActions : MonoBehaviour
             GetComponent<Entity>().Health++;
             GetComponent<Entity>().Health += (playerMaxHealth / 2);
             GetComponent<PlayerInventory>().Items["HealItems"]--;
+
+            GameObject.Find("Level1").GetComponent<Rank>().HealItemsUsed++;
 
             if (GetComponent<PlayerInventory>().Items["HealItems"] == 0)
             {

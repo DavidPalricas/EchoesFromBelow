@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 speedVector;
 
     /// <summary>
+    /// The forbidennDirection property is responsible for storing the direction that the player can't move to.
+    /// </summary>
+    private Vector2 forbidennDirection = Vector2.zero;
+
+    /// <summary>
     /// The previousDirection property is responsible for storing the player's previous direction.
     /// </summary>
     public Vector2 LastMovingDirection { get; set; }
@@ -53,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     /// If the player stops moving, we are storing the last direction the player was moving.
     /// </summary>
     private void Update()
-    {   
+    {
         float speedX = Input.GetAxis("Horizontal");
         float speedY = Input.GetAxis("Vertical");
 
@@ -68,17 +73,24 @@ public class PlayerMovement : MonoBehaviour
         
         }
 
+        if (forbidennDirection != Vector2.zero && Utils.NormalizeDirectionVector(speedVector) == forbidennDirection)
+        {
+            player.velocity = Vector2.zero;
+            return;
+        }
+
         animator.SetFloat("Horizontal", speedX);
         animator.SetFloat("Vertical", speedY);
         animator.SetFloat("Speed", speedVector.sqrMagnitude);
 
         animator.SetFloat("LastHorizontal", LastMovingDirection.x);
         animator.SetFloat("LastVertical", LastMovingDirection.y);
-
-
-        player.velocity = speedVector * speed;
-        //player.velocity = new Vector2(speedX * speed, speedY * speed);  
         
+
+       player.velocity = speedVector * speed;
+
+       //player.velocity = new Vector2(speedX * speed, speedY * speed);  
+       
         if (player.velocity != Vector2.zero)
         {
             LastMovingDirection = Utils.NormalizeDirectionVector(player.velocity);
@@ -102,33 +114,36 @@ public class PlayerMovement : MonoBehaviour
             }        
         }
     }
-    
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{   
-    //    /* NOT WORKING
-    //    if (collision.gameObject.CompareTag("Enemy"))
-    //    {   
-    //        Rigidbody2D enemy = collision.gameObject.GetComponent<Rigidbody2D>();
-
-    //        Vector2 collisionDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
-
-    //        float relativeVelocity = Vector2.Dot(player.velocity - enemy.velocity, collisionDirection);
-
-    //        float impactForce = Mathf.Abs(relativeVelocity) * player.mass;
-
-    //        player.AddForce(-collisionDirection * impactForce, ForceMode2D.Impulse);
-
-    //        enemy.AddForce(collisionDirection * impactForce, ForceMode2D.Impulse);
-    //    }
-    //    */
 
 
+    /// <summary>
+    /// The OnCollisionExit2D method is called when the player exits a collision (Unity Method).
+    /// In this method, we are checking if the player has exited a collision with an enemy, if it has, we are enabling the movement of the entities.
+    /// </summary>
+    /// <param name="collision">   collision.gameObject.GetComponent<EnemyMovement>().enabled = false;.</param>
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            forbidennDirection = Vector2.zero;
+            collision.gameObject.GetComponent<EnemyMovement>().enabled = true;
+        }
+    }
 
-    //    if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
-    //    {
-    //        GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
-    //    }
-    //}
+    /// <summary>
+    /// The OnCollisionStay2D method is called when the player is colliding with another game object (Unity Method).
+    /// In this method, we are checking if the player is colliding with an enemy, if it is, we are stopping the enemy's and player's pushing each other.
+    /// </summary>
+    /// <param name="collision">collision.gameObject.GetComponent<EnemyMovement>().enabled = false;</param>
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            collision.gameObject.GetComponent<EnemyAttack>().AttackDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
+            collision.gameObject.GetComponent<EnemyMovement>().enabled = false;
 
-
+            forbidennDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
+        }
+    }
 }

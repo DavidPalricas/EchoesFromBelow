@@ -77,6 +77,7 @@ public class Enemy : Entity
         var deadBody = new GameObject("DeadBody");
         deadBody.transform.position = transform.position;
         deadBody.transform.localScale = transform.localScale;
+        deadBody.layer = transform.gameObject.layer;
 
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = GetComponent<SpriteRenderer>().sprite;
