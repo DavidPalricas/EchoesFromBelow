@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/First Level.unity
     guid: 0e0d9d90a5aa3754abe75209ad556693
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/Ending.unity
     guid: 8c9c27cb07215d040b0b55717c63f332
   - enabled: 1
     path: Assets/Scenes/FakeEnding.unity

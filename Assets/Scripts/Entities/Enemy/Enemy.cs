@@ -58,9 +58,12 @@ public class Enemy : Entity
 
         GetComponent<EnemyMovement>().enabled = false;
 
+        GameObject.Find("Level1").GetComponent<Rank>().SkeletonsKilled++;
+
         if (isBoss)
         {
             Instantiate(bossDropItem, transform.position, Quaternion.identity);
+            GameObject.Find("Level1").GetComponent<Rank>().BossKilled = true;
         }
 
         StartCoroutine(Utils.WaitForAnimationEnd(animator, "Skeleton_Death", CreateEnemyDeadBody));
@@ -79,8 +82,6 @@ public class Enemy : Entity
         deadBody.transform.localScale = transform.localScale;
         deadBody.layer = transform.gameObject.layer;
       
-
-
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = GetComponent<SpriteRenderer>().sprite;
         deadBodySprite.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;

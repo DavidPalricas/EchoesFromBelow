@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 111813351}
   - component: {fileID: 111813350}
   - component: {fileID: 111813349}
+  - component: {fileID: 111813353}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -224,6 +225,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &111813353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111813348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539862ee549e2de4c839d5721ad2e564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneText: {fileID: 210894897}
 --- !u!1 &210894895
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,8 +272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 155.55592, y: -1.3687}
+  m_SizeDelta: {x: 1828.0625, y: 926.5905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210894897
 MonoBehaviour:
@@ -281,9 +295,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '   Game Over
-
-'
+  m_text: "\"Congratulations! You have completed the alpha version of our game!\\n\";  
+    \n$\"Your Rank is: {playerRank.Item1} ({playerRank.Item2} points)\\n\" +\r\n  
+    $\"Next Rank: {nextRank.Item1}\\nPoints needed: {nextRank.Item2}\\n\" +\r\n  
+    $\"Time spent: {rank.GetTimeSpentFormatted()}\\n\" +\r\n   $\"Deaths: {rank.DeathsNumber}\\n\"
+    +\r\n   $\"Heal Items used: {rank.HealItemsUsed}\\n\" +\r\n   $\"Skeletons killed:
+    {rank.SkeletonsKilled}\\n\" +\r\n   $\"Boss killed: {(rank.BossKilled ? \"yes\"
+    : \"no\")}\\n\";"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
