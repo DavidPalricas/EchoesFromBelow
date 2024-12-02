@@ -259,16 +259,18 @@ public class PlayerActions : MonoBehaviour
     /// If the player has space in the inventory, the player's inventory is updated, and the item is destroyed.
     /// </summary>
     private void GrabHealItem()
-    {
-        if (GetComponent<PlayerInventory>().Items["HealItems"] < PlayerInventory.MaxHealItems)
+    {   
+        PlayerInventory playerInventory = GetComponent<PlayerInventory>();
+
+        if (playerInventory.Items["HealItems"] < PlayerInventory.MaxHealItems)
         {
-            GetComponent<PlayerInventory>().Items["HealItems"]++;
+            playerInventory.Items["HealItems"]++;
 
             DestroyCollectable();
 
             flaskIcon.SetActive(true);
 
-            flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
+            flaskQuantity.text = playerInventory.Items["HealItems"].ToString();
 
         }
     }

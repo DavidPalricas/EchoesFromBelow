@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 4012519553707733667}
   - component: {fileID: 4890617891295396606}
   - component: {fileID: 7641519816493334048}
-  - component: {fileID: 469163243183865698}
   - component: {fileID: 620849192762448018}
   - component: {fileID: 6555994045313621098}
   - component: {fileID: 4115807595486131082}
+  - component: {fileID: 1318209133456532555}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4827529518274912995}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad23fdee2da21fd4fa9c414d5c03e389, type: 3}
   m_Name: 
@@ -169,18 +169,6 @@ MonoBehaviour:
   flaskQuantity: {fileID: 0}
   healthBar: {fileID: 0}
   keyIcon: {fileID: 0}
---- !u!114 &469163243183865698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827529518274912995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac2e923fb778544d945e29dcd02f9d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &620849192762448018
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -265,6 +253,18 @@ MonoBehaviour:
   animator: {fileID: 6555994045313621098}
   isDead: 0
   spawnPoint: {x: 0, y: 0}
+--- !u!114 &1318209133456532555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827529518274912995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac2e923fb778544d945e29dcd02f9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &162705464032259031
 PrefabInstance:
   m_ObjectHideFlags: 0

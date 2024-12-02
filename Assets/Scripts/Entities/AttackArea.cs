@@ -38,8 +38,7 @@ public class AttackArea : MonoBehaviour
             collider.GetComponent<Entity>().Health -= (int) meleeDamage;
 
             if (!isPlayer){
-
-                //GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
+                GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
             }
 
         }

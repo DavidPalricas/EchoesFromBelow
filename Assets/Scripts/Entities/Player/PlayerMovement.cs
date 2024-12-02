@@ -85,17 +85,24 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
 
+    /// <summary>
+    /// The OnTriggerEnter2D method is called when the player enters a trigger collider (Unity Method).
+    /// In this method, we are checking if the player has collided with an item or weapon.
+    /// After that, we are calling the GrabCollectable method from the PlayerActions component, to grab the collectable.
+    /// </summary>
+    /// <param name="collision">The collision (collider of a game object).</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
-        {
-            GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
-
+        {   
+            if (collision.gameObject.GetComponent<Collectable>().isCollected == false)
+            {
+                collision.gameObject.GetComponent<Collectable>().isCollected = true;
+                GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
+            }        
         }
-
     }
-
+    
     //private void OnCollisionEnter2D(Collision2D collision)
     //{   
     //    /* NOT WORKING

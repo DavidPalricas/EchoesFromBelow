@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
     /// In this method, we are initializing the player's inventory (Items and Weapons).
     /// </summary>
     private void Awake()
-    {
+    {   
         Items = new Dictionary<string, int>
         {
             { "HealItems", 0 },
@@ -38,7 +38,6 @@ public class PlayerInventory : MonoBehaviour
             { "Melee", null },
             { "Long", null }
         };
-
     }
 
     /// <summary>
