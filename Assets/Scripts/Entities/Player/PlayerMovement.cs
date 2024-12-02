@@ -108,9 +108,9 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("Weapon"))
         {   
             if (collision.gameObject.GetComponent<Collectable>().isCollected == false)
-            {
+            {   
                 collision.gameObject.GetComponent<Collectable>().isCollected = true;
-                GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);
+                GetComponent<PlayerActions>().GrabCollectable(collision.gameObject);     
             }        
         }
     }

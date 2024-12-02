@@ -77,14 +77,18 @@ public class Enemy : Entity
     private void CreateEnemyDeadBody()
     {   
         Debug.Log("Creating dead body");
+
         var deadBody = new GameObject("DeadBody");
         deadBody.transform.position = transform.position;
         deadBody.transform.localScale = transform.localScale;
         deadBody.layer = transform.gameObject.layer;
-      
+
+        SpriteRenderer enemySprite = GetComponent<SpriteRenderer>();
+
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
-        deadBodySprite.sprite = GetComponent<SpriteRenderer>().sprite;
-        deadBodySprite.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+        deadBodySprite.sprite = enemySprite.sprite;
+        deadBodySprite.sortingOrder = enemySprite.sortingOrder;
+        deadBodySprite.color = enemySprite.color;
 
         Destroy(gameObject);
     }

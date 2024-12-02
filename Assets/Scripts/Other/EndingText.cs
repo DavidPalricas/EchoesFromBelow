@@ -31,7 +31,7 @@ public class EndingText : MonoBehaviour
                       $" - Hugo Tavares\n" + 
                       $" - Pedro Soares\n\n\n";
 
-        endingText += "\t\t\t\t\tPress ESC to exit the game.";
+        endingText += "\t\t\t\t\tPress ESC to return to the main menu.";
 
         sceneText.text = endingText;
 

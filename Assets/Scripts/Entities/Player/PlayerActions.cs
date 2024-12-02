@@ -253,13 +253,18 @@ public class PlayerActions : MonoBehaviour
 
             keyIcon.SetActive(true);
 
-            GameObject itemToDestroy = DestroyCollectable();
+            GameObject keyToDestroy = DestroyCollectable();
 
             // Removes the key from the dictionary which stores the keys and their values
-            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(itemToDestroy);
+            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
 
             SpawnHordes(GetComponent<PlayerInventory>().Items["Key"] == 2);
-        }   
+
+            return;
+        }
+
+        collectableItemGrabed.GetComponent<Collectable>().isCollected = false;
+
     }
 
     /// <summary>
@@ -280,7 +285,10 @@ public class PlayerActions : MonoBehaviour
 
             flaskQuantity.text = playerInventory.Items["HealItems"].ToString();
 
+            return;
         }
+
+        collectableItemGrabed.GetComponent<Collectable>().isCollected = false;
     }
 
     /// <summary>
