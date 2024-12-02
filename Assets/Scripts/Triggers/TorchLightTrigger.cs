@@ -9,7 +9,14 @@ public class TorchLightTrigger : MonoBehaviour
     /// <summary>
     /// The isTorchLightOn variable is responsible for storing the state of the torch light.
     /// </summary>
-    private bool isTorchLightOn, playerDetected;
+    private bool isTorchLit, playerDetected;
+
+    [SerializeField]
+    private GameObject torchLit;
+
+    [SerializeField]
+    private GameObject torchUnlit;
+
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -17,14 +24,14 @@ public class TorchLightTrigger : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        isTorchLightOn = true;
+        isTorchLit = false;
     }
 
     private void Update()
     {
-        if (playerDetected && Input.GetKeyDown(KeyCode.E))
+        if (!isTorchLit && playerDetected && Input.GetKeyDown(KeyCode.E))
         {
-            TunrOnOffLight();
+            LitTorch();
         }
     }
 
@@ -50,20 +57,14 @@ public class TorchLightTrigger : MonoBehaviour
     }
 
     /// <summary>
-    /// The TunrOnOffLight method is responsible for turning on or off the torch light.
-    /// To turn on or off the torch light, a timer of 0.5 seconds is used.
+    /// The LitTorch method is responsible for lit a torch
     /// </summary>
-    private void TunrOnOffLight()
-    {
-        isTorchLightOn = !isTorchLightOn;
+    private void LitTorch()
+    {   
+        isTorchLit= true;
 
-        if (isTorchLightOn)
-        {
-            Debug.Log("Torch light on");
-        }
-        else
-        {
-            Debug.Log("Torch light off");
-        }
+        torchLit.SetActive(true);
+
+        torchUnlit.SetActive(false);
     }
 }

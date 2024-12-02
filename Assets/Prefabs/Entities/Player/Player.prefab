@@ -84,7 +84,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: -703968501, guid: 2db202aa3bd41204fbbbf495cf826b22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   animator: {fileID: 6555994045313621098}
   isDead: 0
   spawnPoint: {x: 0, y: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &1318209133456532555
 MonoBehaviour:
   m_ObjectHideFlags: 0
