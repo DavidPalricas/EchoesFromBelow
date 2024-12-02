@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 3462787359595219444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.73, y: 2.66, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4911128236371775213}
@@ -151,7 +151,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 6.667467
+  m_Mass: 13.068235
   m_LinearDrag: 3
   m_AngularDrag: 3
   m_GravityScale: 0
@@ -253,8 +253,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5679892213634864032, guid: 95a8b2d3befb3b6419d2c00b64d59501, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679892213634864032, guid: 95a8b2d3befb3b6419d2c00b64d59501, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679892213634864032, guid: 95a8b2d3befb3b6419d2c00b64d59501, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5679892213634864032, guid: 95a8b2d3befb3b6419d2c00b64d59501, type: 3}
       propertyPath: m_LocalPosition.y
@@ -319,17 +327,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: melee_up
       objectReference: {fileID: 0}
+    - target: {fileID: 1093010714235285575, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6852547961104909258, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
       propertyPath: m_Density
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8449780013256588519, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449780013256588519, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449780013256588519, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8449780013256588519, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.41
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8449780013256588519, guid: c671f099a1a3b5b4e9d69d2388c7dbef, type: 3}
       propertyPath: m_LocalPosition.z
@@ -387,12 +407,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 8801270003438031257}
     m_Modifications:
     - target: {fileID: 3146963174483634783, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146963174483634783, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146963174483634783, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.01
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3146963174483634783, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.37
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3146963174483634783, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -430,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: melee_down
       objectReference: {fileID: 0}
+    - target: {fileID: 5650638633230600735, guid: f1a395123df2d1546ad33a5670d2614c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -457,9 +489,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: melee_left
       objectReference: {fileID: 0}
+    - target: {fileID: 4916295741682452497, guid: 6803085e6bccfda45836eda5e4b01709, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546454238765602583, guid: 6803085e6bccfda45836eda5e4b01709, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546454238765602583, guid: 6803085e6bccfda45836eda5e4b01709, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52
+      objectReference: {fileID: 0}
     - target: {fileID: 6546454238765602583, guid: 6803085e6bccfda45836eda5e4b01709, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.02
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6546454238765602583, guid: 6803085e6bccfda45836eda5e4b01709, type: 3}
       propertyPath: m_LocalPosition.y

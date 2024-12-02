@@ -95,7 +95,7 @@ public class Rank : MonoBehaviour
 
     /// <summary>
     /// The CalculateRank method is responsible for calculating the rank of the player.
-    /// It uses the time spent, the number of deaths, and the number of heal items used to calculate the rank.
+    /// It uses the time spent, the number of deaths,the number of heal items, skeletons killed and boss killed are used to calculate the rank.
     /// For each of these values, we have a weight that is used to calculate the rank.
     /// </summary>
     /// <returns> The rank value</returns>
@@ -105,8 +105,9 @@ public class Rank : MonoBehaviour
         int deathsComponent = 3 * DeathsNumber;
         int skeletonsComponent = 2 * SkeletonsKilled;
         int healItemsComponent = 1 * HealItemsUsed;
+        int bossComponent = BossKilled ? 25 : 0;
 
-        return timeComponent + deathsComponent + skeletonsComponent + healItemsComponent;
+        return 1000 - ( timeComponent + deathsComponent + healItemsComponent) + skeletonsComponent + bossComponent;
     }
 
     /// <summary>
