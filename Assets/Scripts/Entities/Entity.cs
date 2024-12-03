@@ -26,10 +26,24 @@ public class Entity : MonoBehaviour
     public Animator animator;
 
     /// <summary>
+    /// The entityFSM property is responsible for storing the entity's finite state machine.
+    /// </summary>
+    public EntityFSM entityFSM;
+
+    /// <summary>
     /// The isDead property is responsible for storing whether the entity is dead or not.
     /// </summary>
     [HideInInspector]
     public bool isDead = false;
+
+    /// <summary>
+    /// The Awake method is called when the script instance is being loaded (Unity Method).
+    /// Here, the entityFSM property is initialized.
+    /// </summary>
+    private void Awake()
+    {
+        entityFSM = GetComponent<EntityFSM>();
+    }
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).

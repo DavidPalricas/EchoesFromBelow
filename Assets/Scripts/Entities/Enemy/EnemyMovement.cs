@@ -328,4 +328,3 @@ public class EnemyMovement : MonoBehaviour
         return blockedDirection;
     }
 }
-

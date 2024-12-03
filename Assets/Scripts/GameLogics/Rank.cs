@@ -100,19 +100,21 @@ public class Rank : MonoBehaviour
     /// </summary>
     /// <returns> The rank value</returns>
     private int CalculateRankValue()
-    {     
+    {
         int timeComponent = (int)(5 * timeSpent);
         int deathsComponent = 3 * DeathsNumber;
         int skeletonsComponent = 2 * SkeletonsKilled;
         int healItemsComponent = 1 * HealItemsUsed;
         int bossComponent = BossKilled ? 25 : 0;
 
-        return 1000 - ( timeComponent + deathsComponent + healItemsComponent) + skeletonsComponent + bossComponent;
+        int rankValue = 1000 - (timeComponent + deathsComponent + healItemsComponent) + skeletonsComponent + bossComponent;
+
+        return rankValue > 0 ? rankValue : 0;
     }
 
     /// <summary>
     /// The GetRank method is responsible for calculating the player's rank.
-    // It uses the CalculateRankValue method to get the rank value.
+    /// It uses the CalculateRankValue method to get the rank value.
     /// After getting the rank value, the method compares it with the ranks dictionary to get the rank name of the player.
     /// </summary>
     /// <returns> The rank of the player (Name and Value) or null if the rank is not found</returns>

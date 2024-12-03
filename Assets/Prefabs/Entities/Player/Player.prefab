@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6555994045313621098}
   - component: {fileID: 4115807595486131082}
   - component: {fileID: 1318209133456532555}
+  - component: {fileID: -566987698254412420}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -251,6 +252,7 @@ MonoBehaviour:
   Speed: 10
   AttackDamage: 5
   animator: {fileID: 6555994045313621098}
+  entityFSM: {fileID: 0}
   isDead: 0
   spawnPoint: {x: 0, y: 0}
   healthBar: {fileID: 0}
@@ -264,6 +266,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aac2e923fb778544d945e29dcd02f9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-566987698254412420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827529518274912995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0a3545575bcdd4b8d471b94932cba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &162705464032259031
