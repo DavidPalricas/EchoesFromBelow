@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The EndingText class is responsible for displaying the ending text on the screen.
@@ -46,7 +47,7 @@ public class EndingText : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ExitGame();
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
@@ -70,19 +71,6 @@ public class EndingText : MonoBehaviour
          $"Boss killed: {(rank.BossKilled ? "yes" : "no")}\n\n\n";
 
         return rankStatusText;
-    }
-
-    /// <summary>
-    /// The ExitGame method is responsible for closing the game.
-    /// It will close the game if it is running in a standalone build, and it will stop the game if it is running in the Unity Editor.
-    /// </summary>
-    private void ExitGame()
-    {
-        Application.Quit();
-
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #endif
     }
 
     private void SetTextStyle()
