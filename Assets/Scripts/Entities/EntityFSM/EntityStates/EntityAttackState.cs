@@ -24,7 +24,7 @@ public class EntityAttackState : EntityStateBase
 
         if (entityFSM.entityProprieties is Enemy enemyClass)
         {
-            enemyClass.attack.Attacking = true;
+            ExecuteEnemyLogic();
         }
     }
 
@@ -34,11 +34,16 @@ public class EntityAttackState : EntityStateBase
     /// It is inirrated from the IState interface.
     /// </summary>
     public override void Execute()
-    {
-        if (entityFSM.entityProprieties is Enemy)
-        {   
-            ExecuteEnemyLogic();
+    {   
+        EnemyAttack enemyAttack = ((Enemy)entityFSM.entityProprieties).attack;
+
+
+        Debug.Log("Nigger: " + enemyAttack.attacking);
+        if (!enemyAttack.attacking)
+        {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
         }
+     
     }
 
     /// <summary>
@@ -59,13 +64,6 @@ public class EntityAttackState : EntityStateBase
 
         EnemyAttack enemyAttack = enemyClass.attack;
 
-        if (!enemyAttack.Attacking)
-        {
-            entityFSM.ChangeState(new EntityIdleState(entityFSM));
-
-            return;
-        }
-
         EnemyMovement enemyMovement = enemyClass.movement;
 
         Rigidbody2D enemy = enemyClass.entity;
@@ -78,9 +76,7 @@ public class EntityAttackState : EntityStateBase
         }
 
         UpdateAnimator();
-        enemyAttack.SetAttackArea(enemyAttackDirection);
-        enemyAttack.Attack();
-        enemyAttack.HandleAttackCooldown();
+        enemyAttack.Attack(enemyAttackDirection);
     }
 
 
