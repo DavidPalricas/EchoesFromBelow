@@ -10,6 +10,9 @@ public class EntityFSM : MonoBehaviour
     /// </summary>
     private IState currentState;
 
+    [HideInInspector]
+    public Entity entityProprieties;
+
     /// <summary>
     /// The ChangeState method is responsible for changing the current state of the entity.
     /// </summary>
@@ -22,6 +25,19 @@ public class EntityFSM : MonoBehaviour
         currentState.Enter();
     }
 
+    public void InstantiateItem(GameObject item, Vector2 position)
+    {
+        Instantiate(item, position, Quaternion.identity);
+    }
+
+
+    public void DestroyGameObject(GameObject gameObject)
+    {
+        entityProprieties = null;
+
+        Destroy(gameObject);
+    }
+
     /// <summary>
     /// The Update method is called once per frame (Unity Method).
     /// </summary>
@@ -29,6 +45,7 @@ public class EntityFSM : MonoBehaviour
     {
         currentState?.Execute();
     }
+
 }
 
 /// <summary>
@@ -62,6 +79,9 @@ public abstract class EntityStateBase : IState
     /// </summary>
     protected EntityFSM entityFSM;
 
+
+    protected Animator entityAnimator;
+
     /// <summary>
     /// Creates a new instance of the <see cref="EntityStateBase"/> class.
     /// </summary>
@@ -91,4 +111,10 @@ public abstract class EntityStateBase : IState
     /// It is inirrated from the IState interface.
     /// </summary>
     public virtual void Exit() { }
+
+    protected virtual void ExecuteEnemyLogic(){}
+
+    protected virtual void ExecutePlayerLogic(){}
+
+    protected virtual void UpdateAnimator() { }
 }

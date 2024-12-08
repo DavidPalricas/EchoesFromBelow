@@ -93,7 +93,9 @@ public class SpawnHorde : MonoBehaviour
     private void SpawEnemies()
     {   
         Vector2 enemyPosition = GetEnemySpawnPosition();
-        Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+
+        GameObject enemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+        enemy.GetComponent<Enemy>().Initialize();
 
         EnemiesSpawned++;
     }
@@ -146,6 +148,8 @@ public class SpawnHorde : MonoBehaviour
     {
         Vector2 bossPosition = GetEnemySpawnPosition();
 
-        Instantiate(bossPrefab, bossPosition, Quaternion.identity);
+        GameObject boss = Instantiate(bossPrefab, bossPosition, Quaternion.identity);
+
+        boss.GetComponent<Enemy>().Initialize();
     }
 }

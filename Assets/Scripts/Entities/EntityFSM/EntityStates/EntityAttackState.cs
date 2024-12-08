@@ -19,6 +19,13 @@ public class EntityAttackState : EntityStateBase
     public override void Enter()
     {
         Debug.Log("Entering Attack State");
+
+        entityAnimator = entityFSM.entityProprieties.animator;
+
+        if (entityFSM.entityProprieties is Enemy enemyClass)
+        {
+            enemyClass.attack.Attacking = true;
+        }
     }
 
     /// <summary>
@@ -28,7 +35,10 @@ public class EntityAttackState : EntityStateBase
     /// </summary>
     public override void Execute()
     {
-        Debug.Log("Executing Attack State");
+        if (entityFSM.entityProprieties is Enemy)
+        {   
+            ExecuteEnemyLogic();
+        }
     }
 
     /// <summary>
@@ -39,5 +49,49 @@ public class EntityAttackState : EntityStateBase
     public override void Exit()
     {
         Debug.Log("Exiting Attack State");
+        entityAnimator.SetBool("IsAttacking", false);
+    }
+
+
+    protected override void ExecuteEnemyLogic()
+    {   
+        Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
+
+        EnemyAttack enemyAttack = enemyClass.attack;
+
+        if (!enemyAttack.Attacking)
+        {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+
+            return;
+        }
+
+        EnemyMovement enemyMovement = enemyClass.movement;
+
+        Rigidbody2D enemy = enemyClass.entity;
+
+        Vector2 enemyAttackDirection = enemyMovement.attackDirection;
+
+        if (enemyAttackDirection == Vector2.zero)
+        {
+            return;
+        }
+
+        UpdateAnimator();
+        enemyAttack.SetAttackArea(enemyAttackDirection);
+        enemyAttack.Attack();
+        enemyAttack.HandleAttackCooldown();
+    }
+
+
+    protected override void UpdateAnimator()
+    {
+        Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
+        Vector2 attackDirection = enemyClass.movement.attackDirection;
+
+        entityAnimator.SetBool("IsAttacking", true);
+        entityAnimator.SetFloat("LastHorizontal", attackDirection.x);
+        entityAnimator.SetFloat("LastVertical", attackDirection.y);
+
     }
 }

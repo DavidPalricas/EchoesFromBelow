@@ -252,8 +252,9 @@ MonoBehaviour:
   Speed: 10
   AttackDamage: 5
   animator: {fileID: 6555994045313621098}
-  entityFSM: {fileID: 0}
+  entityFSM: {fileID: -566987698254412420}
   isDead: 0
+  entity: {fileID: 4494120325564115690}
   spawnPoint: {x: 0, y: 0}
   healthBar: {fileID: 0}
 --- !u!114 &1318209133456532555
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0a3545575bcdd4b8d471b94932cba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityProprieties: {fileID: 0}
 --- !u!1001 &162705464032259031
 PrefabInstance:
   m_ObjectHideFlags: 0

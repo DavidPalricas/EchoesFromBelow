@@ -139,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            collision.gameObject.GetComponent<EnemyAttack>().AttackDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);
             collision.gameObject.GetComponent<EnemyMovement>().enabled = false;
 
             forbidennDirection = Utils.NormalizeDirectionVector(collision.transform.position - transform.position);

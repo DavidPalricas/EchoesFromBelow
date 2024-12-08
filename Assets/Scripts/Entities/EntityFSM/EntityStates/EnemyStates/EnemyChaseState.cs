@@ -18,7 +18,9 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        Debug.Log("Entering Chase Player State");
+
+        entityAnimator = entityFSM.entityProprieties.animator;
     }
 
     /// <summary>
@@ -28,8 +30,54 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Execute()
     {
-        Debug.Log("Executing Attack State");
+        Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
+
+        EnemyMovement enemyMovement = enemyClass.movement;
+
+        Rigidbody2D enemy = entityFSM.entityProprieties.entity;
+
+        Rigidbody2D player = enemyMovement.player;
+
+        float speed = entityFSM.entityProprieties.Speed;
+
+        Vector2 directionToPlayer = Utils.NormalizeDirectionVector(player.position - enemy.position);
+
+
+        if (ChangeState(enemyClass.IsIndependent,enemyMovement,directionToPlayer))
+        {
+            return;
+        } 
+
+        enemy.velocity = directionToPlayer * speed;    
+
+        UpdateAnimator();
     }
+
+
+    private bool ChangeState(bool independet,EnemyMovement enemyMovement, Vector2 directionToPlayer)
+    {
+        if (enemyMovement.EnemyIsReadyToAttack(Utils.NormalizeDirectionVector(directionToPlayer)))
+        {
+            entityFSM.ChangeState(new EntityAttackState(entityFSM));
+            return true;
+        }
+
+        if (!enemyMovement.IsPathClear(directionToPlayer))
+        {
+            entityFSM.ChangeState(new EnemyAvoidObstaclesState(entityFSM));
+            return true;
+        }
+
+        if (independet && !enemyMovement.PlayerInRange())
+        {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            return true;
+        }
+
+
+        return false;
+    }
+
 
     /// <summary>
     /// The Exit method is responsible for executing the logic when the state is exited.
@@ -38,6 +86,16 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        Debug.Log("Exiting Chase State");
+    }
+
+
+    protected override void UpdateAnimator()
+    {
+        Vector2 enemyDirection = Utils.NormalizeDirectionVector(entityFSM.entityProprieties.entity.velocity);
+
+        entityFSM.entityProprieties.animator.SetFloat("Horizontal", enemyDirection.x);
+        entityFSM.entityProprieties.animator.SetFloat("Vertical", enemyDirection.y);
+        entityFSM.entityProprieties.animator.SetFloat("Speed", enemyDirection.sqrMagnitude);
     }
 }

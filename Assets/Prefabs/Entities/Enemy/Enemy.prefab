@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa942716d428d44783250ee6be00349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &218704202441924716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,11 +212,15 @@ MonoBehaviour:
   Speed: 2
   AttackDamage: 4
   animator: {fileID: 5023647670042829034}
+  entityFSM: {fileID: 6397195189920809626}
   isDead: 0
+  entity: {fileID: 396571156607656910}
   isBoss: 0
   bossDropItem: {fileID: 0}
   IsLongRanged: 0
   IsIndependent: 0
+  movement: {fileID: 0}
+  attack: {fileID: 0}
 --- !u!95 &5023647670042829034
 Animator:
   serializedVersion: 5
@@ -249,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0a3545575bcdd4b8d471b94932cba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityProprieties: {fileID: 0}
 --- !u!1001 &2125554202570059007
 PrefabInstance:
   m_ObjectHideFlags: 0

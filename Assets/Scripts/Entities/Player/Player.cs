@@ -36,14 +36,19 @@ public class Player : Entity
     private HealthBar healthBar;
 
     /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
+    /// The Start method is called before the first frame update (Unity Method).
     /// </summary>
-    private void Awake()
+    private void Start()
     {
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
         playerActions = GetComponent<PlayerActions>();
+
+        entity = GetComponent<Rigidbody2D>();
+
+        entityFSM = GetComponent<EntityFSM>();
+        entityFSM.entityProprieties = this;
     }
 
     /// <summary>

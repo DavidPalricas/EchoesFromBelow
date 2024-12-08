@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// The Entity class is responsible for handling the game's entities attributes.
 /// </summary>
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     /// <summary>
     /// The Health property  is responsible for storing the entity's health.
@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Stores the animator.
     /// </summary>
+    [HideInInspector]
     public Animator animator;
 
     /// <summary>
@@ -36,15 +37,10 @@ public class Entity : MonoBehaviour
     [HideInInspector]
     public bool isDead = false;
 
-    /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// Here, the entityFSM property is initialized.
-    /// </summary>
-    private void Awake()
-    {
-        entityFSM = GetComponent<EntityFSM>();
-    }
+    [HideInInspector]
+    public Rigidbody2D entity;
 
+   
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, the EntityDeath method is called, when the entity is dead.
@@ -71,7 +67,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            animator.SetBool("isDead", true);
+            entityFSM.ChangeState(new EntityDeadState(entityFSM));
         }   
     }
 }

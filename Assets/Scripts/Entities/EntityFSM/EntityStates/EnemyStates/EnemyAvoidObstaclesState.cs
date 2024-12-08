@@ -18,7 +18,7 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        Debug.Log("Entering avoid obstacles state");
     }
 
     /// <summary>
@@ -27,8 +27,23 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     /// It is inirrated from the IState interface.
     /// </summary>
     public override void Execute()
-    {
-        Debug.Log("Executing Attack State");
+    {   
+        Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
+        EnemyMovement enemyMovement = enemyClass.movement;
+
+        Rigidbody2D enemy = entityFSM.entityProprieties.entity;
+        float speed = entityFSM.entityProprieties.Speed;
+
+        Vector2 directionToPlayer = Utils.NormalizeDirectionVector(enemyMovement.player.position -  enemy.position);
+
+        if (enemyMovement.IsPathClear(directionToPlayer))
+        {
+            entityFSM.ChangeState(new EnemyChaseState(entityFSM));
+            return;
+        }
+
+        Vector2 alternativeDirection = enemyMovement.FindAlternativeDirection(directionToPlayer);
+        enemy.velocity = alternativeDirection * speed;
     }
 
     /// <summary>
@@ -38,6 +53,15 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        Debug.Log("Exiting avoid obstacles State");
+    }
+
+    protected override void UpdateAnimator()
+    {
+        Vector2 enemyDirection = Utils.NormalizeDirectionVector(entityFSM.entityProprieties.entity.velocity);
+
+        entityAnimator.SetFloat("Horizontal", enemyDirection.x);
+        entityAnimator.SetFloat("Vertical", enemyDirection.y);
+        entityAnimator.SetFloat("Speed", entityFSM.entityProprieties.Speed);
     }
 }

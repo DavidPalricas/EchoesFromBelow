@@ -14,17 +14,46 @@ public class EntityIdleState : EntityStateBase
     /// The Enter method is responsible for entering the idle state.
     /// </summary>
     public override void Enter()
-    {
-        Debug.Log("Entering Idle State");
+    {   
+
+        entityAnimator = entityFSM.entityProprieties.animator;
+
+        UpdateAnimator();
+
+        entityFSM.entityProprieties.entity.velocity = Vector2.zero;
     }
 
     public override void Execute()
     {
-        Debug.Log("Executing Idle State");
+        if (entityFSM.entityProprieties is Enemy)
+        {
+            ExecuteEnemyLogic();
+        }
     }
 
     public override void Exit()
     {
         Debug.Log("Exiting Idle State");
+    }
+
+
+    protected override void ExecuteEnemyLogic()
+    {
+
+        Enemy enemy = (Enemy)entityFSM.entityProprieties;
+        
+        if (!enemy.IsIndependent || enemy.IsIndependent && enemy.movement.PlayerInRange())
+        {
+            entityFSM.ChangeState(new EnemyChaseState(entityFSM));
+        }
+    }
+
+
+    protected override void UpdateAnimator()
+    {   
+        Vector2 entityDirection = Utils.NormalizeDirectionVector(entityFSM.entityProprieties.entity.velocity);
+        entityAnimator.SetFloat("Horizontal", entityDirection.x);
+        entityAnimator.SetFloat("Vertical", entityDirection.y);
+        entityAnimator.SetFloat("Speed", 0);
     }
 }

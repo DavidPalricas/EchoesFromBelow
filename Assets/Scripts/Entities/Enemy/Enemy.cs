@@ -8,14 +8,12 @@ public class Enemy : Entity
     /// <summary>
     /// The IsBoss property is responsible for storing if the enemy is a boss.
     /// </summary>
-    [SerializeField]
-    private bool isBoss;
+    public bool isBoss;
 
     /// <summary>
     /// The bossDropItem property is responsible for storing the item that the boss will drop.
     /// </summary>
-    [SerializeField]
-    private GameObject bossDropItem;
+    public GameObject bossDropItem;
 
     /// <summary>
     /// The IsLongRanged property is responsible for storing if the enemy is long ranged.
@@ -28,11 +26,20 @@ public class Enemy : Entity
     public bool IsIndependent;
 
     /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
+    /// The movement of the enemy.
+    /// </summary>
+    [HideInInspector]
+    public EnemyMovement movement;
+
+    [HideInInspector]
+    public EnemyAttack attack;
+
+    /// <summary>
+    /// The Start method is called before the first frame update (Unity Method).
     /// In this method, we are checking if the enemy is no boss and has a drop item.
     /// If these conditions are met, an error message is displayed.
     /// </summary>
-    private void Awake()
+    private void Start()
     {
         if (!isBoss && bossDropItem != null)
         {
@@ -44,52 +51,37 @@ public class Enemy : Entity
         {
             transform.localScale = new Vector2(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f);
         }
+
+        movement = GetComponent<EnemyMovement>();
+        attack = GetComponent<EnemyAttack>();
+
+        entity = GetComponent<Rigidbody2D>();
+
+        entityFSM.entityProprieties = this;
     }
 
+ 
     /// <summary>
-    /// Overrides the EntityDeath method to add custom behavior for boss enemies, to drop an item when they die.
-    /// The base method is called to ensure the standard death behavior is preserved.
+    /// The Initialize method is responsible for initializing the enemy's attributes.
+    /// This method is used to replace the Start method in the Entity class, which is ignore when we instiantie a enemy during runtime.
+    /// Example of this type of initalization: Instantiate(enemyPrefab, spawnPoint, Quaternion.identity)
     /// </summary>
-    protected override void EntityDeath()
+    public void Initialize()
     {
-        // Call the base EntityDeath method to retain the original behavior
+        movement = GetComponent<EnemyMovement>();
+        attack = GetComponent<EnemyAttack>();
+        entity = GetComponent<Rigidbody2D>();
+        entityFSM.entityProprieties = this;
 
-        base.EntityDeath();
-
-        GetComponent<EnemyMovement>().enabled = false;
-
-        GameObject.Find("Level1").GetComponent<Rank>().SkeletonsKilled++;
+        if (!isBoss && bossDropItem != null)
+        {
+            Debug.LogError("Only Bosses can drop items!");
+        }
 
         if (isBoss)
         {
-            Instantiate(bossDropItem, transform.position, Quaternion.identity);
-            GameObject.Find("Level1").GetComponent<Rank>().BossKilled = true;
+            transform.localScale = new Vector2(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f);
         }
-
-        StartCoroutine(Utils.WaitForAnimationEnd(animator, "Skeleton_Death", CreateEnemyDeadBody));
     }
 
-    /// <summary>
-    /// The CreateEnemyDeadBody method is responsible for creating the enemy's dead body.
-    /// This method creates a new GameObject with the enemy's sprite and position, and destroys the enemy GameObject.
-    /// This new game object it has only a sprite renderer as a component.
-    /// </summary>
-    private void CreateEnemyDeadBody()
-    {   
-        Debug.Log("Creating dead body");
-
-        var deadBody = new GameObject("DeadBody");
-        deadBody.transform.position = transform.position;
-        deadBody.transform.localScale = transform.localScale;
-        deadBody.layer = transform.gameObject.layer;
-
-        SpriteRenderer enemySprite = GetComponent<SpriteRenderer>();
-
-        SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
-        deadBodySprite.sprite = enemySprite.sprite;
-        deadBodySprite.sortingOrder = enemySprite.sortingOrder;
-        deadBodySprite.color = enemySprite.color;
-
-        Destroy(gameObject);
-    }
 }
