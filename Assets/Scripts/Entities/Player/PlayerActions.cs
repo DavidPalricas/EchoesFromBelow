@@ -282,6 +282,12 @@ public class PlayerActions : MonoBehaviour
             flaskIcon.SetActive(true);
 
             flaskQuantity.text = playerInventory.Items["HealItems"].ToString();
+
+        } if (playerInventory.Items["HealItems"] == PlayerInventory.MaxHealItems)
+        {
+
+            flaskQuantity.color = new Color32(255, 178, 0, 255);
+
         }
     }
 
