@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 80
   Speed: 10
-  AttackDamage: 5
+  AttackDamage: 4
   animator: {fileID: 6555994045313621098}
   entityFSM: {fileID: -566987698254412420}
   isDead: 0

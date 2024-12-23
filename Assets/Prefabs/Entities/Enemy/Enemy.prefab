@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  attackDirection: {x: 0, y: 0}
 --- !u!114 &218704202441924716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   meleeRight: {fileID: 1235687373376634438}
   meleeUp: {fileID: 4489900053715911245}
   meleeDown: {fileID: 8184823852469538538}
+  attacking: 0
 --- !u!114 &208153476902490351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 10
-  Speed: 2
+  Speed: 3
   AttackDamage: 4
   animator: {fileID: 5023647670042829034}
   entityFSM: {fileID: 6397195189920809626}
