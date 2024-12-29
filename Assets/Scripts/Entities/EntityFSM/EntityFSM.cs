@@ -6,12 +6,21 @@ using UnityEngine;
 public class EntityFSM : MonoBehaviour
 {
     /// <summary>
-    /// The currentState property represents the current state of the entity.
+    /// The currentState property is responsible for storing the current state of the entity.
     /// </summary>
-    private IState currentState;
+    public IState currentState;
 
+    /// <summary>
+    /// The entityProprieties property is responsible for storing the entity's class properties.
+    /// </summary>
     [HideInInspector]
     public Entity entityProprieties;
+
+    /// <summary>
+    /// The entitycurrentHealth property is responsible for storing the entity's current health.
+    /// </summary>
+    [HideInInspector]
+    public int entitycurrentHealth;
 
     /// <summary>
     /// The ChangeState method is responsible for changing the current state of the entity.
@@ -25,12 +34,20 @@ public class EntityFSM : MonoBehaviour
         currentState.Enter();
     }
 
+    /// <summary>
+    /// The InstantiateItem method is responsible for instantiating an item in the game.
+    /// </summary>
+    /// <param name="item">The item game object.</param>
+    /// <param name="position">The spawn position of the item.</param>
     public void InstantiateItem(GameObject item, Vector2 position)
     {
         Instantiate(item, position, Quaternion.identity);
     }
 
-
+    /// <summary>
+    /// The DestroyGameObject method is responsible for destroying a game object.
+    /// </summary>
+    /// <param name="gameObject">The game object to be destroyed.</param>
     public void DestroyGameObject(GameObject gameObject)
     {
         entityProprieties = null;
@@ -45,7 +62,6 @@ public class EntityFSM : MonoBehaviour
     {
         currentState?.Execute();
     }
-
 }
 
 /// <summary>
@@ -79,7 +95,9 @@ public abstract class EntityStateBase : IState
     /// </summary>
     protected EntityFSM entityFSM;
 
-
+    /// <summary>
+    /// The entityAnimator property represents the animator of the entity.
+    /// </summary>
     protected Animator entityAnimator;
 
     /// <summary>
@@ -112,9 +130,21 @@ public abstract class EntityStateBase : IState
     /// </summary>
     public virtual void Exit() { }
 
+    /// <summary>
+    /// The ExecuteEnemyLogic method is responsible for executing the logic of the enemy in a state.
+    /// It is a virtual method that can be overridden by the derived classes.
+    /// </summary>
     protected virtual void ExecuteEnemyLogic(){}
 
+    /// <summary>
+    /// The ExecutePlayerLogic method is responsible for executing the logic of the player in a state.
+    /// It is a virtual method that can be overridden by the derived classes.
+    /// </summary>
     protected virtual void ExecutePlayerLogic(){}
 
+    /// <summary>
+    /// The UpdateAnimator method is responsible for updating the animator to play the animaiton of the entity in a state.
+    /// It is a virtual method that can be overridden by the derived classes.
+    /// </summary>
     protected virtual void UpdateAnimator() { }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// The EntityAttackState class is responsible for handling the logic of the attack state of the entity.
+/// The entity can be an enemy or the player.
 /// </summary>
 public class EntityAttackState : EntityStateBase
 {
@@ -12,9 +13,9 @@ public class EntityAttackState : EntityStateBase
     public EntityAttackState(EntityFSM entityFSM) : base(entityFSM) { }
 
     /// <summary>
-    /// The Enter method is responsible for executing the logic when the state is entered.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Enter method is responsible for entering the entity's idle state.
+    /// It overrides the Enter method from the base class (EntityStateBase).
+    /// It is responsible for setting the entity's animator and executing the logic of the entity according to its type (enemy or player).
     /// </summary>
     public override void Enter()
     {
@@ -22,34 +23,39 @@ public class EntityAttackState : EntityStateBase
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
-        if (entityFSM.entityProprieties is Enemy enemyClass)
+        if (entityFSM.entityProprieties is Enemy)
         {
             ExecuteEnemyLogic();
         }
+        else
+        {
+            ExecutePlayerLogic();
+        }
     }
 
     /// <summary>
-    /// The Execute method is responsible for executing the logic of the state.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Execute method is responsible for executing the logic of the entity's dead state.
+    /// It overrides the Execute method from the base class (EntityStateBase).
     /// </summary>
     public override void Execute()
-    {   
-        EnemyAttack enemyAttack = ((Enemy)entityFSM.entityProprieties).attack;
+    {
+        if (entityFSM.entitycurrentHealth <= 0)
+        {
+            entityFSM.ChangeState(new EntityDeadState(entityFSM));
+            return;
+        }
 
+        EntityMeleeAttack entityAttack = entityFSM.entityProprieties.attack;
 
-        Debug.Log("Nigger: " + enemyAttack.attacking);
-        if (!enemyAttack.attacking)
+        if (!entityAttack.attacking)
         {
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
         }
-     
     }
 
     /// <summary>
-    /// The Exit method is responsible for executing the logic when the state is exited.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Exit method is responsible for executing the logic when the entity's dead state is exited.
+    /// It overrides the Exit method from the base class (EntityStateBase).
     /// </summary>
     public override void Exit()
     {
@@ -57,21 +63,38 @@ public class EntityAttackState : EntityStateBase
         entityAnimator.SetBool("IsAttacking", false);
     }
 
-
+    /// <summary>
+    /// The ExecuteEnemyLogic method is responsible for executing the logic of the enemy entity.
+    /// It overrides the ExecuteEnemyLogic method from the base class (EntityStateBase).
+    /// It checks if the enemy's health is less than or equal to 0 if it is, it changes the state to the dead state.
+    /// It also checks if the player is dead, if it is, it changes the state to the idle state.
+    /// If any of these conditions are not met, it executes the enemy's attack logic, by findiing the its attack direction.
+    /// If the enemy attack direction is invalid (represented by Vector2.zero) it changes the state to the idle state.
+    /// Otherwise the enemy attacks the player and updates the animator to play the attack animation.
+    /// </summary>
     protected override void ExecuteEnemyLogic()
-    {   
+    {
+        if (entityFSM.entitycurrentHealth <= 0)
+        {
+            entityFSM.ChangeState(new EntityDeadState(entityFSM));
+            return;
+        }
+
+        if (!Utils.IsPlayerAlive())
+        {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            return;
+        }
+
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
-        EnemyAttack enemyAttack = enemyClass.attack;
+        EntityMeleeAttack enemyAttack = enemyClass.attack;
 
-        EnemyMovement enemyMovement = enemyClass.movement;
-
-        Rigidbody2D enemy = enemyClass.entity;
-
-        Vector2 enemyAttackDirection = enemyMovement.attackDirection;
+        Vector2 enemyAttackDirection = Utils.GetUnitaryVector(enemyClass.lastMovingDirection);
 
         if (enemyAttackDirection == Vector2.zero)
         {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
             return;
         }
 
@@ -79,15 +102,44 @@ public class EntityAttackState : EntityStateBase
         enemyAttack.Attack(enemyAttackDirection);
     }
 
+    /// <summary>
+    /// The ExecutePlayerLogic method is responsible for executing the logic of the player entity.
+    /// It overrides the ExecutePlayerLogic method from the base class (EntityStateBase).
+    /// The method starts for getting the player's attack direction (last moving direction).
+    /// If its last moving direction is invalid (represented by Vector2.zero) it changes the state to the idle state.
+    /// Otherwise the player attacks the enemy and updates the animator to play the attack animation.
+    /// </summary>
+    protected override void ExecutePlayerLogic()
+    {
+        Player playerClass = (Player)entityFSM.entityProprieties;
 
+        EntityMeleeAttack playerAttack = playerClass.attack;
+
+        Vector2 playerAttackDirection = playerClass.lastMovingDirection;
+
+        if (playerAttackDirection == Vector2.zero)
+        {   
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            return;
+        }
+
+        UpdateAnimator();
+
+        playerAttack.Attack(playerAttackDirection);
+    }
+
+    /// <summary>
+    /// The UpdateAnimator method is responsible for updating the animator of the entity.
+    /// It overrides the UpdateAnimator method from the base class (EntityStateBase), to play the attack animation of the entity.
+    /// </summary>
     protected override void UpdateAnimator()
     {
-        Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
-        Vector2 attackDirection = enemyClass.movement.attackDirection;
+        Entity entity  = entityFSM.entityProprieties;
+
+        Vector2 attackDirection = entity.lastMovingDirection;
 
         entityAnimator.SetBool("IsAttacking", true);
         entityAnimator.SetFloat("LastHorizontal", attackDirection.x);
         entityAnimator.SetFloat("LastVertical", attackDirection.y);
-
     }
 }

@@ -12,9 +12,13 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     public EnemyAvoidObstaclesState(EntityFSM entityFSM) : base(entityFSM) { }
 
     /// <summary>
-    /// The Enter method is responsible for executing the logic when the state is entered.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The alternativeDirection property is responsible for storing the enemy's alternative direction to move.
+    /// </summary>
+    private Vector2 alternativeDirection;
+
+    /// <summary>
+    /// The Enter method is responsible for entering the enemy's avoid obstacle state.
+    /// It overrides the Enter method from the base class (EntityStateBase).
     /// </summary>
     public override void Enter()
     {
@@ -22,19 +26,34 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     }
 
     /// <summary>
-    /// The Execute method is responsible for executing the logic of the state.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Execute method is responsible for executing the logic of the entity's idle state.
+    /// It overrides the Execute method from the base class (EntityStateBase).
+    /// First it checks if the entity's state should be changed.
+    /// If the entity's health is less than or equal to 0, if so, it changes the state to the dead state, if the player is dead, it changes the state to the idle state.
+    /// If the state is not changed, it gets the enemy direction to the player and checks if the path is clear.
+    /// If the path is clear, it changes the state to the chase state, otherwise it finds the alternative direction to move by calling the FindAlternativeDirection method.
+    /// If the alternative direction is zero, it changes the state to the idle state, otherwise it moves the enemy to the alternative direction.
     /// </summary>
     public override void Execute()
-    {   
+    {
+        if (entityFSM.entitycurrentHealth <= 0)
+        {
+            entityFSM.ChangeState(new EntityDeadState(entityFSM));
+            return;
+        }
+
+        if (!Utils.IsPlayerAlive())
+        {
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            return;
+        }
+
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
         EnemyMovement enemyMovement = enemyClass.movement;
 
-        Rigidbody2D enemy = entityFSM.entityProprieties.entity;
-        float speed = entityFSM.entityProprieties.Speed;
+        Rigidbody2D enemyRigidBody = entityFSM.entityProprieties.entityRigidBody;
 
-        Vector2 directionToPlayer = Utils.NormalizeDirectionVector(enemyMovement.player.position -  enemy.position);
+        Vector2 directionToPlayer = (enemyMovement.playerRigidBody.position - enemyRigidBody.position).normalized;
 
         if (enemyMovement.IsPathClear(directionToPlayer))
         {
@@ -42,26 +61,35 @@ public class EnemyAvoidObstaclesState : EntityStateBase
             return;
         }
 
-        Vector2 alternativeDirection = enemyMovement.FindAlternativeDirection(directionToPlayer);
-        enemy.velocity = alternativeDirection * speed;
+        alternativeDirection = enemyMovement.FindAlternativeDirection(directionToPlayer);
+
+        if (alternativeDirection == Vector2.zero)
+        {
+            entityFSM.entityProprieties.lastMovingDirection = directionToPlayer;
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            return;
+        }
+
+        enemyMovement.MoveEnemy(alternativeDirection);
     }
 
     /// <summary>
-    /// The Exit method is responsible for executing the logic when the state is exited.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Exit method is responsible for executing the logic when the enemy's avoid obstacle state is exited.
+    /// It overrides the Exit method from the base class (EntityStateBase).
     /// </summary>
     public override void Exit()
     {
         Debug.Log("Exiting avoid obstacles State");
     }
 
+    /// <summary>
+    /// The UpdateAnimator method is responsible for updating the animator of the entity.
+    /// It overrides the UpdateAnimator method from the base class (EntityStateBase), to play the enemy's movement animation of the entity.
+    /// </summary>
     protected override void UpdateAnimator()
     {
-        Vector2 enemyDirection = Utils.NormalizeDirectionVector(entityFSM.entityProprieties.entity.velocity);
-
-        entityAnimator.SetFloat("Horizontal", enemyDirection.x);
-        entityAnimator.SetFloat("Vertical", enemyDirection.y);
-        entityAnimator.SetFloat("Speed", entityFSM.entityProprieties.Speed);
+        entityAnimator.SetFloat("Horizontal", alternativeDirection.x);
+        entityAnimator.SetFloat("Vertical", alternativeDirection.y);
+        entityAnimator.SetFloat("Speed", entityFSM.entityProprieties.speed);
     }
 }

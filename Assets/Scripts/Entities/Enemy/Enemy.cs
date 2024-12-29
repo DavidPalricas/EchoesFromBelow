@@ -31,36 +31,15 @@ public class Enemy : Entity
     [HideInInspector]
     public EnemyMovement movement;
 
-    [HideInInspector]
-    public EnemyAttack attack;
-
     /// <summary>
     /// The Start method is called before the first frame update (Unity Method).
-    /// In this method, we are checking if the enemy is no boss and has a drop item.
-    /// If these conditions are met, an error message is displayed.
+    /// In this method, the Initialize method is called to initialize the enemy's attributes.
     /// </summary>
     private void Start()
     {
-        if (!isBoss && bossDropItem != null)
-        {
-            Debug.LogError("Only Bosses can drop items!");
-        }
-
-        // When we don't have a sprite for the boss, we make the enemy bigger, to be different from the others enemies
-        if (isBoss)
-        {
-            transform.localScale = new Vector2(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f);
-        }
-
-        movement = GetComponent<EnemyMovement>();
-        attack = GetComponent<EnemyAttack>();
-
-        entity = GetComponent<Rigidbody2D>();
-
-        entityFSM.entityProprieties = this;
+       Initialize();
     }
 
- 
     /// <summary>
     /// The Initialize method is responsible for initializing the enemy's attributes.
     /// This method is used to replace the Start method in the Entity class, which is ignore when we instiantie a enemy during runtime.
@@ -69,19 +48,15 @@ public class Enemy : Entity
     public void Initialize()
     {
         movement = GetComponent<EnemyMovement>();
-        attack = GetComponent<EnemyAttack>();
-        entity = GetComponent<Rigidbody2D>();
+        attack = GetComponent<EntityMeleeAttack>();
+        entityRigidBody = GetComponent<Rigidbody2D>();
+
         entityFSM.entityProprieties = this;
+        entityFSM.entitycurrentHealth = maxHealth;
 
         if (!isBoss && bossDropItem != null)
         {
             Debug.LogError("Only Bosses can drop items!");
         }
-
-        if (isBoss)
-        {
-            transform.localScale = new Vector2(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f);
-        }
     }
-
 }

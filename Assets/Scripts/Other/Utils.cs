@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// The Utils class is responsible for storing utility methods that can be used in different parts of the game.
 /// Such as normalizing a direction vector.
@@ -8,17 +9,15 @@ using UnityEngine;
 public static class Utils 
 {
     /// <summary>
-    /// The NormalizeDirectionVector method is responsible for normalizing a direction vector.
+    /// The  GetUnitaryVector method is responsible for getting a unitary vector from a direction vector.
     /// </summary>
-    /// <returns>A normal vector </returns>
-    public static Vector2 NormalizeDirectionVector(Vector2 directionVector)
-    {
-        // Normalize the  direction vector, examples of normalized vectors: (-1, 0), (0, 1), (1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1), (1, 1)
-        Vector2 vectorToBeNormalized = (directionVector).normalized;
+    /// <returns>A unitary vector </returns>
+    public static Vector2 GetUnitaryVector(Vector2 directionVector)
+    {   
+        float xDirection = Mathf.Round(directionVector.x);
+        float yDirection = Mathf.Round(directionVector.y);
 
-        // Some cases the line above can produce results like (0, -0.4), or (0.8,-0.6).
-        // To avoid these issues, we round the values to get the closest integer value.
-        return new Vector2(Mathf.Round(vectorToBeNormalized.x), Mathf.Round(vectorToBeNormalized.y));
+        return new Vector2(xDirection, yDirection);
     }
 
     /// <summary>
@@ -64,5 +63,18 @@ public static class Utils
     {
         yield return new WaitForSeconds(time);
         action?.Invoke();
+    }
+
+    /// <summary>
+    /// The IsPlayerAlive method is responsible for checking if the player is alive.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the player is alive otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsPlayerAlive()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        return player.GetComponent<Player>().entityFSM.entitycurrentHealth > 0;
     }
 }

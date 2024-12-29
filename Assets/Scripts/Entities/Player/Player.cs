@@ -1,7 +1,3 @@
-
-
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -19,89 +15,30 @@ public class Player : Entity
     /// <summary>
     /// The movement property is responsible for storing the player's PlayerMovement component.
     /// </summary>
-    private PlayerMovement movement;
+    [HideInInspector]
+    public PlayerMovement movement;
 
     /// <summary>
-    /// The attack property is responsible for storing the player's PlayerAttack component.
+    /// The health bar property is responsible for storing the player's health in the HealthBar component.
     /// </summary>
-    private PlayerAttack attack;
-
-    /// <summary>
-    /// The player actions property is responsible for storing the player's PlayerActions component.
-    /// </summary>
-    private PlayerActions playerActions;
-
-
-    [SerializeField]
-    private HealthBar healthBar;
+    public HealthBar healthBar;
 
     /// <summary>
     /// The Start method is called before the first frame update (Unity Method).
+    /// In this method, we are setting the player's spawn point, and initializing the player's attributes.
     /// </summary>
     private void Start()
     {
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
+
         movement = GetComponent<PlayerMovement>();
-        attack = GetComponent<PlayerAttack>();
-        playerActions = GetComponent<PlayerActions>();
-
-        entity = GetComponent<Rigidbody2D>();
-
+        attack = GetComponent<EntityMeleeAttack>();
+        entityRigidBody = GetComponent<Rigidbody2D>();
         entityFSM = GetComponent<EntityFSM>();
+
         entityFSM.entityProprieties = this;
-    }
+        entityFSM.entitycurrentHealth = maxHealth;
 
-    /// <summary>
-    /// Overrides the EntityDeath method from the parent class (Entity) to add custom behavior.
-    /// The base method is called to ensure the standard death behavior is preserved.
-    /// When the player dies, it will respawn at the spawn point after the death animation ends.
-    /// </summary>
-    protected override void EntityDeath()
-    {
-        base.EntityDeath();
-
-        GameObject.Find("Level1").GetComponent<Rank>().DeathsNumber++;
-
-        StartCoroutine(Utils.WaitForAnimationEnd(animator, "Death", Respawn));
-    }
-
-    /// <summary>
-    /// The Respawn method is responsible for respawning the player at the spawn point and resetting its health.
-    /// It waits for 2 seconds before respawning the player.
-    /// </summary>
-    private void Respawn()
-    { 
-        DesactivateScripts();
-
-        StartCoroutine(Utils.Wait(1.5f, () =>
-        {
-            Health = 100;
-            healthBar.GetComponent<HealthBar>().UpdateLabel(Health);
-            transform.position = spawnPoint;
-            animator.SetBool("IsDead", false);
-            GetComponent<Entity>().isDead = false;
-
-            movement.enabled = true;
-            playerActions.enabled = true;
-
-            Dictionary<string, string> playerWeapons = GetComponent<PlayerInventory>().Weapons;
-
-            if (playerWeapons.Values.Any(weapon => weapon != null))
-            {
-                attack.enabled = true;
-            }
-        }));
-    }
-
-    /// <summary>
-    /// The DesactivateScripts method is responsible for deactivating the player's scripts when it dies.
-    /// The scripts that are deactivated are the PlayerAttack, PlayerMovement, and PlayerActions.
-    /// </summary>
-    private void DesactivateScripts()
-    {
         attack.enabled = false;
-        movement.enabled = false;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        playerActions.enabled = false;
     }
 }

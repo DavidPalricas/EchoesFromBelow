@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour
     /// The slider current value is also set, in this case, it is equal to the maximum value.
     /// </summary>
     private void Awake(){
-        slider.maxValue = GameObject.Find("Player"). GetComponent<Entity>().Health;
+        slider.maxValue = GameObject.Find("Player"). GetComponent<Entity>().maxHealth;
         slider.value = slider.maxValue;
     }
 

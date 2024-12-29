@@ -9,20 +9,9 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     /// <summary>
-    /// The player property is responsible for storing the player's Rigidbody2D component.
+    /// The objectNear properties is responsible for storing the object near the player.
     /// </summary>
-    private Rigidbody2D player;
-
-    /// <summary>
-    /// The layer property is responsible for storing the layer mask.
-    /// This layer mask will be used to check the layer of the objects and items near the player.
-    /// </summary>
-    private LayerMask layer;
-
-    /// <summary>
-    /// The gate and objectNear properties are responsible for storing the gate and object near the player.
-    /// </summary>
-    private GameObject gate,collectableItemGrabed;
+    private GameObject collectableItemGrabed;
 
     /// <summary>
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
@@ -81,10 +70,7 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        player = GetComponent<Rigidbody2D>();
-        gate = GameObject.Find("Gate");
-        layer = LayerMask.GetMask("Default");
-        playerMaxHealth = GetComponent<Entity>().Health;
+        playerMaxHealth = GetComponent<Entity>().maxHealth;
         animator = GetComponent<Entity>().animator;
     }
 
@@ -98,22 +84,13 @@ public class PlayerActions : MonoBehaviour
     /// 
     private void Update()
     {
-
-        if (gate != null)
-        {
-            if (Input.GetKeyDown(KeyCode.E) && CheckConditionsToOpenGate())
-            {   
-                OpenGate();
-            }
-        }
-
         // Heal Conditions
         if (Input.GetKeyDown(KeyCode.H) && GetComponent<PlayerInventory>().Items["HealItems"] > 0)
         {
             HealPlayer();
         }
 
-        if (playerArmed == true){
+        if (playerArmed){
             // FALTA FAZER CÓDIGO PARA VERIIFCAR SE O JOGADOR JÁ TEM AS OUTRAS ARMAS NO INVENTÁRIO.
             // SE NÃO, CONSEGUE TROCAR PARA QUALQUER IMAGEM DE ARMA SEM AS TER EQUIPADAS
 
@@ -126,80 +103,6 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    /// The CheckGateConditionsToOpen method is responsible for checking if the gate conditions are met to open the gate.
-    /// First , it checks if the player is facing down, or if the player is idle and the last direction was down.
-    /// After that, it checks if the player is near the gate, calling the IsGateNear method.
-    /// </summary>
-    /// <returns>
-    /// <c>true</c> if the gate is near otherwise, <c>false</c>.
-    /// </returns>
-    private bool CheckConditionsToOpenGate()
-    {   
-        Vector2 LastMovingDirection = GameObject.Find("Player").GetComponent<PlayerMovement>().LastMovingDirection;
-
-        Vector2 playerDirection = Utils.NormalizeDirectionVector(player.velocity);
-
-        return (playerDirection == Vector2.down || LastMovingDirection == Vector2.down) && IsGateNear();
-    }
-
-    /// <summary>
-    /// The IsGateNear method is responsible for checking if the player is near a gate, the object can be an item or a weapon.
-    /// To check if the player is near an object, a box collider is created around the player.
-    /// If the player is near an  object, the objectNear property is updated with the object.
-    /// </summary>
-    /// <returns>
-    ///   <c>true</c> if the object is  near; otherwise, <c>false</c>.
-    /// </returns>
-    private bool IsGateNear()
-    {   
-        BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
-
-        // The box size is 1.5 times the player's collider size.
-        Vector2 boxSize = playerCollider.bounds.size * 1.5f;
-
-        Vector2 offsetPosition = (Vector2)playerCollider.bounds.center;
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(offsetPosition, boxSize, 0, layer);
-
-        foreach (Collider2D collider in colliders)
-        {   
-            if (collider.gameObject.CompareTag("Object") && collider.gameObject.name == "Gate")
-            {            
-               Debug.Log("Gate Near");
-               Debug.Log(GetComponent<PlayerInventory>().Items["Key"]);
-               return true;
-            }
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    /// The OpenGate method is responsible for opening the gate, if the player has the key.
-    /// If the player has the corect key, the gate is opened, otherwise the key is removed from the player's inventory.
-    /// </summary>
-    private void OpenGate()
-    {
-        if (GetComponent<PlayerInventory>().Items["Key"] > 0)
-        {   
-            Debug.Log("Open Gate");
-            // Player has the right key
-            if (GetComponent<PlayerInventory>().Items["Key"] == 2)
-            {
-                // Opens the gate and not removes the key from the player's inventory, to not grab any more keys
-                gate.SetActive(false);
-            }
-            else
-            {
-                // Removes the key from the player's inventory
-                GetComponent<PlayerInventory>().Items["Key"] = 0;
-            }
-
-            keyIcon.SetActive(false);
-        }  
-    }
-
-    /// <summary>
     /// The GrabMeleeWeapon method is responsible for grabbing the melee weapon, updating the player's inventory, and removing the weapon from the level.
     /// If the player grabs the stick, PlayerAttack component is enable, because the stick is the player's first weapon.
     /// </summary>
@@ -207,7 +110,7 @@ public class PlayerActions : MonoBehaviour
     {   
         if (meleeWeapon ==  Utils.CollectableType.Stick)
         {
-            GetComponent<PlayerAttack>().enabled = true;
+            GetComponent<Player>().attack.enabled = true;
 
             playerArmed = true;
 
@@ -251,7 +154,6 @@ public class PlayerActions : MonoBehaviour
     {   
         if (GetComponent<PlayerInventory>().Items["Key"] == 0)
         {   
-
             keyIcon.SetActive(true);
 
             GameObject keyToDestroy = DestroyCollectable();
@@ -311,10 +213,10 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void HealPlayer()
     {   
-        if (GetComponent<Entity>().Health < playerMaxHealth)
+        if (GetComponent<Entity>().entityFSM.entitycurrentHealth < playerMaxHealth)
         {
-            GetComponent<Entity>().Health++;
-            GetComponent<Entity>().Health += (playerMaxHealth / 2);
+            GetComponent<Entity>().maxHealth++;
+            GetComponent<Entity>().maxHealth += (playerMaxHealth / 2);
             GetComponent<PlayerInventory>().Items["HealItems"]--;
 
             GameObject.Find("Level1").GetComponent<Rank>().HealItemsUsed++;
@@ -326,7 +228,7 @@ public class PlayerActions : MonoBehaviour
 
             flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
 
-            healthBar.UpdateLabel(GetComponent<Entity>().Health);
+            healthBar.UpdateLabel(GetComponent<Entity>().maxHealth);
         }
     }
 

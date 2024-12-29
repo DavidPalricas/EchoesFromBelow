@@ -6,19 +6,19 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     /// <summary>
-    /// The Health property  is responsible for storing the entity's health.
+    /// The maxHealth property  is responsible for storing the entity's max health.
     /// </summary>
-    public int Health;
+    public int maxHealth;
 
     /// <summary>
-    /// The Speed property  is responsible for storing the entity's speed.
+    /// The speed property  is responsible for storing the entity's speed.
     /// </summary>
-    public float Speed;
+    public float speed;
 
     /// <summary>
-    /// The AttackDamage property  is responsible for storing the entity's attack damage.
+    /// The attackDamage property  is responsible for storing the entity's attack damage.
     /// </summary>
-    public float AttackDamage;
+    public float attackDamage;
 
     /// <summary>
     /// Stores the animator.
@@ -32,42 +32,22 @@ public abstract class Entity : MonoBehaviour
     public EntityFSM entityFSM;
 
     /// <summary>
-    /// The isDead property is responsible for storing whether the entity is dead or not.
+    /// The entityRigidBody property is responsible for storing the entity's Rigidbody2D component.
     /// </summary>
     [HideInInspector]
-    public bool isDead = false;
+    public Rigidbody2D entityRigidBody;
 
+    /// <summary>
+    /// The attack property is responsible for storing the entity's EntityMeleeAttack component.
+    /// </summary>
     [HideInInspector]
-    public Rigidbody2D entity;
-
-   
-    /// <summary>
-    /// The Update method is called every frame (Unity Method).
-    /// In this method, the EntityDeath method is called, when the entity is dead.
-    /// </summary>
-    private void Update()
-    {
-        if (!isDead && Health <= 0)
-        {
-           EntityDeath();
-        }
-    }
+    public EntityMeleeAttack attack;
 
     /// <summary>
-    /// The EntityDeath method is responsible for handling the entity's death.
+    /// The lastMovingDirection property is responsible for storing the entity's last moving direction.
+    /// It is initializer with Vector2.down to make the entity face down when the game starts.
     /// </summary>
-    protected virtual void EntityDeath()
-    {
-        isDead = true;
-        // THIS IF STATEMENT IS USESSELESS the bool "isDead" in the enemy animator must be called "IsDead" with a capital "I"
-        if (gameObject.CompareTag("Player"))
-        {
-            animator.SetBool("IsDead", true);
-            Debug.Log("Player has died.");
-        }
-        else
-        {
-            entityFSM.ChangeState(new EntityDeadState(entityFSM));
-        }   
-    }
+    [HideInInspector]
+    public Vector2 lastMovingDirection = Vector2.down;
+
 }

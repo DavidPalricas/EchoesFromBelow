@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 4195484751676902585}
   - component: {fileID: 4494120325564115690}
   - component: {fileID: 4012519553707733667}
-  - component: {fileID: 4890617891295396606}
   - component: {fileID: 7641519816493334048}
   - component: {fileID: 620849192762448018}
   - component: {fileID: 6555994045313621098}
   - component: {fileID: 4115807595486131082}
   - component: {fileID: 1318209133456532555}
   - component: {fileID: -566987698254412420}
+  - component: {fileID: 2838323521603683926}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,23 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89872ce6d238c714090a01755d63341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
---- !u!114 &4890617891295396606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827529518274912995}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad23fdee2da21fd4fa9c414d5c03e389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeLeft: {fileID: 3683219949669321261}
-  meleeRight: {fileID: 7597942102496744807}
-  meleeUp: {fileID: 966352755093986192}
-  meleeDown: {fileID: 33022776123688665}
+  speedVector: {x: 0, y: 0}
 --- !u!114 &7641519816493334048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,14 +232,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a21d1ee5af6684184de62b1a0d86ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 80
-  Speed: 10
-  AttackDamage: 4
+  maxHealth: 80
+  speed: 10
+  attackDamage: 4
   animator: {fileID: 6555994045313621098}
   entityFSM: {fileID: -566987698254412420}
-  isDead: 0
-  entity: {fileID: 4494120325564115690}
+  entityRigidBody: {fileID: 0}
+  attack: {fileID: 0}
   spawnPoint: {x: 0, y: 0}
+  movement: {fileID: 0}
   healthBar: {fileID: 0}
 --- !u!114 &1318209133456532555
 MonoBehaviour:
@@ -282,6 +267,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityProprieties: {fileID: 0}
+  entitycurrentHealth: 0
+--- !u!114 &2838323521603683926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827529518274912995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb5d3ac072ac9345b434397a6e0acea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeLeft: {fileID: 3683219949669321261}
+  meleeRight: {fileID: 7597942102496744807}
+  meleeUp: {fileID: 966352755093986192}
+  meleeDown: {fileID: 33022776123688665}
+  attacking: 0
 --- !u!1001 &162705464032259031
 PrefabInstance:
   m_ObjectHideFlags: 0

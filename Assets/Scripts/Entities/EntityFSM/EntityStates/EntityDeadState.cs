@@ -1,8 +1,8 @@
 using UnityEngine;
 
-
 /// <summary>
 /// The EntityDeadState class is responsible for handling the logic of the dead state of the entity.
+/// An entity can be an enemy or the player.+
 /// </summary>
 public class EntityDeadState : EntityStateBase
 {
@@ -13,9 +13,9 @@ public class EntityDeadState : EntityStateBase
     public EntityDeadState(EntityFSM entityFSM) : base(entityFSM) { }
 
     /// <summary>
-    /// The Enter method is responsible for executing the logic when the state is entered.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Enter method is responsible for entering the entity's dead state.
+    /// It overrides the Enter method from the base class (EntityStateBase).
+    /// It is responsible for setting the entity's animator and executing the logic of the entity according to its type (enemy or player).
     /// </summary>
     public override void Enter()
     {
@@ -23,22 +23,23 @@ public class EntityDeadState : EntityStateBase
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
-        entityFSM.entityProprieties.entity.velocity = Vector2.zero;
+        entityFSM.entityProprieties.entityRigidBody.velocity = Vector2.zero;
 
         UpdateAnimator();
-
 
         if (entityFSM.entityProprieties is Enemy)
         {
             ExecuteEnemyLogic();
-
+        }
+        else
+        {
+            ExecutePlayerLogic();
         }
     }
 
     /// <summary>
-    /// The Execute method is responsible for executing the logic of the state.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Execute method is responsible for executing the logic of the entity's dead state.
+    /// It overrides the Execute method from the base class (EntityStateBase).
     /// </summary>
     public override void Execute()
     {
@@ -46,39 +47,74 @@ public class EntityDeadState : EntityStateBase
     }
 
     /// <summary>
-    /// The Exit method is responsible for executing the logic when the state is exited.
-    /// It is a virtual method that can be overridden by the derived classes.
-    /// It is inirrated from the IState interface.
+    /// The Exit method is responsible for executing the logic when the entity's dead state is exited.
+    /// It overrides the Exit method from the base class (EntityStateBase).
     /// </summary>
     public override void Exit()
     {
         Debug.Log("Exiting Dead State");
     }
 
-
+    /// <summary>
+    /// The UpdateAnimator method is responsible for updating the animator of the entity.
+    /// It overrides the UpdateAnimator method from the base class (EntityStateBase), to play the dead animation of the entity.
+    /// </summary>
     protected override void UpdateAnimator()
     {
         entityAnimator.SetBool("IsDead", true);
     }
 
-
+    /// <summary>
+    /// The ExecuteEnemyLogic method is responsible for executing the logic of the enemy entity.
+    /// It overrides the ExecuteEnemyLogic method from the base class (EntityStateBase).
+    /// It starts to increment the number of skeletons kill and if the enemy is a boss it increments the number of boss killed and drops its item.
+    /// After thath a coroutine is started to wait for the end of the death animation and create the enemy's dead body.
+    /// </summary>
     protected override void ExecuteEnemyLogic()
     {
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
-
 
         GameObject.Find("Level1").GetComponent<Rank>().SkeletonsKilled++;
 
         if (enemyClass.isBoss)
         {
-
-            entityFSM.InstantiateItem(enemyClass.bossDropItem, enemyClass.entity.transform.position);
+            entityFSM.InstantiateItem(enemyClass.bossDropItem, enemyClass.entityRigidBody.transform.position);
             GameObject.Find("Level1").GetComponent<Rank>().BossKilled = true;
         }
 
         entityFSM.StartCoroutine(Utils.WaitForAnimationEnd(entityAnimator, "Death", CreateEnemyDeadBody));
     }
 
+    /// <summary>
+    /// The ExecutePlayerLogic method is responsible for executing the logic of the player entity.
+    /// It overrides the ExecutePlayerLogic method from the base class (EntityStateBase).
+    /// It increments the number of deaths of the player and calls the RespawnPlayer  method to respawn the player.
+    /// </summary>
+    protected override void ExecutePlayerLogic()
+    {
+        GameObject.Find("Level1").GetComponent<Rank>().DeathsNumber++;
+        RespawnPlayer();
+    }
+
+    /// <summary>
+    /// The RespawnPlayer method is responsible for respawning the player.
+    /// It waits for 4 seconds and then sets the player's health to the maximum value, updates the health bar, and sets the player's position to the spawn point.
+    /// </summary>
+    private void RespawnPlayer()
+    {
+        entityFSM.StartCoroutine(Utils.Wait(4f, () =>
+        {    
+            Player player = entityFSM.entityProprieties as Player;
+
+            player.entityFSM.entitycurrentHealth = player.maxHealth;
+            player.healthBar.GetComponent<HealthBar>().UpdateLabel(player.maxHealth);
+
+            player.entityRigidBody.transform.position = player.spawnPoint;
+
+            entityFSM.ChangeState(new EntityIdleState(entityFSM));
+            entityAnimator.SetBool("IsDead", false);
+        }));
+    }
 
     /// <summary>
     /// The CreateEnemyDeadBody method is responsible for creating the enemy's dead body.
@@ -91,7 +127,7 @@ public class EntityDeadState : EntityStateBase
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
-        Rigidbody2D enemy = enemyClass.entity;
+        Rigidbody2D enemy = enemyClass.entityRigidBody;
 
         var deadBody = new GameObject("DeadBody");
         deadBody.transform.position = enemy.transform.position;
@@ -105,7 +141,6 @@ public class EntityDeadState : EntityStateBase
         deadBodySprite.sortingOrder = enemySprite.sortingOrder;
         deadBodySprite.color = enemySprite.color;
         
-
         entityFSM.DestroyGameObject(enemy.gameObject);
     }
 }

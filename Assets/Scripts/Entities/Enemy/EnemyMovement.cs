@@ -3,25 +3,25 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// The EnemyMovement class is responsible for handling the player's movement.
+/// The EnemyMovement class is responsible for handling the enemy's movement.
 /// </summary>
 public class EnemyMovement : MonoBehaviour
 {
     /// <summary>
-    /// The player property is responsible for storing the player's Rigidbody2D component.
+    /// The playerRigidBody property is responsible for storing the player's Rigidbody2D component.
     /// </summary>
     [HideInInspector]
-    public Rigidbody2D player;
+    public Rigidbody2D playerRigidBody;
 
     /// <summary>
-    /// The enemy property is responsible for storing the enemy's Rigidbody2D component.
+    /// The enemyRigidBody property is responsible for storing the enemy's Rigidbody2D component.
     /// </summary>
-    private Rigidbody2D enemy;
+    private Rigidbody2D enemyRigidBody;
 
     /// <summary>
-    /// The playerDirections property is responsible for storing the possible movement directions of the player.
+    /// The enemyPossibleDirections property is responsible for storing the unitary vectors of the enemy possible move directions
     /// </summary>
-    private static readonly Vector2[] playerDirections = new Vector2[]
+    private static readonly Vector2[] enemyPossibleDirections = new Vector2[]
     {
         Vector2.left,
         Vector2.right,
@@ -36,12 +36,10 @@ public class EnemyMovement : MonoBehaviour
     /// <summary>
     /// The attackDirections property is responsible for storing the possible attack directions of the enemy.
     /// </summary>
-    private readonly Vector2[] attackDirections = { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
-
-
-    [HideInInspector]
-    public Vector2 attackDirection;
-
+    private readonly Vector2[] attackDirections = { Vector2.left, 
+                                                    Vector2.right, 
+                                                    Vector2.up, 
+                                                    Vector2.down};
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -49,8 +47,8 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        enemy = GetComponent<Entity>().entity;
+        playerRigidBody = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+        enemyRigidBody = GetComponent<Entity>().entityRigidBody;
 
         EntityFSM enemyFSM = GetComponent<Enemy>().entityFSM;
 
@@ -88,7 +86,7 @@ public class EnemyMovement : MonoBehaviour
     {
         float rayCastDistance = 0f;
 
-        BoxCollider2D enemyCollider = enemy.GetComponent<BoxCollider2D>();
+        BoxCollider2D enemyCollider = enemyRigidBody.GetComponent<BoxCollider2D>();
 
         Vector2 raycastOrigin = (Vector2)enemyCollider.bounds.center + directionToPlayer * (enemyCollider.bounds.extents + new Vector3(rayCastDistance, rayCastDistance)).magnitude;
 
@@ -97,8 +95,14 @@ public class EnemyMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-        Debug.DrawRay(enemy.position, directionToPlayer * rayCastDistance, Color.yellow);
+         Debug.DrawRay(enemyRigidBody.position, directionToPlayer * rayCastDistance, Color.yellow);
+        
+        if (hit.collider != null)
+        {
+            Debug.Log(directionToPlayer + "-> " + Utils.GetUnitaryVector(directionToPlayer));
+        }
 
+     
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
@@ -113,7 +117,7 @@ public class EnemyMovement : MonoBehaviour
     {
         float range = 15f;
 
-        return Vector2.Distance(player.position, enemy.position) <= range;
+        return Vector2.Distance(playerRigidBody.position, enemyRigidBody.position) <= range;
     }
 
     /// <summary>
@@ -127,19 +131,16 @@ public class EnemyMovement : MonoBehaviour
     public bool EnemyIsReadyToAttack(Vector2 directionToPlayer)
     {
         // Check if the enemy is attacking or the conditions to attack are met
-        if (PlayerNear(directionToPlayer) && IsAttackDirection(directionToPlayer))
+        if (PlayerNear(directionToPlayer) && IsAttackDirection(Utils.GetUnitaryVector(directionToPlayer)))
         {   
-
-            attackDirection = directionToPlayer;
             // Stop the enemy's movement to attack
-            enemy.velocity = Vector2.zero;
+            enemyRigidBody.velocity = Vector2.zero;
 
             return true;
         }
 
         return false;
     }
-
 
     /// <summary>
     /// The IsPathClear method is responsible for checking if the path is clear for the enemy to move.
@@ -171,7 +172,7 @@ public class EnemyMovement : MonoBehaviour
         // Check if there is an obstacle in the enemy's path
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Object") || collider.CompareTag("Enemy") && collider.gameObject != enemy.gameObject)
+            if (collider.CompareTag("Object") || collider.CompareTag("Enemy") && collider.gameObject != enemyRigidBody.gameObject)
             {
                 return false;
             }
@@ -186,30 +187,39 @@ public class EnemyMovement : MonoBehaviour
         return true;
     }
 
-
     /// <summary>
     /// The FindAlternativeDirection method is responsible for finding an alternative direction for the enemy to move.
     /// This method tries to find the closest direction to the player that is not blocked by an obstacle.
-    /// If there is no alternative direction, the method returns the blocked direction.
+    /// If there is no alternative direction, the method will return a Vector2.zero to tell the enemy to stop moving
     /// </summary>
     /// <param name="blockedDirection"></param>
     /// <returns>It returns a Vector2 which represents the direction in which the enemy should move</returns>
     public Vector2 FindAlternativeDirection(Vector2 blockedDirection)
     {
-        List<Vector2> alternativeDirections = playerDirections
-            .Where(direction => direction != blockedDirection)
-            .OrderBy(direction => Vector2.Distance((Vector2)enemy.position + direction, player.position))
+        List<Vector2> alternativeDirections = enemyPossibleDirections
+            .Where(direction => direction != Utils.GetUnitaryVector(blockedDirection))
+            .OrderBy(direction => Vector2.Distance(enemyRigidBody.position + direction, playerRigidBody.position))
             .ToList();
 
-        foreach (var direction in alternativeDirections)
+        foreach (var unitaryDirection in alternativeDirections)
         {
+            Vector2 direction = unitaryDirection.normalized;
+
             if (IsPathClear(direction))
-            {
+            {   
                 return direction;
             }
         }
 
-        return blockedDirection;
+        return Vector2.zero;
     }
 
+    /// <summary>
+    /// The MoveEnemy method is responsible for moving the enemy
+    /// </summary>
+    /// <param name="moveDirection">The move direction vector of the enemy.</param>
+    public void MoveEnemy(Vector2 moveDirection)
+    {   
+        enemyRigidBody.position += GetComponent<Entity>().speed * Time.deltaTime * moveDirection;
+    }
 }

@@ -22,7 +22,7 @@ public class TouristMovement : MonoBehaviour
     private void Awake()
     {
         tourist = GetComponent<Rigidbody2D>();
-        speed = GetComponent<Entity>().Speed;
+        speed = GetComponent<Entity>().speed;
     }
 
     /// <summary>

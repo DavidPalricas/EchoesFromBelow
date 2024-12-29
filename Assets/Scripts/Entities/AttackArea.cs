@@ -13,7 +13,7 @@ public class AttackArea : MonoBehaviour
     /// <summary>
     /// The isPlayer property is responsible for storing whether the entity is a player or not.
     /// </summary>
-    private bool isPlayer;
+    private bool attackerIsPlayer;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -21,9 +21,9 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        meleeDamage = GetComponentInParent<Entity>().AttackDamage;
+        meleeDamage = GetComponentInParent<Entity>().attackDamage;
 
-        isPlayer =  transform.parent.CompareTag("Player");
+        attackerIsPlayer =  transform.parent.CompareTag("Player");
     }
 
     /// <summary>
@@ -33,14 +33,17 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     /// <param name="collider">The collider or RigidBody2D of a game object.</param>
     private void OnTriggerEnter2D (Collider2D collider){
-        if (collider.gameObject.CompareTag("Enemy") && isPlayer || collider.gameObject.CompareTag("Player") && !isPlayer)
+        // Player attacked an enemy
+        if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
-            collider.GetComponent<Entity>().Health -= (int) meleeDamage;
+            collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
+        }
+        else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
+        {
+            Player player = collider.GetComponent<Player>();
 
-            if (!isPlayer){
-                GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateLabel(collider.GetComponent<Entity>().Health);
-            }
-
+            player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
+            player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
         }
     }
 }
