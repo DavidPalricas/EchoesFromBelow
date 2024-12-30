@@ -45,7 +45,7 @@ public class EntityAttackState : EntityStateBase
             return;
         }
 
-        EntityMeleeAttack entityAttack = entityFSM.entityProprieties.attack;
+        EntityAttack entityAttack = entityFSM.entityProprieties.attack;
 
         if (!entityAttack.attacking)
         {
@@ -88,7 +88,7 @@ public class EntityAttackState : EntityStateBase
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
-        EntityMeleeAttack enemyAttack = enemyClass.attack;
+        EntityAttack enemyAttack = enemyClass.attack;
 
         Vector2 enemyAttackDirection = Utils.GetUnitaryVector(enemyClass.lastMovingDirection);
 
@@ -113,7 +113,7 @@ public class EntityAttackState : EntityStateBase
     {
         Player playerClass = (Player)entityFSM.entityProprieties;
 
-        EntityMeleeAttack playerAttack = playerClass.attack;
+        EntityAttack playerAttack = playerClass.attack;
 
         Vector2 playerAttackDirection = playerClass.lastMovingDirection;
 

@@ -18,7 +18,7 @@ public class Enemy : Entity
     /// <summary>
     /// The IsLongRanged property is responsible for storing if the enemy is long ranged.
     /// </summary>
-    public bool IsLongRanged;
+    public bool IsRanged;
 
     /// <summary>
     /// The IsIndependent property is responsible for storing if the enemy is independent (is not in a horde).
@@ -48,11 +48,13 @@ public class Enemy : Entity
     public void Initialize()
     {
         movement = GetComponent<EnemyMovement>();
-        attack = GetComponent<EntityMeleeAttack>();
-        entityRigidBody = GetComponent<Rigidbody2D>();
+
+        attack = IsRanged ? GetComponent<EntityRangedAttack>() : GetComponent<EntityMeleeAttack>();
 
         entityFSM.entityProprieties = this;
         entityFSM.entitycurrentHealth = maxHealth;
+        entityFSM.entityProprieties.entityRigidBody = GetComponent<Rigidbody2D>();
+
 
         if (!isBoss && bossDropItem != null)
         {
