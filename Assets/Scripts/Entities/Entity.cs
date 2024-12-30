@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
     /// The attack property is responsible for storing the entity's EntityMeleeAttack component.
     /// </summary>
     [HideInInspector]
-    public EntityMeleeAttack attack;
+    public EntityAttack attack;
 
     /// <summary>
     /// The lastMovingDirection property is responsible for storing the entity's last moving direction.
