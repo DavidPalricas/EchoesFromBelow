@@ -1,4 +1,4 @@
-# Les Catacombes
+# Echoes from Below
 
 ## Game Overview
 
@@ -21,3 +21,6 @@ We are Arcadia Labs, a team of Master’s students specializing in Digital Game 
 * Eva Aguiar: 2D Artist and Animator
 * Hugo Tavares: Story Teller and Programmer
 * Pedro Soares 2D: Artist and Sound Designer 
+
+## Note
+If you play the aplha version of our game you may notice that our prototype name was Les Catacombes
