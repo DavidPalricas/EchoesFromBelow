@@ -7,7 +7,7 @@ using UnityEngine;
 /// Such as normalizing a direction vector.
 /// </summary>
 public static class Utils 
-{
+{   
     /// <summary>
     /// The  GetUnitaryVector method is responsible for getting a unitary vector from a direction vector.
     /// </summary>

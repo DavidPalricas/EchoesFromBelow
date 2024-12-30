@@ -19,6 +19,21 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D enemyRigidBody;
 
     /// <summary>
+    /// The isRanged property is responsible for storing if the enemy attacks are ranged or not.
+    /// </summary>
+    private bool isRanged;
+
+    /// <summary>
+    /// The rangeConstants property is responsible for storing the enemy's range constants.
+    /// </summary>
+    private readonly Dictionary<string, float> rangeConstants = new()
+    {
+        { "PlayerInRange", 15f },
+        { "RangedAttackRange", 2f },
+        { "MelleeAttackRange", 0f }
+    };
+
+    /// <summary>
     /// The enemyPossibleDirections property is responsible for storing the unitary vectors of the enemy possible move directions
     /// </summary>
     private static readonly Vector2[] enemyPossibleDirections = new Vector2[]
@@ -48,9 +63,12 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         playerRigidBody = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        enemyRigidBody = GetComponent<Entity>().entityRigidBody;
+        enemyRigidBody = GetComponent<Rigidbody2D>();
 
-        EntityFSM enemyFSM = GetComponent<Enemy>().entityFSM;
+        Enemy enemy = GetComponent<Enemy>();
+        EntityFSM enemyFSM = enemy.entityFSM;
+
+        isRanged = enemy.IsRanged;
 
         enemyFSM.ChangeState(new EntityIdleState(enemyFSM));
     }
@@ -84,7 +102,7 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     private bool PlayerNear(Vector2 directionToPlayer)
     {
-        float rayCastDistance = 0f;
+        float rayCastDistance = isRanged ? rangeConstants["RangedAttackRange"] : rangeConstants["MelleeAttackRange"];
 
         BoxCollider2D enemyCollider = enemyRigidBody.GetComponent<BoxCollider2D>();
 
@@ -106,7 +124,6 @@ public class EnemyMovement : MonoBehaviour
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
-
     /// <summary>
     /// The PlayerInRange method is responsible for checking if the player is in range of the enemy.
     /// </summary>
@@ -115,7 +132,7 @@ public class EnemyMovement : MonoBehaviour
     /// </returns>
     public bool PlayerInRange()
     {
-        float range = 15f;
+        float range = rangeConstants["PlayerInRange"];
 
         return Vector2.Distance(playerRigidBody.position, enemyRigidBody.position) <= range;
     }
