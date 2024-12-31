@@ -36,18 +36,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer()
     {
-        float speedX = Input.GetAxis("Horizontal");
-        float speedY = Input.GetAxis("Vertical");
+        // Get raw input for sharp and precise movement
+        float speedX = Input.GetAxisRaw("Horizontal");
+        float speedY = Input.GetAxisRaw("Vertical");
 
-        speedVector  = new Vector2(speedX, speedY).normalized;
+        // Create a movement vector and normalize it
+        speedVector = new Vector2(speedX, speedY).normalized;
 
-        player.position += speed * Time.deltaTime * speedVector;     
+        // Apply velocity directly to the Rigidbody2D
+        player.velocity = speed * speedVector;
     }
 
 
     public void StopPlayer()
     {
-        player.velocity = Vector2.zero;
+        if (speedVector == Vector2.zero)
+        {
+            player.velocity = Vector2.zero;
+        }
     }
 
     /// <summary>
