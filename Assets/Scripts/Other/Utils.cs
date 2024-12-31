@@ -29,6 +29,7 @@ public static class Utils
         Key,
         Sword,
         Stick,
+        SlingShot
     }
 
     /// <summary>

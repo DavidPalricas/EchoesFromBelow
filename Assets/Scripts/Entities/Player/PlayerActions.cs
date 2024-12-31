@@ -1,17 +1,17 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UnityEngine;
 
 /// <summary>
 /// The PlayerActions class is responsible for handling the player's actions.
+/// These actions include grabbing collecatables, healing the player, and switching weapons.
 /// </summary>
 public class PlayerActions : MonoBehaviour
 {
     /// <summary>
     /// The objectNear properties is responsible for storing the object near the player.
     /// </summary>
-    private GameObject collectableItemGrabed;
+    private GameObject collectableGrabed;
 
     /// <summary>
     /// The playerMaxHealth property is responsible for storing the player's maximum health.
@@ -20,7 +20,6 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The playerArmed property is responsible for verifying if the player has a weapon equiped.
-    /// The ...Iconm properties are responsible for identifying the proper UI images for the equiped weapons.
     /// </summary>
     private bool playerArmed = false;
 
@@ -30,39 +29,10 @@ public class PlayerActions : MonoBehaviour
     private Animator animator;
 
     /// <summary>
-    /// The stickIcon property is responsible for storing the stick icon.
-    /// Its Serialized so that it can be set in the Unity Editor.
+    /// The playerInventory property is responsible for storing the player's inventory.
     /// </summary>
-    [SerializeField]
-    private GameObject stickIcon;
+    private PlayerInventory playerInventory;
 
-    /// <summary>
-    /// Icone e texto do icone dos frascos de vida no HUD.
-    /// Its Serialized so that it can be set in the Unity Editor.
-    /// </summary>
-    [SerializeField]
-    private GameObject flaskIcon;
-
-    /// <summary>
-    /// The flaskQuantity property is responsible for storing the quantity of heal items in the player's inventory.
-    /// Its Serialized so that it can be set in the Unity Editor.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI flaskQuantity;
-
-    /// <summary>
-    /// The healthBar property is responsible for storing the player's health bar.
-    /// Its Serialized so that it can be set in the Unity Editor.
-    /// </summary>
-    [SerializeField]
-    private HealthBar healthBar;
-
-    /// <summary>
-    /// The keyIcon property is responsible for storing the key icon.
-    /// Its Serialized so that it can be set in the Unity Editor.
-    /// </summary>
-    [SerializeField]
-    private GameObject keyIcon;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -72,98 +42,67 @@ public class PlayerActions : MonoBehaviour
     {
         playerMaxHealth = GetComponent<Entity>().maxHealth;
         animator = GetComponent<Entity>().animator;
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, we are checking if the are gates, if the player pressed the E key, and if the heal conditions are met.
-    /// If there are gates, the IsGateNear() and OpenGate() methods are called.
-    /// If the player pressed the E key, the CheckGrabObjectsConditions() method is called.
-    /// And if the player pressed the H key, the HealPlayer() method is called.
+    /// In this method, we are checking  whether the player pressed the H key to heal the player or the Q key to switch weapons.
+    /// The SwitchWeapons method is only called if the player has a weapon equiped.
     /// </summary>
-    /// 
     private void Update()
     {
-        // Heal Conditions
-        if (Input.GetKeyDown(KeyCode.H) && GetComponent<PlayerInventory>().Items["HealItems"] > 0)
+        if (Input.GetKeyDown(KeyCode.H))
         {
             HealPlayer();
         }
 
-        if (playerArmed){
-            // FALTA FAZER CÓDIGO PARA VERIIFCAR SE O JOGADOR JÁ TEM AS OUTRAS ARMAS NO INVENTÁRIO.
-            // SE NÃO, CONSEGUE TROCAR PARA QUALQUER IMAGEM DE ARMA SEM AS TER EQUIPADAS
-
-            if (Input.GetKeyDown(KeyCode.Q)){
-
-                //INSERIR CÓDIGO PARA TROCAR PARA AS FUTURAS ARMAS
-
-            }
+        if (playerArmed && Input.GetKeyDown(KeyCode.Q)){
+            SwitchWeapons();   
         }
     }
 
     /// <summary>
-    /// The GrabMeleeWeapon method is responsible for grabbing the melee weapon, updating the player's inventory, and removing the weapon from the level.
-    /// If the player grabs the stick, PlayerAttack component is enable, because the stick is the player's first weapon.
+    /// The GrabWeapons method is responsible for grabbing the weapons.
+    /// It adds a weapon to the player's inventory, removes the weapon from the level.
+    /// If the player is not armed, it enables the player's attack component and updates the animator.
     /// </summary>
-    private void GrabMeleeWeapon(Utils.CollectableType meleeWeapon)
+    private void GrabWeapons(Utils.CollectableType weapon)
     {   
-        if (meleeWeapon ==  Utils.CollectableType.Stick)
+        if (!playerArmed)
         {
             GetComponent<Player>().attack.enabled = true;
 
             playerArmed = true;
 
-            stickIcon.SetActive(true);
-
             animator.SetBool("HasWeapon", true);
-
-            GetComponent<PlayerInventory>().Weapons["Melee"] = "Stick";
-        }
-        else
-        {
-            GetComponent<PlayerInventory>().Weapons["Melee"] = "Sword";
         }
 
         DestroyCollectable();
+
+        playerInventory.UpdateInventory(weapon);
     }
 
     /// <summary>
-    /// The RightKeyGrabbed method is responsible for checking if the player has grabbed the right key, to open the gate.
-    /// If the are no keys with a true value in the level, it means that the player has grabbed the right key.
-    /// </summary>
-    /// <returns>
-    ///   <c>true</c> if the right key was grabbed; otherwise, <c>false</c>.
-    /// </returns>
-    private bool RightKeyGrabbed()
-    {
-        // Gets the key and its values (true or false)
-        Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
-
-        Debug.Log("Keys Left : " + GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Count);
-
-        return (!keys.Values.Any(value => value));
-    }
-
-    /// <summary>
-    /// The GrabKey method is responsible for grabbing the key.
+    /// The GrabKey method is responsible for grabbing the key if the player doesn't have a key in the inventory.
     /// It adds a key to the player's inventory, removes the key from the level and spawns an horde of enemies.
-    /// If the player has the right key, it will have the value 2 in the inventory, otherwise it will have the value 1.
     /// </summary>
     private void GrabKey()
     {   
-        if (GetComponent<PlayerInventory>().Items["Key"] == 0)
+        if (playerInventory.Items["Key"] == 0)
         {   
-            keyIcon.SetActive(true);
-
             GameObject keyToDestroy = DestroyCollectable();
+
+            playerInventory.UpdateInventory(Utils.CollectableType.Key);
 
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
 
-            GetComponent<PlayerInventory>().Items["Key"] = RightKeyGrabbed() ? 2 : 1;
+            Dictionary<string, int> Items = playerInventory.Items;
 
-            SpawnHordes(GetComponent<PlayerInventory>().Items["Key"] == 2);
+            SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
+
+            spawnHord.SpawnKeyHorde(Items["Key"] == 2);
         } 
     }
 
@@ -173,100 +112,97 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void GrabHealItem()
     {   
-        PlayerInventory playerInventory = GetComponent<PlayerInventory>();
+        Dictionary<string, int> Items = playerInventory.Items;
 
-        if (playerInventory.Items["HealItems"] < PlayerInventory.MaxHealItems)
-        {
-            playerInventory.Items["HealItems"]++;
-
+        if (Items["HealItems"] < PlayerInventory.MaxHealItems)
+        {    
             DestroyCollectable();
-
-            flaskIcon.SetActive(true);
-
-            flaskQuantity.text = playerInventory.Items["HealItems"].ToString();
-
-        } if (playerInventory.Items["HealItems"] == PlayerInventory.MaxHealItems)
-        {
-
-            flaskQuantity.color = new Color32(255, 178, 0, 255);
-
         }
+
+        playerInventory.UpdateInventory(Utils.CollectableType.HealItem);
     }
 
     /// <summary>
     /// The DestroyCollectable method is responsible for destroying the collectable item grabbed by the player.
     /// </summary>
-    /// <returns>The object to destroy</returns>
+    /// <returns>The destroyed object </returns>
     private GameObject DestroyCollectable()
     {
-        collectableItemGrabed.GetComponent<Collectable>().isCollected = true;
+        collectableGrabed.GetComponent<Collectable>().isCollected = true;
 
-        GameObject collectableToDestroy = collectableItemGrabed;
-        collectableItemGrabed = null;
+        GameObject collectableToDestroy = collectableGrabed;
+        collectableGrabed = null;
         Destroy(collectableToDestroy);
 
         return collectableToDestroy;
     }
 
     /// <summary>
-    /// The HealPlayer method is responsible for healing the player, if the player's health is less than its maximum health.
+    /// The HealPlayer method is responsible for healing the player, if the heal conditions are met.
     /// </summary>
     private void HealPlayer()
-    {   
-        if (GetComponent<Entity>().entityFSM.entitycurrentHealth < playerMaxHealth)
-        {
-            GetComponent<Entity>().maxHealth++;
-            GetComponent<Entity>().maxHealth += (playerMaxHealth / 2);
-            GetComponent<PlayerInventory>().Items["HealItems"]--;
+    {
+        EntityFSM entityFSM = GetComponent<EntityFSM>();
+
+        if (HealConditions(entityFSM.entitycurrentHealth, entityFSM.currentState))
+        {   
+            entityFSM.entitycurrentHealth = Math.Min(entityFSM.entitycurrentHealth + playerMaxHealth / 2, playerMaxHealth);
+
+            playerInventory.HealItemUsed();
 
             GameObject.Find("Level1").GetComponent<Rank>().HealItemsUsed++;
 
-            if (GetComponent<PlayerInventory>().Items["HealItems"] == 0)
-            {
-                flaskIcon.SetActive(false);
-            }
+            HealthBar healthBar = (entityFSM.entityProprieties as Player).healthBar;
 
-            flaskQuantity.text = GetComponent<PlayerInventory>().Items["HealItems"].ToString();
-
-            healthBar.UpdateLabel(GetComponent<Entity>().maxHealth);
+            healthBar.UpdateLabel(entityFSM.entitycurrentHealth);
         }
     }
 
     /// <summary>
-    /// The SpawnHordes method is responsible for spawning hordes of enemies.
-    /// It gets the SpawnHorde component and resets the number of enemies spawned and increases the horde size.
-    /// By reseting the number of enemies spawned in a horde, we ensure that a new horde will be spawned.
-    /// Because the horde stops spawning when the number of enemies reaches a certain value.
+    /// The HealConditions method is responsible for checking if the heal conditions are met.
+    /// These conditions are: the player has heal items, the player is not attacking and the player's health is less than the maximum health.
     /// </summary>
-    private void SpawnHordes(bool hasRightKey){
+    /// <param name="playerCurrentHealth">The player's current health.</param>
+    /// <param name="playerCurrentState">The player's current state.</param>
+    /// <returns>
+    ///   <c>true</c> if the heal conditions are mete; otherwise, <c>false</c>.
+    /// </returns>
+    private bool HealConditions(int playerCurrentHealth,IState playerCurrentState)
+    {
+        return playerInventory.Items["HealItems"] > 0 && playerCurrentState is not EntityAttackState && playerCurrentHealth < playerMaxHealth;
+    }
 
-        SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
+    /// <summary>
+    /// The SwitchWeapons method is responsible for switching the player's weapons type (melee or ranged).
+    /// After switching the weapon, the player's attack component is updated to ensure the logic of the new weapon type
+    /// </summary>
+    private void SwitchWeapons()
+    {   
+        string currentWeapon = playerInventory.currentWeapon == "Melee" ? "Ranged" : "Melee";
 
-        spawnHord.EnemiesSpawned = 0;
+        EntityAttack attackType = currentWeapon == "Melee" ? GetComponent<EntityMeleeAttack>() : GetComponent<EntityRangedAttack>();
 
-        spawnHord.HordeSize += Mathf.RoundToInt(spawnHord.HordeSize /= 2);
+        GetComponent<EntityFSM>().entityProprieties.attack = attackType;
 
-        if (hasRightKey){
-            spawnHord.SpawnBoss();
-        }
+        playerInventory.UpdateCurrentWeapon(currentWeapon);
     }
 
     /// <summary>
     /// The GrabObject method is responsible for grabbing the object near the player.
-    /// It removes the (Clone) string from the object's name, if it exists, to get the original object name.
-    /// It calls the correct method to grab the object, depending on the object's name.
+    /// It calls the correct method to grab the object, depending on the object's type.
     /// </summary>
-    public void GrabCollectable(GameObject collectableItem)
+    public void GrabCollectable(GameObject collectable)
     {   
-        collectableItemGrabed = collectableItem;
+        collectableGrabed = collectable;
 
-        Utils.CollectableType ColleccollectableType = collectableItem.GetComponent<Collectable>().type;
+        Utils.CollectableType CollectableType = collectable.GetComponent<Collectable>().type;
 
-        switch (ColleccollectableType)
+        switch (CollectableType)
         {
             case Utils.CollectableType.Stick:
             case Utils.CollectableType.Sword:
-                GrabMeleeWeapon(ColleccollectableType);
+            case Utils.CollectableType.SlingShot:
+                GrabWeapons(CollectableType);
 
                 return;
 
@@ -278,12 +214,7 @@ public class PlayerActions : MonoBehaviour
 
             case Utils.CollectableType.HealItem:
                 GrabHealItem();
-                Debug.Log(GetComponent<PlayerInventory>().Items["HealItems"]);
-
-                return;
-
-            default:
-                Debug.LogError("Invalid collectable type");
+ 
                 return;
         }
     }

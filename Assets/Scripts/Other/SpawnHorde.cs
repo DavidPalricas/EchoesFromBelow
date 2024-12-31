@@ -6,43 +6,28 @@ using UnityEngine;
 public class SpawnHorde : MonoBehaviour
 {
     /// <summary>
-    /// The hordeSize property represents the number of enemies that will be spawned.
-    /// It is serialized so that it can be set in the Unity Editor.
-    /// </summary>
-    public int HordeSize;
-
-    /// <summary>
-    /// The enemyPrefab property stores the prefab of the enemy that will be spawned.
+    /// The enemyPrefab and bossPrefab properties are responsible for storing the enemy and boss prefabs respectively.
     /// It is serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject enemyPrefab, bossPrefab;
 
     /// <summary>
-    /// The bossPrefab property stores the prefab of the boss enemy that will be spawned.
+    /// The maxSpawnTime and minSpawnTime properties are responsible for storing the maximum and minimum time between enemy spawns respectively.
     /// It is serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject bossPrefab;
+    private float maxSpawnTime, minSpawnTime;
 
     /// <summary>
-    /// The maxSpawnTime property represents the maximum time between enemy spawns.
-    /// It is serialized so that it can be set in the Unity Editor.
+    /// The hordeSize property is responsible for storing the number of enemies that will spawn in the horde.
     /// </summary>
     [SerializeField]
-    private float maxSpawnTime;
-
+    private int hordeSize;
     /// <summary>
-    /// The minSpawnTime property represents the minimum time between enemy spawns.
-    /// It is serialized so that it can be set in the Unity Editor.
+    /// The enemiesSpawned property is responsible for storing the number of enemies spawned in the horde.
     /// </summary>
-    [SerializeField]
-    private float minSpawnTime;
-
-    /// <summary>
-    /// The enemiesSpawned property represents the number of enemies that have been spawned.
-    /// </summary>
-    public int EnemiesSpawned { get; set; }
+    private int enemiesSpawned;
 
     /// <summary>
     /// The spawnTime property represents the time between enemy spawns.
@@ -56,7 +41,7 @@ public class SpawnHorde : MonoBehaviour
     private void Awake()
     {
         spawnTime = GetSpawnTime();
-        EnemiesSpawned = 0;
+        enemiesSpawned = 0;
     }
 
     /// <summary>
@@ -66,7 +51,7 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (EnemiesSpawned < HordeSize)
+        if (enemiesSpawned < hordeSize)
         {
             spawnTime -= Time.deltaTime;
 
@@ -97,7 +82,7 @@ public class SpawnHorde : MonoBehaviour
         GameObject enemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
         enemy.GetComponent<Enemy>().Initialize();
 
-        EnemiesSpawned++;
+        enemiesSpawned++;
     }
 
     /// <summary>
@@ -135,7 +120,9 @@ public class SpawnHorde : MonoBehaviour
     /// <param name="enemyPosition">The enemy position.</param>
     /// <param name="radius">The radius.</param>
     /// <param name="spawnAreaCenter">The area center.</param>
-    /// <returns></returns>
+    /// <returns>
+    ///   <c>true</c> if the enemy in in the spawn area; otherwise, <c>false</c>.
+    /// </returns>
     private bool InSpawnArea(Vector2 enemyPosition, float radius, Vector2 spawnAreaCenter)
     {
         return Mathf.Pow(enemyPosition.x - spawnAreaCenter.x, 2) + Mathf.Pow(enemyPosition.y - spawnAreaCenter.y, 2) <= Mathf.Pow(radius, 2);
@@ -144,12 +131,30 @@ public class SpawnHorde : MonoBehaviour
     /// <summary>
     /// The SpawnBoss method is responsible for spawning the boss enemy.
     /// </summary>
-    public void SpawnBoss()
+    private void SpawnBoss()
     {
         Vector2 bossPosition = GetEnemySpawnPosition();
 
         GameObject boss = Instantiate(bossPrefab, bossPosition, Quaternion.identity);
 
         boss.GetComponent<Enemy>().Initialize();
+    }
+
+    /// <summary>
+    /// The SpawnKeyHorde method is responsible for spawning a horde of enemies when the player picks up the key.
+    /// It resets the number of enemies spawned to spawn a new horde and increases its size.
+    /// The number of enemies is reseted because the horde stops spawning when a certain number of enemies is reached.
+    /// If the player has the right key, it spawns the boss enemy.
+    /// </summary>
+    public void SpawnKeyHorde(bool playerHasRightKey )
+    {
+        enemiesSpawned = 0;
+
+        hordeSize += Mathf.RoundToInt(hordeSize /= 2);
+
+        if (playerHasRightKey)
+        {
+            SpawnBoss();
+        }
     }
 }

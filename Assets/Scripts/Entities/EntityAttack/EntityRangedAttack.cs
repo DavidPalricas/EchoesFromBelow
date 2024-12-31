@@ -42,7 +42,7 @@ public class EntityRangedAttack : EntityAttack
             ProjetileMovement newProjetileMovement = newProjetile.GetComponent<ProjetileMovement>();
 
             newProjetileMovement.attackDirection = attackDirection;
-            newProjetileMovement.playerThrown = false;
+            newProjetileMovement.playerThrown = GetComponent<EntityFSM>().entityProprieties is Player;
 
             HandleAttackCooldown();
         }

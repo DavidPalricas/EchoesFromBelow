@@ -24,6 +24,12 @@ public class Player : Entity
     public HealthBar healthBar;
 
     /// <summary>
+    /// The playerActions property is responsible for storing the player's PlayerActions component.
+    /// </summary>
+    [HideInInspector]
+    public PlayerActions playerActions;
+
+    /// <summary>
     /// The Start method is called before the first frame update (Unity Method).
     /// In this method, we are setting the player's spawn point, and initializing the player's attributes.
     /// </summary>
@@ -32,6 +38,7 @@ public class Player : Entity
         spawnPoint = new Vector2(transform.position.x, transform.position.y);
 
         movement = GetComponent<PlayerMovement>();
+        playerActions = GetComponent<PlayerActions>();
         attack = GetComponent<EntityMeleeAttack>();
         entityRigidBody = GetComponent<Rigidbody2D>();
         entityFSM = GetComponent<EntityFSM>();

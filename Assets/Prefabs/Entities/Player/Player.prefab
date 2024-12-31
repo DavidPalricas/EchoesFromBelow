@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1318209133456532555}
   - component: {fileID: -566987698254412420}
   - component: {fileID: 2838323521603683926}
+  - component: {fileID: -6216490367219927351}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -239,6 +240,7 @@ MonoBehaviour:
   entityFSM: {fileID: -566987698254412420}
   entityRigidBody: {fileID: 0}
   attack: {fileID: 0}
+  lastMovingDirection: {x: 0, y: -1}
   spawnPoint: {x: 0, y: 0}
   movement: {fileID: 0}
   healthBar: {fileID: 0}
@@ -280,11 +282,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb5d3ac072ac9345b434397a6e0acea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacking: 0
   meleeLeft: {fileID: 3683219949669321261}
   meleeRight: {fileID: 7597942102496744807}
   meleeUp: {fileID: 966352755093986192}
   meleeDown: {fileID: 33022776123688665}
+--- !u!114 &-6216490367219927351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827529518274912995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada51824f08b4b34380f1d8d6b8f5747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   attacking: 0
+  projetile: {fileID: 1666102939682133933, guid: 2d9766cc6f7a4d644be45f13f452b62f, type: 3}
 --- !u!1001 &162705464032259031
 PrefabInstance:
   m_ObjectHideFlags: 0
