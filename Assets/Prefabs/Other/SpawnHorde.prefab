@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430ee4ee9bee1244d9c5748198d69437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HordeSize: 3
   enemyPrefab: {fileID: 3462787359595219444, guid: f4d20865588846c44b64a3911b3f9896, type: 3}
   bossPrefab: {fileID: 3462787359595219444, guid: 3d80eb6b239ecfa458005bfa847f4366, type: 3}
   maxSpawnTime: 2
   minSpawnTime: 1
+  hordeSize: 3
 --- !u!58 &2031448498831029051
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// The speed property is responsible for storing the player's speed.
     /// </summary>
+    [HideInInspector]
     public Vector2 speedVector;
 
     /// <summary>

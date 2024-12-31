@@ -91,7 +91,10 @@ public class EntityDeadState : EntityStateBase
     /// It increments the number of deaths of the player and calls the RespawnPlayer  method to respawn the player.
     /// </summary>
     protected override void ExecutePlayerLogic()
-    {
+    {  
+        Player player =  entityFSM.entityProprieties as Player;
+        player.playerActions.enabled = false;
+
         GameObject.Find("Level1").GetComponent<Rank>().DeathsNumber++;
         RespawnPlayer();
     }
@@ -107,12 +110,14 @@ public class EntityDeadState : EntityStateBase
             Player player = entityFSM.entityProprieties as Player;
 
             player.entityFSM.entitycurrentHealth = player.maxHealth;
-            player.healthBar.GetComponent<HealthBar>().UpdateLabel(player.maxHealth);
+            player.healthBar.UpdateLabel(player.maxHealth);
 
             player.entityRigidBody.transform.position = player.spawnPoint;
 
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
             entityAnimator.SetBool("IsDead", false);
+
+            player.playerActions.enabled = true;
         }));
     }
 
