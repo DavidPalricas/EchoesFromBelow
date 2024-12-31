@@ -9,11 +9,6 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     /// <summary>
-    /// The weapons property is responsible for storing the weapons that the player has.
-    /// </summary>
-    private Dictionary<string, string> weapons;
-
-    /// <summary>
     /// The stickIcon, flaskIcon, slingShotIcon and keyIcon properties are responsible for storing the icons of the stick, sling shot, flask, and key items respectively.
     /// Its Serialized so that it can be set in the Unity Editor.
     /// </summary>
@@ -38,6 +33,11 @@ public class PlayerInventory : MonoBehaviour
     public Dictionary<string, int> Items { get; private set; }
 
     /// <summary>
+    /// The weapons property is responsible for storing the weapons that the player has.
+    /// </summary>
+    public Dictionary<string, string> Weapons { get; set; }
+
+    /// <summary>
     /// The currentWeapon property is responsible for storing the current weapon that the player is using.
     /// </summary>
     [HideInInspector]
@@ -55,7 +55,7 @@ public class PlayerInventory : MonoBehaviour
             { "Key", 0 }
         };
 
-        weapons = new Dictionary<string, string>
+        Weapons = new Dictionary<string, string>
         {
             { "Melee", null },
             { "Ranged", null }
@@ -67,7 +67,8 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     private void UpdateRangedWeapon()
     {
-        weapons["Ranged"] = "SlingShot";
+        Weapons["Ranged"] = "SlingShot";
+        slingShotIcon.SetActive(true);
     }
 
     /// <summary>
@@ -77,7 +78,7 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="meleeWeapon">The melee weapon that the player grabbed.</param>
     private void UpdateMeleeWeapon(Utils.CollectableType meleeWeapon)
     {
-        weapons["Melee"] = meleeWeapon == Utils.CollectableType.Stick ? "Stick" : "Sword";
+        Weapons["Melee"] = meleeWeapon == Utils.CollectableType.Stick ? "Stick" : "Sword";
 
         if (meleeWeapon == Utils.CollectableType.Stick)
         {

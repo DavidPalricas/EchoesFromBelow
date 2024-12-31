@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -48,7 +49,7 @@ public class PlayerActions : MonoBehaviour
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking  whether the player pressed the H key to heal the player or the Q key to switch weapons.
-    /// The SwitchWeapons method is only called if the player has a weapon equiped.
+    /// The SwitchWeapons method  if the player can switch weapons (check with the SwitchHeaponsConditions method).
     /// </summary>
     private void Update()
     {
@@ -57,7 +58,7 @@ public class PlayerActions : MonoBehaviour
             HealPlayer();
         }
 
-        if (playerArmed && Input.GetKeyDown(KeyCode.Q)){
+        if (Input.GetKeyDown(KeyCode.Q) && SwitchHeaponsConditions()){
             SwitchWeapons();   
         }
     }
@@ -72,6 +73,12 @@ public class PlayerActions : MonoBehaviour
         if (!playerArmed)
         {
             GetComponent<Player>().attack.enabled = true;
+
+            // Its not necessary to check if the weapon is as sword or a stick, because the player default attack component is a melee attack
+            if (weapon == Utils.CollectableType.SlingShot)
+            {
+                GetComponent<EntityFSM>().entityProprieties.attack = GetComponent<EntityRangedAttack>();
+            }
 
             playerArmed = true;
 
@@ -185,6 +192,17 @@ public class PlayerActions : MonoBehaviour
         GetComponent<EntityFSM>().entityProprieties.attack = attackType;
 
         playerInventory.UpdateCurrentWeapon(currentWeapon);
+    }
+
+    /// <summary>
+    /// The SwitchHeaponsConditions method is responsible for checking if the player can switch weapons.
+    /// These conditions are: the player is armed and the player has 2 different types of weapons (melee and ranged).
+    /// To check if the player has 2 different types of weapons its dictionary cannot have any null value has the weapon name.
+    /// </summary>
+    /// <returns></returns>
+    private bool SwitchHeaponsConditions()
+    {   
+        return playerArmed  && !playerInventory.Weapons.Values.Any(weaponName => weaponName == null);
     }
 
     /// <summary>
