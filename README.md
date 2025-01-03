@@ -19,7 +19,7 @@ As you navigate oppressive, ancient corridors, you'll face fantastical creatures
  |:-------------:|:-----------------:|:----------------:|:----------------:|:----------------:|:---------:|:---------:|:----:|:-------------:|
  | Left Joystick |  `Right Direction`|  `Left Direction`|  `Up Direction`  |  `Down Direction`|           |           |      |               |
  | DPad          |  `Right`          |  `Left`          |  `Up`            |  `Down`          |           |           |      |               |  
- | Other Buttons |                   |                  |                  |                  |  `Left `  | `Down`    | `Up` |   `Left`      |
+ | Other Buttons |                   |                  |                  |                  |  `Left`   | `Down`    | `Up` |   `Left`      |
 
  
 ## Team
