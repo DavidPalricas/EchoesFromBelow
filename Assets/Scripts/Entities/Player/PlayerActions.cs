@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// The PlayerActions class is responsible for handling the player's actions.
-/// These actions include grabbing collecatables, healing the player, and switching weapons.
+/// These actions include grabbing collecatables, healing the player, switching weapons and check the player's input.
 /// </summary>
 public class PlayerActions : MonoBehaviour
 {
@@ -31,12 +31,12 @@ public class PlayerActions : MonoBehaviour
     private PlayerInventory playerInventory;
 
     /// <summary>
-    /// The healInput, interactInput, switchWeaponsInput and attackInput properties are responsible for storing the player's input actions.
+    /// The healInput, interactInput, switchWeaponsInput, attackInput and pauseUnpauseInput  properties are responsible for storing the player's input actions.
     /// These properties 
     /// These properties are serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private InputActionReference healInput, interactInput, switchWeaponsInput, attackInput;
+    private InputActionReference healInput, interactInput, switchWeaponsInput, attackInput, pauseUnpauseInput;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -240,24 +240,29 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
-    ///  The InteractInputTriggered method is responsible for checking if the player interact input is triggered.
+    /// The InputTriggered method is responsible for checking if the input was triggered.
+    /// If the inputName is invalid, an error message is displayed.
     /// </summary>
+    /// <param name="inputName"> The name of the input.</param>
     /// <returns>
-    ///   <c>true</c> if the interact input is triggered; otherwise, <c>false</c>.
+    ///   <c>true</c> if the selected input is triggered; otherwise, <c>false</c>.
     /// </returns>
-    public bool InteractInputTriggered()
+    public bool InputTriggered(string inputName)
     {
-        return interactInput.action.triggered;
-    }
+        switch (inputName)
+        {
+            case "Pause/Unpause":
+                return pauseUnpauseInput.action.triggered;
 
-    /// <summary>
-    /// The AttackInputTriggered method is responsible for checking if the player attack input is triggered.
-    /// </summary>
-    /// <returns>
-    ///   <c>true</c> if the attack input is triggered; otherwise, <c>false</c>.
-    /// </returns>
-    public bool AttackInputTriggered()
-    {
-        return attackInput.action.triggered;
+            case "Interact":
+                return interactInput.action.triggered;
+
+            case "Attack":
+                return attackInput.action.triggered;
+
+            default:
+                Debug.LogError("Invalid Input Name");
+                return false;
+        }
     }
 }

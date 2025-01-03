@@ -15,7 +15,7 @@ public class BaseInteractionTrigger : MonoBehaviour
     /// It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    protected PlayerActions playerActions;
+    private PlayerActions playerActions;
 
 
     /// <summary>
@@ -44,5 +44,16 @@ public class BaseInteractionTrigger : MonoBehaviour
         {
             playerDetected = false;
         }
+    }
+
+    /// <summary>
+    /// The InteractInputTriggered method is responsible for checking if the player pressed the interact input.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the interact input is triggered; otherwise, <c>false</c>.
+    /// </returns>
+    protected bool InteractInputTriggered()
+    {
+        return playerActions.InputTriggered("Interact");
     }
 }

@@ -31,7 +31,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
     /// </summary>
     private void Update()
     {
-        if (!isTorchLit && playerDetected && playerActions.InteractInputTriggered())
+        if (!isTorchLit && playerDetected && InteractInputTriggered())
         {
             LitTorch();
         }
