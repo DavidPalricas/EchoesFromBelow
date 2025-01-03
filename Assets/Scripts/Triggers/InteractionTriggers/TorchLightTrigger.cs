@@ -3,12 +3,12 @@ using UnityEngine;
 /// <summary>
 /// The TorchLightTrigger class is responsible for turning off the torch light.
 /// </summary>
-public class TorchLightTrigger : MonoBehaviour
+public class TorchLightTrigger : BaseInteractionTrigger
 {
     /// <summary>
-    /// The playerDetected and isTorchLit variables are responsible for storing the player detection and torch light status, respectively.
+    /// The isTorchLit property is responsible for storing the torch light status.
     /// </summary>
-    private bool isTorchLit, playerDetected;
+    private bool isTorchLit = false;
 
     /// <summary>
     /// The torchLit property is responsible for storing the torch with light game object.
@@ -25,22 +25,13 @@ public class TorchLightTrigger : MonoBehaviour
     private GameObject torchUnlit;
 
     /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// Here, the isTorchLightOn variable is set to true.
-    /// </summary>
-    private void Awake()
-    {
-        isTorchLit = false;
-    }
-
-    /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, we are checking if the player is detected and if the player pressed the E key.
+    /// In this method, we are checking if the player is detected and if the player interact input was triggred
     /// Íf these conditions are met, the LitTorch method is called to lit the torch.
     /// </summary>
     private void Update()
     {
-        if (!isTorchLit && playerDetected && Input.GetKeyDown(KeyCode.E))
+        if (!isTorchLit && playerDetected && playerActions.InteractInputTriggered())
         {
             LitTorch();
         }
@@ -48,28 +39,22 @@ public class TorchLightTrigger : MonoBehaviour
 
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
-    /// In this method, we are setting the playerDetected variable to true (player enter the torch area).
+    /// In this method we are calling the behavior of the parent class of this method.
     /// </summary>
-    /// <param name="collision">The collider of the game object that collided..</param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <param name="collision">The collider of the game object that collided.</param>
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerDetected = true;
-        }
+        base.OnTriggerEnter2D(collision);
     }
 
     /// <summary>
     /// The OnTriggerExit2D method is called when the Collider2D other exits the trigger (Unity Method).
-    /// In this method, we are setting the playerDetected variable to false (player left the torch area).
+    /// In this method we are calling the behavior of the parent class of this method.
     /// </summary>
     /// <param name="collision">The collider of the game object that collided.</param>
-    private void OnTriggerExit2D(Collider2D collision)
+    protected override void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerDetected = false;
-        }
+        base.OnTriggerExit2D(collision);
     }
 
     /// <summary>

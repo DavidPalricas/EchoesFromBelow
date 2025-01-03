@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The Player class is responsible for handling the player's attributes.
@@ -45,7 +46,7 @@ public class Player : Entity
 
         entityFSM.entityProprieties = this;
         entityFSM.entitycurrentHealth = maxHealth;
-
+      
         attack.enabled = false;
     }
 }

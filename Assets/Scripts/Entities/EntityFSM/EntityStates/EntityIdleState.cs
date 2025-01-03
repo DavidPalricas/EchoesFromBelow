@@ -33,6 +33,8 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Execute()
     {   
+        Debug.Log("Executing Idle State");
+
         if (entityFSM.entitycurrentHealth <= 0)
         {
             entityFSM.ChangeState(new EntityDeadState(entityFSM));
@@ -99,7 +101,7 @@ public class EntityIdleState : EntityStateBase
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && player.attack.enabled)
+        if (player.attack.enabled && player.GetComponent<PlayerActions>().AttackInputTriggered())
         {
             entityFSM.ChangeState(new EntityAttackState(entityFSM));
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// The GateTrigger class is responsible for setting the gate trigger to open it.
 /// </summary>
-public class GateTrigger : MonoBehaviour
+public class GateTrigger : BaseInteractionTrigger
 {
     /// <summary>
     /// The gate property is responsible for storing the gate game object.
@@ -27,47 +27,36 @@ public class GateTrigger : MonoBehaviour
     private int gateKey;
 
     /// <summary>
-    /// The player detected property is responsible for storing the player detection status.
-    /// </summary>
-    private bool playerDetected;
-
-    /// <summary>
     /// The Update method is called every frame (Unity Method).
-    /// In this method, we are checking if the player is detected and if the player pressed the E key and if the conditions to open the gate are met.
+    /// In this method, we are checking if the player is detected and if the player interact input was triggred and if the conditions to open the gate are met.
     /// If these conditions are met, the OpenGate method is called to open the gate.
     /// </summary>
     private void Update()
     {
-        if (playerDetected && Input.GetKeyDown(KeyCode.E) && CheckConditionsToOpenGate())
+        if (playerDetected && playerActions.InteractInputTriggered() && CheckConditionsToOpenGate())
         {
             OpenGate();
         }
     }
 
     /// <summary>
-    /// The OnTriggerExit2D method is called when the Collider2D other exits the trigger (Unity Method).
-    /// In this method, we are setting the playerDetected variable to true (player enter the gate area).
+    /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
+    /// In this method we are calling the behavior of the parent class of this method.
     /// </summary>
     /// <param name="collision">The collider of the game object that collided.</param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") )
-        {
-            playerDetected = true;
-        }
+        base.OnTriggerEnter2D(collision);
     }
 
     /// <summary>
     /// The OnTriggerExit2D method is called when the Collider2D other exits the trigger (Unity Method).
-    /// In this method, we are setting the playerDetected variable to false (player left the gate area).
+    /// In this method we are calling the behavior of the parent class of this method.
     /// </summary>
     /// <param name="collision">The collider of the game object that collided.</param>
-    private void OnTriggerExit2D(Collider2D collision)
+    protected override void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerDetected = false;
-        }
+        base.OnTriggerExit2D(collision);
     }
 
     private bool CheckConditionsToOpenGate()
