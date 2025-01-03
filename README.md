@@ -6,12 +6,21 @@ In this exploration and 2D top down adventure game, you play as an explorer who,
 
 As you navigate oppressive, ancient corridors, you'll face fantastical creatures, gather resources, and struggle to stay alive. 
 
-## Controls
- |Keys         | Move Right| Move Left| Move Up| Move Down|    Attack    | Pick Items | Heal |
- |:-----------:| :--------:| :-------:|:------:|:--------:|:------------:|:----------:|:----:|
- |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |              |            |      |
- | Arrow Keys  |  `Right`  |    `Left`|  `Up`  |  `Down`  |              |            |      |
- | Other Keys  |           |          |        |          |  `Space Bar` |    `E`     | `H`  |
+## Default Controls
+### KeyBoard
+ |Keys         | Move Right| Move Left| Move Up| Move Down|    Attack    | Interact   | Heal | Switch Weapons|
+ |:-----------:| :--------:| :-------:|:------:|:--------:|:------------:|:----------:|:----:|:-------------:|
+ |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |              |            |      |               |
+ | Arrow Keys  |  `Right`  |  `Left`  |  `Up`  |  `Down`  |              |            |      |               |  
+ | Other Keys  |           |          |        |          |  `Space Bar` |    `E`     | `H`  |       `Q`     |
+
+ ### GamePad
+ |Buttons        |   Move Right      |     Move Left    |      Move Up     |      Move Down   |    Attack | Interact  | Heal | Switch Weapons|
+ |:-------------:|:-----------------:|:----------------:|:----------------:|:----------------:|:---------:|:---------:|:----:|:-------------:|
+ | Left Joystick |  `Right Direction`|  `Left Direction`|  `Up Direction`  |  `Down Direction`|           |           |      |               |
+ | DPad          |  `Right`          |  `Left`          |  `Up`            |  `Down`          |           |           |      |               |  
+ | Other Buttons |                   |                  |                  |                  |  `Left `  | `Down`    | `Up` |   `Left`      |
+
  
 ## Team
 We are Arcadia Labs, a team of Master’s students specializing in Digital Game Development at the University of Aveiro. 
