@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The PlayerActions class is responsible for handling the player's actions.
@@ -25,15 +26,17 @@ public class PlayerActions : MonoBehaviour
     private bool playerArmed = false;
 
     /// <summary>
-    /// The animator property is responsible for storing the player's animator.
-    /// </summary>
-    private Animator animator;
-
-    /// <summary>
     /// The playerInventory property is responsible for storing the player's inventory.
     /// </summary>
     private PlayerInventory playerInventory;
 
+    /// <summary>
+    /// The healInput, interactInput, switchWeaponsInput and attackInput properties are responsible for storing the player's input actions.
+    /// These properties 
+    /// These properties are serialized to be set in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private InputActionReference healInput, interactInput, switchWeaponsInput, attackInput;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -42,7 +45,6 @@ public class PlayerActions : MonoBehaviour
     private void Awake()
     {
         playerMaxHealth = GetComponent<Entity>().maxHealth;
-        animator = GetComponent<Entity>().animator;
         playerInventory = GetComponent<PlayerInventory>();
     }
 
@@ -53,12 +55,12 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (healInput.action.triggered)
         {
             HealPlayer();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && SwitchHeaponsConditions()){
+        if (switchWeaponsInput.action.triggered && SwitchHeaponsConditions()){
             SwitchWeapons();   
         }
     }
@@ -82,7 +84,7 @@ public class PlayerActions : MonoBehaviour
 
             playerArmed = true;
 
-            animator.SetBool("HasWeapon", true);
+            GetComponent<Player>().animator.SetBool("HasWeapon", true);
         }
 
         DestroyCollectable();
@@ -235,5 +237,27 @@ public class PlayerActions : MonoBehaviour
  
                 return;
         }
+    }
+
+    /// <summary>
+    ///  The InteractInputTriggered method is responsible for checking if the player interact input is triggered.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the interact input is triggered; otherwise, <c>false</c>.
+    /// </returns>
+    public bool InteractInputTriggered()
+    {
+        return interactInput.action.triggered;
+    }
+
+    /// <summary>
+    /// The AttackInputTriggered method is responsible for checking if the player attack input is triggered.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the attack input is triggered; otherwise, <c>false</c>.
+    /// </returns>
+    public bool AttackInputTriggered()
+    {
+        return attackInput.action.triggered;
     }
 }

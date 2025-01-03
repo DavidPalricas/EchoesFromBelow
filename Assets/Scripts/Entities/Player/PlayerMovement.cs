@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The PlayerMovement class is responsible for handling the player's movement.
@@ -22,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 speedVector;
 
     /// <summary>
+    /// The movementInput property is responsible for storing the player's movement input.
+    /// It is serialized so it can be modified in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private InputActionReference movementInput;
+
+    /// <summary>
     /// The Start method is called before the first frame update (Unity Method).
     /// </summary>
     private void Start()
@@ -35,20 +43,21 @@ public class PlayerMovement : MonoBehaviour
         entityFSM.ChangeState(new EntityIdleState(entityFSM));
     }
 
+    /// <summary>
+    /// The MovePlayer method is responsible for moving the player.
+    /// </summary>
     public void MovePlayer()
-    {
-        // Get raw input for sharp and precise movement
-        float speedX = Input.GetAxisRaw("Horizontal");
-        float speedY = Input.GetAxisRaw("Vertical");
-
+    {   
         // Create a movement vector and normalize it
-        speedVector = new Vector2(speedX, speedY).normalized;
+        speedVector = movementInput.action.ReadValue<Vector2>().normalized;
 
         // Apply velocity directly to the Rigidbody2D
         player.velocity = speed * speedVector;
     }
 
-
+    /// <summary>
+    /// The StopPlayer method is responsible for stopping the player.
+    /// </summary>
     public void StopPlayer()
     {
         if (speedVector == Vector2.zero)
@@ -73,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
             }        
         }
     }
-
 
     /// <summary>
     /// The OnCollisionExit2D method is called when the player exits a collision (Unity Method).
