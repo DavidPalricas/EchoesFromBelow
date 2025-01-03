@@ -8,18 +8,18 @@ As you navigate oppressive, ancient corridors, you'll face fantastical creatures
 
 ## Default Controls
 ### KeyBoard
- |Keys         | Move Right| Move Left| Move Up| Move Down|    Attack    | Interact   | Heal | Switch Weapons|
- |:-----------:| :--------:| :-------:|:------:|:--------:|:------------:|:----------:|:----:|:-------------:|
- |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |              |            |      |               |
- | Arrow Keys  |  `Right`  |  `Left`  |  `Up`  |  `Down`  |              |            |      |               |  
- | Other Keys  |           |          |        |          |  `Space Bar` |    `E`     | `H`  |       `Q`     |
+ |Keys         | Move Right| Move Left| Move Up| Move Down|    Attack    | Interact   | Heal | Switch Weapons|Pause/Unpause Game|
+ |:-----------:| :--------:| :-------:|:------:|:--------:|:------------:|:----------:|:----:|:-------------:|:----------------:|
+ |WASD Keys    |     `D`   |    `A`   |  `W`   |   `S`    |              |            |      |               |                  |
+ | Arrow Keys  |  `Right`  |  `Left`  |  `Up`  |  `Down`  |              |            |      |               |                  |
+ | Other Keys  |           |          |        |          |  `Space Bar` |    `E`     | `H`  |       `Q`     |  `Escape`        | 
 
  ### GamePad
- |Buttons        |   Move Right      |     Move Left    |      Move Up     |      Move Down   |    Attack | Interact  | Heal | Switch Weapons|
- |:-------------:|:-----------------:|:----------------:|:----------------:|:----------------:|:---------:|:---------:|:----:|:-------------:|
- | Left Joystick |  `Right Direction`|  `Left Direction`|  `Up Direction`  |  `Down Direction`|           |           |      |               |
- | DPad          |  `Right`          |  `Left`          |  `Up`            |  `Down`          |           |           |      |               |  
- | Other Buttons |                   |                  |                  |                  |  `Left`   | `Down`    | `Up` |   `Left`      |
+ |Buttons        |   Move Right      |     Move Left    |      Move Up     |      Move Down   |    Attack | Interact  | Heal | Switch Weapons|Pause/Unpause Game|
+ |:-------------:|:-----------------:|:----------------:|:----------------:|:----------------:|:---------:|:---------:|:----:|:-------------:|:-----------------:|
+ | Left Joystick |  `Right Direction`|  `Left Direction`|  `Up Direction`  |  `Down Direction`|           |           |      |               |                   |
+ | DPad          |  `Right`          |  `Left`          |  `Up`            |  `Down`          |           |           |      |               |                   |
+ | Other Buttons |                   |                  |                  |                  |  `Left`   | `Down`    | `Up` |   `Left`      |  `Start`          |
 
  
 ## Team
