@@ -101,7 +101,7 @@ public class EntityIdleState : EntityStateBase
             return;
         }
 
-        if (player.attack.enabled && player.GetComponent<PlayerActions>().AttackInputTriggered())
+        if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
         {
             entityFSM.ChangeState(new EntityAttackState(entityFSM));
         }

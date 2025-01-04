@@ -56,7 +56,7 @@ public class EntityMovementState : EntityStateBase
 
         player.lastMovingDirection = player.movement.speedVector;
 
-        if (Input.GetKeyDown(KeyCode.Space) && player.attack.enabled)
+        if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
         {
             entityFSM.entityProprieties.lastMovingDirection = player.movement.speedVector;
             player.movement.StopPlayer();

@@ -33,7 +33,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// </summary>
     private void Update()
     {
-        if (playerDetected && playerActions.InteractInputTriggered() && CheckConditionsToOpenGate())
+        if (playerDetected && InteractInputTriggered() && CheckConditionsToOpenGate())
         {
             OpenGate();
         }

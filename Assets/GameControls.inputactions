@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause/Unpause",
+                    "type": "Button",
+                    "id": "c297f689-384a-4de6-81a7-5b8f4451fa6c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -359,32 +368,26 @@
                     "action": "SwitchWeapons",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PauseMenu",
-            "id": "b390cdf7-7479-401b-a01d-a46b7db5960d",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "ce6f71e5-2ae3-4d71-a8c0-73dee16b27f1",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "9f1bf697-93a7-4a88-b4ae-05135bc40003",
-                    "path": "",
+                    "id": "aec0ad2d-eac3-4972-8e99-68ac4b9f5fb3",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Pause/Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b34ed082-77d7-40b9-aa3c-1f38aa29bad9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause/Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
