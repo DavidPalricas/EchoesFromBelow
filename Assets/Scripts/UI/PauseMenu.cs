@@ -81,7 +81,7 @@ public class PauseMenu : MonoBehaviour
     {
         foreach (var action in playerInput.actions)
         {
-            if (action.name != "Pause/Unpause")
+            if (action.name != "PauseUnpause")
             {
                 if (gameIsPaused)
                 {
