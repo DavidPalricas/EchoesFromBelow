@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -19,6 +20,12 @@ public class AttackArea : MonoBehaviour
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, the meleeDamage and isPlayer variables are initialized.
     /// </summary>
+    /// 
+
+    /// <summary>
+    /// Variable to hold the Sprite Renderer of the attacked entity.
+    /// </summary>
+    private SpriteRenderer targetSpriteRenderer;
     private void Awake()
     {
         meleeDamage = GetComponentInParent<Entity>().attackDamage;
@@ -37,13 +44,32 @@ public class AttackArea : MonoBehaviour
         if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
             collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
+
+            targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
+            targetSpriteRenderer.color = Color.red;
+
+            // Start the coroutine to reset the color
+            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
+        // Enemy attacked the player
         else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
         {
             Player player = collider.GetComponent<Player>();
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
+
+            targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
+            targetSpriteRenderer.color = Color.red;
+
+            // Start the coroutine to reset the color
+            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
+    }
+
+    private IEnumerator ResetColorAfterHit(SpriteRenderer spriteRenderer, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        spriteRenderer.color = Color.white;
     }
 }
