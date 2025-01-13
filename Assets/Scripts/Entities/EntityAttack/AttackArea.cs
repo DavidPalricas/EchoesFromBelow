@@ -46,7 +46,7 @@ public class AttackArea : MonoBehaviour
             collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
 
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
-            targetSpriteRenderer.color = Color.red;
+            targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 
             // Start the coroutine to reset the color
             StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
@@ -60,7 +60,7 @@ public class AttackArea : MonoBehaviour
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
 
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
-            targetSpriteRenderer.color = Color.red;
+            targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 
             // Start the coroutine to reset the color
             StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
