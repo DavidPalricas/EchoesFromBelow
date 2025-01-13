@@ -1,19 +1,28 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// The Utils class is responsible for storing utility methods that can be used in different parts of the game.
 /// Such as normalizing a direction vector.
 /// </summary>
-public static class Utils 
-{   
+public static class Utils
+{
+    /// <summary>
+    /// The IsKeyBoardBinding property is responsible for storing if the player seleceted the key board binding settings or not.
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if the player seleceted the key board binding settings ; otherwise, <c>false</c>.
+    /// </value>
+    public static bool IsKeyBoardBinding { get; set; }
+
     /// <summary>
     /// The  GetUnitaryVector method is responsible for getting a unitary vector from a direction vector.
     /// </summary>
     /// <returns>A unitary vector </returns>
     public static Vector2 GetUnitaryVector(Vector2 directionVector)
-    {   
+    {
         float xDirection = Mathf.Round(directionVector.x);
         float yDirection = Mathf.Round(directionVector.y);
 
@@ -43,7 +52,7 @@ public static class Utils
     public static IEnumerator WaitForAnimationEnd(Animator animator, string animationName, System.Action callback)
     {
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName(animationName))
-        {   
+        {
             yield return null;
         }
 
@@ -77,5 +86,19 @@ public static class Utils
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         return player.GetComponent<Player>().entityFSM.entitycurrentHealth > 0;
+    }
+
+
+    /// <summary>
+    /// The LoadAndApplyBindings method is responsible for loading and applying if there are any player's input preferences saved.
+    /// </summary>
+    public static void LoadAndApplyBindings(PlayerInput playerInput)
+    {
+        string rebinds = PlayerPrefs.GetString("inputBindings", string.Empty);
+
+        if (!string.IsNullOrEmpty(rebinds))
+        {
+            playerInput.actions.LoadBindingOverridesFromJson(rebinds);
+        }
     }
 }

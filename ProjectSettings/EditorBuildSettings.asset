@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 6124de9136768a04cb690ea5b8b4ea95
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Menus/MainMenu.unity
     guid: 2b378e3d04d789c4dafefa11400ec06e
   - enabled: 1
     path: Assets/Scenes/First Level.unity
@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: 72b0eb1340257ec4d8bb6fcd908e984e
+  - enabled: 1
+    path: Assets/Scenes/Menus/ControlsMenu.unity
+    guid: 4c9f838c89d7c1c4fa575e3beaf60a49
+  - enabled: 1
+    path: Assets/Scenes/Menus/BindingsMenu.unity
+    guid: b22b9803590ad3c49a96b35f199d9953
   m_configObjects: {}
