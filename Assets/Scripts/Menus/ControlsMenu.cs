@@ -15,6 +15,7 @@ public class ControlsMenu : MonoBehaviour
     public void KeyBoardBindings()
     {
         rebindingMenu.actionIndex = 0;
+        rebindingMenu.UpdateUIText();
     }
 
     /// <summary>
@@ -23,5 +24,6 @@ public class ControlsMenu : MonoBehaviour
     public void GamePadBindings()
     {
         rebindingMenu.actionIndex = 1;
+        rebindingMenu.UpdateUIText();
     }
 }

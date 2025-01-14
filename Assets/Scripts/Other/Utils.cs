@@ -10,14 +10,6 @@ using UnityEngine.InputSystem;
 public static class Utils
 {
     /// <summary>
-    /// The IsKeyBoardBinding property is responsible for storing if the player seleceted the key board binding settings or not.
-    /// </summary>
-    /// <value>
-    ///   <c>true</c> if the player seleceted the key board binding settings ; otherwise, <c>false</c>.
-    /// </value>
-    public static bool IsKeyBoardBinding { get; set; }
-
-    /// <summary>
     /// The  GetUnitaryVector method is responsible for getting a unitary vector from a direction vector.
     /// </summary>
     /// <returns>A unitary vector </returns>
