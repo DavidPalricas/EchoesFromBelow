@@ -133,13 +133,13 @@ public class PlayerInventory : MonoBehaviour
 
     private bool RightKeyGrabbed()
     {
-        // Gets the key and its values (true or false)
         Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
 
-        Debug.Log("Keys Left : " + GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Count);
+        Debug.Log("Keys Left : " + keys.Count);
 
-        return (!keys.Values.Any(value => value));
+        return keys.Values.All(value => !value);
     }
+
 
     /// <summary>
     /// The UpdateInventory method is responsible for updating the player's inventory and HUD when a collectable item is grabbed.
