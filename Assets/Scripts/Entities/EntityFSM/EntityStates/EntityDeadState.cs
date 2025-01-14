@@ -105,12 +105,14 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     private void RespawnPlayer()
     {
-        entityFSM.StartCoroutine(Utils.Wait(4f, () =>
+        entityFSM.StartCoroutine(Utils.Wait(3f, () =>
         {    
             Player player = entityFSM.entityProprieties as Player;
 
             player.entityFSM.entitycurrentHealth = player.maxHealth;
             player.healthBar.UpdateLabel(player.maxHealth);
+
+            player.GetComponent<SpriteRenderer>().color = Color.white;
 
             player.entityRigidBody.transform.position = player.spawnPoint;
 
@@ -144,8 +146,8 @@ public class EntityDeadState : EntityStateBase
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = enemySprite.sprite;
         deadBodySprite.sortingOrder = enemySprite.sortingOrder;
-        deadBodySprite.color = enemySprite.color;
-        
+        deadBodySprite.color = Color.white;
+
         entityFSM.DestroyGameObject(enemy.gameObject);
     }
 }

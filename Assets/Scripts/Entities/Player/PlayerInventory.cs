@@ -115,6 +115,12 @@ public class PlayerInventory : MonoBehaviour
         {
             flaskQuantity.color = new Color32(255, 178, 0, 255);
         }
+        else
+        {
+
+            flaskQuantity.color = Color.white;
+
+        }
     }
 
     /// <summary>
@@ -176,6 +182,13 @@ public class PlayerInventory : MonoBehaviour
         if (Items["HealItems"] == 0)
         {
             flaskIcon.SetActive(false);
+        }
+
+        if (Items["HealItems"] < MaxHealItems)
+        {
+
+            flaskQuantity.color = Color.white;
+
         }
 
         flaskQuantity.text = Items["HealItems"].ToString();
