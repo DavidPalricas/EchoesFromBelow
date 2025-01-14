@@ -36,7 +36,7 @@ public class RebindingMenu : MonoBehaviour
     /// The action index property is responsible for storing the index of the action.
     /// 0 for keyboard and 1 for gamepad.
     /// </summary>
-    private int actionIndex;
+    public int actionIndex;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity method).
@@ -44,10 +44,10 @@ public class RebindingMenu : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        actionIndex = Utils.IsKeyBoardBinding ? 0 : 1;
-        Debug.Log("Action index: " + actionIndex);
+        //actionIndex = Utils.IsKeyBoardBinding ? 0 : 1;
         Utils.LoadAndApplyBindings(playerInput);
         UpdateUIText();
+        Debug.Log("Action index: " + actionIndex);
     }
 
     /// <summary>
@@ -123,7 +123,7 @@ public class RebindingMenu : MonoBehaviour
         }
         else if (actionIndex == 1) 
         {
-            rebindOperation.WithControlsExcluding("<Keyboard>").WithControlsExcluding("<Mouse>"); 
+            rebindOperation.WithControlsExcluding("<Keyboard>"); 
         }
 
 
