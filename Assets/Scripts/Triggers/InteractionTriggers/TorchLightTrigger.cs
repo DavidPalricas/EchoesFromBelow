@@ -24,6 +24,15 @@ public class TorchLightTrigger : BaseInteractionTrigger
     [SerializeField]
     private GameObject torchUnlit;
 
+    [SerializeField]
+    private bool isTutorial;
+
+    [SerializeField]
+    private GameObject tutorialText;
+
+    [SerializeField]
+    private GameObject tutorialCollider;
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected and if the player interact input was triggred
@@ -34,6 +43,12 @@ public class TorchLightTrigger : BaseInteractionTrigger
         if (!isTorchLit && playerDetected && InteractInputTriggered())
         {
             LitTorch();
+
+            if (isTutorial)
+            {
+                Destroy(tutorialText);
+                tutorialCollider.SetActive(false);
+            }
         }
     }
 
