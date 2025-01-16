@@ -202,6 +202,9 @@ MonoBehaviour:
   playerActions: {fileID: 7641519816493334048, guid: 2f7cd5c2108cf934dad1093da953bccc, type: 3}
   torchLit: {fileID: 1161488174482932207}
   torchUnlit: {fileID: 1421236661688594711}
+  tutorialText: {fileID: 0}
+  tutorialCollider: {fileID: 0}
+  isTutorial: 0
 --- !u!1 &1421236661688594711
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,10 +444,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
   m_Color: {r: 0.8301887, g: 0.6286196, b: 0.21537916, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 19a5e07b000000004f0724b0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -463,7 +466,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 4
-  m_PointLightOuterRadius: 33
+  m_PointLightOuterRadius: 37
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

@@ -308,7 +308,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1732337687974722496}
   - component: {fileID: 7466673950401265119}
-  - component: {fileID: 5188873504962630395}
   m_Layer: 0
   m_Name: collider_texto
   m_TagString: Untagged
@@ -376,19 +375,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.115163, y: 2.90371}
   m_EdgeRadius: 0
---- !u!114 &5188873504962630395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2538141677379508079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebf35688de42594682c32ff6aef7dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 679047014355107318}
 --- !u!1 &3207018007551684260
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,10 +425,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
   m_Color: {r: 0.8301887, g: 0.6286196, b: 0.21537916, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 19a5e07b000000004f0724b0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -461,7 +447,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 4
-  m_PointLightOuterRadius: 33
+  m_PointLightOuterRadius: 37
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -870,6 +856,6 @@ MonoBehaviour:
   playerActions: {fileID: 7641519816493334048, guid: 2f7cd5c2108cf934dad1093da953bccc, type: 3}
   torchLit: {fileID: 5104822558818554642}
   torchUnlit: {fileID: 5088201256166220219}
-  isTutorial: 1
   tutorialText: {fileID: 679047014355107318}
   tutorialCollider: {fileID: 6440610739380325598, guid: 95632397b8bb86f4c8d7a868c5144245, type: 3}
+  isTutorial: 1

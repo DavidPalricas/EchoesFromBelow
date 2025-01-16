@@ -145,7 +145,7 @@ public class EntityDeadState : EntityStateBase
 
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = enemySprite.sprite;
-        deadBodySprite.sortingOrder = enemySprite.sortingOrder;
+        deadBodySprite.sortingOrder = 2;
         deadBodySprite.color = Color.white;
 
         entityFSM.DestroyGameObject(enemy.gameObject);
