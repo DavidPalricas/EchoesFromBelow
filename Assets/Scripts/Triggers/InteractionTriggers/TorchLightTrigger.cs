@@ -11,27 +11,17 @@ public class TorchLightTrigger : BaseInteractionTrigger
     private bool isTorchLit = false;
 
     /// <summary>
-    /// The torchLit property is responsible for storing the torch with light game object.
+    /// The torchlit, torchUnlit, tutorialText and tutorialCollider properties are responsible for storing the torch lit, torch unlit, tutorial text and tutorial collider game objects respectively.
     /// It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject torchLit;
+    private GameObject torchLit, torchUnlit,tutorialText, tutorialCollider;
 
     /// <summary>
-    /// The torchUnlit property is responsible for storing the torch without light game object.
-    /// It is serialized to be set in the Unity Editor.
+    /// The isTutorial property is responsible for storing if the torch is a tutorial torch or not.
     /// </summary>
     [SerializeField]
-    private GameObject torchUnlit;
-
-    [SerializeField]
     private bool isTutorial;
-
-    [SerializeField]
-    private GameObject tutorialText;
-
-    [SerializeField]
-    private GameObject tutorialCollider;
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
@@ -46,10 +36,22 @@ public class TorchLightTrigger : BaseInteractionTrigger
 
             if (isTutorial)
             {
-                Destroy(tutorialText);
-                tutorialCollider.SetActive(false);
+                DestroyTutorialToLitTorch();
             }
         }
+    }
+
+    /// <summary>
+    /// The DestroyTutorialToLitTorch method is responsible for destroying all the tutorial things related to the lit torch tutorial.
+    /// This things are the tutorial text and the tutorial collider (invisible wall).
+    /// </summary>
+    private void DestroyTutorialToLitTorch()
+    {
+        Destroy(tutorialText);
+
+        tutorialCollider.SetActive(false);
+
+        isTutorial = false;
     }
 
     /// <summary>
@@ -60,6 +62,11 @@ public class TorchLightTrigger : BaseInteractionTrigger
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
+
+        if (isTutorial && playerDetected)
+        {
+            tutorialText.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -70,6 +77,11 @@ public class TorchLightTrigger : BaseInteractionTrigger
     protected override void OnTriggerExit2D(Collider2D collision)
     {
         base.OnTriggerExit2D(collision);
+
+        if (isTutorial)
+        {
+            tutorialText.SetActive(false);
+        }
     }
 
     /// <summary>

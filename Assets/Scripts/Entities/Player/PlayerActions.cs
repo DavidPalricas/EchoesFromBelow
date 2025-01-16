@@ -94,7 +94,7 @@ public class PlayerActions : MonoBehaviour
 
     /// <summary>
     /// The GrabKey method is responsible for grabbing the key if the player doesn't have a key in the inventory.
-    /// It adds a key to the player's inventory, removes the key from the level and spawns an horde of enemies.
+    /// It adds a key to the player's inventory, removes the key from the level.
     /// </summary>
     private void GrabKey()
     {   
@@ -102,16 +102,10 @@ public class PlayerActions : MonoBehaviour
         {   
             GameObject keyToDestroy = DestroyCollectable();
 
-            playerInventory.UpdateInventory(Utils.CollectableType.Key);
-
             // Removes the key from the dictionary which stores the keys and their values
             GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
 
-            Dictionary<string, int> Items = playerInventory.Items;
-
-            SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
-
-            spawnHord.SpawnKeyHorde(Items["Key"] == 2);
+            playerInventory.UpdateInventory(Utils.CollectableType.Key);
         } 
     }
 
@@ -227,7 +221,6 @@ public class PlayerActions : MonoBehaviour
                 return;
 
             case Utils.CollectableType.Key:
-                Debug.Log("Grab Key");
                 GrabKey();
 
                 return;

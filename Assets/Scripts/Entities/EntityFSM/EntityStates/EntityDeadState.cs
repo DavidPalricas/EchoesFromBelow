@@ -19,7 +19,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Dead State");
+        // Debug.Log("Entering Dead State");
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
@@ -43,7 +43,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Execute()
     {
-        Debug.Log("Executing Dead State");
+        // Debug.Log("Executing Dead State");
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Dead State");
+        // Debug.Log("Exiting Dead State");
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     private void CreateEnemyDeadBody()
     {
-        Debug.Log("Creating dead body");
+        // Debug.Log("Creating dead body");
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 

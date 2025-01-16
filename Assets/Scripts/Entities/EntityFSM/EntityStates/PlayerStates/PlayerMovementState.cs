@@ -29,7 +29,7 @@ public class EntityMovementState : EntityStateBase
 
         UpdateAnimator();
 
-        Debug.Log("Entering Move State");
+        // Debug.Log("Entering Move State");
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public class EntityMovementState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Move State");
+        // Debug.Log("Exiting Move State");
     }
 
     /// <summary>

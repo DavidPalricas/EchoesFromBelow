@@ -22,7 +22,7 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Chase State");
+        // Debug.Log("Entering Chase State");
 
         entityAnimator = entityFSM.entityProprieties.animator;
     }
@@ -34,7 +34,7 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Execute()
     {   
-        Debug.Log("Executing Chase State");
+        // Debug.Log("Executing Chase State");
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
@@ -103,7 +103,7 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Chase State");
+        // Debug.Log("Exiting Chase State");
     }
 
     /// <summary>

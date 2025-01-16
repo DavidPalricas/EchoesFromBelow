@@ -17,7 +17,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Idle State");
+        // Debug.Log("Entering Idle State");
         entityAnimator = entityFSM.entityProprieties.animator;
 
         UpdateAnimator();
@@ -33,7 +33,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Execute()
     {   
-        Debug.Log("Executing Idle State");
+        // Debug.Log("Executing Idle State");
 
         if (entityFSM.entitycurrentHealth <= 0)
         {
@@ -57,7 +57,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Idle State");
+        // Debug.Log("Exiting Idle State");
     }
 
     /// <summary>

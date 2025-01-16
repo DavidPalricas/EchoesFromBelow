@@ -19,7 +19,7 @@ public class EntityAttackState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        // Debug.Log("Entering Attack State");
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
@@ -59,7 +59,7 @@ public class EntityAttackState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        // Debug.Log("Exiting Attack State");
         entityAnimator.SetBool("IsAttacking", false);
     }
 

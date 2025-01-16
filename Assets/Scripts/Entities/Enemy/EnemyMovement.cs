@@ -113,14 +113,8 @@ public class EnemyMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
         // This line is used to draw a ray in the scene view for debugging purposes
-         Debug.DrawRay(enemyRigidBody.position, directionToPlayer * rayCastDistance, Color.yellow);
-        
-        if (hit.collider != null)
-        {
-            Debug.Log(directionToPlayer + "-> " + Utils.GetUnitaryVector(directionToPlayer));
-        }
+        // Debug.DrawRay(enemyRigidBody.position, directionToPlayer * rayCastDistance, Color.yellow);
 
-     
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 
