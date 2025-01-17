@@ -15,10 +15,8 @@ public class SoundManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat("musicVolume", 1);
         }
-        else
-        {
-            Load();
-        }
+
+        Load();
     }
 
     public void ChangeVolume()
