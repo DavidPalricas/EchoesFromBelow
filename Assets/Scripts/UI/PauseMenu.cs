@@ -13,6 +13,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuPanel;
 
+    [SerializeField]
+    private GameObject gameUI;
+
     /// <summary>
     /// The playerActions property is responsible for storing the player actions component.
     /// It is serialized to be set in the Unity Editor.
@@ -64,6 +67,7 @@ public class PauseMenu : MonoBehaviour
     {   
         gameIsPaused = !gameIsPaused;
 
+        gameUI.SetActive(!gameIsPaused);
         pauseMenuPanel.SetActive(gameIsPaused);
 
         // Stops the time and everything in the game

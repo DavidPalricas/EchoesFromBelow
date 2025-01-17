@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,8 @@ public class ControlsMenu : MonoBehaviour
 {
     [SerializeField]
     private RebindingMenu rebindingMenu;
+
+    private GameObject dontDestroyOnLoad;
     
     /// <summary>
     /// The KeyBoardBindings method is responsible for loading the key board bindings menu.
@@ -25,5 +28,10 @@ public class ControlsMenu : MonoBehaviour
     {
         rebindingMenu.actionIndex = 1;
         rebindingMenu.UpdateUIText();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
