@@ -396,9 +396,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fced9b163b763e347813b19eea04b657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 15
   speed: 3
-  attackDamage: 4
+  attackDamage: 10
   animator: {fileID: 5023647670042829034}
   entityFSM: {fileID: 6397195189920809626}
   entityRigidBody: {fileID: 0}
@@ -700,7 +700,7 @@ RectTransform:
   m_Father: {fileID: 783937267400818427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -155,7 +155,7 @@ public class SpawnHorde : MonoBehaviour
     {
         enemiesSpawned = 0;
 
-        hordeSize += Mathf.RoundToInt(hordeSize /= 2);
+        // hordeSize += Mathf.RoundToInt(hordeSize /= 2);
 
         if (playerHasRightKey)
         {

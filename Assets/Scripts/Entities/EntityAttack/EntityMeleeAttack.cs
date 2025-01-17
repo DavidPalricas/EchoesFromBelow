@@ -61,6 +61,9 @@ public class EntityMeleeAttack : EntityAttack
     {
         if (attacking)
         {
+            // !!!!!!!!!!!!!!
+            // 0.5f PARA O PLAYER, 1f PARA OS ESQUELETOS
+            // !!!!!!!!!!!!!!
             StartCoroutine(Utils.Wait(0.5f, () =>
             {
                 attacking = false;

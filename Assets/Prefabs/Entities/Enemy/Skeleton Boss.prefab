@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fced9b163b763e347813b19eea04b657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 50
   speed: 2
-  attackDamage: 4
+  attackDamage: 20
   animator: {fileID: 5023647670042829034}
   entityFSM: {fileID: 1963104146521824594}
   entityRigidBody: {fileID: 0}
@@ -205,7 +205,6 @@ MonoBehaviour:
   IsRanged: 0
   IsIndependent: 0
   movement: {fileID: 0}
-  bossHealthBar: {fileID: 0}
 --- !u!95 &5023647670042829034
 Animator:
   serializedVersion: 5
