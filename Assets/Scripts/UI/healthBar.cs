@@ -19,13 +19,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Image fill;
 
+    [SerializeField]
+    private GameObject player;
+
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are setting the maximum value of the slider to the player's health.
     /// The slider current value is also set, in this case, it is equal to the maximum value.
     /// </summary>
     private void Awake(){
-        slider.maxValue = GameObject.Find("Player"). GetComponent<Entity>().maxHealth;
+        slider.maxValue = player.GetComponent<Entity>().maxHealth;
         slider.value = slider.maxValue;
     }
 

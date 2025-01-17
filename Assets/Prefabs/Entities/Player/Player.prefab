@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4012519553707733667}
   - component: {fileID: 7641519816493334048}
   - component: {fileID: 620849192762448018}
-  - component: {fileID: 6555994045313621098}
   - component: {fileID: 4115807595486131082}
   - component: {fileID: 1318209133456532555}
   - component: {fileID: -566987698254412420}
@@ -22,6 +21,7 @@ GameObject:
   - component: {fileID: -6216490367219927351}
   - component: {fileID: 3395697710984638505}
   - component: {fileID: 847430891861300582}
+  - component: {fileID: 7153247059205019118}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -39,7 +39,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.0016791578, z: 0}
-  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3314350913495946539}
@@ -203,27 +203,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2547136, y: 0.72217417}
   m_EdgeRadius: 0
---- !u!95 &6555994045313621098
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827529518274912995}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 61bcba05ab05b944ebb73c88139dbd23, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4115807595486131082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,10 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a21d1ee5af6684184de62b1a0d86ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 80
+  maxHealth: 100
   speed: 10
-  attackDamage: 4
-  animator: {fileID: 6555994045313621098}
+  attackDamage: 5
+  animator: {fileID: 7153247059205019118}
   entityFSM: {fileID: -566987698254412420}
   entityRigidBody: {fileID: 0}
   attack: {fileID: 0}
@@ -354,6 +333,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 3395697710984638505}
+--- !u!95 &7153247059205019118
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827529518274912995}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 61bcba05ab05b944ebb73c88139dbd23, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &162705464032259031
 PrefabInstance:
   m_ObjectHideFlags: 0

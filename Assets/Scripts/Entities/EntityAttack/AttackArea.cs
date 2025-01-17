@@ -16,11 +16,7 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     private bool attackerIsPlayer;
 
-    /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// In this method, the meleeDamage and isPlayer variables are initialized.
-    /// </summary>
-    /// 
+    private bool isProcessingCollision = false;
 
     /// <summary>
     /// Variable to hold the Sprite Renderer of the attacked entity.
@@ -40,24 +36,28 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     /// <param name="collider">The collider or RigidBody2D of a game object.</param>
     private void OnTriggerEnter2D (Collider2D collider){
+        Debug.Log($"Collider triggered by {collider.gameObject.name}, attackerIsPlayer: {attackerIsPlayer}");
         // Player attacked an enemy
         if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
+            Debug.Log($"Player attacked enemy. Damage: {meleeDamage}");
             collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
 
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
             targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 
             // Start the coroutine to reset the color
-            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
+            // StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
         // Enemy attacked the player
         else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
         {
+            Debug.Log($"Enemy attacked player. Damage: {meleeDamage}");
             Player player = collider.GetComponent<Player>();
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
+            // Debug.Log(player.entityFSM.entitycurrentHealth);
 
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
             targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
