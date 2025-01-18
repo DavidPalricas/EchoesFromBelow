@@ -90,10 +90,18 @@ public class PlayerInventory : MonoBehaviour
     /// The UpdateKeyItem method is responsible for updating the key item in the player's inventory and its icon on the HUD.
     /// This method also checks if the player grabbed the right key to open the gate by calling the RightKeyGrabbed method.
     /// If the player grabbed the right key, its value is set to 2, otherwise it is set to 1.
+    /// And spawns the horde of enemies by calling the SpawnKeyHorde method from the SpawnHorde script.
     /// </summary>
     private void UpdateKeyItem()
     {
         Items["Key"] = RightKeyGrabbed() ? 2 : 1;
+
+        SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
+
+        Debug.Log("Key Value: " + Items["Key"]);
+
+        spawnHord.SpawnKeyHorde(Items["Key"] == 2);
+
         keyIcon.SetActive(true);
     }
 
@@ -115,6 +123,12 @@ public class PlayerInventory : MonoBehaviour
         {
             flaskQuantity.color = new Color32(255, 178, 0, 255);
         }
+        else
+        {
+
+            flaskQuantity.color = Color.white;
+
+        }
     }
 
     /// <summary>
@@ -127,13 +141,11 @@ public class PlayerInventory : MonoBehaviour
 
     private bool RightKeyGrabbed()
     {
-        // Gets the key and its values (true or false)
         Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
 
-        Debug.Log("Keys Left : " + GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Count);
-
-        return (!keys.Values.Any(value => value));
+        return keys.Values.All(value => !value);
     }
+
 
     /// <summary>
     /// The UpdateInventory method is responsible for updating the player's inventory and HUD when a collectable item is grabbed.
@@ -176,6 +188,13 @@ public class PlayerInventory : MonoBehaviour
         if (Items["HealItems"] == 0)
         {
             flaskIcon.SetActive(false);
+        }
+
+        if (Items["HealItems"] < MaxHealItems)
+        {
+
+            flaskQuantity.color = Color.white;
+
         }
 
         flaskQuantity.text = Items["HealItems"].ToString();

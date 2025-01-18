@@ -11,14 +11,9 @@ public abstract class Entity : MonoBehaviour
     public int maxHealth;
 
     /// <summary>
-    /// The speed property  is responsible for storing the entity's speed.
+    /// The speed, attackDamage, and attackCooldown properties are responsible for storing the entity's speed, attack damage, and attack cooldown.
     /// </summary>
-    public float speed;
-
-    /// <summary>
-    /// The attackDamage property  is responsible for storing the entity's attack damage.
-    /// </summary>
-    public float attackDamage;
+    public float speed, attackDamage, attackCooldown;
 
     /// <summary>
     /// Stores the animator.

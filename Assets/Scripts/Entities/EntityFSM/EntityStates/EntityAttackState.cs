@@ -19,7 +19,7 @@ public class EntityAttackState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Attack State");
+        // Debug.Log("Entering Attack State");
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
@@ -59,7 +59,7 @@ public class EntityAttackState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Attack State");
+        // Debug.Log("Exiting Attack State");
         entityAnimator.SetBool("IsAttacking", false);
     }
 
@@ -99,7 +99,7 @@ public class EntityAttackState : EntityStateBase
         }
 
         UpdateAnimator();
-        enemyAttack.Attack(enemyAttackDirection);
+        enemyAttack.Attack(enemyAttackDirection,enemyClass.attackCooldown);
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class EntityAttackState : EntityStateBase
 
         Vector2 playerAttackDirection = playerClass.lastMovingDirection;
 
-        if (playerAttackDirection == Vector2.zero)
+        if (playerAttackDirection == Vector2.zero || Utils.isSpeechActive)
         {   
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
             return;
@@ -125,7 +125,7 @@ public class EntityAttackState : EntityStateBase
 
         UpdateAnimator();
 
-        playerAttack.Attack(playerAttackDirection);
+        playerAttack.Attack(playerAttackDirection, playerClass.attackCooldown);
     }
 
     /// <summary>

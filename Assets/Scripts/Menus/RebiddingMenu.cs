@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -35,19 +34,18 @@ public class RebindingMenu : MonoBehaviour
     /// <summary>
     /// The action index property is responsible for storing the index of the action.
     /// 0 for keyboard and 1 for gamepad.
+    /// Is HideInInspector, to avoid changing it manually in the editor.
     /// </summary>
-    private int actionIndex;
+    [HideInInspector]
+    public int actionIndex;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity method).
-    /// In this method, the action index is set and the bindings are loaded, and the UI text is updated.
+    /// In this method, we are loading and applying the bindings by calling the LoadAndApplyBindings method.
     /// </summary>
     private void Awake()
     {
-        actionIndex = Utils.IsKeyBoardBinding ? 0 : 1;
-        Debug.Log("Action index: " + actionIndex);
         Utils.LoadAndApplyBindings(playerInput);
-        UpdateUIText();
     }
 
     /// <summary>
@@ -61,46 +59,6 @@ public class RebindingMenu : MonoBehaviour
 
         PlayerPrefs.SetString("inputBindings", rebinds);
         PlayerPrefs.Save();
-    }
-
-    /// <summary>
-    /// The UpdateUIText method is responsible for updating the UI text (action buttons text).
-    /// To update the action buttons text, the action bindings are loaded in order to get the key or button that is binded to the action.
-    /// </summary>
-    private void UpdateUIText()
-    {   
-        attackButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Attack"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        healButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Heal"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        healButton.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
-        attackButton.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
-
-        interactButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Interact"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        pauseButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["PauseUnpause"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        switchWeaponsButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["SwitchWeapons"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-
-        var buttons = new GameObject[] { attackButton, healButton, interactButton, pauseButton, switchWeaponsButton };
-
-        // In case if a duplicated binding is found, the colors of the action buttons are changed to the default colors
-        foreach (GameObject button in buttons)
-        {
-            button.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
-            button.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
-        }
     }
 
     /// <summary>
@@ -123,7 +81,7 @@ public class RebindingMenu : MonoBehaviour
         }
         else if (actionIndex == 1) 
         {
-            rebindOperation.WithControlsExcluding("<Keyboard>").WithControlsExcluding("<Mouse>"); 
+            rebindOperation.WithControlsExcluding("<Keyboard>"); 
         }
 
 
@@ -269,6 +227,45 @@ public class RebindingMenu : MonoBehaviour
         }
 
         WaitingForRebind(InputActionReference.Create(actionToRebind), button);
+    }
+
+    /// <summary>
+    /// The UpdateUIText method is responsible for updating the UI text (action buttons text).
+    /// To update the action buttons text, the action bindings are loaded in order to get the key or button that is binded to the action.
+    /// </summary>
+    public void UpdateUIText()
+    {
+        attackButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+            playerInput.actions["Attack"].bindings[actionIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+        healButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+            playerInput.actions["Heal"].bindings[actionIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+        healButton.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
+        attackButton.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
+
+        interactButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+            playerInput.actions["Interact"].bindings[actionIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+        pauseButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+            playerInput.actions["PauseUnpause"].bindings[actionIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+        switchWeaponsButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+            playerInput.actions["SwitchWeapons"].bindings[actionIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+        var buttons = new GameObject[] { attackButton, healButton, interactButton, pauseButton, switchWeaponsButton };
+
+        // In case if a duplicated binding is found, the colors of the action buttons are changed to the default colors
+        foreach (GameObject button in buttons)
+        {
+            button.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
+            button.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
+        }
     }
 
     /// <summary>

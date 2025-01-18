@@ -20,12 +20,19 @@ public class HealthBar : MonoBehaviour
     private Image fill;
 
     /// <summary>
+    /// The player property is responsible for storing the player's GameObject.
+    /// It is serialized so that it can be set in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private GameObject player;
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are setting the maximum value of the slider to the player's health.
     /// The slider current value is also set, in this case, it is equal to the maximum value.
     /// </summary>
     private void Awake(){
-        slider.maxValue = GameObject.Find("Player"). GetComponent<Entity>().maxHealth;
+        slider.maxValue = player.GetComponent<Entity>().maxHealth;
         slider.value = slider.maxValue;
     }
 
@@ -39,6 +46,5 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
 
         fill.color = slider.value <= 30 ? new Color32(207, 0, 4, (byte)(0.9f * 255)) : new Color32(77, 207, 0, (byte)(0.9f * 255));
-
     }
 }

@@ -192,9 +192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fced9b163b763e347813b19eea04b657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 50
   speed: 2
-  attackDamage: 4
+  attackDamage: 20
+  attackCooldown: 2
   animator: {fileID: 5023647670042829034}
   entityFSM: {fileID: 1963104146521824594}
   entityRigidBody: {fileID: 0}
@@ -202,7 +203,7 @@ MonoBehaviour:
   lastMovingDirection: {x: 0, y: -1}
   isBoss: 1
   bossDropItem: {fileID: 4279726040407628192, guid: e9af9346b962c61488190ea4fb1ddd43, type: 3}
-  IsLongRanged: 0
+  IsRanged: 0
   IsIndependent: 0
   movement: {fileID: 0}
 --- !u!95 &5023647670042829034
@@ -252,11 +253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcb5d3ac072ac9345b434397a6e0acea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacking: 0
   meleeLeft: {fileID: 1336788449587913793}
   meleeRight: {fileID: 1235687373376634438}
   meleeUp: {fileID: 4489900053715911245}
   meleeDown: {fileID: 8184823852469538538}
-  attacking: 0
 --- !u!1001 &2125554202570059007
 PrefabInstance:
   m_ObjectHideFlags: 0

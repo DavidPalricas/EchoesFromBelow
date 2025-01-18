@@ -19,7 +19,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Dead State");
+        // Debug.Log("Entering Dead State");
 
         entityAnimator = entityFSM.entityProprieties.animator;
 
@@ -43,7 +43,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Execute()
     {
-        Debug.Log("Executing Dead State");
+        // Debug.Log("Executing Dead State");
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Dead State");
+        // Debug.Log("Exiting Dead State");
     }
 
     /// <summary>
@@ -105,12 +105,14 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     private void RespawnPlayer()
     {
-        entityFSM.StartCoroutine(Utils.Wait(4f, () =>
+        entityFSM.StartCoroutine(Utils.Wait(3f, () =>
         {    
             Player player = entityFSM.entityProprieties as Player;
 
             player.entityFSM.entitycurrentHealth = player.maxHealth;
             player.healthBar.UpdateLabel(player.maxHealth);
+
+            player.GetComponent<SpriteRenderer>().color = Color.white;
 
             player.entityRigidBody.transform.position = player.spawnPoint;
 
@@ -128,7 +130,7 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     private void CreateEnemyDeadBody()
     {
-        Debug.Log("Creating dead body");
+        // Debug.Log("Creating dead body");
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
@@ -143,9 +145,9 @@ public class EntityDeadState : EntityStateBase
 
         SpriteRenderer deadBodySprite = deadBody.AddComponent<SpriteRenderer>();
         deadBodySprite.sprite = enemySprite.sprite;
-        deadBodySprite.sortingOrder = enemySprite.sortingOrder;
-        deadBodySprite.color = enemySprite.color;
-        
+        deadBodySprite.sortingOrder = 2;
+        deadBodySprite.color = Color.white;
+
         entityFSM.DestroyGameObject(enemy.gameObject);
     }
 }

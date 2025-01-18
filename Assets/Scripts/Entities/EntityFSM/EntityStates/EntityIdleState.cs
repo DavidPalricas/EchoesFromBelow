@@ -17,7 +17,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering Idle State");
+        // Debug.Log("Entering Idle State");
         entityAnimator = entityFSM.entityProprieties.animator;
 
         UpdateAnimator();
@@ -33,7 +33,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Execute()
     {   
-        Debug.Log("Executing Idle State");
+        // Debug.Log("Executing Idle State");
 
         if (entityFSM.entitycurrentHealth <= 0)
         {
@@ -57,7 +57,7 @@ public class EntityIdleState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Idle State");
+        // Debug.Log("Exiting Idle State");
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class EntityIdleState : EntityStateBase
     {
         Enemy enemy = (Enemy)entityFSM.entityProprieties;
 
-        if (Utils.IsPlayerAlive())
+        if (Utils.IsPlayerAlive() && !Utils.isSpeechActive)
         {
             if (!enemy.IsIndependent || enemy.IsIndependent && enemy.movement.PlayerInRange())
             {
@@ -92,18 +92,21 @@ public class EntityIdleState : EntityStateBase
     {
         Player player = (Player)entityFSM.entityProprieties;
   
-        player.movement.MovePlayer();
-
-        if (player.movement.speedVector != Vector2.zero)
+        if (!Utils.isSpeechActive)
         {
-            entityFSM.ChangeState(new EntityMovementState(entityFSM));
+            player.movement.MovePlayer();
 
-            return;
-        }
+            if (player.movement.speedVector != Vector2.zero && !Utils.isSpeechActive)
+            {
+                entityFSM.ChangeState(new EntityMovementState(entityFSM));
 
-        if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
-        {
-            entityFSM.ChangeState(new EntityAttackState(entityFSM));
+                return;
+            }
+
+            if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
+            {
+                entityFSM.ChangeState(new EntityAttackState(entityFSM));
+            }
         }
     }
 

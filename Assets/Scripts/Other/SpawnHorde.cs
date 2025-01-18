@@ -34,6 +34,9 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     private float spawnTime = 0f;
 
+    [SerializeField]
+    private GameObject bossHealthBar;
+
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, the spawnTime property is initialized, by calling the GetSpawnTime method.
@@ -138,6 +141,8 @@ public class SpawnHorde : MonoBehaviour
         GameObject boss = Instantiate(bossPrefab, bossPosition, Quaternion.identity);
 
         boss.GetComponent<Enemy>().Initialize();
+
+        bossHealthBar.SetActive(true);
     }
 
     /// <summary>
@@ -150,7 +155,7 @@ public class SpawnHorde : MonoBehaviour
     {
         enemiesSpawned = 0;
 
-        hordeSize += Mathf.RoundToInt(hordeSize /= 2);
+        // hordeSize += Mathf.RoundToInt(hordeSize /= 2);
 
         if (playerHasRightKey)
         {

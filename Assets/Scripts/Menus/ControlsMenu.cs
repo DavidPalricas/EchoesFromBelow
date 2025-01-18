@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,13 +7,18 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ControlsMenu : MonoBehaviour
 {
+    [SerializeField]
+    private RebindingMenu rebindingMenu;
+
+    private GameObject dontDestroyOnLoad;
+    
     /// <summary>
     /// The KeyBoardBindings method is responsible for loading the key board bindings menu.
     /// </summary>
     public void KeyBoardBindings()
     {
-        Utils.IsKeyBoardBinding = true;
-        SceneManager.LoadScene("BindingsMenu");
+        rebindingMenu.actionIndex = 0;
+        rebindingMenu.UpdateUIText();
     }
 
     /// <summary>
@@ -20,15 +26,12 @@ public class ControlsMenu : MonoBehaviour
     /// </summary>
     public void GamePadBindings()
     {
-        Utils.IsKeyBoardBinding = false;
-        SceneManager.LoadScene("BindingsMenu");
+        rebindingMenu.actionIndex = 1;
+        rebindingMenu.UpdateUIText();
     }
 
-    /// <summary>
-    /// The ReturnMainMenu method is responsible for returning to the main menu.
-    /// </summary>
-    public void ReturnMainMenu()
+    public void QuitGame()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
 }

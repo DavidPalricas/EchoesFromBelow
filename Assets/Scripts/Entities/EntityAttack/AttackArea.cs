@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -16,9 +17,9 @@ public class AttackArea : MonoBehaviour
     private bool attackerIsPlayer;
 
     /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// In this method, the meleeDamage and isPlayer variables are initialized.
+    /// Variable to hold the Sprite Renderer of the attacked entity.
     /// </summary>
+    private SpriteRenderer targetSpriteRenderer;
     private void Awake()
     {
         meleeDamage = GetComponentInParent<Entity>().attackDamage;
@@ -33,17 +34,46 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     /// <param name="collider">The collider or RigidBody2D of a game object.</param>
     private void OnTriggerEnter2D (Collider2D collider){
+        Debug.Log($"Collider triggered by {collider.gameObject.name}, attackerIsPlayer: {attackerIsPlayer}");
         // Player attacked an enemy
         if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
             collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
+
+            targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
+            targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
+
+            // Start the coroutine to reset the color
+            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
+        // Enemy attacked the player
         else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
         {
             Player player = collider.GetComponent<Player>();
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
+  
+            targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
+            targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
+
+            // Start the coroutine to reset the color
+            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
+    }
+
+    /// <summary>
+    /// The ResetColorAfterHit resets the entity sprite's color to white after being hit.
+    /// </summary>
+    /// <param name="spriteRenderer">The SpriteRenderer component whose color will be reset.</param>
+    /// <param name="delay">The time in seconds to wait before resetting the color.</param>
+    /// <returns>
+    /// An IEnumerator, allowing this method to be used in a coroutine for delayed execution.
+    /// </returns>
+    private IEnumerator ResetColorAfterHit(SpriteRenderer spriteRenderer, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        spriteRenderer.color = Color.white;
     }
 }

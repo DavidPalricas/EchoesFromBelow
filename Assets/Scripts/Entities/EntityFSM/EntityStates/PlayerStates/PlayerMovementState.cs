@@ -29,7 +29,7 @@ public class EntityMovementState : EntityStateBase
 
         UpdateAnimator();
 
-        Debug.Log("Entering Move State");
+        // Debug.Log("Entering Move State");
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class EntityMovementState : EntityStateBase
 
         player.movement.MovePlayer();
 
-        if (player.movement.speedVector == Vector2.zero)
+        if (player.movement.speedVector == Vector2.zero || Utils.isSpeechActive)
         {
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
 
@@ -75,7 +75,7 @@ public class EntityMovementState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting Move State");
+        // Debug.Log("Exiting Move State");
     }
 
     /// <summary>

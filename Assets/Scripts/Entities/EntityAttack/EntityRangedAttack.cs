@@ -15,19 +15,27 @@ public class EntityRangedAttack : EntityAttack
     /// The HandleAttackCooldown method is responsible for handling the enemy's attack cooldown.
     /// If the entity is attacking, a coroutine is started to wait 1.5 seconds and then the entity stops attacking.
     /// It overrides the HandleAttackCooldown method from the base class (EntityAttack).
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>""
     /// </summary>
-    protected override void HandleAttackCooldown()
+    protected override void HandleAttackCooldown(float attackCoolDown)
     {
         if (attacking)
         {
-            StartCoroutine(Utils.Wait(1.5f, () =>
+            StartCoroutine(Utils.Wait(attackCoolDown, () =>
             {
                 attacking = false;
             }));
         }
     }
 
-    public override void Attack(Vector2 attackDirection)
+    /// <summary>
+    /// The Attack method is responsible for handling the enemy's attack.
+    ///  It overrides the Attack method from the base class (EntityAttack).
+    ///  In this method, the entity's projetile is instantiated and its movement is set.
+    /// </summary>
+    /// <param name="attackDirection">The vector's attack direction of entity.</param>
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>
+    public override void Attack(Vector2 attackDirection, float attackCoolDown)
     {
         if (!attacking)
         {
@@ -44,7 +52,7 @@ public class EntityRangedAttack : EntityAttack
             newProjetileMovement.attackDirection = attackDirection;
             newProjetileMovement.playerThrown = GetComponent<EntityFSM>().entityProprieties is Player;
 
-            HandleAttackCooldown();
+            HandleAttackCooldown(attackCoolDown);
         }
     }
 }

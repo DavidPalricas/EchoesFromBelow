@@ -22,7 +22,7 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     /// </summary>
     public override void Enter()
     {
-        Debug.Log("Entering avoid obstacles state");
+        // Debug.Log("Entering avoid obstacles state");
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class EnemyAvoidObstaclesState : EntityStateBase
 
         alternativeDirection = enemyMovement.FindAlternativeDirection(directionToPlayer);
 
-        if (alternativeDirection == Vector2.zero)
+        if (alternativeDirection == Vector2.zero || Utils.isSpeechActive)
         {
             entityFSM.entityProprieties.lastMovingDirection = directionToPlayer;
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
@@ -79,7 +79,7 @@ public class EnemyAvoidObstaclesState : EntityStateBase
     /// </summary>
     public override void Exit()
     {
-        Debug.Log("Exiting avoid obstacles State");
+        // Debug.Log("Exiting avoid obstacles State");
     }
 
     /// <summary>

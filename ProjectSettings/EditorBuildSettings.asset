@@ -23,10 +23,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: 72b0eb1340257ec4d8bb6fcd908e984e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menus/ControlsMenu.unity
     guid: 4c9f838c89d7c1c4fa575e3beaf60a49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menus/BindingsMenu.unity
     guid: b22b9803590ad3c49a96b35f199d9953
   m_configObjects: {}
