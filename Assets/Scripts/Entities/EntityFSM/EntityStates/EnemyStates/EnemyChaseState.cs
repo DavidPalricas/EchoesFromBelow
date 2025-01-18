@@ -75,7 +75,7 @@ public class EnemyChaseState : EntityStateBase
             return true;
         }
 
-        if (independet && !enemyMovement.PlayerInRange() || !Utils.IsPlayerAlive())
+        if (independet && !enemyMovement.PlayerInRange() || !Utils.IsPlayerAlive() || Utils.isSpeechActive)
         {
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
             return true;

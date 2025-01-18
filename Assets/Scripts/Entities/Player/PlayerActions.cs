@@ -31,12 +31,12 @@ public class PlayerActions : MonoBehaviour
     private PlayerInventory playerInventory;
 
     /// <summary>
-    /// The healInput, interactInput, switchWeaponsInput, attackInput and pauseUnpauseInput  properties are responsible for storing the player's input actions.
+    /// The healInput, interactInput, switchWeaponsInput, attackInput and pauseUnpauseInput, skipDialogueInput  properties are responsible for storing the player's input actions.
     /// These properties 
     /// These properties are serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private InputActionReference healInput, interactInput, switchWeaponsInput, attackInput, pauseUnpauseInput;
+    private InputActionReference healInput, interactInput, switchWeaponsInput, attackInput, pauseUnpauseInput ,skipDialogueInput;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -252,6 +252,9 @@ public class PlayerActions : MonoBehaviour
 
             case "Attack":
                 return attackInput.action.triggered;
+
+            case "SkipDialogue":
+                return skipDialogueInput.action.triggered;
 
             default:
                 Debug.LogError("Invalid Input Name");

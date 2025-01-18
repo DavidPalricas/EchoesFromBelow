@@ -47,7 +47,7 @@ public class EntityMovementState : EntityStateBase
 
         player.movement.MovePlayer();
 
-        if (player.movement.speedVector == Vector2.zero)
+        if (player.movement.speedVector == Vector2.zero || Utils.isSpeechActive)
         {
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
 
