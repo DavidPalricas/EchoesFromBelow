@@ -18,14 +18,16 @@ public class EntityAttack : MonoBehaviour
     /// <summary>
     /// The HandleAttackCooldown method is responsible for handling the enemy's attack cooldown.
     /// It is a virtual method, so it can be overridden by the classes that inherit from this class.
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>"
     /// </summary>
-    protected virtual void HandleAttackCooldown() { }
+    protected virtual void HandleAttackCooldown(float attackCoolDown) { }
 
     /// <summary>
     /// The Attack method is responsible for handling the enemy's attack.
     /// It is a virtual method, so it can be overridden by the classes that inherit from this class.
     /// </summary>
-    /// <param name="attackDirection">The vector's attack direction.</param>
-    public virtual void Attack(Vector2 attackDirection) { }
+    /// <param name="attackDirection">The vector's attack direction of entity.</param>
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>
+    public virtual void Attack(Vector2 attackDirection, float attackCoolDown) { }
 
 }

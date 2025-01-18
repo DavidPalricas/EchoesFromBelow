@@ -191,6 +191,7 @@ MonoBehaviour:
   maxHealth: 10
   speed: 3
   attackDamage: 4
+  attackCooldown: 0.8
   animator: {fileID: 5023647670042829034}
   entityFSM: {fileID: 6397195189920809626}
   entityRigidBody: {fileID: 0}

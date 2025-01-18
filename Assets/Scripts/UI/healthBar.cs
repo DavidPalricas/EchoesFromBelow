@@ -19,6 +19,10 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Image fill;
 
+    /// <summary>
+    /// The player property is responsible for storing the player's GameObject.
+    /// It is serialized so that it can be set in the Unity Editor.
+    /// </summary>
     [SerializeField]
     private GameObject player;
 
@@ -42,6 +46,5 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
 
         fill.color = slider.value <= 30 ? new Color32(207, 0, 4, (byte)(0.9f * 255)) : new Color32(77, 207, 0, (byte)(0.9f * 255));
-
     }
 }

@@ -56,15 +56,16 @@ public class EntityMeleeAttack : EntityAttack
     /// It overrides the HandleAttackCooldown method from the base class (EntityAttack).
     /// If the entity is attacking, a coroutine is started to wait 1.5 seconds and then the entity stops attacking.
     /// After that, the entity's attack areas are deactivated.
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>"
     /// </summary>
-    protected override void HandleAttackCooldown()
+    protected override void HandleAttackCooldown(float attackCoolDown)
     {
         if (attacking)
         {
             // !!!!!!!!!!!!!!
             // 0.5f PARA O PLAYER, 1f PARA OS ESQUELETOS
             // !!!!!!!!!!!!!!
-            StartCoroutine(Utils.Wait(0.5f, () =>
+            StartCoroutine(Utils.Wait(attackCoolDown, () =>
             {
                 attacking = false;
 
@@ -77,8 +78,10 @@ public class EntityMeleeAttack : EntityAttack
     /// The Attack method is responsible for activating the entity's attack area and updating the entity's attack status.
     /// It overrides the Attack method from the base class (EntityAttack).
     /// It also desactivates the other attack areas.
+    /// <param name="attackDirection">The vector's attack direction of entity.</param>
+    /// <param name="attackCoolDown">The attack cooldown of entity.</param>
     /// </summary>
-    public override void Attack(Vector2 attackDirection)
+    public override void Attack(Vector2 attackDirection,float attackCoolDown)
     {
         SetAttackArea(attackDirection);
 
@@ -89,6 +92,6 @@ public class EntityMeleeAttack : EntityAttack
 
         attacking = true;
 
-        HandleAttackCooldown();
+        HandleAttackCooldown(attackCoolDown);
     }
 }
