@@ -99,7 +99,7 @@ public class EntityAttackState : EntityStateBase
         }
 
         UpdateAnimator();
-        enemyAttack.Attack(enemyAttackDirection);
+        enemyAttack.Attack(enemyAttackDirection,enemyClass.attackCooldown);
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ public class EntityAttackState : EntityStateBase
 
         UpdateAnimator();
 
-        playerAttack.Attack(playerAttackDirection);
+        playerAttack.Attack(playerAttackDirection, playerClass.attackCooldown);
     }
 
     /// <summary>

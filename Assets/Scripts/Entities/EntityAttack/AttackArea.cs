@@ -16,8 +16,6 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     private bool attackerIsPlayer;
 
-    private bool isProcessingCollision = false;
-
     /// <summary>
     /// Variable to hold the Sprite Renderer of the attacked entity.
     /// </summary>
@@ -47,7 +45,7 @@ public class AttackArea : MonoBehaviour
             targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 
             // Start the coroutine to reset the color
-            // StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
+            StartCoroutine(ResetColorAfterHit(targetSpriteRenderer, 0.3f));
         }
         // Enemy attacked the player
         else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
@@ -57,8 +55,7 @@ public class AttackArea : MonoBehaviour
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
-            // Debug.Log(player.entityFSM.entitycurrentHealth);
-
+  
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
             targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 
@@ -67,9 +64,18 @@ public class AttackArea : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The ResetColorAfterHit resets the entity sprite's color to white after being hit.
+    /// </summary>
+    /// <param name="spriteRenderer">The SpriteRenderer component whose color will be reset.</param>
+    /// <param name="delay">The time in seconds to wait before resetting the color.</param>
+    /// <returns>
+    /// An IEnumerator, allowing this method to be used in a coroutine for delayed execution.
+    /// </returns>
     private IEnumerator ResetColorAfterHit(SpriteRenderer spriteRenderer, float delay)
     {
         yield return new WaitForSeconds(delay);
+
         spriteRenderer.color = Color.white;
     }
 }
