@@ -72,7 +72,7 @@ public class EntityIdleState : EntityStateBase
     {
         Enemy enemy = (Enemy)entityFSM.entityProprieties;
 
-        if (Utils.IsPlayerAlive())
+        if (Utils.IsPlayerAlive() && !Utils.isSpeechActive)
         {
             if (!enemy.IsIndependent || enemy.IsIndependent && enemy.movement.PlayerInRange())
             {
@@ -92,18 +92,21 @@ public class EntityIdleState : EntityStateBase
     {
         Player player = (Player)entityFSM.entityProprieties;
   
-        player.movement.MovePlayer();
-
-        if (player.movement.speedVector != Vector2.zero)
+        if (!Utils.isSpeechActive)
         {
-            entityFSM.ChangeState(new EntityMovementState(entityFSM));
+            player.movement.MovePlayer();
 
-            return;
-        }
+            if (player.movement.speedVector != Vector2.zero && !Utils.isSpeechActive)
+            {
+                entityFSM.ChangeState(new EntityMovementState(entityFSM));
 
-        if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
-        {
-            entityFSM.ChangeState(new EntityAttackState(entityFSM));
+                return;
+            }
+
+            if (player.GetComponent<PlayerActions>().InputTriggered("Attack") && player.attack.enabled)
+            {
+                entityFSM.ChangeState(new EntityAttackState(entityFSM));
+            }
         }
     }
 

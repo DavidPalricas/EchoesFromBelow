@@ -93,4 +93,9 @@ public static class Utils
             playerInput.actions.LoadBindingOverridesFromJson(rebinds);
         }
     }
+
+    /// <summary>
+    /// The isSpeechActive property is responsible for storing if the speech box is active.
+    /// </summary>
+    public static bool isSpeechActive = false;
 }

@@ -38,7 +38,6 @@ public class AttackArea : MonoBehaviour
         // Player attacked an enemy
         if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
-            Debug.Log($"Player attacked enemy. Damage: {meleeDamage}");
             collider.GetComponent<Enemy>().entityFSM.entitycurrentHealth -= (int)meleeDamage;
 
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
@@ -50,7 +49,6 @@ public class AttackArea : MonoBehaviour
         // Enemy attacked the player
         else if (collider.gameObject.CompareTag("Player") && !attackerIsPlayer) //Enemy attacked the player
         {
-            Debug.Log($"Enemy attacked player. Damage: {meleeDamage}");
             Player player = collider.GetComponent<Player>();
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;

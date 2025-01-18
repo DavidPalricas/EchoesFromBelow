@@ -63,7 +63,7 @@ public class EnemyAvoidObstaclesState : EntityStateBase
 
         alternativeDirection = enemyMovement.FindAlternativeDirection(directionToPlayer);
 
-        if (alternativeDirection == Vector2.zero)
+        if (alternativeDirection == Vector2.zero || Utils.isSpeechActive)
         {
             entityFSM.entityProprieties.lastMovingDirection = directionToPlayer;
             entityFSM.ChangeState(new EntityIdleState(entityFSM));

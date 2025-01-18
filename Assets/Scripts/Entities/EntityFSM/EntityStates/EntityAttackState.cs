@@ -117,7 +117,7 @@ public class EntityAttackState : EntityStateBase
 
         Vector2 playerAttackDirection = playerClass.lastMovingDirection;
 
-        if (playerAttackDirection == Vector2.zero)
+        if (playerAttackDirection == Vector2.zero || Utils.isSpeechActive)
         {   
             entityFSM.ChangeState(new EntityIdleState(entityFSM));
             return;
