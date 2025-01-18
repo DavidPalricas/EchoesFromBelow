@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,10 +17,10 @@ public class RebindingMenu : MonoBehaviour
     private PlayerInput playerInput;
 
     /// <summary>
-    /// The attackButton, healButton, interactButton, pauseButton, switchWeaponsButton properties are responsible for storing the buttons of the actions that can be rebound.
+    /// The attackButton, healButton, interactButton, pauseButton, switchWeaponsButton, skipDialogueButton properties are responsible for storing the buttons of the actions that can be rebound.
     /// </summary>
     [SerializeField]
-    private GameObject attackButton, healButton, interactButton, pauseButton, switchWeaponsButton;
+    private GameObject attackButton, healButton, interactButton, pauseButton, switchWeaponsButton, skipDialogueButton;
 
     /// <summary>
     /// The defaultButtonImageColor property is responsible for storing the default color of the button image.
@@ -71,10 +72,8 @@ public class RebindingMenu : MonoBehaviour
     /// <param name="actionButton">The button of the action to rebind.</param>
     private void WaitingForRebind(InputActionReference actionToRebind, GameObject actionButton)
     {
-
         var rebindOperation = actionToRebind.action.PerformInteractiveRebinding();
 
- 
         if (actionIndex == 0) 
         {
             rebindOperation.WithControlsExcluding("<Gamepad>"); 
@@ -83,7 +82,6 @@ public class RebindingMenu : MonoBehaviour
         {
             rebindOperation.WithControlsExcluding("<Keyboard>"); 
         }
-
 
         rebindOperation
             .OnMatchWaitForAnother(0.1f)
@@ -145,6 +143,7 @@ public class RebindingMenu : MonoBehaviour
             _ when button == interactButton => playerInput.actions["Interact"],
             _ when button == pauseButton => playerInput.actions["PauseUnpause"],
             _ when button == switchWeaponsButton => playerInput.actions["SwitchWeapons"],
+            _ when button == skipDialogueButton => playerInput.actions["SkipDialogue"],
             _ => null
         };
     }
@@ -235,36 +234,26 @@ public class RebindingMenu : MonoBehaviour
     /// </summary>
     public void UpdateUIText()
     {
-        attackButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Attack"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        healButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Heal"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        healButton.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
-        attackButton.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
-
-        interactButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["Interact"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        pauseButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["PauseUnpause"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        switchWeaponsButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
-            playerInput.actions["SwitchWeapons"].bindings[actionIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
-
-        var buttons = new GameObject[] { attackButton, healButton, interactButton, pauseButton, switchWeaponsButton };
-
-        // In case if a duplicated binding is found, the colors of the action buttons are changed to the default colors
-        foreach (GameObject button in buttons)
+        Dictionary<GameObject, string> actions = new()
         {
-            button.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
-            button.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
+            {attackButton, "Attack" },
+            { healButton, "Heal" },
+            { interactButton, "Interact" },
+            { pauseButton, "PauseUnpause" },
+            { switchWeaponsButton, "SwitchWeapons" },
+            { skipDialogueButton, "SkipDialogue"}
+        };
+
+        foreach (KeyValuePair<GameObject, string> action in actions)
+        {  
+            GameObject actionButton = action.Key;
+
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().text = InputControlPath.ToHumanReadableString(
+                playerInput.actions[action.Value].bindings[actionIndex].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
+
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().color = defaultButtonTextColor;
+            actionButton.GetComponent<UnityEngine.UI.Image>().color = defaultButtonImageColor;
         }
     }
 
