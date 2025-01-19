@@ -82,31 +82,4 @@ public class PlayerMovement : MonoBehaviour
             }        
         }
     }
-
-    /// <summary>
-    /// The OnCollisionExit2D method is called when the player exits a collision (Unity Method).
-    /// In this method, we are checking if the player has exited a collision with an enemy, if it has, we are enabling the movement of the entities.
-    /// </summary>
-    /// <param name="collision">   collision.gameObject.GetComponent<EnemyMovement>().enabled = false;.</param>
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<EnemyMovement>().enabled = true;
-        }
-    }
-
-    /// <summary>
-    /// The OnCollisionStay2D method is called when the player is colliding with another game object (Unity Method).
-    /// In this method, we are checking if the player is colliding with an enemy, if it is, we are stopping the enemy's and player's pushing each other.
-    /// </summary>
-    /// <param name="collision">collision.gameObject.GetComponent<EnemyMovement>().enabled = false;</param>
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            collision.gameObject.GetComponent<EnemyMovement>().enabled = false;
-        }
-    }
 }

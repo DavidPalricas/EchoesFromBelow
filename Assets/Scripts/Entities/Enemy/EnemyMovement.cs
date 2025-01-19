@@ -29,8 +29,8 @@ public class EnemyMovement : MonoBehaviour
     private readonly Dictionary<string, float> rangeConstants = new()
     {
         { "PlayerInRange", 15f },
-        { "RangedAttackRange", 2f },
-        { "MelleeAttackRange", 0f }
+        { "RangedAttackRange", 5f },
+        { "MelleeAttackRange", 2f }
     };
 
     /// <summary>
@@ -93,12 +93,12 @@ public class EnemyMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// The PlayerNear method is responsible for checking if the player is near the enemy.
-    /// It crates a raycast in the direction of the player, and if the player is hit, the method returns true.
+    /// The PlayerNear method checks if the player is near the enemy by casting a ray in the direction of the player.
+    /// If the ray hits an object tagged as "Player", it returns true, indicating the player is near.
     /// </summary>
-    /// <param name="directionToPlayer">The direction to the player.</param>
+    /// <param name="directionToPlayer">The direction from the enemy to the player. This is the direction in which the ray will be cast.</param>
     /// <returns>
-    ///   <c>true</c> if the enemy is near to the player; otherwise, <c>false</c>.
+    ///   <c>true</c> if the raycast hits an object tagged as "Player"; otherwise, <c>false</c>.
     /// </returns>
     private bool PlayerNear(Vector2 directionToPlayer)
     {
@@ -106,16 +106,24 @@ public class EnemyMovement : MonoBehaviour
 
         BoxCollider2D enemyCollider = enemyRigidBody.GetComponent<BoxCollider2D>();
 
-        Vector2 raycastOrigin = (Vector2)enemyCollider.bounds.center + directionToPlayer * (enemyCollider.bounds.extents + new Vector3(rayCastDistance, rayCastDistance)).magnitude;
+        Vector2 raycastOrigin = enemyCollider.bounds.center; 
 
         LayerMask playerLayer = LayerMask.GetMask("Default");
 
-        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(raycastOrigin, directionToPlayer, rayCastDistance, playerLayer);
 
-        // This line is used to draw a ray in the scene view for debugging purposes
-        // Debug.DrawRay(enemyRigidBody.position, directionToPlayer * rayCastDistance, Color.yellow);
+        // The next line is only used for debugging purposes
+       // Debug.DrawRay(raycastOrigin, directionToPlayer.normalized * rayCastDistance, Color.yellow);
 
-        return hit.collider != null && hit.collider.CompareTag("Player");
+        foreach (RaycastHit2D hit in hits)
+        {   
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>

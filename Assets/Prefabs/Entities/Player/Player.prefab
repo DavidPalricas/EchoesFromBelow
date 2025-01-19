@@ -112,7 +112,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2.1515157
+  m_Mass: 1
   m_LinearDrag: 3
   m_AngularDrag: 3
   m_GravityScale: 0
@@ -125,7 +125,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4012519553707733667
 MonoBehaviour:
@@ -158,6 +158,7 @@ MonoBehaviour:
   switchWeaponsInput: {fileID: 7818920733948849544, guid: efb361b7f94d17e4fa7824ab5171ff91, type: 3}
   attackInput: {fileID: -2181492751077275449, guid: efb361b7f94d17e4fa7824ab5171ff91, type: 3}
   pauseUnpauseInput: {fileID: 579543526333686018, guid: efb361b7f94d17e4fa7824ab5171ff91, type: 3}
+  skipDialogueInput: {fileID: 0}
 --- !u!61 &620849192762448018
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0000005662441, y: 0.032094583}
+  m_Offset: {x: 0.0000005662441, y: -0.0042710006}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -201,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2547136, y: 0.72217417}
+  m_Size: {x: 0.2547136, y: 0.7760628}
   m_EdgeRadius: 0
 --- !u!114 &4115807595486131082
 MonoBehaviour:
