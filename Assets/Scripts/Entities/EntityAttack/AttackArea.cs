@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -34,7 +35,6 @@ public class AttackArea : MonoBehaviour
     /// </summary>
     /// <param name="collider">The collider or RigidBody2D of a game object.</param>
     private void OnTriggerEnter2D (Collider2D collider){
-        Debug.Log($"Collider triggered by {collider.gameObject.name}, attackerIsPlayer: {attackerIsPlayer}");
         // Player attacked an enemy
         if (collider.gameObject.CompareTag("Enemy") && attackerIsPlayer)
         {
@@ -74,6 +74,10 @@ public class AttackArea : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        spriteRenderer.color = Color.white;
+        // To avoid bugs, we check if the spriteRenderer is destroyed before changing its color
+        if (!spriteRenderer.IsDestroyed())
+        {
+            spriteRenderer.color = Color.white;
+        } 
     }
 }

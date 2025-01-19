@@ -36,21 +36,24 @@ public class SpeechTrigger : MonoBehaviour
     /// <summary>
     /// The speechTexts property is responsible for storing the speech texts.
     /// </summary>
-    private Dictionary<string, string> speechTexts = new();
+    private Dictionary<string, string> speeches = new();
+
+
+    private string currentSpeech = "startSpeech";
 
     /// <summary>
     /// The currentText property is responsible for storing the current text shown in the speech box.
     /// </summary>
     private string currentText = null;
 
-    /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity Method).
-    /// In this method, we are loading the speech texts from the json file.
-    /// And getting the first text to show.
-    /// </summary>
+
+
     private void Awake()
     {
-        speechTexts  = JsonConvert.DeserializeObject<Dictionary<string, string>>(speechJsonFile.text);
+        Utils.isSpeechActive = true;
+        speechBox.SetActive(Utils.isSpeechActive);
+
+        speeches = JsonConvert.DeserializeObject<Dictionary<string,Dictionary<string,string>>>(speechJsonFile.text)[currentSpeech];
 
         currentText = GetNextText();
     }
@@ -91,32 +94,32 @@ public class SpeechTrigger : MonoBehaviour
     {
         if (currentText != null)
         {
-            speechTexts.Remove(speechTexts.Keys.First());
+            speeches.Remove(speeches.Keys.First());
         }
 
-        if (speechTexts.Count == 0)
+        if (speeches.Count == 0)
         {
             Utils.isSpeechActive = false;
             speechBox.SetActive(Utils.isSpeechActive);
-            Destroy(gameObject);
             return null;
         }
 
-        return speechTexts[speechTexts.Keys.First()];
+        return speeches[speeches.Keys.First()];
     }
 
     /// <summary>
-    /// The OnTriggerExit2D method is called when the Collider2D other exits the trigger (Unity Method).
-    /// In this method, we are checking if the player entered on trigger.
-    /// If the player entered on trigger, we are setting the speech box active and informing the game that the speech is active (Utils.isSpeechActive).
+    /// The ChangeSpeech method is responsible for changing the current speech.
     /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {   
-        if (collision.CompareTag("Player"))
-        {   
-            Utils.isSpeechActive = true;
-            speechBox.SetActive(Utils.isSpeechActive);
-        }
+    /// <param name="newSpeech">The new current speech.</param>
+    public void ChangeSpeech(string newSpeech)
+    {
+        currentSpeech = newSpeech;
+
+        Utils.isSpeechActive = true;
+        speechBox.SetActive(Utils.isSpeechActive);
+
+        speeches = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(speechJsonFile.text)[currentSpeech];
+
+        currentText = GetNextText();
     }
 }

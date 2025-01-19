@@ -77,9 +77,8 @@ public class EntityDeadState : EntityStateBase
         GameObject.Find("Level1").GetComponent<Rank>().SkeletonsKilled++;
 
         if (enemyClass.isBoss)
-        {
-            entityFSM.InstantiateItem(enemyClass.bossDropItem, enemyClass.entityRigidBody.transform.position);
-            GameObject.Find("Level1").GetComponent<Rank>().BossKilled = true;
+        {    
+            GameObject.Find("Level1").GetComponent<Level1Logic>().BossKilled();
         }
 
         entityFSM.StartCoroutine(Utils.WaitForAnimationEnd(entityAnimator, "Death", CreateEnemyDeadBody));

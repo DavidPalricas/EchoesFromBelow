@@ -1,0 +1,48 @@
+{
+    "startSpeech": {
+        "firstText": "Woah I feel dizzy. That was quite the fall but …\nWhere am I?",
+        "secondText": "All I remember is touring the Catacombs and taking a detour.\nI remember falling down a hole and … wait.",
+        "thirdText": "Am I in the lower levels of the Catacombs?\nThese are secluded areas, I must be the first person to see them in ages!",
+        "fourthText": "But first, I need to find some sort of light.\nI can barely see two feet ahead of me. Let’s see what I can find."
+    },
+
+    "firstLitTorchSpeech": {
+        "firstText": "Now that’s more like it.\nI’m sure these torches will be helpful along the way.",
+        "secondText": "I can see some more light along that corridor however …\nIt’s best I go check it out."
+    },
+
+    "stickSpeech": {
+        "firstText": "Holy moly, this room is huge!\nSomething feels off though …",
+        "secondText": "There’s a stick over there, won’t deal much damage but I’ll have something to defend myself with, in case I get jumped by someone, or something …"
+    },
+
+    "skeletonsTutorialSpeech": {
+        "firstText": "What was that?!\nDid I just fight a bunch of LIVE SKELETONS?!\n",
+        "secondText": "Something’s definitely wrong down here, I must find a way out NOW!"
+    },
+
+    "gateSpottedSpeech": {
+        "firstText": "Hmm, this gate is locked, but it sure feels like the right way to go.",
+        "secondText": "I must find a key for it."        
+    },
+
+    "firstWrongKeySpeech": {
+        "firstText": "There’s no way this was the wrong key!",
+        "secondText": "I MUST find the right key before these monsters overrun me!"
+    },
+
+    "secondWrongKeySpeech": {
+        "firstText": "This key doesn’t work either!"
+    },
+
+    "thirdWrongKeySpeech": {
+        "secondText": " No way!\n Where can it be?"
+    },
+
+    "bossKilledSpeech": {
+        "firstText": "Of course, besides all these skeletons, I had to face a HUGE one too!",
+        "secondText": "I wonder if anybody has ever even been here before at this point!",
+        "thirdText": "This key must be important, the big guy attacked when I picked it up.",
+        "fourthText": "This must be the key to open the gate."
+    }
+}
