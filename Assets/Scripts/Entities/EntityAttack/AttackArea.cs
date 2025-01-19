@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -74,6 +75,10 @@ public class AttackArea : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        spriteRenderer.color = Color.white;
+        // To avoid bugs, we check if the spriteRenderer is destroyed before changing its color
+        if (!spriteRenderer.IsDestroyed())
+        {
+            spriteRenderer.color = Color.white;
+        } 
     }
 }
