@@ -35,19 +35,8 @@ public class RebindingMenu : MonoBehaviour
     /// <summary>
     /// The action index property is responsible for storing the index of the action.
     /// 0 for keyboard and 1 for gamepad.
-    /// Is HideInInspector, to avoid changing it manually in the editor.
     /// </summary>
-    [HideInInspector]
-    public int actionIndex;
-
-    /// <summary>
-    /// The Awake method is called when the script instance is being loaded (Unity method).
-    /// In this method, we are loading and applying the bindings by calling the LoadAndApplyBindings method.
-    /// </summary>
-    private void Awake()
-    {
-        Utils.LoadAndApplyBindings(playerInput);
-    }
+    private int actionIndex;
 
     /// <summary>
     /// The SaveBindings method is responsible for saving the bindings.
@@ -74,16 +63,18 @@ public class RebindingMenu : MonoBehaviour
     {
         var rebindOperation = actionToRebind.action.PerformInteractiveRebinding();
 
-        if (actionIndex == 0) 
+        if (actionIndex == 0)
         {
-            rebindOperation.WithControlsExcluding("<Gamepad>"); 
+            rebindOperation = rebindOperation.WithControlsExcluding("<Gamepad>");
         }
-        else if (actionIndex == 1) 
+        else
         {
-            rebindOperation.WithControlsExcluding("<Keyboard>"); 
+            rebindOperation = rebindOperation.WithControlsExcluding("<Keyboard>");
         }
 
         rebindOperation
+            .WithTargetBinding(actionIndex)
+            .WithControlsExcluding("<Mouse>")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation =>
             {
@@ -196,14 +187,6 @@ public class RebindingMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// The ReturnControlsMenu method is responsible for returning to the controls menu after the player clicks the return button.
-    /// </summary>
-    public void ReturnControlsMenu()
-    {
-        SceneManager.LoadScene("ControlsMenu");
-    }
-
-    /// <summary>
     /// The StartRebinding method is responsible for starting the rebind operation after the player clicks the action button to rebind.
     /// The user is informed to press a key to rebind the action.
     /// After that the action to rebind is found by calling the GetActionToRebind method and the WaitingForRebind method is called for waiting to the user's input.
@@ -232,8 +215,13 @@ public class RebindingMenu : MonoBehaviour
     /// The UpdateUIText method is responsible for updating the UI text (action buttons text).
     /// To update the action buttons text, the action bindings are loaded in order to get the key or button that is binded to the action.
     /// </summary>
-    public void UpdateUIText()
-    {
+    public void UpdateUIText(int newActionIndex)
+    {   
+
+        Utils.LoadAndApplyBindings(playerInput);
+
+        actionIndex = newActionIndex;
+
         Dictionary<GameObject, string> actions = new()
         {
             {attackButton, "Attack" },
@@ -243,6 +231,8 @@ public class RebindingMenu : MonoBehaviour
             { switchWeaponsButton, "SwitchWeapons" },
             { skipDialogueButton, "SkipDialogue"}
         };
+
+        Debug.Log(actionIndex);
 
         foreach (KeyValuePair<GameObject, string> action in actions)
         {  
@@ -270,6 +260,6 @@ public class RebindingMenu : MonoBehaviour
 
         PlayerPrefs.SetString("inputBindings", string.Empty);
 
-        UpdateUIText();
+        UpdateUIText(actionIndex);
     }
 }
