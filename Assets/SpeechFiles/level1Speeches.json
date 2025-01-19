@@ -1,11 +1,9 @@
 {
     "startSpeech": {
         "firstText": "Woah I feel dizzy. That was quite the fall but …\nWhere am I?",
-        "secondText": "All I remember is touring the Catacombs and taking a detour through a different corridor.",
-        "thirdText": "I remember falling down a hole and … wait.",
-        "fourthText": "Am I in the lower levels of the Catacombs?\nThese are secluded areas, I must be the first person to see them in ages!",
-        "fifthText": "But first, I need to find some sort of light.\nI can barely see two feet ahead of me. Let’s see what I can find.",
-        "sixthText": "I see some more light at the end of that corridor however ...\nBest to check it out."
+        "secondText": "All I remember is touring the Catacombs and taking a detour.\nI remember falling down a hole and … wait.",
+        "thirdText": "Am I in the lower levels of the Catacombs?\nThese are secluded areas, I must be the first person to see them in ages!",
+        "fourthText": "But first, I need to find some sort of light.\nI can barely see two feet ahead of me. Let’s see what I can find."
     },
 
     "firstLitTorchSpeech": {
