@@ -37,6 +37,13 @@ public class TorchLightTrigger : BaseInteractionTrigger
             if (isTutorial)
             {
                 DestroyTutorialToLitTorch();
+
+                Level1Logic level1Logic = GameObject.Find("Level1").GetComponent<Level1Logic>();
+
+                if (level1Logic != null && !level1Logic.firstTorchLit)
+                {
+                    level1Logic.FirstTorchLitSpeech();
+                }
             }
         }
     }

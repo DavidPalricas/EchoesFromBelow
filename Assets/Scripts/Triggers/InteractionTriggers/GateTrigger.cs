@@ -11,20 +11,24 @@ public class GateTrigger : BaseInteractionTrigger
     ///  It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject gate;
+    private GameObject gate, player,keyIcon;
 
     /// <summary>
-    /// The key icon property is responsible for storing the key icon game object of the HUD.
-    /// It is serialized to be set in the Unity Editor.
+    /// The speechTrigger property is responsible for storing the speech trigger.
     /// </summary>
     [SerializeField]
-    private GameObject keyIcon;
+    private SpeechTrigger speechTrigger;
 
     /// <summary>
     /// The gateKey property is responsible for storing the value of the key that the player has.
     /// 0 - No key, 1 - False key, 2 - Correct key to open the gate
     /// </summary>
     private int gateKey;
+
+    /// <summary>
+    /// The attempts property is responsible for storing the number of attempts to open the gate.
+    /// </summary>
+    private int attempts = 0;
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
@@ -61,8 +65,6 @@ public class GateTrigger : BaseInteractionTrigger
 
     private bool CheckConditionsToOpenGate()
     {
-        GameObject player = GameObject.Find("Player");
-
         Vector2 lastMovingDirection = player.GetComponent<EntityFSM>().entityProprieties.lastMovingDirection;
         Vector2 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
 
@@ -79,7 +81,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// </returns>
     private bool PlayerHasKey()
     {
-        Dictionary<string, int> playerItems = GameObject.Find("Player").GetComponent<PlayerInventory>().Items;
+        Dictionary<string, int> playerItems = player.GetComponent<PlayerInventory>().Items;
 
         gateKey = playerItems["Key"];
 
@@ -99,8 +101,12 @@ public class GateTrigger : BaseInteractionTrigger
         else
         {
             gateKey = 0;
+            player.GetComponent<PlayerInventory>().Items["Key"] = gateKey;
 
-            GameObject.Find("Player").GetComponent<PlayerInventory>().Items["Key"] = 0;
+            string[] attemptSpeech = { "firstWrongKeySpeech", "secondWrongKeySpeech", "thirdWrongKeySpeech" };
+            speechTrigger.ChangeSpeech(attemptSpeech[attempts]);
+
+            attempts++;
         }
 
         keyIcon.SetActive(false);

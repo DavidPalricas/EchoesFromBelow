@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -7,10 +8,41 @@ using UnityEngine;
 public class Level1Logic : MonoBehaviour
 {
     /// <summary>
+    /// The playerRank property is responsible for storing the player's rank and its status.
+    /// </summary>
+    [SerializeField]
+    private Rank playerRank;
+
+    /// <summary>
+    /// The speech trigger property is responsible for storing the speech trigger.
+    /// </summary>
+    [SerializeField]
+    private SpeechTrigger speechTrigger;
+
+    /// <summary>
+    /// The enemyTutorialWall , player properties are responsible for storing the enemy tutorial wall and the player game objects.
+    /// They are serialized to be set in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private GameObject enemyTutorialWall, player;
+
+    /// <summary>
+    /// The SKELETONSTUTORIAL property is responsible for storing the number of skeletons in the combat tutorial.
+    /// </summary>
+    private const int SKELETONSTUTORIAL = 5;
+
+    /// <summary>
     /// The Keys property is responsible for storing the keys in the level and their values.
     /// If the value is true, the key is the correct key to open the gate, otherwise it is not.
     /// </summary>
     public Dictionary<GameObject, bool> Keys { get; private set; } = new Dictionary<GameObject, bool>();
+
+    /// <summary>
+    /// The firstTorchLit property is responsible for checking if the player has lit the first torch.
+    /// It is HiddenInInspector because it is only used to check if the first torch was lit.
+    /// </summary>
+    [HideInInspector]
+    public bool firstTorchLit = false;
 
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
@@ -19,6 +51,19 @@ public class Level1Logic : MonoBehaviour
     private void Awake()
     {
         AddKeysValues(FindKeys());
+    }
+
+    /// <summary>
+    /// The Update method is called every frame (Unity Method).
+    /// In this method, we are checking if the player has killed the skeletons tutorial and if the enemy tutorial wall is destroyed.
+    /// </summary>
+    private void Update()
+    {
+        if (playerRank.SkeletonsKilled == SKELETONSTUTORIAL && !enemyTutorialWall.IsDestroyed())
+        {
+            speechTrigger.ChangeSpeech("skeletonsTutorialSpeech");
+            Destroy(enemyTutorialWall);
+        }
     }
 
     /// <summary>
@@ -96,5 +141,23 @@ public class Level1Logic : MonoBehaviour
         }
 
         return keys_values;
-    }    
+    }
+
+    /// <summary>
+    /// The FirstTorchLitSpeech method is responsible for showing the first torch lit speech.
+    /// </summary>
+    public void FirstTorchLitSpeech()
+    {
+        firstTorchLit = true;
+        speechTrigger.ChangeSpeech("firstLitTorchSpeech");
+    }
+
+    /// <summary>
+    /// The BossKilled method is responsible for setting the player rank to BossKilled and showing the boss killed speech.
+    /// </summary>
+    public void BossKilled()
+    {
+        playerRank.BossKilled = true;
+        speechTrigger.ChangeSpeech("bossKilledSpeech");
+    }
 }
