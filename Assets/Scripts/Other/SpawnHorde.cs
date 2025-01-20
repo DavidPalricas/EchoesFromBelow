@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -151,9 +152,13 @@ public class SpawnHorde : MonoBehaviour
     /// The number of enemies is reseted because the horde stops spawning when a certain number of enemies is reached.
     /// If the player has the right key, it spawns the boss enemy.
     /// </summary>
-    public void SpawnKeyHorde(bool playerHasRightKey )
+    public void SpawnKeyHorde(bool playerHasRightKey)
     {
-        enemiesSpawned = 0;
+        enemiesSpawned = hordeSize;
+
+        enemiesSpawned = hordeSize - Utils.GetActiveHordeEnemies().Length;
+
+        Debug.Log(enemiesSpawned);
 
         // hordeSize += Mathf.RoundToInt(hordeSize /= 2);
 
