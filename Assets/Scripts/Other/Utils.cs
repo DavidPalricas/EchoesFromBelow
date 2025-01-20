@@ -98,4 +98,9 @@ public static class Utils
     /// The isSpeechActive property is responsible for storing if the speech box is active.
     /// </summary>
     public static bool isSpeechActive = false;
+
+    public static GameObject[] GetActiveHordeEnemies()
+    {
+        return GameObject.FindGameObjectsWithTag("Enemy");
+    }
 }
