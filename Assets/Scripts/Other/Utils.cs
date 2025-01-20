@@ -32,6 +32,11 @@ public static class Utils
         Stick,
         SlingShot
     }
+    
+    /// <summary>
+    /// The isSpeechActive property is responsible for storing if the speech box is active.
+    /// </summary>
+    public static bool isSpeechActive = false;
 
     /// <summary>
     /// The WaitForAnimationEnd method is responsible for waiting for a specific animation to end.
@@ -92,15 +97,5 @@ public static class Utils
         {
             playerInput.actions.LoadBindingOverridesFromJson(rebinds);
         }
-    }
-
-    /// <summary>
-    /// The isSpeechActive property is responsible for storing if the speech box is active.
-    /// </summary>
-    public static bool isSpeechActive = false;
-
-    public static GameObject[] GetActiveHordeEnemies()
-    {
-        return GameObject.FindGameObjectsWithTag("Enemy");
     }
 }
