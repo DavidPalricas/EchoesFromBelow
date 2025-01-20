@@ -129,8 +129,6 @@ public class EntityDeadState : EntityStateBase
     /// </summary>
     private void CreateEnemyDeadBody()
     {
-        // Debug.Log("Creating dead body");
-
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
         Rigidbody2D enemy = enemyClass.entityRigidBody;

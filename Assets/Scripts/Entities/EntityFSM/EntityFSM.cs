@@ -35,16 +35,6 @@ public class EntityFSM : MonoBehaviour
     }
 
     /// <summary>
-    /// The InstantiateItem method is responsible for instantiating an item in the game.
-    /// </summary>
-    /// <param name="item">The item game object.</param>
-    /// <param name="position">The spawn position of the item.</param>
-    public void InstantiateItem(GameObject item, Vector2 position)
-    {
-        Instantiate(item, position, Quaternion.identity);
-    }
-
-    /// <summary>
     /// The DestroyGameObject method is responsible for destroying a game object.
     /// </summary>
     /// <param name="gameObject">The game object to be destroyed.</param>

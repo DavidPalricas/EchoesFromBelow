@@ -25,6 +25,7 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     [SerializeField]
     private int hordeSize;
+
     /// <summary>
     /// The enemiesToSpawn and hordeID properties are responsible for storing the number of enemies spawned and the horde ID respectively.
     /// </summary>
@@ -50,7 +51,7 @@ public class SpawnHorde : MonoBehaviour
     private void Awake()
     {
         spawnTime = GetSpawnTime();
-        enemiesToSpawn = 0;
+        enemiesToSpawn = hordeSize;
 
         hordeID = nextHordeID++;
     }
@@ -61,8 +62,8 @@ public class SpawnHorde : MonoBehaviour
     /// Whene the spawnTime property is less than or equal to 0, the SpawEnemies method is called to spawn the enemy and the spawnTime property is reset by calling the GetSpawnTime method.
     /// </summary>
     private void Update()
-    {
-        if (enemiesToSpawn < hordeSize)
+    {   
+        if (enemiesToSpawn > 0)
         {
             spawnTime -= Time.deltaTime;
 
@@ -94,7 +95,7 @@ public class SpawnHorde : MonoBehaviour
         enemy.name = "Enemy " + hordeID;
         enemy.GetComponent<Enemy>().Initialize();
 
-        enemiesToSpawn++;
+        enemiesToSpawn--;
     }
 
     /// <summary>
@@ -167,12 +168,17 @@ public class SpawnHorde : MonoBehaviour
 
     /// <summary>
     /// The SpawnKeyHorde method is responsible for spawning a horde of enemies when the player picks up the key.
-    /// It resets the number of enemies to spawn by getting the number of active enemies in the horde.
+    /// It calculates the number of enemies to spawn based on the number of active enemies in the horde.
+    /// If the active enemies are less than the maximum number of enemies between hordes, it calculates the number of enemies to spawn otherwise it sets it to 0 (no enemies to spawn).
     /// If the player has the right key, it spawns the boss enemy.
     /// </summary>
     public void SpawnKeyHorde(bool playerHasRightKey)
-    {
-        enemiesToSpawn = GetActiveHordeEnemies();
+    {   
+        int maxEnemiesbetweenHordes = hordeSize * 2;
+
+        int activeEnemies = GetActiveHordeEnemies();
+
+        enemiesToSpawn = activeEnemies < maxEnemiesbetweenHordes ? maxEnemiesbetweenHordes - activeEnemies: 0;
 
         if (playerHasRightKey)
         {
