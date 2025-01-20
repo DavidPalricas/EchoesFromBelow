@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
-///    The SpawnHorde class is responsible for spawning a horde of enemies.
+///  The SpawnHorde class is responsible for spawning a horde of enemies.
 /// </summary>
 public class SpawnHorde : MonoBehaviour
 {
@@ -26,9 +26,9 @@ public class SpawnHorde : MonoBehaviour
     [SerializeField]
     private int hordeSize;
     /// <summary>
-    /// The enemiesSpawned property is responsible for storing the number of enemies spawned in the horde.
+    /// The enemiesToSpawn and hordeID properties are responsible for storing the number of enemies spawned and the horde ID respectively.
     /// </summary>
-    private int enemiesSpawned;
+    private int enemiesToSpawn, hordeID;
 
     /// <summary>
     /// The spawnTime property represents the time between enemy spawns.
@@ -39,13 +39,20 @@ public class SpawnHorde : MonoBehaviour
     private GameObject bossHealthBar;
 
     /// <summary>
+    /// The nextHordeID property is responsible for storing the ID of the next horde to be spawned.
+    /// </summary>
+    private static int nextHordeID = 0;
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, the spawnTime property is initialized, by calling the GetSpawnTime method.
     /// </summary>
     private void Awake()
     {
         spawnTime = GetSpawnTime();
-        enemiesSpawned = 0;
+        enemiesToSpawn = 0;
+
+        hordeID = nextHordeID++;
     }
 
     /// <summary>
@@ -55,7 +62,7 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (enemiesSpawned < hordeSize)
+        if (enemiesToSpawn < hordeSize)
         {
             spawnTime -= Time.deltaTime;
 
@@ -84,9 +91,10 @@ public class SpawnHorde : MonoBehaviour
         Vector2 enemyPosition = GetEnemySpawnPosition();
 
         GameObject enemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+        enemy.name = "Enemy " + hordeID;
         enemy.GetComponent<Enemy>().Initialize();
 
-        enemiesSpawned++;
+        enemiesToSpawn++;
     }
 
     /// <summary>
@@ -147,20 +155,24 @@ public class SpawnHorde : MonoBehaviour
     }
 
     /// <summary>
+    /// The GetActiveHordeEnemies method is responsible for getting the number of active enemies in the horde.
+    /// </summary>
+    /// <returns> It returns the number of enemies actives of the horde</returns>
+    private int GetActiveHordeEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        return allEnemies.Where(enemy => enemy.name.Contains("Enemy " + hordeID)).Count();
+    }
+
+    /// <summary>
     /// The SpawnKeyHorde method is responsible for spawning a horde of enemies when the player picks up the key.
-    /// It resets the number of enemies spawned to spawn a new horde and increases its size.
-    /// The number of enemies is reseted because the horde stops spawning when a certain number of enemies is reached.
+    /// It resets the number of enemies to spawn by getting the number of active enemies in the horde.
     /// If the player has the right key, it spawns the boss enemy.
     /// </summary>
     public void SpawnKeyHorde(bool playerHasRightKey)
     {
-        enemiesSpawned = hordeSize;
-
-        enemiesSpawned = hordeSize - Utils.GetActiveHordeEnemies().Length;
-
-        Debug.Log(enemiesSpawned);
-
-        // hordeSize += Mathf.RoundToInt(hordeSize /= 2);
+        enemiesToSpawn = GetActiveHordeEnemies();
 
         if (playerHasRightKey)
         {
