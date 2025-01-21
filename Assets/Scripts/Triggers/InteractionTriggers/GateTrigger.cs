@@ -14,6 +14,13 @@ public class GateTrigger : BaseInteractionTrigger
     private GameObject gate, player,keyIcon;
 
     /// <summary>
+    /// The playerRank property is responsible for storing the player rank.
+    /// It is serialized to be set in the Unity Editor.
+    /// </summary>
+    [SerializeField]
+    private Rank playerRank;
+
+    /// <summary>
     /// The speechTrigger property is responsible for storing the speech trigger.
     /// </summary>
     [SerializeField]
@@ -95,7 +102,13 @@ public class GateTrigger : BaseInteractionTrigger
     private void OpenGate()
     {
         if (gateKey == 2)
-        {
+        {   
+            if (!playerRank.BossKilled)
+            {
+                speechTrigger.ChangeSpeech("bossNotKilledSpeech");
+                return;
+            }
+
             gate.SetActive(false);
         }
         else

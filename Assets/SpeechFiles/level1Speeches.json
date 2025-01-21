@@ -11,9 +11,17 @@
         "secondText": "I can see some more light along that corridor however …\nIt’s best I go check it out."
     },
 
+    "torchTutorialSpeech": {
+        "firstText": "I must find a way to light the path before going any further."
+    },
+
     "stickSpeech": {
         "firstText": "Holy moly, this room is huge!\nSomething feels off though …",
         "secondText": "There’s a stick over there, won’t deal much damage but I’ll have something to defend myself with, in case I get jumped by someone, or something …"
+    },
+
+    "combatTutorialSpeech": {
+        "firstText": "I must defeat these monsters first!"
     },
 
     "skeletonsTutorialSpeech": {
@@ -44,5 +52,9 @@
         "secondText": "I wonder if anybody has ever even been here before at this point!",
         "thirdText": "This key must be important, the big guy attacked when I picked it up.",
         "fourthText": "This must be the key to open the gate."
+    },
+
+    "bossNotKilledSpeech": {
+        "firstText": "I must defeat the big guy first or it might be chase me down."
     }
 }
