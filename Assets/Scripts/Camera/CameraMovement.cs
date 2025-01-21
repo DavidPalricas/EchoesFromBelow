@@ -46,8 +46,8 @@ public class CameraMovement : MonoBehaviour
         if (currentSceneIndex != 0)
         {
             if (currentTarget != player && !Utils.isSpeechActive)
-            {   
-                ChangeTarget(player, 0.8f);
+            {
+                currentTarget = player;
                 Utils.isSpeechActive = false;
             }
             
