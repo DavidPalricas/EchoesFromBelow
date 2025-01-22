@@ -22,17 +22,17 @@ public class EndingText : MonoBehaviour
     /// </summary>
     private void Awake()
     {   
-        string endingText = "\t\tCongratulations! You have completed the alpha version of our game!\n\n\n";
+        string endingText = "\t\tCongratulations! You have completed the level!\n";
    
         endingText += WriteRankStatus(GameObject.Find("Level1").GetComponent<Rank>());
 
-        endingText += $"Game made by:\n" +
-                      $" - David Palricas\n" +
-                      $" - Eva Aguiar\n" +
-                      $" - Hugo Tavares\n" + 
-                      $" - Pedro Soares\n\n\n";
+        //endingText += $"Game made by:\n" +
+        //              $" - David Palricas\n" +
+        //              $" - Eva Aguiar\n" +
+        //              $" - Hugo Tavares\n" + 
+        //              $" - Pedro Soares\n\n\n";
 
-        endingText += "\t\t\t\t\tPress ESC to return to the main menu.";
+        endingText += "\t\t\t\t\tPress Enter to return to the main menu.";
 
         sceneText.text = endingText;
 
@@ -45,9 +45,9 @@ public class EndingText : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("MainMenu");
+            this.gameObject.GetComponent<LevelChanger>().FadeToLevel(0);
         }
     }
 
