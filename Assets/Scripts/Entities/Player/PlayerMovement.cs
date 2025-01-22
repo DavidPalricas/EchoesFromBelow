@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// The speed property is responsible for storing the player's speed.
     /// </summary>
-    private float speed;
+    public float speed;
 
     /// <summary>
     /// The speed property is responsible for storing the player's speed.
