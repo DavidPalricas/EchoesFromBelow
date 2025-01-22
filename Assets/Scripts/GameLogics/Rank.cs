@@ -13,13 +13,13 @@ public class Rank : MonoBehaviour
     /// </summary>
     private readonly Dictionary<string, int> ranks = new()
     {
-        {"F", 50},
-        {"E", 150},
-        {"D", 300},
-        {"C", 500},
-        {"B", 750},
-        {"A", 900},
-        {"S", 950},
+        {"The Lost Child ", 0},
+        {"Crying Tourist", 150},
+        {"Explorer", 300},
+        {"Monster Hunter", 500},
+        {"The Dark Knight", 700},
+        {"The Catacombs Monster", 850},
+        {"The Paris Nigthmare", 950},
     };
 
     /// <summary>
@@ -101,11 +101,12 @@ public class Rank : MonoBehaviour
     /// <returns> The rank value</returns>
     private int CalculateRankValue()
     {
-        int timeComponent = (int)(5 * timeSpent);
-        int deathsComponent = 3 * DeathsNumber;
-        int skeletonsComponent = 2 * SkeletonsKilled;
-        int healItemsComponent = 1 * HealItemsUsed;
-        int bossComponent = BossKilled ? 25 : 0;
+        // Measure the time spent in the game in minutes
+        int timeComponent = (int)(60 * (timeSpent / 60.0)); 
+        int deathsComponent = 5 * DeathsNumber;
+        int skeletonsComponent = 4 * SkeletonsKilled;
+        int healItemsComponent = 3 * HealItemsUsed;
+        int bossComponent = BossKilled ? 5 : 0;
 
         int rankValue = 1000 - (timeComponent + deathsComponent + healItemsComponent) + skeletonsComponent + bossComponent;
 
@@ -122,9 +123,19 @@ public class Rank : MonoBehaviour
     {
         int rankValue = CalculateRankValue();
 
+        Debug.Log($"Rank Value: {rankValue}");
+
+        const int MAXRANK = 1000;
+
+        int lastTypeRankValue = ranks.Values.Last();
+
         foreach (string rankName in ranks.Keys)
         {
             if (rankValue <= ranks[rankName])
+            {
+                return new Tuple<string, int>(rankName, rankValue);
+            }
+            else if (rankValue > lastTypeRankValue && rankValue <= MAXRANK)
             {
                 return new Tuple<string, int>(rankName, rankValue);
             }
@@ -139,7 +150,12 @@ public class Rank : MonoBehaviour
     /// <param name="currentRank">The current rank of the player.</param>
     /// <returns> A Tuple with the next rank name and the points neede to reach it </returns>
     public Tuple<string, int> GetNextRank(Tuple<string,int> currentRank)
-    {
+    {   
+        if (currentRank == null)
+        {
+           Debug.LogError("Error getting the player's rank");
+        }
+
         string currentRankName = currentRank.Item1;
         int currentRankValue = currentRank.Item2;
 
