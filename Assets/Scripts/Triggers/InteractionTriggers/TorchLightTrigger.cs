@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// The TorchLightTrigger class is responsible for turning off the torch light.
@@ -17,20 +15,13 @@ public class TorchLightTrigger : BaseInteractionTrigger
     /// It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject torchLit, torchUnlit,tutorialTextObject, tutorialCollider;
+    private GameObject torchLit, torchUnlit,tutorialText, tutorialCollider;
 
     /// <summary>
     /// The isTutorial property is responsible for storing if the torch is a tutorial torch or not.
     /// </summary>
     [SerializeField]
     private bool isTutorial;
-
-    [SerializeField]
-    private InputActionReference interactAction;
-
-
-    [SerializeField]
-    private TextMeshPro tutorialText;
 
     /// <summary>
     /// The Update method is called every frame (Unity Method).
@@ -63,7 +54,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
     /// </summary>
     private void DestroyTutorialToLitTorch()
     {
-        Destroy(tutorialTextObject);
+        Destroy(tutorialText);
 
         tutorialCollider.SetActive(false);
 
@@ -81,9 +72,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
 
         if (isTutorial && playerDetected)
         {
-            tutorialTextObject.SetActive(true);
-
-            UpdateTutorialText();
+            tutorialText.SetActive(true);
         }
     }
 
@@ -98,7 +87,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
 
         if (isTutorial)
         {
-            tutorialTextObject.SetActive(false);
+            tutorialText.SetActive(false);
         }
     }
 
@@ -112,25 +101,5 @@ public class TorchLightTrigger : BaseInteractionTrigger
         torchLit.SetActive(true);
 
         torchUnlit.SetActive(false);
-    }
-
-    /// <summary>
-    /// The UpdateTutorialText method is responsible for updating the tutorial text with the correct input.
-    /// </summary>
-    private void UpdateTutorialText()
-    {
-        string bindPath;
-
-        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "")
-        {   
-           bindPath = interactAction.action.bindings[1].effectivePath;
-        }
-        else
-        {
-            // Keyboard Input
-            bindPath =  interactAction.action.bindings[0].effectivePath;
-        }
-
-        tutorialText.text = "Press " + InputControlPath.ToHumanReadableString(bindPath,InputControlPath.HumanReadableStringOptions.OmitDevice).ToUpper();
     }
 }
