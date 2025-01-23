@@ -24,7 +24,7 @@ public class EndingText : MonoBehaviour
     {   
         string endingText = "\t\tCongratulations! You have completed the level!\n";
    
-        endingText += WriteRankStatus(GameObject.Find("Level1").GetComponent<Rank>());
+        endingText += WriteRankStatus(GameObject.Find("GameLogic").GetComponent<Rank>());
 
         //endingText += $"Game made by:\n" +
         //              $" - David Palricas\n" +

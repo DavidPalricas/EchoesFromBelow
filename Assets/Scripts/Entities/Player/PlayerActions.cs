@@ -103,7 +103,7 @@ public class PlayerActions : MonoBehaviour
             GameObject keyToDestroy = DestroyCollectable();
 
             // Removes the key from the dictionary which stores the keys and their values
-            GameObject.Find("Level1").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
+            GameObject.Find("GameLogic").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
 
             playerInventory.UpdateInventory(Utils.CollectableType.Key);
         } 
@@ -153,7 +153,7 @@ public class PlayerActions : MonoBehaviour
 
             playerInventory.HealItemUsed();
 
-            GameObject.Find("Level1").GetComponent<Rank>().HealItemsUsed++;
+            GameObject.Find("GameLogic").GetComponent<Rank>().HealItemsUsed++;
 
             HealthBar healthBar = (entityFSM.entityProprieties as Player).healthBar;
 

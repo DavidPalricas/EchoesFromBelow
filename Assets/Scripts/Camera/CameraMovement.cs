@@ -23,6 +23,10 @@ public class CameraMovement : MonoBehaviour
     /// </summary>
     private int currentSceneIndex;
 
+    /// <summary>
+    /// The Start method is called before the first frame update (Unity Method).
+    /// In this method, the current target is initialized (player) the music volume and scene index are set.
+    /// </summary>
     private void Start()
     {
         currentTarget = player;
@@ -65,13 +69,23 @@ public class CameraMovement : MonoBehaviour
         return new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
     }
 
-
+    /// <summary>
+    /// The ChangeTarget method is responsible for changing the camera's target.
+    /// It starts a coroutine to make a smooth transition between the current target and the new target.
+    /// </summary>
+    /// <param name="newTarget">The new target to the camera to focus.</param>
+    /// <param name="transitionTime">The transition time.</param>
     public void ChangeTarget(GameObject newTarget, float transitionTime)
     {
         StartCoroutine(SmoothTransition(newTarget, transitionTime));
     }
 
-
+    /// <summary>
+    /// The SmoothTransition method, smoothly transitions the GameObject's position from its current location to the position of the new target over a specified duration.
+    /// </summary>
+    /// <param name="newTarget">The GameObject to transition towards.</param>
+    /// <param name="transitionTime">The duration of the transition.</param>
+    /// <returns>An IEnumerator that can be used in a coroutine to execute the transition over multiple frames.</returns>
     private IEnumerator SmoothTransition(GameObject newTarget, float transitionTime)
     {
         Utils.isSpeechActive = true;

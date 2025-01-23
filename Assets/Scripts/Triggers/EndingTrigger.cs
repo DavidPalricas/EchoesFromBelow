@@ -16,11 +16,11 @@ public class EndingTrigger : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameObject level1 = GameObject.Find("Level1");
+            GameObject gameLogic = GameObject.Find("GameLogic");
 
-            level1.GetComponent<Level1Logic>().enabled = false;
+            gameLogic.GetComponent<Level1Logic>().enabled = false;
 
-            level1.GetComponent<Rank>().StopTimer = true;
+            gameLogic.GetComponent<Rank>().StopTimer = true;
 
             fadeManager.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
 

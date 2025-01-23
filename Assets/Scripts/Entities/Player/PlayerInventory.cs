@@ -141,7 +141,7 @@ public class PlayerInventory : MonoBehaviour
 
     private bool RightKeyGrabbed()
     {
-        Dictionary<GameObject, bool> keys = GameObject.Find("Level1").GetComponent<Level1Logic>().Keys;
+        Dictionary<GameObject, bool> keys = GameObject.Find("GameLogic").GetComponent<Level1Logic>().Keys;
 
         return keys.Values.All(value => !value);
     }
