@@ -1,21 +1,21 @@
 {
-    "firstDialogueWithNpc": {
+    "firstDialogueWithNPC": {
         "firstText": "Oh my, another human!\nI thought you were another one of those – things!",
         "secondText": "The strange man: Ah, hello stranger! Another wanderer at last.\nWhat brings you to these twisted corridors?",
         "thirdText": "Well it certainly wasn’t on purpose.I fell through a hole touring the upper levels of the Catacombs, then I just found myself lost in here.",
         "fourthText": "I had to fight LIVE SKELETONS!\n But I believe you went through the same nightmares to get here.",
         "fifthText": "You have any idea about what the hell is going on down here?!",
-        "sixthText": "The strange man: Not entirely. I understand some terrifying monsters lurk these corridors.Forgotten, live creatures that are somehow walking between ",
+        "sixthText": "The strange man: Not entirely. I understand some terrifying monsters lurk these corridors.\nForgotten, live creatures that are somehow walking between.",
         "sevenText": "The strange man: I for one, have had many, many days to think about that.\nMaybe they’re controlled by something, someone.",
         "eightText": "The strange man: But who am I to make suggestions ha-ha!\nI’m just another lost soul down here.",
         "ninthText": "Controlled by something?!\nHow could that b- wait.",
         "tenthText": "You said you’ve been here for a long time.\nHow long exactly?! You don’t look the best.",
         "eleventhText": "The strange man: Ah, there’s something I’ve lost count of.\nLet’s just say I know my way around here.",
         "twelvelthText": "Well, that is uplifting …",
-        "thirteenthText": "**(the strange man just stares)**",
-        "fourteenthText": "Look I just need to find a way out of here.\nHave you ever managed to find one?!",
+        "thirteenthText": "**(The strange man just stares)**",
+        "fourteenthText": "Look I just need to find a way out of here.\nHave you ever managed to find one?",
         "fifteenthText": "The strange man: Well yes stranger, right through this gate.\nBut it isn’t that simple.",
-        "sixteenthText": "The strange man: First you must go through that corridor there and find the key for it.This, however, will not be an easy fit.",
+        "sixteenthText": "The strange man: First you must go through that corridor there and find the key for it.\nThis, however, will not be an easy fit.",
         "seventeenthText": "The strange man: The key will be inside a chest surrounded by filthy waters, so you’ll need to find a way to cross it.\nTo do so, you will have to fight your way to it.",
         "eighteenthText": "Seems simple enough.\nWhy have you never tried it?",
         "nineteenthText": "The strange man: Oh but I have, a good few times even but never managed to.\nTakes the energy I no longer have, but you sure look capable young one.",
@@ -36,20 +36,23 @@
     },
 
     "spidersSpeech":{
-        "firstText": "Now besides live skeletons there are giant spiders?!\nHow come this be …",
-        "secondText": "I better clear the area out before checking for the key or I will be jumped!",
-        "thirdText": "Why are there so many damned monsters?\nGive me a break!"
+        "firstText": "Now besides live skeletons there are giant spiders?!\nHow come this be …"
     },
 
     "graveyardSpeech": {
-        "firstText": "There’s nowhere else to look, key must be somewhere in this graveyard.\nOdds are some skeleton had it, I better check the graves for it."
+        "firstText": "I better clear the area out before checking for the key or I will be jumped!"
+    },
+    
+    "graveyardEnemiesDead": {
+        "firstText": "Why are there so many damned monsters?\nGive me a break!",
+        "secondText": "There’s nowhere else to look, key must be somewhere in this graveyard.\nOdds are some skeleton had it, I better check the graves for it."
     },
 
     "keyFoundSpeech": {
         "firstText": "Here it is!\nNow, onto the gate."
     },
 
-    "idontKnowSpeech": {
+    "darkAreaSpeech": {
         "firstText": "It’s so dark in here …\nThere’s no sign of torches, nor of the lever piece. Where can it be?",
         "secondText": "I must find it before they attack again, specially being this dark in here."
     },
@@ -59,8 +62,11 @@
     },
 
     "bossRecounterSpeech": {
-        "firstText": "What? How are you still alive?!\nWell, I’ve beat you before … come at me!",
-        "secondText": "There! I’d say I’d like to see you come back from THAT, but I better shut it before you ACTUALLY do."
+        "firstText": "What? How are you still alive?!\nWell, I’ve beat you before … come at me!"
+    },
+
+    "bossDeathSpeech":{
+        "firstText": "There! I’d say I’d like to see you come back from THAT, but I better shut it before you ACTUALLY do."
     },
 
     "useLeverSpeech": {
@@ -72,7 +78,7 @@
         "firstText": "The key, finally!\nNow I must get back to the gate. I can’t believe I’m almost out of here!"
     },
 
-    "secondDialogueWithNpc": {
+    "secondDialogueWithNPC": {
         "firstText": "The strange man: Hello again stranger!\nI see you managed to open the gate.",
         "secondText": "You have no idea what I had to go through there!\bBut yes, yes I did.",
         "thirdText": "The strange man: Ready to find your freedom stranger?",

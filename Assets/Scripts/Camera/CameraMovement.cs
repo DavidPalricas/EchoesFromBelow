@@ -23,7 +23,6 @@ public class CameraMovement : MonoBehaviour
     /// </summary>
     private int currentSceneIndex;
 
-   
     private void Start()
     {
         currentTarget = player;
