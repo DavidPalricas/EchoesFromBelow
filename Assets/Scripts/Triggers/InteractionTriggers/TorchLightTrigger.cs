@@ -26,7 +26,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected and if the player interact input was triggred
-    /// Íf these conditions are met, the LitTorch method is called to lit the torch.
+    /// ï¿½f these conditions are met, the LitTorch method is called to lit the torch.
     /// </summary>
     private void Update()
     {
@@ -38,7 +38,7 @@ public class TorchLightTrigger : BaseInteractionTrigger
             {   
                 DestroyTutorialToLitTorch();
 
-                Level1Logic level1Logic = GameObject.Find("Level1").GetComponent<Level1Logic>();
+                Level1Logic level1Logic = GameObject.Find("GameLogic").GetComponent<Level1Logic>();
 
                 if (level1Logic != null && !level1Logic.firstTorchLit)
                 {

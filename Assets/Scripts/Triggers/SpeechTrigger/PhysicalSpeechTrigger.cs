@@ -19,7 +19,7 @@ public class PhysicalSpeechTrigger : MonoBehaviour
 
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
-    /// In this method we are checking if the player has entered the trigger and showing the speech.
+    /// In this method we are checking if the player has entered the trigger ,showing the speech and destroying the trigger.
     /// </summary>
     /// <param name="collision">The collider of the game object that collided.</param>
     private void OnTriggerEnter2D(Collider2D collision)

@@ -11,7 +11,7 @@ public class SpawnHorde : MonoBehaviour
     /// It is serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject enemyPrefab, bossPrefab;
+    private GameObject enemyPrefab1,enemyPrefab2, bossPrefab;
 
     /// <summary>
     /// The maxSpawnTime and minSpawnTime properties are responsible for storing the maximum and minimum time between enemy spawns respectively.
@@ -26,11 +26,7 @@ public class SpawnHorde : MonoBehaviour
     [SerializeField]
     private int hordeSize;
 
-    /// <summary>
-    /// The enemiesToSpawn and hordeID properties are responsible for storing the number of enemies spawned and the horde ID respectively.
-    /// </summary>
-    private int enemiesToSpawn, hordeID;
-
+ 
     /// <summary>
     /// The spawnTime property represents the time between enemy spawns.
     /// </summary>
@@ -45,15 +41,31 @@ public class SpawnHorde : MonoBehaviour
     private static int nextHordeID = 0;
 
     /// <summary>
+    /// The HordeID property is responsible for storing the ID of the horde.
+    /// </summary>
+    /// <value>
+    /// It returns the ID of the horde.
+    /// </value>
+    public int HordeID { get; private set; }
+
+    /// <summary>
+    /// The EnemiesToSpawn property is responsible for storing the number of enemies to spawn.
+    /// </summary>
+    /// <value>
+    /// The number of enemies to spawn.
+    /// </value>
+    public int EnemiesToSpawn { get; private set; }
+
+    /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, the spawnTime property is initialized, by calling the GetSpawnTime method.
     /// </summary>
     private void Awake()
     {
         spawnTime = GetSpawnTime();
-        enemiesToSpawn = hordeSize;
+        EnemiesToSpawn = hordeSize;
 
-        hordeID = nextHordeID++;
+        HordeID = nextHordeID++;
     }
 
     /// <summary>
@@ -63,7 +75,7 @@ public class SpawnHorde : MonoBehaviour
     /// </summary>
     private void Update()
     {   
-        if (enemiesToSpawn > 0)
+        if (EnemiesToSpawn > 0)
         {
             spawnTime -= Time.deltaTime;
 
@@ -91,11 +103,18 @@ public class SpawnHorde : MonoBehaviour
     {   
         Vector2 enemyPosition = GetEnemySpawnPosition();
 
+        GameObject enemyPrefab = enemyPrefab1;
+
+        if (enemyPrefab2 != null)
+        {
+            enemyPrefab = Random.Range(0, 5) < 3  ? enemyPrefab1 : enemyPrefab2;
+        }
+
         GameObject enemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
-        enemy.name = "Enemy " + hordeID;
+        enemy.name = "Enemy " + HordeID;
         enemy.GetComponent<Enemy>().Initialize();
 
-        enemiesToSpawn--;
+        EnemiesToSpawn--;
     }
 
     /// <summary>
@@ -163,7 +182,7 @@ public class SpawnHorde : MonoBehaviour
     {
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        return allEnemies.Where(enemy => enemy.name.Contains("Enemy " + hordeID)).Count();
+        return allEnemies.Where(enemy => enemy.name.Contains("Enemy " + HordeID)).Count();
     }
 
     /// <summary>
@@ -178,7 +197,7 @@ public class SpawnHorde : MonoBehaviour
 
         int activeEnemies = GetActiveHordeEnemies();
 
-        enemiesToSpawn = activeEnemies < maxEnemiesbetweenHordes ? maxEnemiesbetweenHordes - activeEnemies: 0;
+        EnemiesToSpawn = activeEnemies < maxEnemiesbetweenHordes ? maxEnemiesbetweenHordes - activeEnemies: 0;
 
         if (playerHasRightKey)
         {

@@ -74,11 +74,11 @@ public class EntityDeadState : EntityStateBase
     {
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
-        GameObject.Find("Level1").GetComponent<Rank>().SkeletonsKilled++;
+        GameObject.Find("GameLogic").GetComponent<Rank>().SkeletonsKilled++;
 
         if (enemyClass.isBoss)
         {    
-            GameObject.Find("Level1").GetComponent<Level1Logic>().BossKilled();
+            GameObject.Find("GameLogic").GetComponent<Level1Logic>().BossKilled();
         }
 
         entityFSM.StartCoroutine(Utils.WaitForAnimationEnd(entityAnimator, "Death", CreateEnemyDeadBody));
@@ -94,7 +94,7 @@ public class EntityDeadState : EntityStateBase
         Player player =  entityFSM.entityProprieties as Player;
         player.playerActions.enabled = false;
 
-        GameObject.Find("Level1").GetComponent<Rank>().DeathsNumber++;
+        GameObject.Find("GameLogic").GetComponent<Rank>().DeathsNumber++;
         RespawnPlayer();
     }
 

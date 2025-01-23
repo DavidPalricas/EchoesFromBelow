@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// The StrangeManDialogueTrigger class is responsible for handling the logic of the a trigger that shows a speech box with the dialogue bewteen the player and the strange man.
+/// </summary>
 public class StrangeManDialogueTrigger : MonoBehaviour
 {
     /// <summary>
@@ -14,6 +17,9 @@ public class StrangeManDialogueTrigger : MonoBehaviour
     [SerializeField]
     private string speechName;
 
+    /// <summary>
+    /// The strange man property is responsible for storing the strange man game object.
+    /// </summary>
     [SerializeField]
     private GameObject strangeMan;
 
@@ -34,9 +40,10 @@ public class StrangeManDialogueTrigger : MonoBehaviour
     }
 
     /// <summary>
-    /// Changes the player direction.
+    /// The ChangePlayerDirection method is responsible for changing the player's sprite direction by updating its animator.
+    /// The new sprite direction is based on the strange position.
     /// </summary>
-    /// <param name="player">The player.</param>
+    /// <param name="player">The player game object.</param>
     private void ChangePlayerDirection(GameObject player)
     {
         Animator playerAnimator = player.GetComponent<Animator>();

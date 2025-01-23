@@ -27,7 +27,7 @@ public class EnemyBossHealthBar : MonoBehaviour
             healthBar.value = enemy.GetComponent<EntityFSM>().entitycurrentHealth;
         }
 
-        if (GameObject.Find("Level1").GetComponent<Rank>().BossKilled)
+        if (GameObject.Find("GameLogic").GetComponent<Rank>().BossKilled)
         {
             gameObject.SetActive(false);
         }

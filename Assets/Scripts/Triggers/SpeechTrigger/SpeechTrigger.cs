@@ -51,7 +51,7 @@ public class SpeechTrigger : MonoBehaviour
     private void Awake()
     {
         // Checks if it is to show the first level speech
-        if (GameObject.Find("Level1").GetComponent<Level1Logic>().enabled)
+        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
         {
             Utils.isSpeechActive = true;
             speechBox.SetActive(Utils.isSpeechActive);
