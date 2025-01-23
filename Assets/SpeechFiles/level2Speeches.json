@@ -1,0 +1,101 @@
+{
+    "firstDialogueWithNPC": {
+        "firstText": "Oh my, another human!\nI thought you were another one of those – things!",
+        "secondText": "The strange man: Ah, hello stranger! Another wanderer at last.\nWhat brings you to these twisted corridors?",
+        "thirdText": "Well it certainly wasn’t on purpose.I fell through a hole touring the upper levels of the Catacombs, then I just found myself lost in here.",
+        "fourthText": "I had to fight LIVE SKELETONS!\n But I believe you went through the same nightmares to get here.",
+        "fifthText": "You have any idea about what the hell is going on down here?!",
+        "sixthText": "The strange man: Not entirely. I understand some terrifying monsters lurk these corridors.\nForgotten, live creatures that are somehow walking between.",
+        "sevenText": "The strange man: I for one, have had many, many days to think about that.\nMaybe they’re controlled by something, someone.",
+        "eightText": "The strange man: But who am I to make suggestions ha-ha!\nI’m just another lost soul down here.",
+        "ninthText": "Controlled by something?!\nHow could that b- wait.",
+        "tenthText": "You said you’ve been here for a long time.\nHow long exactly?! You don’t look the best.",
+        "eleventhText": "The strange man: Ah, there’s something I’ve lost count of.\nLet’s just say I know my way around here.",
+        "twelvelthText": "Well, that is uplifting …",
+        "thirteenthText": "**(The strange man just stares)**",
+        "fourteenthText": "Look I just need to find a way out of here.\nHave you ever managed to find one?",
+        "fifteenthText": "The strange man: Well yes stranger, right through this gate.\nBut it isn’t that simple.",
+        "sixteenthText": "The strange man: First you must go through that corridor there and find the key for it.\nThis, however, will not be an easy fit.",
+        "seventeenthText": "The strange man: The key will be inside a chest surrounded by filthy waters, so you’ll need to find a way to cross it.\nTo do so, you will have to fight your way to it.",
+        "eighteenthText": "Seems simple enough.\nWhy have you never tried it?",
+        "nineteenthText": "The strange man: Oh but I have, a good few times even but never managed to.\nTakes the energy I no longer have, but you sure look capable young one.",
+        "twentiethText": "Not exactly what I wanted to hear but …\nI guess I’ll give it a try.",
+        "twentyFirstText": "Anything else I should know?",
+        "twentySecondText": "The strange man: Some foes there will be harder to hit and will attack you with range, so I would recommend caution.",
+        "twentyThirdText": "Now there’s something I can use, thank you.\nWish me luck I guess."
+    },
+
+    "chestSpeech": {
+        "firstText": "That must be the chest he was talking about.\nNow I just need a way across to it.",
+        "secondText": "There’s this lever thingy here, but it’s broken.\nMaybe if I fix it somehow it’ll allow me through."
+    },
+
+    "missingLeverSpeech": {
+        "firstText": "I see the missing lever piece! But the gate is locked.\nI got to find a key for it and fast, these corridors give me the creeps.",
+        "secondText": "I must find the key to open the gate."
+    },
+
+    "spidersSpeech":{
+        "firstText": "Now besides live skeletons there are giant spiders?!\nHow come this be …"
+    },
+
+    "graveyardSpeech": {
+        "firstText": "I better clear the area out before checking for the key or I will be jumped!"
+    },
+    
+    "graveyardEnemiesDead": {
+        "firstText": "Why are there so many damned monsters?\nGive me a break!",
+        "secondText": "There’s nowhere else to look, key must be somewhere in this graveyard.\nOdds are some skeleton had it, I better check the graves for it."
+    },
+
+    "keyFoundSpeech": {
+        "firstText": "Here it is!\nNow, onto the gate."
+    },
+
+    "darkAreaSpeech": {
+        "firstText": "It’s so dark in here …\nThere’s no sign of torches, nor of the lever piece. Where can it be?",
+        "secondText": "I must find it before they attack again, specially being this dark in here."
+    },
+
+    "levelPieceFoundSpeech": {
+        "firstText": "I got it!\nNow, to the chest."
+    },
+
+    "bossRecounterSpeech": {
+        "firstText": "What? How are you still alive?!\nWell, I’ve beat you before … come at me!"
+    },
+
+    "bossDeathSpeech":{
+        "firstText": "There! I’d say I’d like to see you come back from THAT, but I better shut it before you ACTUALLY do."
+    },
+
+    "useLeverSpeech": {
+        "firstText": "Let me try the lever now.",
+        "secondText": "A bridge, awesome!\nOnly one thing left to do."
+    },
+
+    "chestOpenedSpeech": {
+        "firstText": "The key, finally!\nNow I must get back to the gate. I can’t believe I’m almost out of here!"
+    },
+
+    "secondDialogueWithNPC": {
+        "firstText": "The strange man: Hello again stranger!\nI see you managed to open the gate.",
+        "secondText": "You have no idea what I had to go through there!\bBut yes, yes I did.",
+        "thirdText": "The strange man: Ready to find your freedom stranger?",
+        "fourthText": "I sure am.\nCome one, let’s leave this nightmare!",
+        "fifthText": "The strange man: Ah, but that I cannot dear stranger.",
+        "sixthText":"What do you mean? The exit is right there!" ,
+        "seventhText": "The strange man : Yes it is, but nothing awaits me outside.\nMy purpose is here. A guide to other lost souls.To warn them.",
+        "eighthText": "Right … but are you sure?\nWe have no idea how dangerous this place is, what else is down here …",
+        "ninthText": "The strange man: The Catacombs are full of secrets stranger, believe me.\nAnd some are best left buried.",
+        "tenthText": "I feel like I will not be able to change your mind.\nThank you for all the help.",
+        "eleventhText": "You did good stranger, maybe one day we’ll meet again.\nFarewell." 
+    },
+
+    "playerMonolgueSpeech":{
+       "firstText": "I can’t believe I finally made it out, what a nightmare!\nBut that man …",
+       "secondText": "Why does something tell me there’s something else he did not tell me.\nHe was there for ages, but he seemed so … “at home”.",
+       "thirdText": "I guess that’s not my problem anymore, what matters is that I FINALLY made it out.\nI can’t wait to tell everyone about all I just went through.",
+       "fourthText": "Live skeletons and haunted corridors, ha-ha, who would’ve known."
+    }
+}
