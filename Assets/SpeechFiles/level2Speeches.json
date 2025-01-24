@@ -35,17 +35,14 @@
         "secondText": "I must find the key to open the gate."
     },
 
-    "spidersSpeech":{
-        "firstText": "Now besides live skeletons there are giant spiders?!\nHow come this be …"
-    },
-
     "graveyardSpeech": {
         "firstText": "I better clear the area out before checking for the key or I will be jumped!"
     },
     
     "graveyardEnemiesDead": {
-        "firstText": "Why are there so many damned monsters?\nGive me a break!",
-        "secondText": "There’s nowhere else to look, key must be somewhere in this graveyard.\nOdds are some skeleton had it, I better check the graves for it."
+        "firstText": "Why are there so many damned monsters?\nNow there's even giant spiders!",
+        "secondText": "No matter, there’s nowhere else to look, key must be somewhere in this graveyard.\nOdds are some skeleton had it, I better check the graves for it."
+
     },
 
     "keyFoundSpeech": {
@@ -57,7 +54,7 @@
         "secondText": "I must find it before they attack again, specially being this dark in here."
     },
 
-    "levelPieceFoundSpeech": {
+    "leverPieceFoundSpeech": {
         "firstText": "I got it!\nNow, to the chest."
     },
 

@@ -58,7 +58,8 @@ public class ActiveHordesTrigger : MonoBehaviour
 
     /// <summary>
     /// The OnCollisionEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
-    /// In this method, we are showing the speech if the player collides with the trigger.
+    /// In this method, we are showing the speech if the player and enemies collide with the trigger.
+    /// 
     /// </summary>
     /// <param name="collision">The collision of a game object.</param>
     private void OnCollisionEnter2D(Collision2D collision)
@@ -66,6 +67,9 @@ public class ActiveHordesTrigger : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {     
             speechTrigger.ChangeSpeech(speechName);  
+        }else if(collision.collider.CompareTag("Enemy"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<BoxCollider2D>());
         }
     }
 }

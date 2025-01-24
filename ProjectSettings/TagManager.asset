@@ -11,6 +11,8 @@ TagManager:
   - Weapon
   - Camera
   - Stairs
+  - Coffin
+  - LeverSpawn
   layers:
   - Default
   - TransparentFX

@@ -4,23 +4,22 @@ using Unity.VisualScripting;
 
 public class Level2Logic : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject leverPrefab;
 
     private GameObject graveyardHorde, graveyardTrigger;
 
-
     private SpeechTrigger speechTrigger;
-
-    private SpawnHorde graveyardHordeScript;
 
 
     private void OnEnable()
     {
         graveyardHorde = GameObject.Find("GraveyardHorde");
-        graveyardHordeScript = graveyardHorde.GetComponent<SpawnHorde>();
         graveyardTrigger = GameObject.Find("GraveyardHordeTrigger");
         speechTrigger = GameObject.Find("SpeechTriggersLevel2").GetComponentInChildren<SpeechTrigger>();
-    }
 
+        AddKeyToACoffin(GameObject.FindGameObjectsWithTag("Coffin"));
+    }
 
     private void Update()
     {
@@ -32,9 +31,29 @@ public class Level2Logic : MonoBehaviour
         }
     }
 
+    private void AddKeyToACoffin(GameObject[] coffins)
+    {   
+        GameObject coffinWithKey = coffins[Random.Range(0, coffins.Length)];
 
-    private bool GraveYardEnemiesDead()
+        coffinWithKey.GetComponentInChildren<CoffinTrigger>().hasKey = true;
+    }
+
+
+    public Vector3 GetNewLeverPosition()
     {
+        GameObject[] leversSpawn = GameObject.FindGameObjectsWithTag("LeverSpawn");
+
+        return leversSpawn[Random.Range(0, leversSpawn.Length)].transform.position;   
+    }
+
+
+    public bool GraveYardEnemiesDead()
+    {
+        if (graveyardHorde.IsDestroyed())
+        {
+            return true;
+        }
+
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         SpawnHorde graveyardHordeScript = graveyardHorde.GetComponent<SpawnHorde>();
@@ -47,5 +66,10 @@ public class Level2Logic : MonoBehaviour
         string graveyardEnemiesId = graveyardHordeScript.HordeID.ToString();
 
         return allEnemies.Where(enemy => enemy.name.Contains("Enemy " + graveyardEnemiesId)).Count() == 0;
+    }
+
+    public void PuzzleItemGrabbed(bool isLever)
+    {   
+        speechTrigger.ChangeSpeech(isLever ? "leverPieceFoundSpeech" : "keyFoundSpeech");
     }
 }

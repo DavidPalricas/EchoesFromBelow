@@ -102,11 +102,37 @@ public class PlayerActions : MonoBehaviour
         {   
             GameObject keyToDestroy = DestroyCollectable();
 
-            // Removes the key from the dictionary which stores the keys and their values
-            GameObject.Find("GameLogic").GetComponent<Level1Logic>().Keys.Remove(keyToDestroy);
+            Level1Logic level1Logic = GameObject.Find("GameLogic").GetComponent<Level1Logic>();
 
+            if(level1Logic.enabled)
+            {
+                // Removes the key from the dictionary which stores the keys and their values
+               level1Logic.Keys.Remove(keyToDestroy);
+            }
+            else
+            {
+                GameObject.Find("GameLogic").GetComponent<Level2Logic>().PuzzleItemGrabbed(false);
+            }
+           
             playerInventory.UpdateInventory(Utils.CollectableType.Key);
         } 
+    }
+
+    /// <summary>
+    /// The GrabLever method is responsible for grabbing a lever.
+    /// </summary>
+    private void GrabLever()
+    {
+        playerInventory.UpdateInventory(Utils.CollectableType.Lever);
+
+        Level2Logic level2Logic = GameObject.Find("GameLogic").GetComponent<Level2Logic>();
+
+        if (level2Logic.enabled)
+        {
+            level2Logic.PuzzleItemGrabbed(true);
+        }
+
+        DestroyCollectable();
     }
 
     /// <summary>
@@ -222,6 +248,11 @@ public class PlayerActions : MonoBehaviour
 
             case Utils.CollectableType.Key:
                 GrabKey();
+
+                return;
+
+            case Utils.CollectableType.Lever:
+                GrabLever();
 
                 return;
 

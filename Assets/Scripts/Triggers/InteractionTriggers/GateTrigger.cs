@@ -38,6 +38,21 @@ public class GateTrigger : BaseInteractionTrigger
     private int attempts = 0;
 
     /// <summary>
+    /// The isLevel1 property is responsible for storing the level 1 status.
+    /// </summary>
+    private bool isLevel1;
+
+
+    /// <summary>
+    /// The Awake method is called when the script instance is being loaded (Unity Method).
+    /// In this method, we are checking if the level is level 1.
+    /// </summary>
+    private void Awake()
+    {
+        isLevel1 = GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled;
+    }
+
+    /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected and if the player interact input was triggred and if the conditions to open the gate are met.
     /// If these conditions are met, the OpenGate method is called to open the gate.
@@ -101,7 +116,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// </summary>
     private void OpenGate()
     {
-        if (gateKey == 2)
+        if (gateKey == 2 && isLevel1)
         {   
             if (!playerRank.BossKilled)
             {
@@ -115,13 +130,26 @@ public class GateTrigger : BaseInteractionTrigger
         {
             gateKey = 0;
             player.GetComponent<PlayerInventory>().Items["Key"] = gateKey;
+            keyIcon.SetActive(false);
 
-            string[] attemptSpeech = { "firstWrongKeySpeech", "secondWrongKeySpeech", "thirdWrongKeySpeech" };
-            speechTrigger.ChangeSpeech(attemptSpeech[attempts]);
+            if (!isLevel1)
+            {
+                gate.SetActive(false);
+                return;
+            }
 
-            attempts++;
+            NewAttempt();
         }
 
-        keyIcon.SetActive(false);
+    }
+
+    /// <summary>
+    /// The NewAttempt method is responsible for changing the speech when the player tries to open the gate without the correct key based on the number of attempts.
+    /// </summary>
+    private void NewAttempt() { 
+        string[] attemptSpeech = { "firstWrongKeySpeech", "secondWrongKeySpeech", "thirdWrongKeySpeech" };
+        speechTrigger.ChangeSpeech(attemptSpeech[attempts]);
+
+        attempts++;
     }
 }

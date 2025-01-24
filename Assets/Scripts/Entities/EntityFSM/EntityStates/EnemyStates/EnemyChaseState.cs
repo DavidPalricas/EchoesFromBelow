@@ -34,7 +34,7 @@ public class EnemyChaseState : EntityStateBase
     /// </summary>
     public override void Execute()
     {   
-        Debug.Log("Executing Chase State");
+        // Debug.Log("Executing Chase State");
 
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 

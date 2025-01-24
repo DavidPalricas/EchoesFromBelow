@@ -28,6 +28,7 @@ public static class Utils
     {
         HealItem,
         Key,
+        Lever,
         Sword,
         Stick,
         SlingShot

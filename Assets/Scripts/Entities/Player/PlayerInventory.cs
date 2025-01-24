@@ -52,7 +52,8 @@ public class PlayerInventory : MonoBehaviour
         Items = new Dictionary<string, int>
         {
             { "HealItems", 0 },
-            { "Key", 0 }
+            { "Key", 0 },
+            { "Lever", 0 }
         };
 
         Weapons = new Dictionary<string, string>
@@ -106,6 +107,19 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /// <summary>
+    /// The UpdateLeverItem method is responsible for updating the lever item in the player's inventory and its icon on the HUD.
+    /// </summary>
+    private void UpdateLeverItem()
+    {
+        Items["Lever"] = 1;
+
+        Debug.Log("Lever Value: " + Items["Lever"]);
+        // To implement when the lever has an icon
+        // leverIcon.SetActive(true);
+    }
+
+
+    /// <summary>
     /// The UpdateHealItem method is responsible for updating the heal item in the player's inventory and its icon on the HUD.
     /// If the player has less than the maximum number of heal items, the quantity is incremented.
     /// If the player has the maximum number of heal items, the flask icon color is changed to yellow to indicate that the player has the maximum number of heal items.
@@ -146,7 +160,6 @@ public class PlayerInventory : MonoBehaviour
         return keys.Values.All(value => !value);
     }
 
-
     /// <summary>
     /// The UpdateInventory method is responsible for updating the player's inventory and HUD when a collectable item is grabbed.
     /// Base on the type of the collectable a proper method is called to update the inventory.
@@ -171,6 +184,10 @@ public class PlayerInventory : MonoBehaviour
 
                 return;
 
+            case Utils.CollectableType.Lever:
+                UpdateLeverItem();
+                return;
+
             case Utils.CollectableType.HealItem:
                 UpdateHealItem();
                 return;
@@ -192,9 +209,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (Items["HealItems"] < MaxHealItems)
         {
-
             flaskQuantity.color = Color.white;
-
         }
 
         flaskQuantity.text = Items["HealItems"].ToString();

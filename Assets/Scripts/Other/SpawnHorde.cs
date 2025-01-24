@@ -26,7 +26,6 @@ public class SpawnHorde : MonoBehaviour
     [SerializeField]
     private int hordeSize;
 
- 
     /// <summary>
     /// The spawnTime property represents the time between enemy spawns.
     /// </summary>
@@ -163,7 +162,7 @@ public class SpawnHorde : MonoBehaviour
     /// <summary>
     /// The SpawnBoss method is responsible for spawning the boss enemy.
     /// </summary>
-    private void SpawnBoss()
+    public void SpawnBoss()
     {
         Vector2 bossPosition = GetEnemySpawnPosition();
 
