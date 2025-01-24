@@ -110,6 +110,14 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
+    /// The GrabLever method is responsible for grabbing a lever.
+    /// </summary>
+    private void GrabLever()
+    {
+        playerInventory.UpdateInventory(Utils.CollectableType.Lever);
+    }
+
+    /// <summary>
     /// The GrabHealItem method is responsible for grabbing the heal item, if the player has space in the inventory.
     /// If the player has space in the inventory, the player's inventory is updated, and the item is destroyed.
     /// </summary>
@@ -222,6 +230,11 @@ public class PlayerActions : MonoBehaviour
 
             case Utils.CollectableType.Key:
                 GrabKey();
+
+                return;
+
+            case Utils.CollectableType.Lever:
+                GrabLever();
 
                 return;
 

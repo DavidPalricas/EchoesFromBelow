@@ -4,10 +4,13 @@ using Unity.VisualScripting;
 
 public class Level2Logic : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject leverPrefab;
 
     private GameObject graveyardHorde, graveyardTrigger;
 
     private SpeechTrigger speechTrigger;
+
 
     private void OnEnable()
     {
@@ -16,13 +19,8 @@ public class Level2Logic : MonoBehaviour
         speechTrigger = GameObject.Find("SpeechTriggersLevel2").GetComponentInChildren<SpeechTrigger>();
 
         AddKeyToACoffin(GameObject.FindGameObjectsWithTag("Coffin"));
-    }
 
-   private void AddKeyToACoffin(GameObject[] coffins)
-    {
-        GameObject coffinWithKey = coffins[Random.Range(0, coffins.Length)];
-
-        coffinWithKey.GetComponentInChildren<CoffinTrigger>().hasKey = true;
+        SetLeverSpawn(GameObject.FindGameObjectsWithTag("LeverSpawn"));
     }
 
     private void Update()
@@ -33,6 +31,20 @@ public class Level2Logic : MonoBehaviour
             Destroy(graveyardHorde);
             Destroy(graveyardTrigger);
         }
+    }
+
+    private void AddKeyToACoffin(GameObject[] coffins)
+    {
+        GameObject coffinWithKey = coffins[Random.Range(0, coffins.Length)];
+
+        coffinWithKey.GetComponentInChildren<CoffinTrigger>().hasKey = true;
+    }
+
+    private void SetLeverSpawn(GameObject[] levers)
+    {
+        Vector3 leverSpawn = levers[Random.Range(0, levers.Length)].transform.position;
+        
+        Instantiate(leverPrefab, leverSpawn, Quaternion.identity);
     }
 
 
