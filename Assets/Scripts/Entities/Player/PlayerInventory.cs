@@ -97,13 +97,23 @@ public class PlayerInventory : MonoBehaviour
     {
         Items["Key"] = RightKeyGrabbed() ? 2 : 1;
 
-        SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
-
-        Debug.Log("Key Value: " + Items["Key"]);
-
-        spawnHord.SpawnKeyHorde(Items["Key"] == 2);
-
+        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
+        {
+            SpawnHorde spawnHord = GameObject.Find("SpawnHorde").GetComponent<SpawnHorde>();
+            spawnHord.SpawnKeyHorde(Items["Key"] == 2);
+        }
+      
         keyIcon.SetActive(true);
+    }
+
+    /// <summary>
+    /// The UpdateFinalKeyItem method is responsible for updating the final key item in the player's inventory.
+    /// </summary>
+    private void UpdateFinalKeyItem()
+    {
+        Items["Key"] = 2;
+
+        // finalKeyIcon.SetActive(true);
     }
 
     /// <summary>
@@ -154,7 +164,13 @@ public class PlayerInventory : MonoBehaviour
     /// </returns>
 
     private bool RightKeyGrabbed()
-    {
+    {   
+        // If the player is in the second level the right key to open the gate doesnt exit
+        if (!GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
+        {
+            return false;
+        }
+
         Dictionary<GameObject, bool> keys = GameObject.Find("GameLogic").GetComponent<Level1Logic>().Keys;
 
         return keys.Values.All(value => !value);
@@ -182,6 +198,11 @@ public class PlayerInventory : MonoBehaviour
             case Utils.CollectableType.Key:
                 UpdateKeyItem();
 
+                return;
+
+
+            case Utils.CollectableType.FinalKey:
+                UpdateFinalKeyItem();
                 return;
 
             case Utils.CollectableType.Lever:
@@ -233,5 +254,21 @@ public class PlayerInventory : MonoBehaviour
             stickIcon.SetActive(true);
             slingShotIcon.SetActive(false);
         }
+    }
+
+
+    public void KeyOrLeverUsed(bool isKey)
+    {
+        Items[isKey ? "Key" : "Lever"] = 0;
+
+        if (isKey)
+        {
+            keyIcon.SetActive(false);
+
+            return;
+        }
+        
+        // To implement when the lever has an icon
+        // leverIcon.SetActive(false);    
     }
 }

@@ -168,6 +168,13 @@ public class SpawnHorde : MonoBehaviour
 
         GameObject boss = Instantiate(bossPrefab, bossPosition, Quaternion.identity);
 
+        // The boss in the first Level doesn't drop any item
+        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
+        {
+            Enemy bossProprieties = boss.GetComponent<EntityFSM>().entityProprieties as Enemy;
+            bossProprieties.bossDropItem = null;
+        }
+       
         boss.GetComponent<Enemy>().Initialize();
 
         bossHealthBar.SetActive(true);

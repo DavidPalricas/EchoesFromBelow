@@ -119,6 +119,18 @@ public class PlayerActions : MonoBehaviour
     }
 
     /// <summary>
+    /// The GrabFinalKey method is responsible for grabbing the final key if the player doesn't have a key in the inventory.
+    /// </summary>
+    private void GrabFinalKey()
+    {
+        if (playerInventory.Items["Key"] == 0)
+        {
+            DestroyCollectable();
+            playerInventory.UpdateInventory(Utils.CollectableType.FinalKey);
+        }
+    }
+
+    /// <summary>
     /// The GrabLever method is responsible for grabbing a lever.
     /// </summary>
     private void GrabLever()
@@ -249,6 +261,10 @@ public class PlayerActions : MonoBehaviour
             case Utils.CollectableType.Key:
                 GrabKey();
 
+                return;
+
+            case Utils.CollectableType.FinalKey:
+                GrabFinalKey(); 
                 return;
 
             case Utils.CollectableType.Lever:

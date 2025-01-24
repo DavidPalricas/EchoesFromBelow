@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +10,10 @@ public class GateTrigger : BaseInteractionTrigger
     ///  It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject gate, player,keyIcon;
+    private GameObject gate;
+
+    [SerializeField]
+    private PlayerInventory playerInventory;
 
     /// <summary>
     /// The playerRank property is responsible for storing the player rank.
@@ -42,7 +44,6 @@ public class GateTrigger : BaseInteractionTrigger
     /// </summary>
     private bool isLevel1;
 
-
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are checking if the level is level 1.
@@ -59,7 +60,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// </summary>
     private void Update()
     {
-        if (playerDetected && InteractInputTriggered() && CheckConditionsToOpenGate())
+        if (playerDetected && InteractInputTriggered() && PlayerHasKey())
         {
             OpenGate();
         }
@@ -85,16 +86,6 @@ public class GateTrigger : BaseInteractionTrigger
         base.OnTriggerExit2D(collision);
     }
 
-    private bool CheckConditionsToOpenGate()
-    {
-        Vector2 lastMovingDirection = player.GetComponent<EntityFSM>().entityProprieties.lastMovingDirection;
-        Vector2 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
-
-        Vector2 playerDirection = Utils.GetUnitaryVector(playerVelocity);
-
-        return (playerDirection == Vector2.down || lastMovingDirection == Vector2.down) && PlayerHasKey();
-    }
-
     /// <summary>
     /// The PlayerHasKey method is responsible for checking if the player has the key to open the gate.
     /// </summary>
@@ -103,9 +94,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// </returns>
     private bool PlayerHasKey()
     {
-        Dictionary<string, int> playerItems = player.GetComponent<PlayerInventory>().Items;
-
-        gateKey = playerItems["Key"];
+        gateKey = playerInventory.Items["Key"];
 
         return gateKey > 0;
     }
@@ -115,7 +104,7 @@ public class GateTrigger : BaseInteractionTrigger
     /// If the player has the corect key, the gate is opened, otherwise the key is removed from the player's inventory.
     /// </summary>
     private void OpenGate()
-    {
+    {   
         if (gateKey == 2 && isLevel1)
         {   
             if (!playerRank.BossKilled)
@@ -128,19 +117,17 @@ public class GateTrigger : BaseInteractionTrigger
         }
         else
         {
-            gateKey = 0;
-            player.GetComponent<PlayerInventory>().Items["Key"] = gateKey;
-            keyIcon.SetActive(false);
-
             if (!isLevel1)
             {
                 gate.SetActive(false);
+                playerInventory.KeyOrLeverUsed(true);
                 return;
             }
 
             NewAttempt();
         }
 
+        playerInventory.KeyOrLeverUsed(true);
     }
 
     /// <summary>

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +18,12 @@ public class HordesGroupTrigger : MonoBehaviour
     [SerializeField]
     private GameObject hordesGroup;
 
+    [SerializeField]
+    private CameraMovement mainCameraMovement;
+
+    [SerializeField]
+    private SpeechTrigger speechTrigger;
+
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
     /// In this method, we are checking if the player entered in trigger and has the lever item and if so, we are activating the hordes.
@@ -25,9 +32,12 @@ public class HordesGroupTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && playerInventory.Items["Lever"] == 1)
-        {   
-            ChangePlayerSpawn(collision.gameObject);
+        {
             ActiveHordes();
+            ChangePlayerSpawn(collision.gameObject);
+
+            FocusOnBoss();
+            Destroy(gameObject);
         }
     }
 
@@ -60,5 +70,20 @@ public class HordesGroupTrigger : MonoBehaviour
         Player playerProprieties = player.GetComponent<EntityFSM>().entityProprieties as Player;
 
         playerProprieties.spawnPoint = new Vector2(transform.position.x, transform.position.y);
+    }
+
+
+    private void FocusOnBoss()
+    {   
+        GameObject boss = null;
+        
+        do
+        {
+            boss = GameObject.FindGameObjectsWithTag("Enemy").Where(enemy => enemy.name.Contains("Skeleton Boss")).FirstOrDefault();
+
+        } while(boss == null);
+
+        speechTrigger.ChangeSpeech("bossRecounterSpeech");
+        mainCameraMovement.ChangeTarget(boss, 0.8f);
     }
 }
