@@ -19,8 +19,6 @@ public class Level2Logic : MonoBehaviour
         speechTrigger = GameObject.Find("SpeechTriggersLevel2").GetComponentInChildren<SpeechTrigger>();
 
         AddKeyToACoffin(GameObject.FindGameObjectsWithTag("Coffin"));
-
-        SetLeverSpawn(GameObject.FindGameObjectsWithTag("LeverSpawn"));
     }
 
     private void Update()
@@ -34,17 +32,18 @@ public class Level2Logic : MonoBehaviour
     }
 
     private void AddKeyToACoffin(GameObject[] coffins)
-    {
+    {   
         GameObject coffinWithKey = coffins[Random.Range(0, coffins.Length)];
 
         coffinWithKey.GetComponentInChildren<CoffinTrigger>().hasKey = true;
     }
 
-    private void SetLeverSpawn(GameObject[] levers)
+
+    public Vector3 GetNewLeverPosition()
     {
-        Vector3 leverSpawn = levers[Random.Range(0, levers.Length)].transform.position;
-        
-        Instantiate(leverPrefab, leverSpawn, Quaternion.identity);
+        GameObject[] leversSpawn = GameObject.FindGameObjectsWithTag("LeverSpawn");
+
+        return leversSpawn[Random.Range(0, leversSpawn.Length)].transform.position;   
     }
 
 
@@ -67,5 +66,10 @@ public class Level2Logic : MonoBehaviour
         string graveyardEnemiesId = graveyardHordeScript.HordeID.ToString();
 
         return allEnemies.Where(enemy => enemy.name.Contains("Enemy " + graveyardEnemiesId)).Count() == 0;
+    }
+
+    public void PuzzleItemGrabbed(bool isLever)
+    {   
+        speechTrigger.ChangeSpeech(isLever ? "leverPieceFoundSpeech" : "keyFoundSpeech");
     }
 }

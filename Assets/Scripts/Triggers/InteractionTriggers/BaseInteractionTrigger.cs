@@ -17,7 +17,6 @@ public class BaseInteractionTrigger : MonoBehaviour
     [SerializeField]
     private PlayerActions playerActions;
 
-
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
     /// In this method, we are setting the playerDetected variable to true (player enter in the trigger area).
@@ -29,8 +28,6 @@ public class BaseInteractionTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerDetected = true;
-
-            Debug.Log("Player detected");
         }
     }
 

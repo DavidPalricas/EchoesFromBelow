@@ -33,6 +33,15 @@ public class EntityFSM : MonoBehaviour
         currentState = newState;
         currentState.Enter();
     }
+    /// <summary>
+    /// The InstantiateItem method is responsible for instantiating an item in the game.
+    /// </summary>
+    /// <param name="item">The item to be instanciated.</param>
+    /// <param name="position">The position of the item to instanciate.</param>
+    public void InstantiateItem(GameObject item, Vector2 position)
+    {
+        Instantiate(item, position, Quaternion.identity);
+    }
 
     /// <summary>
     /// The DestroyGameObject method is responsible for destroying a game object.
