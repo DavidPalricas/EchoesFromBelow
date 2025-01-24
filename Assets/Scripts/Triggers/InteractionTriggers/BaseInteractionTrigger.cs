@@ -29,6 +29,8 @@ public class BaseInteractionTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerDetected = true;
+
+            Debug.Log("Player detected");
         }
     }
 

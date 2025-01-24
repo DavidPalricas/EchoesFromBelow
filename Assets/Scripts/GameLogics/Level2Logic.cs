@@ -7,20 +7,23 @@ public class Level2Logic : MonoBehaviour
 
     private GameObject graveyardHorde, graveyardTrigger;
 
-
     private SpeechTrigger speechTrigger;
-
-    private SpawnHorde graveyardHordeScript;
-
 
     private void OnEnable()
     {
         graveyardHorde = GameObject.Find("GraveyardHorde");
-        graveyardHordeScript = graveyardHorde.GetComponent<SpawnHorde>();
         graveyardTrigger = GameObject.Find("GraveyardHordeTrigger");
         speechTrigger = GameObject.Find("SpeechTriggersLevel2").GetComponentInChildren<SpeechTrigger>();
+
+        AddKeyToACoffin(GameObject.FindGameObjectsWithTag("Coffin"));
     }
 
+   private void AddKeyToACoffin(GameObject[] coffins)
+    {
+        GameObject coffinWithKey = coffins[Random.Range(0, coffins.Length)];
+
+        coffinWithKey.GetComponentInChildren<CoffinTrigger>().hasKey = true;
+    }
 
     private void Update()
     {
@@ -33,8 +36,13 @@ public class Level2Logic : MonoBehaviour
     }
 
 
-    private bool GraveYardEnemiesDead()
+    public bool GraveYardEnemiesDead()
     {
+        if (graveyardHorde.IsDestroyed())
+        {
+            return true;
+        }
+
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         SpawnHorde graveyardHordeScript = graveyardHorde.GetComponent<SpawnHorde>();
