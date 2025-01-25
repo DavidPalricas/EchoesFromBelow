@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4447942683967627992}
   - component: {fileID: 8341474175332172157}
   - component: {fileID: 3185000960411804867}
+  - component: {fileID: 3483590099005592555}
   m_Layer: 0
   m_Name: Coffin
   m_TagString: Coffin
@@ -282,3 +283,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.6383622}
   m_EdgeRadius: 0
+--- !u!114 &3483590099005592555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463852769488908067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42557c23ed4a3a947ad954aa7f99e15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
