@@ -1,0 +1,1167 @@
+fileFormatVersion: 2
+guid: a6e3c4cca7e8b9f4488c0dbd011e4c62
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: aranha_morte_ataque_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3847f3619e9ecf9489a77849a8119848
+      internalID: -152752740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c4e4c2eadd4e04aa860bdb5e70a37c
+      internalID: 805343705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_2
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a76001b8b4eb340a626cb10c77cf55
+      internalID: 1796144942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_3
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e8731d232c52540a1e7efbee094aaa
+      internalID: -1142818481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_4
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de55cf11ca8b8034a94abcb801a1fd50
+      internalID: -1485575121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_5
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 836
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9df6ab31d22576419f25f744d6d5ee0
+      internalID: -405240982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a04a14c3ec683e740b80ca2ef761cf3a
+      internalID: -345195773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e46247e6179e18a4da170d73280945fa
+      internalID: -2091118852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed32ddd5298ce44a9f08eb9eba00334
+      internalID: -959369368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ccedfada4327b4b844321fb162c1f0
+      internalID: 1800471936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_16
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f2aa208c1b6e049b29cedbfecaa31a
+      internalID: 1281275952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_17
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 738
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da439c576ae89ba4cb5fb242e22c4290
+      internalID: 1056504637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc2204eb42a7ae43b2454b493da06c5
+      internalID: 888740322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_19
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943bc83c38c4f044bbf0f1c425310331
+      internalID: -1157314541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_20
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820339fb36702f3479d124aa802ef756
+      internalID: -274114800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_21
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d793f38d3d9615468778a2353f9b328
+      internalID: 1407263879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_22
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8dc3e21e61fb054ea57919efd76a94b
+      internalID: 647841764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_23
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 631
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b174b62859c78d488cb3eb9e1fe8250
+      internalID: 2042053799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_30
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 792bcaafb8143c047ba96c3f089e06a1
+      internalID: 600762539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_31
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43dcfee25ab4afa40922d6c616d70fc4
+      internalID: -1273758568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_32
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d74e0395aaa1c42b7e2ae3cfc2f535
+      internalID: 654604097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_33
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b6f461729141d348bea743226a6e4b0
+      internalID: -260845872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_34
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164216bf92b03d94c978514f30374b41
+      internalID: -1489471541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_35
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 498
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3653e35859e7282498c908f1e4e749c4
+      internalID: -1163518263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 353
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c562d4a16cb7a1243ab7e1a7aac1dbe3
+      internalID: 752305127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_43
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 353
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ddb9770468222d4cbaf3c57ed9d86b7
+      internalID: 1321405852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 353
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5544598b291d69747b17e16504ddff81
+      internalID: -684552880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_45
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 353
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02423e0baf8c70f4ba144e9e0f4cabe9
+      internalID: -1893315179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_46
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 353
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8282470b85c44d42be4d6fddb688730
+      internalID: -810560110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dabc71a61607be6408680b19352c827a
+      internalID: -1741716549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_55
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 240
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c585f3a9afaed348a439c59d1c8609d
+      internalID: -355097327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_56
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 240
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 458cb128127641c43a5cd1398818d938
+      internalID: 1675412114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_57
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 240
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9be46c7db231c244e9ee0a6d2e0748e1
+      internalID: 666876714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_58
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 240
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab73e0bd87abc2c4cbba75ef7b32d797
+      internalID: 1377147025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_60
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 118
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5b3f5f0f29e20543a1c8e3e706f96ef
+      internalID: 1484092446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_61
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 118
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70cee11413dd15b43abde00be82be147
+      internalID: -805258173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_62
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 118
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e69c8251cfe374ca5f03145c2d64fb
+      internalID: 332204759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_63
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 118
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 197d93cb6dea3014baa984815d95fccf
+      internalID: 1814814593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_64
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 118
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8575f57c6ed0ef4fb0cb679bb4bac05
+      internalID: -1692573448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_71
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 14
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9513611021459e489e3bdbb41eeeaa7
+      internalID: -987378710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_72
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 14
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b5e865f8b69f649b7cd6fe216e29e2
+      internalID: -1035693120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_73
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 14
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b74b9cf79765a4c868306e08e158df
+      internalID: -807012156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_74
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 14
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a502e261c663b4d9b38de3e6203e18
+      internalID: 1145525462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aranha_morte_ataque_75
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 14
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4748158f7a86b6f41843ae886862a1e7
+      internalID: -772701528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      aranha_morte_ataque_0: -152752740
+      aranha_morte_ataque_1: 805343705
+      aranha_morte_ataque_10: -862404566
+      aranha_morte_ataque_11: 722807640
+      aranha_morte_ataque_12: -345195773
+      aranha_morte_ataque_13: -2091118852
+      aranha_morte_ataque_14: -959369368
+      aranha_morte_ataque_15: 1800471936
+      aranha_morte_ataque_16: 1281275952
+      aranha_morte_ataque_17: 1056504637
+      aranha_morte_ataque_18: 888740322
+      aranha_morte_ataque_19: -1157314541
+      aranha_morte_ataque_2: 1796144942
+      aranha_morte_ataque_20: -274114800
+      aranha_morte_ataque_21: 1407263879
+      aranha_morte_ataque_22: 647841764
+      aranha_morte_ataque_23: 2042053799
+      aranha_morte_ataque_24: 509225167
+      aranha_morte_ataque_25: -1151968435
+      aranha_morte_ataque_26: -814546777
+      aranha_morte_ataque_27: 1842200915
+      aranha_morte_ataque_28: -345105928
+      aranha_morte_ataque_29: -575927575
+      aranha_morte_ataque_3: -1142818481
+      aranha_morte_ataque_30: 600762539
+      aranha_morte_ataque_31: -1273758568
+      aranha_morte_ataque_32: 654604097
+      aranha_morte_ataque_33: -260845872
+      aranha_morte_ataque_34: -1489471541
+      aranha_morte_ataque_35: -1163518263
+      aranha_morte_ataque_36: -1098066692
+      aranha_morte_ataque_37: -839066304
+      aranha_morte_ataque_38: -2088686540
+      aranha_morte_ataque_39: 1592376995
+      aranha_morte_ataque_4: -1485575121
+      aranha_morte_ataque_40: -829937370
+      aranha_morte_ataque_41: 285524855
+      aranha_morte_ataque_42: 752305127
+      aranha_morte_ataque_43: 1321405852
+      aranha_morte_ataque_44: -684552880
+      aranha_morte_ataque_45: -1893315179
+      aranha_morte_ataque_46: -810560110
+      aranha_morte_ataque_47: -1126311743
+      aranha_morte_ataque_48: -256773141
+      aranha_morte_ataque_49: -1326007336
+      aranha_morte_ataque_5: -405240982
+      aranha_morte_ataque_50: -272826377
+      aranha_morte_ataque_51: 1405153634
+      aranha_morte_ataque_52: 1317512909
+      aranha_morte_ataque_53: 1112294394
+      aranha_morte_ataque_54: -1741716549
+      aranha_morte_ataque_55: -355097327
+      aranha_morte_ataque_56: 1675412114
+      aranha_morte_ataque_57: 666876714
+      aranha_morte_ataque_58: 1377147025
+      aranha_morte_ataque_59: 1161254869
+      aranha_morte_ataque_6: 1771498964
+      aranha_morte_ataque_60: 1484092446
+      aranha_morte_ataque_61: -805258173
+      aranha_morte_ataque_62: 332204759
+      aranha_morte_ataque_63: 1814814593
+      aranha_morte_ataque_64: -1692573448
+      aranha_morte_ataque_65: 909160574
+      aranha_morte_ataque_66: 345875761
+      aranha_morte_ataque_67: 557438346
+      aranha_morte_ataque_68: 804316686
+      aranha_morte_ataque_69: -945644486
+      aranha_morte_ataque_7: -683040030
+      aranha_morte_ataque_70: -2019866626
+      aranha_morte_ataque_71: -987378710
+      aranha_morte_ataque_72: -1035693120
+      aranha_morte_ataque_73: -807012156
+      aranha_morte_ataque_74: 1145525462
+      aranha_morte_ataque_75: -772701528
+      aranha_morte_ataque_76: 1326230359
+      aranha_morte_ataque_8: 874723852
+      aranha_morte_ataque_9: 907260939
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

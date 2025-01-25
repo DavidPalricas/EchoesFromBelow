@@ -171,8 +171,7 @@ public class SpawnHorde : MonoBehaviour
         // The boss in the first Level doesn't drop any item
         if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
         {
-            Enemy bossProprieties = boss.GetComponent<EntityFSM>().entityProprieties as Enemy;
-            bossProprieties.bossDropItem = null;
+            boss.GetComponent<Enemy>().bossDropItem = null;
         }
        
         boss.GetComponent<Enemy>().Initialize();

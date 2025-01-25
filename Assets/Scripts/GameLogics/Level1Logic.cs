@@ -48,7 +48,7 @@ public class Level1Logic : MonoBehaviour
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are retrieving the keys by calling the FindKeys() method and adding their values by calling the AddKeysValues() method.
     /// </summary>
-    private void Awake()
+    private void Enabled()
     {
         AddKeysValues(FindKeys());
     }
