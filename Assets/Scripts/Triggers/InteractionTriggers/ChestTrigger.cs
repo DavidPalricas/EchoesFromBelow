@@ -8,11 +8,15 @@ public class ChestTrigger : BaseInteractionTrigger
     [SerializeField]
     private GameObject finalKeyPrefab;
 
+    [SerializeField]
+    private GameObject chestObject;
+
     private void Update()
     {
         if (playerDetected && InteractInputTriggered() && playerInventory.Items["Key"] == 1)
         {
             OpenChest();
+            chestObject.GetComponent<Animator>().Play("openChest");
         }
     }
 

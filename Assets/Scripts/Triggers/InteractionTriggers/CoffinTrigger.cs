@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 /// <summary>
@@ -23,6 +24,15 @@ public class CoffinTrigger : BaseInteractionTrigger
     [SerializeField]
     private Level2Logic level2Logic;
 
+    [SerializeField]
+    private GameObject coffinObject;
+    
+    [SerializeField]
+    private bool originalCoffin = true;
+
+    [SerializeField]
+    private Sprite coffin01, coffin02;
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected, the interact input is triggered, the graveyard enemies are dead and the player has the key
@@ -30,9 +40,20 @@ public class CoffinTrigger : BaseInteractionTrigger
     /// </summary>
     private void Update()
     {
-        if (playerDetected && InteractInputTriggered() && level2Logic.GraveYardEnemiesDead() && hasKey)
+        if (playerDetected && InteractInputTriggered() && level2Logic.GraveYardEnemiesDead())
         {
-            OpenCoffin();
+            if (originalCoffin)
+            {
+                coffinObject.GetComponent<SpriteRenderer>().sprite = coffin01;
+            } else
+            {
+                coffinObject.GetComponent<SpriteRenderer>().sprite = coffin02;
+            }
+
+            if (hasKey)
+            {
+                OpenCoffin();
+            }
         }
     }
 
@@ -41,7 +62,7 @@ public class CoffinTrigger : BaseInteractionTrigger
     /// </summary>
     private void OpenCoffin()
     {   
-       var keySpawn = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
+       var keySpawn = new Vector3(transform.position.x, transform.position.y - 4.5f, transform.position.z);
 
        Instantiate(keyPrefab,keySpawn, Quaternion.identity);
 

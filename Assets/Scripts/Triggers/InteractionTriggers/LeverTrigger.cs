@@ -6,7 +6,10 @@ public class LeverTrigger : BaseInteractionTrigger
     private PlayerInventory playerInventory;
 
     [SerializeField]
-    private GameObject bridge;
+    private GameObject bridge_left, bridge_right;
+
+    [SerializeField]
+    private GameObject leverObject;
 
 
     // Update is called once per frame
@@ -19,9 +22,14 @@ public class LeverTrigger : BaseInteractionTrigger
 
     private void ActivateBridge()
     {
+        leverObject.GetComponent<Animator>().Play("leverActivation");
+        
         playerInventory.KeyOrLeverUsed(false);
 
-        bridge.SetActive(true);
+        bridge_left.GetComponent<BoxCollider2D>().enabled = false;
+        bridge_left.GetComponent<Animator>().Play("Bridge_Left_open");
+        bridge_right.GetComponent<BoxCollider2D>().enabled = false;
+        bridge_right.GetComponent<Animator>().Play("Bridge_Right_open");
 
         Destroy(gameObject);
     }

@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
     /// Its Serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject stickIcon, slingShotIcon, flaskIcon, keyIcon;
+    private GameObject stickIcon, slingShotIcon, flaskIcon, keyIcon, leverIcon;
 
     /// <summary>
     /// The flaskQuantity property is responsible for storing the quantity of heal items in the player's inventory.
@@ -126,7 +126,7 @@ public class PlayerInventory : MonoBehaviour
 
         Debug.Log("Lever Value: " + Items["Lever"]);
         // To implement when the lever has an icon
-        // leverIcon.SetActive(true);
+        leverIcon.SetActive(true);
     }
 
 
@@ -270,7 +270,7 @@ public class PlayerInventory : MonoBehaviour
         }
         
         // To implement when the lever has an icon
-        // leverIcon.SetActive(false);    
+        leverIcon.SetActive(false);    
     }
 
 
