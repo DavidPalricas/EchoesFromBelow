@@ -53,7 +53,8 @@ public class PlayerInventory : MonoBehaviour
         {
             { "HealItems", 0 },
             { "Key", 0 },
-            { "Lever", 0 }
+            { "Lever", 0 },
+            { "FinalKey", 0 }
         };
 
         Weapons = new Dictionary<string, string>
@@ -111,7 +112,7 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     private void UpdateFinalKeyItem()
     {
-        Items["Key"] = 2;
+        Items["FinalKey"] = 1;
 
         // finalKeyIcon.SetActive(true);
     }
@@ -270,5 +271,12 @@ public class PlayerInventory : MonoBehaviour
         
         // To implement when the lever has an icon
         // leverIcon.SetActive(false);    
+    }
+
+
+    public void FinalKeyUsed()
+    {
+        Items["FinalKey"] = 0;
+        // finalKeyIcon.SetActive(false);
     }
 }

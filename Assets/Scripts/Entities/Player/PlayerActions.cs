@@ -123,7 +123,7 @@ public class PlayerActions : MonoBehaviour
     /// </summary>
     private void GrabFinalKey()
     {
-        if (playerInventory.Items["Key"] == 0)
+        if (playerInventory.Items["FinalKey"] == 0)
         {
             DestroyCollectable();
             playerInventory.UpdateInventory(Utils.CollectableType.FinalKey);

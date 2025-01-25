@@ -75,6 +75,11 @@
         "firstText": "The key, finally!\nNow I must get back to the gate. I can’t believe I’m almost out of here!"
     },
 
+    "mustTalkWithNPC": {
+        "firstText": "I should go back to the strange"
+
+    },
+
     "secondDialogueWithNPC": {
         "firstText": "The strange man: Hello again stranger!\nI see you managed to open the gate.",
         "secondText": "You have no idea what I had to go through there!\bBut yes, yes I did.",

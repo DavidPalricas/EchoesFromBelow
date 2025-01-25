@@ -51,6 +51,8 @@ public class ProjetileMovement : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
 
+        SetProjetileRotation();
+
         if (timeElapsed >= 2f)
         {
             Destroy(gameObject);
@@ -67,7 +69,7 @@ public class ProjetileMovement : MonoBehaviour
     /// The attack direction can be (0,1), (0,-1), (1,0) or (-1,0).
     /// </summary>
     private void MoveProjetile()
-    {   
+    {
         projetileRigidBody.position += speed * Time.deltaTime * attackDirection;
     }
 
@@ -142,5 +144,23 @@ public class ProjetileMovement : MonoBehaviour
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
         }
         return true;
+    }
+
+    private void SetProjetileRotation()
+    {
+        // Note : The projetile sprite is facing right by default
+
+        if (attackDirection == Vector2.up)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        else if (attackDirection == Vector2.down)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (attackDirection == Vector2.right)
+        {
+           transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
     }
 }
