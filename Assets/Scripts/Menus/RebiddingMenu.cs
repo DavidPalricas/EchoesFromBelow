@@ -22,6 +22,9 @@ public class RebindingMenu : MonoBehaviour
     [SerializeField]
     private GameObject attackButton, healButton, interactButton, pauseButton, skipDialogueButton;
 
+    [SerializeField]
+    private TextMeshProUGUI noteText;
+
     /// <summary>
     /// The defaultButtonImageColor property is responsible for storing the default color of the button image.
     /// </summary>
@@ -215,11 +218,15 @@ public class RebindingMenu : MonoBehaviour
     /// To update the action buttons text, the action bindings are loaded in order to get the key or button that is binded to the action.
     /// </summary>
     public void UpdateUIText(int newActionIndex)
-    {   
-
+    {  
         Utils.LoadAndApplyBindings(playerInput);
 
         actionIndex = newActionIndex;
+
+        if (noteText != null)
+        {
+            noteText.text = actionIndex == 0 ? "The movement keys cannot be altered.\r\nUse WASD or the arrow keys to move." : "The movement buttons cannot be altered.\r\nUse the left stick or the D-pad to move.";
+        }
 
         Dictionary<GameObject, string> actions = new()
         {

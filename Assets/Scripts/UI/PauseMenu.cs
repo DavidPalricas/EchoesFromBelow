@@ -64,7 +64,10 @@ public class PauseMenu : MonoBehaviour
     /// The time is stopped when the game is paused and the HandlingInput method is called to handle the input (enable or disable the player input).
     /// </summary>
     private void HandlingPauseMenu()
-    {   
+    {
+        AudioManager audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager.HandlePlayStopMusic(audioManager.ambient);
+
         gameIsPaused = !gameIsPaused;
 
         gameUI.SetActive(!gameIsPaused);

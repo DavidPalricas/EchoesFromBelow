@@ -104,7 +104,7 @@ public static class Utils
 
     public static void PlaySoundEffect(string clipName)
     {   
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        AudioManager audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
         switch(clipName)
         {

@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     [Header("---------- Audio Clip -------------")]
     public AudioClip lever, playerAttack, spiderAttack, chest, coffin, heal, takeDamage, fall, playerDeath, ambient, gate, skeletonAttack, bossAttack;
 
+    private float musicPauseTime = 0f;
+
     private void Awake()
     {      
         PlayMusic(ambient);
@@ -36,14 +38,17 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void StopMusic(AudioClip clip)
+    public void HandlePlayStopMusic(AudioClip clip)
     {
         if (musicSource.isPlaying && musicSource.clip == clip)
         {
-            musicSource.Stop();
+            musicPauseTime = musicSource.time;
+            musicSource.Pause();
         }
         else if (!musicSource.isPlaying && musicSource.clip == clip)
         {
+            musicSource.clip = clip;
+            musicPauseTime = 0f;
             musicSource.Play();
         }
     }
