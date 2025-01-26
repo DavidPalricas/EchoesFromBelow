@@ -51,21 +51,21 @@ public class SpeechTrigger : MonoBehaviour
     private void Awake()
     {
         // Checks if it is to show the first level speech
-        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
-        {
-            Utils.isSpeechActive = true;
-            speechBox.SetActive(Utils.isSpeechActive);
 
-            currentSpeech = "startSpeech";
-
-            speeches = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(speechJsonFile.text)[currentSpeech];
-
-            currentText = GetNextText();
-        }
 
         if (playerActions == null)
         {
             playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
+
+        if (speechBox == null)
+        {
+            speechBox = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().speechBox;
+        }
+
+        if (currentSpeechText == null)
+        {
+            currentSpeechText = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().currentSpeechText;
         }
     }
 
@@ -123,7 +123,8 @@ public class SpeechTrigger : MonoBehaviour
     /// </summary>
     /// <param name="newSpeech">The new current speech.</param>
     public void ChangeSpeech(string newSpeech)
-    {
+    {   
+
         currentSpeech = newSpeech;
 
         Utils.isSpeechActive = true;
@@ -132,6 +133,10 @@ public class SpeechTrigger : MonoBehaviour
 
         speeches = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(speechJsonFile.text)[currentSpeech];
 
+        Debug.Log("Boas: " + speeches);
+
         currentText = GetNextText();
+
+        Debug.Log("Cona: " + currentText);
     }
 }

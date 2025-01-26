@@ -7,8 +7,13 @@ public class EndingTrigger : MonoBehaviour
     [SerializeField]
     private GameObject fadeManager;
 
+    [SerializeField]
+    private GameObject hud;
+
     // Variavel que vai verificar qual a cena atual, DEVE EXISTIR NOS SCRIPTS DE CANVAS DAS CENAS QUE NECESSITAM DE DAR FADE IN/OUT
     private int currentSceneIndex;
+
+  
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,6 +21,7 @@ public class EndingTrigger : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            hud.GetComponent<Animator>().Play("fadeIn");
             GameObject gameLogic = GameObject.Find("GameLogic");
 
             gameLogic.GetComponent<Level1Logic>().enabled = false;
