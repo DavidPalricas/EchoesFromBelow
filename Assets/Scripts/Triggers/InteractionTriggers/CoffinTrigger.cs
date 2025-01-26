@@ -33,6 +33,15 @@ public class CoffinTrigger : BaseInteractionTrigger
     [SerializeField]
     private Sprite coffin01, coffin02;
 
+
+    private void OnEnable()
+    {
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
+    }
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected, the interact input is triggered, the graveyard enemies are dead and the player has the key

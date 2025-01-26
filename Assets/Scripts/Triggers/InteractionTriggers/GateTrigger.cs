@@ -44,6 +44,14 @@ public class GateTrigger : BaseInteractionTrigger
     /// </summary>
     private bool isLevel1;
 
+    private void OnEnable()
+    {
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
+    }
+
     /// <summary>
     /// The Awake method is called when the script instance is being loaded (Unity Method).
     /// In this method, we are checking if the level is level 1.
@@ -51,6 +59,11 @@ public class GateTrigger : BaseInteractionTrigger
     private void Awake()
     {
         isLevel1 = GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled;
+
+        if (playerInventory == null)
+        {
+          playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        }
     }
 
     /// <summary>

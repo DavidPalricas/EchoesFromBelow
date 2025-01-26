@@ -9,7 +9,7 @@ public class GraveyardCheckPoint : MonoBehaviour
     /// The fakeLever property is responsible for storing the fake lever game object.
     /// </summary>
     [SerializeField]
-    private GameObject Lever;
+    private GameObject lever, leverPrefab;
 
     /// <summary>
     /// The level2Logic property is responsible for storing the Level2Logic component.
@@ -40,7 +40,8 @@ public class GraveyardCheckPoint : MonoBehaviour
     /// The ChangeLeverPosition method is responsible for changing the lever position.
     /// </summary>
     private void ChangeLeverPosition()
-    {
-        Lever.transform.position = level2Logic.GetNewLeverPosition();
+    {   
+        GameObject newLever = Instantiate(leverPrefab, level2Logic.GetNewLeverPosition(), Quaternion.identity);
+        Destroy(lever);
     }
 }

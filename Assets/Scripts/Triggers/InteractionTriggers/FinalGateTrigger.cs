@@ -19,6 +19,11 @@ public class FinalGateTrigger : BaseInteractionTrigger
         {
             playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         }
+
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
     }
 
     /// <summary>
@@ -33,6 +38,8 @@ public class FinalGateTrigger : BaseInteractionTrigger
             if (!secondDialogueWithStrangeMan.IsDestroyed())
             {
                 speechTrigger.ChangeSpeech("mustTalkWithNPC");
+
+                return;
             }
             OpenFinalGate();
         }

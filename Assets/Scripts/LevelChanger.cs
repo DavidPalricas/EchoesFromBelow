@@ -12,6 +12,11 @@ public class LevelChanger : MonoBehaviour
 
     public GameObject speechBox;
 
+    public GameObject bossHealthBar;
+
+    [SerializeField]
+    private bool destroyOnLoad;
+
     /// <summary>
     /// The currentSpeechText property is responsible for storing the current speech text.
     /// </summary>
@@ -19,7 +24,10 @@ public class LevelChanger : MonoBehaviour
 
     private void OnEnable()
     {
-        DontDestroyOnLoad(gameObject);
+        if (destroyOnLoad)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

@@ -89,6 +89,11 @@ public class EntityDeadState : EntityStateBase
             {
                 level1Logic.BossKilled();
             }
+            else
+            {
+                Level2Logic level2Logic = GameObject.Find("Level2").GetComponent<Level2Logic>();
+                level2Logic.BossKilled();
+            }
         }
 
         entityFSM.StartCoroutine(Utils.WaitForAnimationEnd(entityAnimator, "Death", CreateEnemyDeadBody));

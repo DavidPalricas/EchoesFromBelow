@@ -23,6 +23,16 @@ public class TorchLightTrigger : BaseInteractionTrigger
     [SerializeField]
     private bool isTutorial;
 
+
+
+    private void OnEnable()
+    {
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
+    }
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected and if the player interact input was triggred

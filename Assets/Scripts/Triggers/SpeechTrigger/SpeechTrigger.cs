@@ -53,6 +53,18 @@ public class SpeechTrigger : MonoBehaviour
         // Checks if it is to show the first level speech
 
 
+        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled)
+        {
+            Utils.isSpeechActive = true;
+            speechBox.SetActive(Utils.isSpeechActive);
+
+            currentSpeech = "startSpeech";
+
+            speeches = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(speechJsonFile.text)[currentSpeech];
+
+            currentText = GetNextText();
+        }
+
         if (playerActions == null)
         {
             playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();

@@ -12,6 +12,21 @@ public class LeverTrigger : BaseInteractionTrigger
     private GameObject leverObject;
 
 
+    private void OnEnable()
+    {
+        if (playerInventory == null)
+        {
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+
+        }
+
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
+
+    }
+
     // Update is called once per frame
     private void Update()
     {

@@ -20,7 +20,7 @@ public class RebindingMenu : MonoBehaviour
     /// The attackButton, healButton, interactButton, pauseButton, switchWeaponsButton, skipDialogueButton properties are responsible for storing the buttons of the actions that can be rebound.
     /// </summary>
     [SerializeField]
-    private GameObject attackButton, healButton, interactButton, pauseButton, switchWeaponsButton, skipDialogueButton;
+    private GameObject attackButton, healButton, interactButton, pauseButton, skipDialogueButton;
 
     /// <summary>
     /// The defaultButtonImageColor property is responsible for storing the default color of the button image.
@@ -133,7 +133,6 @@ public class RebindingMenu : MonoBehaviour
             _ when button == healButton => playerInput.actions["Heal"],
             _ when button == interactButton => playerInput.actions["Interact"],
             _ when button == pauseButton => playerInput.actions["PauseUnpause"],
-            _ when button == switchWeaponsButton => playerInput.actions["SwitchWeapons"],
             _ when button == skipDialogueButton => playerInput.actions["SkipDialogue"],
             _ => null
         };
@@ -228,7 +227,6 @@ public class RebindingMenu : MonoBehaviour
             { healButton, "Heal" },
             { interactButton, "Interact" },
             { pauseButton, "PauseUnpause" },
-            { switchWeaponsButton, "SwitchWeapons" },
             { skipDialogueButton, "SkipDialogue"}
         };
 

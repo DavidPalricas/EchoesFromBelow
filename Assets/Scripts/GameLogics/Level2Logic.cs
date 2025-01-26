@@ -9,6 +9,7 @@ public class Level2Logic : MonoBehaviour
 
     private GameObject graveyardHorde, graveyardTrigger;
 
+    [SerializeField]
     private SpeechTrigger speechTrigger;
 
 
@@ -16,7 +17,6 @@ public class Level2Logic : MonoBehaviour
     {
         graveyardHorde = GameObject.Find("GraveyardHorde");
         graveyardTrigger = GameObject.Find("GraveyardHordeTrigger");
-        speechTrigger = GameObject.Find("SpeechTriggersLevel2").GetComponentInChildren<SpeechTrigger>();
 
         AddKeyToACoffin(GameObject.FindGameObjectsWithTag("Coffin"));
     }
@@ -71,5 +71,15 @@ public class Level2Logic : MonoBehaviour
     public void PuzzleItemGrabbed(bool isLever)
     {   
         speechTrigger.ChangeSpeech(isLever ? "leverPieceFoundSpeech" : "keyFoundSpeech");
+    }
+
+
+    public void BossKilled()
+    {
+        GameObject bossHealthBar = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().bossHealthBar;
+
+        bossHealthBar.SetActive(false);
+
+        speechTrigger.ChangeSpeech("bossDeathSpeech");
     }
 }

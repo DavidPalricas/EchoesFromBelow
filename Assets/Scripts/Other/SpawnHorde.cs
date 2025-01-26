@@ -176,6 +176,11 @@ public class SpawnHorde : MonoBehaviour
        
         boss.GetComponent<Enemy>().Initialize();
 
+        if (bossHealthBar == null)
+        {
+            bossHealthBar = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().bossHealthBar;
+
+        }
         bossHealthBar.SetActive(true);
     }
 

@@ -18,6 +18,11 @@ public class ChestTrigger : BaseInteractionTrigger
         {
             playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         }
+
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
     }
     private void Update()
     {

@@ -15,15 +15,9 @@ public class BaseInteractionTrigger : MonoBehaviour
     /// It is serialized to be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private PlayerActions playerActions;
+    protected PlayerActions playerActions;
 
-    private void OnEnable()
-    {
-        if (playerActions == null)
-        {
-            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
-        }
-    }
+ 
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
     /// In this method, we are setting the playerDetected variable to true (player enter in the trigger area).
