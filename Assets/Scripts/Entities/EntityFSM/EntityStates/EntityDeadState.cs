@@ -74,7 +74,7 @@ public class EntityDeadState : EntityStateBase
     {
         Enemy enemyClass = (Enemy)entityFSM.entityProprieties;
 
-        GameObject.Find("GameLogic").GetComponent<Rank>().SkeletonsKilled++;
+        GameObject.Find("GameLogic").GetComponent<Rank>().EnemiesKilled++;
 
         if (enemyClass.isBoss)
         {    

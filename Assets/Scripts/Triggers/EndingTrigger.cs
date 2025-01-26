@@ -38,11 +38,13 @@ public class EndingTrigger : MonoBehaviour
                 gameLogic.GetComponent<Rank>().StopTimer = true;
 
                 DestroyPlayerAndMainCamera();
-            }
-       
-            hud.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
 
-            //SceneManager.LoadScene("Ending");
+                SceneManager.LoadScene("Ending");
+
+                return;
+            }
+             
+            hud.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
         }
 
         gameObject.SetActive(false);
@@ -50,7 +52,7 @@ public class EndingTrigger : MonoBehaviour
 
     private void DestroyPlayerAndMainCamera()
     {
-        string[] gameObjectsToDestroy = {"Player", "MainCamera"};
+        string[] gameObjectsToDestroy = {"HUD","Audio","Player","MainCamera"};
 
         foreach (string gameObjectName in gameObjectsToDestroy)
         {

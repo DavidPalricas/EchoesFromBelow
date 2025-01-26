@@ -145,10 +145,6 @@ public class SpeechTrigger : MonoBehaviour
 
         speeches = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(speechJsonFile.text)[currentSpeech];
 
-        Debug.Log("Boas: " + speeches);
-
         currentText = GetNextText();
-
-        Debug.Log("Cona: " + currentText);
     }
 }

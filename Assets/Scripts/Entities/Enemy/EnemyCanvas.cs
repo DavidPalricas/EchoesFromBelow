@@ -17,13 +17,17 @@ public class EnemyCanvas : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (player.transform.position.y < enemy.transform.position.y)
+    {   
+        if (player != null)
         {
-            enemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        } else if (player.transform.position.y > enemy.transform.position.y)
-        {
-            enemy.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            if (player.transform.position.y < enemy.transform.position.y)
+            {
+                enemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+            else if (player.transform.position.y > enemy.transform.position.y)
+            {
+                enemy.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            }
         }
     }
 

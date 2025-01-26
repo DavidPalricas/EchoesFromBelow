@@ -52,7 +52,7 @@ public class Rank : MonoBehaviour
     /// <value>
     /// The number of skeletons killed during the player's gameplay.
     /// </value>
-    public int SkeletonsKilled { get; set; }
+    public int EnemiesKilled { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the boss was killed.
@@ -77,7 +77,7 @@ public class Rank : MonoBehaviour
         HealItemsUsed = 0;
         DeathsNumber = 0;
         timeSpent = 0F;
-        SkeletonsKilled = 0;
+        EnemiesKilled = 0;
         BossKilled = false;
     }
 
@@ -102,13 +102,13 @@ public class Rank : MonoBehaviour
     private int CalculateRankValue()
     {
         // Measure the time spent in the game in minutes
-        int timeComponent = (int)(60 * (timeSpent / 60.0)); 
+        int timeComponent = (int)(5 * (timeSpent / 60.0)); 
         int deathsComponent = 5 * DeathsNumber;
-        int skeletonsComponent = 4 * SkeletonsKilled;
+        int enemiesComponent = 4 * EnemiesKilled;
         int healItemsComponent = 3 * HealItemsUsed;
         int bossComponent = BossKilled ? 5 : 0;
 
-        int rankValue = 1000 - (timeComponent + deathsComponent + healItemsComponent) + skeletonsComponent + bossComponent;
+        int rankValue = 1000 - (timeComponent + deathsComponent + healItemsComponent) + enemiesComponent + bossComponent;
 
         return rankValue > 0 ? rankValue : 0;
     }

@@ -28,8 +28,13 @@ public class TorchLightTrigger : BaseInteractionTrigger
     private void OnEnable()
     {
         if (playerActions == null)
-        {
-            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        {   
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player != null)
+            {
+                playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+            }   
         }
     }
 

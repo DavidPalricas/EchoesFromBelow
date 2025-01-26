@@ -59,7 +59,7 @@ public class Level1Logic : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (playerRank.SkeletonsKilled == SKELETONSTUTORIAL && !enemyTutorialWall.IsDestroyed())
+        if (playerRank.EnemiesKilled == SKELETONSTUTORIAL && !enemyTutorialWall.IsDestroyed())
         {
             speechTrigger.ChangeSpeech("skeletonsTutorialSpeech");
             Destroy(enemyTutorialWall);

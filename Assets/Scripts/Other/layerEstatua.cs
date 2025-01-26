@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class layerEstatua : MonoBehaviour
@@ -12,14 +10,17 @@ public class layerEstatua : MonoBehaviour
     }
 
     void Update()
-    {
-        if (player.transform.position.y < this.transform.position.y)
+    {   
+        if (player != null)
         {
-            this.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        }
-        else if (player.transform.position.y > this.transform.position.y)
-        {
-            this.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            if (player.transform.position.y < this.transform.position.y)
+            {
+                this.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+            else if (player.transform.position.y > this.transform.position.y)
+            {
+                this.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            }
         }
     }
 }

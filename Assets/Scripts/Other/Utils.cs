@@ -84,6 +84,11 @@ public static class Utils
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
+        if (player == null)
+        {
+            return false;
+        }
+
         return player.GetComponent<Player>().entityFSM.entitycurrentHealth > 0;
     }
 

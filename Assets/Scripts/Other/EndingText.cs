@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The EndingText class is responsible for displaying the ending text on the screen.
@@ -67,7 +66,7 @@ public class EndingText : MonoBehaviour
          $"Time spent: {rank.GetTimeSpentFormatted()}\n" +
          $"Deaths: {rank.DeathsNumber}\n" +
          $"Heal Items used: {rank.HealItemsUsed}\n" +
-         $"Skeletons killed: {rank.SkeletonsKilled}\n" +
+         $"Skeletons killed: {rank.EnemiesKilled}\n" +
          $"Boss killed: {(rank.BossKilled ? "yes" : "no")}\n\n\n";
 
         return rankStatusText;
