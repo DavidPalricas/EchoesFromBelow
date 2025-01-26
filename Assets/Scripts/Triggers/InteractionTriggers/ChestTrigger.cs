@@ -11,6 +11,14 @@ public class ChestTrigger : BaseInteractionTrigger
     [SerializeField]
     private GameObject chestObject;
 
+
+    private void OnEnable()
+    {
+        if (playerInventory == null)
+        {
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        }
+    }
     private void Update()
     {
         if (playerDetected && InteractInputTriggered() && playerInventory.Items["Key"] == 1)

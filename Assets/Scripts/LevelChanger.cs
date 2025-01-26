@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -9,6 +7,11 @@ public class LevelChanger : MonoBehaviour
     private Animator animator;
 
     private int levelToLoad;
+
+    private void OnEnable()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void FadeToLevel(int levelIndex)
     {

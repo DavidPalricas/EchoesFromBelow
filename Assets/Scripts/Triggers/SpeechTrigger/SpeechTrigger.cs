@@ -62,6 +62,11 @@ public class SpeechTrigger : MonoBehaviour
 
             currentText = GetNextText();
         }
+
+        if (playerActions == null)
+        {
+            playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>();
+        }
     }
 
     /// <summary>

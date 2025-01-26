@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class StrangeManTrigger2 : StrangeManDialogueTrigger
 {
-    [SerializeField]
-    PlayerInventory playerInventory;
+    private PlayerInventory playerInventory;
 
+
+    private void OnEnable()
+    {       
+        playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+    }
+    
     private void Update()
     {
         if (playerEntered && playerInventory.Items["FinalKey"] == 1)

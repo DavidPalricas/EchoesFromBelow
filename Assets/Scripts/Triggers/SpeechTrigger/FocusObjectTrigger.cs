@@ -30,6 +30,15 @@ public class FocusObjectTrigger : MonoBehaviour
     [SerializeField]
     private string speechName;
 
+
+    private void OnEnable()
+    {
+        if (mainCameraMovement == null)
+        {
+           mainCameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>();
+        }
+    }
+
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
     /// In this method we are checking if the player has entered the trigger and showing the speech.

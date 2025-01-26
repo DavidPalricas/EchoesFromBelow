@@ -38,6 +38,8 @@ public class CameraMovement : MonoBehaviour
 
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         currentTarget = player; // Initialize currentTarget in Start method
+
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>

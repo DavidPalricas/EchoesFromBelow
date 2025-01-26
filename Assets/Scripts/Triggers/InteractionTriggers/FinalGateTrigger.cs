@@ -12,6 +12,15 @@ public class FinalGateTrigger : BaseInteractionTrigger
     [SerializeField]
      private SpeechTrigger speechTrigger;
 
+
+    private void OnEnable()
+    {   
+        if (playerInventory == null)
+        {
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        }
+    }
+
     /// <summary>
     /// The Update method is called every frame (Unity Method).
     /// In this method, we are checking if the player is detected and if the player interact input was triggred and if the conditions to open the gate are met.

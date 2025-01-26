@@ -24,6 +24,21 @@ public class HordesGroupTrigger : MonoBehaviour
     [SerializeField]
     private SpeechTrigger speechTrigger;
 
+
+
+    private void OnEnable()
+    {
+        if (playerInventory == null)
+        {
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        }
+
+        if (mainCameraMovement == null)
+        {
+            mainCameraMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>();
+        }
+    }
+
     /// <summary>
     /// The OnTriggerEnter2D method is called when the Collider2D other enters the trigger (Unity Method).
     /// In this method, we are checking if the player entered in trigger and has the lever item and if so, we are activating the hordes.
