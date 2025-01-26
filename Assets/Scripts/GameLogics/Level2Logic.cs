@@ -12,6 +12,8 @@ public class Level2Logic : MonoBehaviour
     [SerializeField]
     private SpeechTrigger speechTrigger;
 
+    private bool firstKeyUsed  = false;
+
 
     private void OnEnable()
     {
@@ -70,7 +72,15 @@ public class Level2Logic : MonoBehaviour
 
     public void PuzzleItemGrabbed(bool isLever)
     {   
-        speechTrigger.ChangeSpeech(isLever ? "leverPieceFoundSpeech" : "keyFoundSpeech");
+        if (isLever)
+        {
+            speechTrigger.ChangeSpeech("leverPieceFoundSpeech");
+        }
+        else if (!isLever && !firstKeyUsed)
+        {
+            speechTrigger.ChangeSpeech("keyFoundSpeech");
+            firstKeyUsed = true;
+        }
     }
 
 
@@ -79,7 +89,5 @@ public class Level2Logic : MonoBehaviour
         GameObject bossHealthBar = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().bossHealthBar;
 
         bossHealthBar.SetActive(false);
-
-        speechTrigger.ChangeSpeech("bossDeathSpeech");
     }
 }

@@ -126,14 +126,18 @@ public class GateTrigger : BaseInteractionTrigger
                 return;
             }
 
+            Utils.PlaySoundEffect("gate");
             gate.SetActive(false);
         }
         else
         {
             if (!isLevel1)
-            {
+            {   
+                Utils.PlaySoundEffect("gate");
                 gate.SetActive(false);
+
                 playerInventory.KeyOrLeverUsed(true);
+
                 return;
             }
 

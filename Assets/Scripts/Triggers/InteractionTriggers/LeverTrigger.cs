@@ -31,6 +31,7 @@ public class LeverTrigger : BaseInteractionTrigger
     private void Update()
     {
         if (playerDetected && InteractInputTriggered() && playerInventory.Items["Lever"] == 1){
+            Utils.PlaySoundEffect("lever");
             ActivateBridge();
         }
     }

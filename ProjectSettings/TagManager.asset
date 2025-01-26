@@ -15,6 +15,7 @@ TagManager:
   - LeverSpawn
   - HUD
   - SpeechBox
+  - Audio
   layers:
   - Default
   - TransparentFX

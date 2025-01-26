@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class EndingTrigger : MonoBehaviour
 {
-    // Referencia ao objecto com o script que gere o fade in/out
-    [SerializeField]
-    private GameObject fadeManager;
 
     [SerializeField]
     private GameObject hud;
@@ -13,7 +10,14 @@ public class EndingTrigger : MonoBehaviour
     // Variavel que vai verificar qual a cena atual, DEVE EXISTIR NOS SCRIPTS DE CANVAS DAS CENAS QUE NECESSITAM DE DAR FADE IN/OUT
     private int currentSceneIndex;
 
-  
+
+    private void OnEnable()
+    {
+        if (hud == null)
+        {
+            hud = GameObject.FindGameObjectWithTag("HUD");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,15 +28,34 @@ public class EndingTrigger : MonoBehaviour
             hud.GetComponent<Animator>().Play("fadeIn");
             GameObject gameLogic = GameObject.Find("GameLogic");
 
-            gameLogic.GetComponent<Level1Logic>().enabled = false;
 
-            gameLogic.GetComponent<Rank>().StopTimer = true;
+            if (gameLogic.GetComponent<Level1Logic>().enabled)
+            {
+                gameLogic.GetComponent<Level1Logic>().enabled = false;
+            }
+            else
+            {
+                gameLogic.GetComponent<Rank>().StopTimer = true;
 
-            fadeManager.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
+                DestroyPlayerAndMainCamera();
+            }
+       
+            hud.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
 
             //SceneManager.LoadScene("Ending");
         }
 
         gameObject.SetActive(false);
+    }
+
+    private void DestroyPlayerAndMainCamera()
+    {
+        string[] gameObjectsToDestroy = {"Player", "MainCamera"};
+
+        foreach (string gameObjectName in gameObjectsToDestroy)
+        {
+            Destroy(GameObject.FindGameObjectWithTag(gameObjectName));
+
+        }
     }
 }

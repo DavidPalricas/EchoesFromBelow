@@ -99,6 +99,19 @@ public class EntityAttackState : EntityStateBase
         }
 
         UpdateAnimator();
+
+        if (enemyClass.IsRanged)
+        {
+            Utils.PlaySoundEffect("spiderAttack");
+        }else if (enemyClass.isBoss)
+        {
+            Utils.PlaySoundEffect("bossAttack");
+        }
+        else
+        {
+            Utils.PlaySoundEffect("skeletonAttack");
+        }
+
         enemyAttack.Attack(enemyAttackDirection,enemyClass.attackCooldown);
     }
 
@@ -125,6 +138,7 @@ public class EntityAttackState : EntityStateBase
 
         UpdateAnimator();
 
+        Utils.PlaySoundEffect("playerAttack");
         playerAttack.Attack(playerAttackDirection, playerClass.attackCooldown);
     }
 

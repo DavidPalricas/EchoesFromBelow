@@ -52,8 +52,11 @@ public class AttackArea : MonoBehaviour
             Player player = collider.GetComponent<Player>();
 
             player.entityFSM.entitycurrentHealth -= (int)meleeDamage;
+
             player.healthBar.UpdateLabel(player.entityFSM.entitycurrentHealth);
-  
+
+            Utils.PlaySoundEffect("takeDamage");
+
             targetSpriteRenderer = collider.GetComponent<SpriteRenderer>();
             targetSpriteRenderer.color = new Color32(207, 115, 115, 255);
 

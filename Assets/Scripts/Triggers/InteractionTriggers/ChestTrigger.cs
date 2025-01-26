@@ -35,6 +35,7 @@ public class ChestTrigger : BaseInteractionTrigger
 
     private void OpenChest()
     {   
+        Utils.PlaySoundEffect("chest");
         playerInventory.KeyOrLeverUsed(true);
 
         var finalKeyPosition = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);

@@ -18,6 +18,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
+        Utils.PlaySoundEffect("fall");
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         fadeManager.GetComponent<LevelChanger>().FadeToLevel(currentSceneIndex + 1);
     }

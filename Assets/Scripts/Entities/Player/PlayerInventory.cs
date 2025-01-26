@@ -224,6 +224,8 @@ public class PlayerInventory : MonoBehaviour
     {
         Items["HealItems"]--;
 
+        Utils.PlaySoundEffect("heal");
+
         if (Items["HealItems"] == 0)
         {
             flaskIcon.SetActive(false);

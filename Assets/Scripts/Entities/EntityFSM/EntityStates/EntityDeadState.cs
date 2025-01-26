@@ -105,7 +105,8 @@ public class EntityDeadState : EntityStateBase
     /// It increments the number of deaths of the player and calls the RespawnPlayer  method to respawn the player.
     /// </summary>
     protected override void ExecutePlayerLogic()
-    {  
+    {
+        Utils.PlaySoundEffect("playerDeath");
         Player player =  entityFSM.entityProprieties as Player;
         player.playerActions.enabled = false;
 

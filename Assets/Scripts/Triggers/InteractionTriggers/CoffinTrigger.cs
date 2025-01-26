@@ -50,7 +50,9 @@ public class CoffinTrigger : BaseInteractionTrigger
     private void Update()
     {
         if (playerDetected && InteractInputTriggered() && level2Logic.GraveYardEnemiesDead())
-        {
+        {   
+            Utils.PlaySoundEffect("coffin");
+
             if (originalCoffin)
             {
                 coffinObject.GetComponent<SpriteRenderer>().sprite = coffin01;
@@ -61,15 +63,15 @@ public class CoffinTrigger : BaseInteractionTrigger
 
             if (hasKey)
             {
-                OpenCoffin();
+                OpenRightCoffin();
             }
         }
     }
 
     /// <summary>
-    /// The OpenCoffin method is responsible for opening the coffin and spawning the key.
+    /// The OpenRightCoffin method is responsible for opening the coffin and spawning the key.
     /// </summary>
-    private void OpenCoffin()
+    private void OpenRightCoffin()
     {   
        var keySpawn = new Vector3(transform.position.x, transform.position.y - 4.5f, transform.position.z);
 

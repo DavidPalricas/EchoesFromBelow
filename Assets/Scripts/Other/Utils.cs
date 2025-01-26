@@ -100,4 +100,68 @@ public static class Utils
             playerInput.actions.LoadBindingOverridesFromJson(rebinds);
         }
     }
+
+
+    public static void PlaySoundEffect(string clipName)
+    {   
+        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        switch(clipName)
+        {
+            case "playerDeath":
+                audioManager.PlaySFX(audioManager.playerDeath);
+                break;
+
+            case "playerAttack":
+                audioManager.PlaySFX(audioManager.playerAttack);
+                break;
+
+            case "spiderAttack":
+                audioManager.PlaySFX(audioManager.spiderAttack);
+                break;
+
+            case "skeletonAttack":
+                audioManager.PlaySFX(audioManager.skeletonAttack);
+                break;
+
+            case "bosssAttack":
+                audioManager.PlaySFX(audioManager.bossAttack);
+                break;
+
+            case "chest":
+                audioManager.PlaySFX(audioManager.chest);
+                break;
+
+            case "coffin":
+                audioManager.PlaySFX(audioManager.coffin);
+                break;
+
+            case "heal":
+                audioManager.PlaySFX(audioManager.heal);
+                break;
+
+            case "takeDamage":
+                audioManager.PlaySFX(audioManager.takeDamage);
+                break;
+
+            case "fall":
+                audioManager.PlaySFX(audioManager.fall);
+                break;
+
+            case "ambient":
+                audioManager.PlaySFX(audioManager.ambient);
+                break;
+
+            case "gate":
+                audioManager.PlaySFX(audioManager.gate);
+                break;
+
+            case "lever":
+                audioManager.PlaySFX(audioManager.lever);
+                break;
+
+            default:
+                break;
+        }
+    }
 }
