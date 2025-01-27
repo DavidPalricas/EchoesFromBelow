@@ -19,7 +19,7 @@ public class EnemyBossHealthBar : MonoBehaviour
         {   
             maxValue = enemy.GetComponent<Enemy>().maxHealth;
             healthBar.maxValue = maxValue;
-            healthBar.value =  maxValue
+            healthBar.value = maxValue;
         }
     }
 
