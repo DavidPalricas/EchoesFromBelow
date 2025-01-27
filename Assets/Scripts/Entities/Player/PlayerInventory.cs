@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
     /// Its Serialized so that it can be set in the Unity Editor.
     /// </summary>
     [SerializeField]
-    private GameObject stickIcon, slingShotIcon, flaskIcon, keyIcon, leverIcon;
+    private GameObject stickIcon, slingShotIcon, flaskIcon, keyIcon, leverIcon, finalKeyIcon;
 
     /// <summary>
     /// The flaskQuantity property is responsible for storing the quantity of heal items in the player's inventory.
@@ -114,7 +114,7 @@ public class PlayerInventory : MonoBehaviour
     {
         Items["FinalKey"] = 1;
 
-        // finalKeyIcon.SetActive(true);
+        finalKeyIcon.SetActive(true);
     }
 
     /// <summary>

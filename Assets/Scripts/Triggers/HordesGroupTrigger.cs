@@ -47,7 +47,15 @@ public class HordesGroupTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && playerInventory.Items["Lever"] == 1)
-        {
+        {   
+
+            GameObject bossHealthBar = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelChanger>().bossHealthBar;
+
+            if (bossHealthBar != null && !bossHealthBar.activeSelf)
+            {
+                bossHealthBar.SetActive(true);
+            }
+
             ActiveHordes();
             ChangePlayerSpawn(collision.gameObject);
 

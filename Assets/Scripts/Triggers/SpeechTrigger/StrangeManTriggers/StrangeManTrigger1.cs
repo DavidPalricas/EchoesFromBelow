@@ -9,7 +9,13 @@ public class StrangeManTrigger1 : StrangeManDialogueTrigger
     private void Update()
     {
         if (playerEntered)
-        {
+        {   
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            Player playerProprieties = (Player) player.GetComponent<EntityFSM>().entityProprieties;
+            playerProprieties.spawnPoint = transform.position;
+
             speechTrigger.ChangeSpeech(speechName);
             enabled = false;
         }

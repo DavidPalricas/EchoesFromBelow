@@ -104,7 +104,7 @@ public class Rank : MonoBehaviour
         // Measure the time spent in the game in minutes
         int timeComponent = (int)(5 * (timeSpent / 60.0)); 
         int deathsComponent = 5 * DeathsNumber;
-        int enemiesComponent = 4 * EnemiesKilled;
+        int enemiesComponent = EnemiesKilled;
         int healItemsComponent = 3 * HealItemsUsed;
         int bossComponent = BossKilled ? 5 : 0;
 
