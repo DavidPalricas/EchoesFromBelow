@@ -8,13 +8,17 @@ public class EnemyBossHealthBar : MonoBehaviour
     
     private GameObject enemy;
 
+
+    private int maxValue;
+
     void Start()
     {
         enemy = GameObject.Find("Skeleton Boss(Clone)");
 
         if (enemy != null)
-        {
-            healthBar.maxValue = enemy.GetComponent<Enemy>().maxHealth;
+        {   
+            maxValue = enemy.GetComponent<Enemy>().maxHealth;
+            healthBar.maxValue = maxValue;
             healthBar.value = enemy.GetComponent<EntityFSM>().entitycurrentHealth;
         }
     }
@@ -32,5 +36,13 @@ public class EnemyBossHealthBar : MonoBehaviour
             gameObject.SetActive(false);
             
         }
+    }
+
+
+    public void SetHealthBar()
+    {   
+        enemy = GameObject.Find("Skeleton Boss(Clone)");
+        healthBar.maxValue = maxValue;
+        healthBar.value = maxValue;
     }
 }
