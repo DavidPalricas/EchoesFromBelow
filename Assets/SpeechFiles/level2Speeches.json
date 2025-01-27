@@ -76,13 +76,13 @@
     },
 
     "mustTalkWithNPC": {
-        "firstText": "I should go back to the strange"
+        "firstText": "I should go back to the stranger."
 
     },
 
     "secondDialogueWithNPC": {
         "firstText": "The strange man: Hello again stranger!\nI see you managed to open the gate.",
-        "secondText": "You have no idea what I had to go through there!\bBut yes, yes I did.",
+        "secondText": "You have no idea what I had to go through there!\nBut yes, yes I did.",
         "thirdText": "The strange man: Ready to find your freedom stranger?",
         "fourthText": "I sure am.\nCome one, let’s leave this nightmare!",
         "fifthText": "The strange man: Ah, but that I cannot dear stranger.",
