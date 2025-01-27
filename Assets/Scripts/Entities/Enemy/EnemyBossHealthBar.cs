@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,18 +9,20 @@ public class EnemyBossHealthBar : MonoBehaviour
     
     private GameObject enemy;
 
-
-    private int maxValue;
-
     private void OnEnable()
-    {
-        enemy = GameObject.Find("Skeleton Boss(Clone)");
+    {  
+       GameObject[] allEnemiens = GameObject.FindGameObjectsWithTag("Enemy");
+
+        enemy = allEnemiens.Where(enemy => enemy.name.Contains("Boss")).FirstOrDefault();
+
+        Debug.Log("Boss: " + enemy);
 
         if (enemy != null)
         {   
-            maxValue = enemy.GetComponent<Enemy>().maxHealth;
+            int maxValue = enemy.GetComponent<Enemy>().maxHealth;
+
             healthBar.maxValue = maxValue;
-            healthBar.value =  maxValue
+            healthBar.value =  maxValue;
         }
     }
 

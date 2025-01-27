@@ -37,7 +37,7 @@ public class EndingTrigger : MonoBehaviour
             {
                 gameLogic.GetComponent<Rank>().StopTimer = true;
 
-                DestroyPlayerAndMainCamera();
+                DestroyObjects();
 
                 SceneManager.LoadScene("Ending");
 
@@ -50,9 +50,19 @@ public class EndingTrigger : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void DestroyPlayerAndMainCamera()
+    private void DestroyObjects()
     {
-        string[] gameObjectsToDestroy = {"HUD","Audio","Player","MainCamera"};
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (allEnemies.Length > 0)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                Destroy(enemy);
+            }
+        }
+
+        string[] gameObjectsToDestroy = {"HUD","Audio","MainCamera"};
 
         foreach (string gameObjectName in gameObjectsToDestroy)
         {

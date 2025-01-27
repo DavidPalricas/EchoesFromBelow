@@ -34,7 +34,7 @@ public class ReadRank : MonoBehaviour
         string timeSpent = playerRank.GetTimeSpentFormatted();
 
         currentRankText.text = "Your obtained rank is: " + currentRank.Item1 + " " + currentRank.Item2 + " points.";
-        nextRankText.text = "Your next rank is: " + nextRank.Item1 + " you need " + nextRank.Item2 + " points.";
+        nextRankText.text = "Your next rank is: " + nextRank.Item1 + "you need " + nextRank.Item2 + " points.";
         timeSpentText.text = "Time to completion: " + timeSpent;
         deaths.text = "Deaths: " + playerRank.DeathsNumber;
         healItemsUsed.text = "Heal items used: " + playerRank.HealItemsUsed;
