@@ -54,7 +54,7 @@ public class HordesGroupTrigger : MonoBehaviour
             if (bossHealthBar != null && !bossHealthBar.activeSelf)
             {
                 bossHealthBar.SetActive(true);
-                bossHealthBar.GetComponent<EnemyBossHealthBar>().SetHealthBar();
+                bossHealthBar.GetComponent<EnemyBossHealthBar>().enabled = true;
             }
 
             ActiveHordes();

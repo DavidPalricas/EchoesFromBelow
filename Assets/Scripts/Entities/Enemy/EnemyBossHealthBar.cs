@@ -11,7 +11,7 @@ public class EnemyBossHealthBar : MonoBehaviour
 
     private int maxValue;
 
-    void Start()
+    private void OnEnable()
     {
         enemy = GameObject.Find("Skeleton Boss(Clone)");
 
@@ -28,21 +28,12 @@ public class EnemyBossHealthBar : MonoBehaviour
         if (enemy != null)
         {
             healthBar.value = enemy.GetComponent<EntityFSM>().entitycurrentHealth;
+
+            if (healthBar.value <= 0)
+            {
+                gameObject.SetActive(false);
+                enabled = false;
+            }
         }
-
-
-        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled && GameObject.Find("GameLogic").GetComponent<Rank>().BossKilled)
-        {
-            gameObject.SetActive(false);
-            
-        }
-    }
-
-
-    public void SetHealthBar()
-    {   
-        enemy = GameObject.Find("Skeleton Boss(Clone)");
-        healthBar.maxValue = maxValue;
-        healthBar.value = maxValue;
     }
 }
