@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,9 +26,11 @@ public class EnemyBossHealthBar : MonoBehaviour
             healthBar.value = enemy.GetComponent<EntityFSM>().entitycurrentHealth;
         }
 
-        if (GameObject.Find("GameLogic").GetComponent<Rank>().BossKilled)
+
+        if (GameObject.Find("GameLogic").GetComponent<Level1Logic>().enabled && GameObject.Find("GameLogic").GetComponent<Rank>().BossKilled)
         {
             gameObject.SetActive(false);
+            
         }
     }
 }
