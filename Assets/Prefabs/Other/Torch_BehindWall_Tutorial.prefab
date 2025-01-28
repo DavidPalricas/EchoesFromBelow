@@ -281,11 +281,9 @@ MonoBehaviour:
   playerActions: {fileID: 7641519816493334048, guid: 2f7cd5c2108cf934dad1093da953bccc, type: 3}
   torchLit: {fileID: 1161488174482932207}
   torchUnlit: {fileID: 1421236661688594711}
-  tutorialTextObject: {fileID: 0}
+  tutorialText: {fileID: 0}
   tutorialCollider: {fileID: 6440610739380325598, guid: 95632397b8bb86f4c8d7a868c5144245, type: 3}
   isTutorial: 1
-  interactAction: {fileID: 0}
-  tutorialText: {fileID: 8784885373096178515}
 --- !u!1 &1421236661688594711
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,8 +509,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.007, y: 3.33}
-  m_SizeDelta: {x: 6.0147, y: 0.5924}
+  m_AnchoredPosition: {x: 0.01, y: 3.33}
+  m_SizeDelta: {x: 7.59, y: 0.5924}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8407087500984015495
 MeshRenderer:
@@ -534,7 +532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1167288822986388013, guid: 35b4c41f64a9a714fba4d0f7045a86b8, type: 2}
+  - {fileID: -1881289376728807686, guid: 81171dbdca569ec4d8205799525034a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -578,8 +576,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press the interact key
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35b4c41f64a9a714fba4d0f7045a86b8, type: 2}
-  m_sharedMaterial: {fileID: 1167288822986388013, guid: 35b4c41f64a9a714fba4d0f7045a86b8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 81171dbdca569ec4d8205799525034a4, type: 2}
+  m_sharedMaterial: {fileID: -1881289376728807686, guid: 81171dbdca569ec4d8205799525034a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
